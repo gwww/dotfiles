@@ -1,0 +1,26 @@
+snippet fea
+	Feature: ${1:title}
+		As a ${2:role}
+		I want to ${3:feature}
+		So that ${4:value}
+snippet sc
+	Scenario: ${1:title}
+		Given ${2:Some_pre-condition}
+		When ${3:Some_event happens}
+		Then ${4:Result_I_should_see}
+snippet esc
+	Scenario: ${1:title}
+		Given ${2:Some_pre-condition}
+		When ${3:Some_event happens}
+		Then ${4:Result_I_should_see}
+
+		Examples:
+		| ${5:First column} | ${6:Second column} |
+snippet gi
+	Given ${1:Some_pre-condition}
+snippet wh
+	When ${1:Some_event_happens}
+snippet an
+	And ${1:condition}
+snippet th
+	Then ${1:Result_I_should_see}

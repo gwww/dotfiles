@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'tinify'
+
+Tinify.key = "hLrYlp3sHGqVqHkoODtopYZyAQWUnoho"
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: tinify [options]"
+
+  opts.on("-h", "--height HEIGHT", OptionParser::DecimalInteger, "Set image height") do |height|
+    options[:height] = height
+    options[:width] = 9999 unless options[:width]
+  end
+  opts.on("-w", "--width WIDTH", OptionParser::DecimalInteger, "Set image width") do |width|
+    options[:width] = width
+    options[:height] = 9999 unless options[:height]
+  end
+  opts.on("-?", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+end.parse!
+
+ARGV.each { |file|
+  print "Processing file: #{file}... "
+  STDOUT.flush
+  current_file_size = File.new(file).size
+  source = Tinify.from_file(file)
+  if options[:width] || options[:height]
+    # puts "... resizing"
+    source = source.resize(
+      method: "fit",
+      width: options[:width],
+      height: options[:height]
+    )
+  end
+  source.to_file("#{file}~~")
+  new_file_size = File.new("#{file}~~").size
+  percent_savings = (current_file_size-new_file_size)*100/current_file_size
+  puts "savings #{percent_savings}% (#{current_file_size-new_file_size} bytes)"
+  File.rename(file, "#{file}~")
+  File.rename("#{file}~~", file)
+}
+puts "Compressions this month: #{Tinify.compression_count}"

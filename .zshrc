@@ -24,8 +24,7 @@ fi
 # Set path
 #
 path=(
-  $HOME/local/bin
-  $HOME/.nvm/bin
+  $HOME/bin
   $path
 )
 source ~/.rvm/scripts/rvm

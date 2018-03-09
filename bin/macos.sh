@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 
+# Default file explorer
 defaults write -g NSFileViewer -string com.binarynights.ForkLift-3
 # defaults delete -g NSFileViewer
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # only show active applications 
 defaults write com.apple.dock static-only -bool TRUE
@@ -17,9 +26,6 @@ defaults write -g NSOverlayScrollerHideDelay -float 5
 
 # This setting will turn off the keyboard lights when the keyboard is not touched for five minutes. 
 defaults write com.apple.BezelServices kDimTime -int 300
-
-# Preview Window enable copy text 
-defaults write com.apple.finder QLEnableTextSelection -bool true
 
 # Disable .DS_Store files on Network Volumes Windows 
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -40,6 +46,9 @@ defaults write com.apple.Finder FXPreferredViewStyle Nlsv
 # echo "Show Path bar in Finder"
 defaults write com.apple.finder ShowPathbar -bool true
 
+# Finder: allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
 # Show the ~/Library folder.
 chflags nohidden ~/Library
 
@@ -49,6 +58,9 @@ defaults write NSGlobalDomain KeyRepeat -int 1
 
 echo "Setting system timezone..."
 sudo systemsetup -settimezone "America/Toronto" > /dev/null
+
+# Save screenshots to the desktop
+defaults write com.apple.screencapture location -string "${HOME}/Desktop"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"

@@ -5,7 +5,7 @@ setopt   complete_in_word
 setopt   always_to_end
 
 autoload -Uz compinit
-compinit -d ~/.cache/zcompdump
+compinit -d ~/.local/share/zsh/zcompdump
 
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
@@ -19,3 +19,9 @@ zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-dir
 # Use caching so that commands like apt and dpkg complete are useable
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
+
+if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
+  source /usr/local/opt/fzf/shell/completion.zsh
+fi
+

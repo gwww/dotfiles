@@ -1,10 +1,5 @@
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
-  source /usr/local/opt/fzf/shell/key-bindings.zsh
-  source /usr/local/opt/fzf/shell/completion.zsh
-fi
-
 # Set path
 path=(
   $HOME/bin
@@ -19,7 +14,7 @@ export LESS="-RM"
 export LESSHISTFILE=-
 export EDITOR=vim
 export VISUAL=vim
-export HISTFILE=~/.cache/zsh_history
+export HISTFILE=~/.local/share/zsh/history
 export DIRSTACKSIZE=9
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--inline-info"

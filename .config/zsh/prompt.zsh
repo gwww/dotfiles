@@ -162,7 +162,7 @@ function mnml_me_git {
 }
 
 # Wrappers & utils
-# join outpus of components
+# join outputs of components
 function mnml_wrap {
     local arr=()
     local cmd_out=""
@@ -225,7 +225,7 @@ RPROMPT='$(mnml_wrap MNML_RPROMPT)'
 
 zle -N zle-line-init mnml_line_init
 zle -N zle-keymap-select mnml_keymap_select
-zle -N buffer-empty mnml_buffer_empty
+# zle -N buffer-empty mnml_buffer_empty
 
-bindkey -M main  "^M" buffer-empty
-bindkey -M vicmd "^M" buffer-empty
+# bindkey -M main  "^M" buffer-empty
+# bindkey -M vicmd "^M" buffer-empty

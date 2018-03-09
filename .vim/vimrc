@@ -2,9 +2,9 @@ set nocompatible
 set modeline
 
 if has('nvim')
-  set viminfo+=n~/.cache/neoviminfo
+  set viminfo+=n~/.local/share/vim/neoviminfo
 else
-  set viminfo+=n~/.cache/viminfo
+  set viminfo+=n~/.local/share/vim/viminfo
 endif
 
 "------------------------------------------------------------

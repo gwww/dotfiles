@@ -97,7 +97,8 @@ function mnml_ssh {
 function mnml_pyenv {
     if [ -n "$VIRTUAL_ENV" ]; then
         _venv="$(basename $VIRTUAL_ENV)"
-        echo -n "${_venv%%.*}"
+        # echo -n "${_venv%%.*}"
+        echo -n "🐍 "
     fi
 }
 

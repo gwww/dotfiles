@@ -1,6 +1,7 @@
 alias _=sudo
 alias d='dirs -v | head -10'
 
+# Bunch of git bits...
 alias g=git
 alias ga='git add'
 alias gb='git branch'
@@ -11,9 +12,9 @@ alias gcam='git commit -a -m'
 alias gcm='git checkout master'
 alias gco='git checkout'
 alias ghi='git hist'
-alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias gst='git status'
 
+alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias history='fc -l 1'
 
 alias l='ls -lah'
@@ -23,7 +24,9 @@ alias ll='ls -lh'
 alias ls='ls -G'
 alias lsa='ls -lah'
 
-alias pe=pipenv
+#alias pe=pipenv
+
+alias dotfiles=yadm
 
 alias more=less
 alias please=sudo !!
@@ -40,17 +43,17 @@ alias xyzzy="echo nothing happens"
 
 # read markdown files like manpages
 function md() {
-    pandoc -s -f markdown -t man "$*" | man -l -
+    pandoc -s -f markdown -t man "$*" | nroff -man
 }
 
 # Convert web page to PDF using headless Chrome
-chromepdf() {
+function chromepdf() {
   /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
     --headless --disable-gpu --print-to-pdf="$1" $2
 }
 
 # Pretty path print
-path() {
+function path() {
   echo $PATH | tr ":" "\n" | \
   awk "{ \
     sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
@@ -59,6 +62,36 @@ path() {
     sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
     sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
     print }"
+}
+
+# Small wrapper around pipenv to provice activate/deactivate commands
+function pe() {
+  if [[ $# -gt 0 ]]; then
+    case $1 in
+      act|activate)
+        venv="$(pipenv --venv 2> /dev/null)"
+        if [ -n "$venv" ]; then
+          echo "Activating '$venv'"
+          source $venv/bin/activate
+        else
+          echo "No virtual environment for this directory"
+        fi
+      ;;
+      de|deactivate)
+        if [ -n "$VIRTUAL_ENV" ]; then
+          echo "Deactivating '$VIRTUAL_ENV'"
+          deactivate
+        else
+          echo "No virtual environment active"
+        fi
+      ;;
+      *)
+        pipenv $@
+      ;;
+    esac
+  else
+    pipenv $@
+  fi
 }
 
 # This was written entirely by Mikael Magnusson (Mikachu)

@@ -8,6 +8,4 @@ function e_arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
 
 brew update
 brew outdated
-# rvm version
-# rvm get stable
 gem update --system

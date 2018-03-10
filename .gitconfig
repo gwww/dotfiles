@@ -17,4 +17,4 @@
 [push]
   default = simple
 [include]
-  path = ~/.dotfiles/gitconfig.private
+  path = ~/.config/git/gitconfig.private

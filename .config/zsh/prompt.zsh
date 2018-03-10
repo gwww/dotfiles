@@ -8,7 +8,7 @@ MNML_INSERT_CHAR="${MNML_INSERT_CHAR:-›}"
 MNML_NORMAL_CHAR="${MNML_NORMAL_CHAR:-·}"
 
 [ -z "$MNML_PROMPT" ] && MNML_PROMPT=(mnml_ssh mnml_pyenv mnml_status mnml_keymap)
-[ -z "$MNML_RPROMPT" ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
+[ -z "$MNML_RPROMPT" ] && MNML_RPROMPT=('mnml_cwd 3 30' mnml_git)
 [ -z "$MNML_INFOLN" ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
 
 [ -z "$MNML_MAGICENTER" ] && MNML_MAGICENTER=(mnml_me_dirs mnml_me_ls mnml_me_git)
@@ -69,10 +69,9 @@ function mnml_cwd {
 }
 
 function mnml_git {
-    local statc="%{\e[0;3${MNML_OK_COLOR}m%}" # assume clean
     local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-
     if [ -n "$bname" ]; then
+        local statc="%{\e[0;3${MNML_OK_COLOR}m%}" # assume clean
         if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
             statc="%{\e[0;3${MNML_ERR_COLOR}m%}"
         fi

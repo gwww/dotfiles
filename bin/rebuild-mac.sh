@@ -69,3 +69,7 @@ yadm clone https://github.com/gwww/dotfiles.git
 
 echo "Installing python eggs..."
 sudo easy_install -U spritemapper
+
+echo "Create .local..."
+mkdir -p ~/.local/share/zsh ~/.local/share/vim ~/local/share/virtualenvs
+mkdir -p ~/.local/share/cups

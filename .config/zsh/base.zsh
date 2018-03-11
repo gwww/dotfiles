@@ -2,6 +2,21 @@
 # All things interactive shell
 #
 
+# Add to the path ensuring no duplicates
+for x in ~/bin; do
+  case ":$PATH:" in
+    *":$x:"*) :;; # already there
+    *) PATH="$x:$PATH";;
+  esac
+done
+
+export CUPS_CACHEDIR=~/.local/share/cups
+export CUPS_DATADIR=~/.local/share/cups
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS="--inline-info"
+
+export PIP_CONFIG_FILE=~/.config/pip/pip.conf
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 export LESS="-RM"
 export LESSHISTFILE=-
 export EDITOR=vim

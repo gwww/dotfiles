@@ -7,8 +7,9 @@ MNML_USER_CHAR="${MNML_USER_CHAR:-λ}"
 MNML_INSERT_CHAR="${MNML_INSERT_CHAR:-›}"
 MNML_NORMAL_CHAR="${MNML_NORMAL_CHAR:-·}"
 
-[ -z "$MNML_PROMPT" ] && MNML_PROMPT=(mnml_ssh mnml_pyenv mnml_status mnml_keymap)
-[ -z "$MNML_RPROMPT" ] && MNML_RPROMPT=('mnml_cwd 3 30' mnml_git)
+# [ -z "$MNML_PROMPT" ] && MNML_PROMPT=(mnml_ssh mnml_pyenv mnml_status mnml_keymap)
+[ -z "$MNML_PROMPT" ] && MNML_PROMPT=('mnml_cwd 2 0' mnml_git mnml_ssh mnml_pyenv mnml_status)
+[ -z "$MNML_RPROMPT" ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
 [ -z "$MNML_INFOLN" ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
 
 [ -z "$MNML_MAGICENTER" ] && MNML_MAGICENTER=(mnml_me_dirs mnml_me_ls mnml_me_git)
@@ -44,6 +45,7 @@ function mnml_cwd {
 
     local _w="%{\e[0m%}"
     local _g="%{\e[38;5;244m%}"
+    local _g="%{\e[38;5;14m%}"
 
     if [ "$segments" -le 0 ]; then
         segments=1
@@ -221,7 +223,7 @@ autoload -U colors && colors
 setopt prompt_subst
 
 PROMPT='$(mnml_wrap MNML_PROMPT) '
-RPROMPT='$(mnml_wrap MNML_RPROMPT)'
+#RPROMPT='$(mnml_wrap MNML_RPROMPT)'
 
 zle -N zle-line-init mnml_line_init
 zle -N zle-keymap-select mnml_keymap_select

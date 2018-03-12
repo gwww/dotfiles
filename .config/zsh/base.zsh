@@ -22,6 +22,9 @@ export LESSHISTFILE=-
 export EDITOR=vim
 export VISUAL=vim
 
+export PIPENV_SHELL_FANCY=1
+export PIPENV_VENV_IN_PROJECT=1
+
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 

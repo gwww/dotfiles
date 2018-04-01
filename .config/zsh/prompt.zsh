@@ -1,233 +1,77 @@
-# From: https://github.com/subnixr/minimal
-# Global settings
-MNML_OK_COLOR="${MNML_OK_COLOR:-2}"
-MNML_ERR_COLOR="${MNML_ERR_COLOR:-1}"
+function prompt_cwd {
+  local _separator="%{\e[1;38;5;11m%}"
+  local _segment="%{\e[0;38;5;14m%}"
 
-MNML_USER_CHAR="${MNML_USER_CHAR:-λ}"
-MNML_INSERT_CHAR="${MNML_INSERT_CHAR:-›}"
-MNML_NORMAL_CHAR="${MNML_NORMAL_CHAR:-·}"
-
-# [ -z "$MNML_PROMPT" ] && MNML_PROMPT=(mnml_ssh mnml_pyenv mnml_status mnml_keymap)
-[ -z "$MNML_PROMPT" ] && MNML_PROMPT=('mnml_cwd 2 0' mnml_git mnml_ssh mnml_pyenv mnml_status)
-[ -z "$MNML_RPROMPT" ] && MNML_RPROMPT=('mnml_cwd 2 0' mnml_git)
-[ -z "$MNML_INFOLN" ] && MNML_INFOLN=(mnml_err mnml_jobs mnml_uhp mnml_files)
-
-[ -z "$MNML_MAGICENTER" ] && MNML_MAGICENTER=(mnml_me_dirs mnml_me_ls mnml_me_git)
-
-# Components
-function mnml_status {
-    local okc="$MNML_OK_COLOR"
-    local errc="$MNML_ERR_COLOR"
-    local uchar="$MNML_USER_CHAR"
-
-    local job_ansi="0"
-    if [ -n "$(jobs | sed -n '$=')" ]; then
-        job_ansi="4"
-    fi
-
-    local err_ansi="$MNML_OK_COLOR"
-    if [ "$MNML_LAST_ERR" != "0" ]; then
-        err_ansi="$MNML_ERR_COLOR"
-    fi
-
-    echo -n "%{\e[$job_ansi;3${err_ansi}m%}%(!.#.$uchar)%{\e[0m%}"
+  local cwd="%2~"
+  cwd="${(%)cwd}"
+  echo -n "$_segment${cwd//\//$_separator/$_segment} "
 }
 
-function mnml_keymap {
-    local kmstat="$MNML_INSERT_CHAR"
-    [ "$KEYMAP" = 'vicmd' ] && kmstat="$MNML_NORMAL_CHAR"
-    echo -n "$kmstat"
-}
-
-function mnml_cwd {
-    local segments="${1:-2}"
-    local seg_len="${2:-0}"
-
-    local _w="%{\e[0m%}"
-    local _g="%{\e[38;5;244m%}"
-    local _g="%{\e[38;5;14m%}"
-
-    if [ "$segments" -le 0 ]; then
-        segments=1
-    fi
-    if [ "$seg_len" -gt 0 ] && [ "$seg_len" -lt 4 ]; then
-        seg_len=4
-    fi
-    local seg_hlen=$((seg_len / 2 - 1))
-
-    local cwd="%${segments}~"
-    cwd="${(%)cwd}"
-    cwd=("${(@s:/:)cwd}")
-
-    local pi=""
-    for i in {1..${#cwd}}; do
-        pi="$cwd[$i]"
-        if [ "$seg_len" -gt 0 ] && [ "${#pi}" -gt "$seg_len" ]; then
-            cwd[$i]="${pi:0:$seg_hlen}$_w..$_g${pi: -$seg_hlen}"
-        fi
-    done
-
-    echo -n "$_g${(j:/:)cwd//\//$_w/$_g}$_w"
-}
-
-function mnml_git {
-    local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-    if [ -n "$bname" ]; then
-        local statc="%{\e[0;3${MNML_OK_COLOR}m%}" # assume clean
-        if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
-            statc="%{\e[0;3${MNML_ERR_COLOR}m%}"
-        fi
-        echo -n "$statc$bname%{\e[0m%}"
-    fi
-}
-
-function mnml_uhp {
-    local _w="%{\e[0m%}"
-    local _g="%{\e[38;5;244m%}"
-    local cwd="%~"
-    cwd="${(%)cwd}"
-
-    echo -n "$_g%n$_w@$_g%m$_w:$_g${cwd//\//$_w/$_g}$_w"
-}
-
-function mnml_ssh {
-    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        echo -n "$(hostname -s)"
-    fi
-}
-
-function mnml_pyenv {
-    if [ -n "$VIRTUAL_ENV" ]; then
-        _venv="$(basename $VIRTUAL_ENV)"
-        # echo -n "${_venv%%.*}"
-        echo -n "🐍 "
-    fi
-}
-
-function mnml_err {
-    local _w="%{\e[0m%}"
-    local _err="%{\e[3${MNML_ERR_COLOR}m%}"
-
-    if [ "${MNML_LAST_ERR:-0}" != "0" ]; then
-        echo -n "$_err$MNML_LAST_ERR$_w"
-    fi
-}
-
-function mnml_jobs {
-    local _w="%{\e[0m%}"
-    local _g="%{\e[38;5;244m%}"
-
-    local job_n="$(jobs | sed -n '$=')"
-    if [ "$job_n" -gt 0 ]; then
-        echo -n "$_g$job_n$_w&"
-    fi
-}
-
-function mnml_files {
-    local _w="%{\e[0m%}"
-    local _g="%{\e[38;5;244m%}"
-
-    local a_files="$(ls -1A | sed -n '$=')"
-    local v_files="$(ls -1 | sed -n '$=')"
-    local h_files="$((a_files - v_files))"
-
-    local output="${_w}[$_g${v_files:-0}"
-    if [ "${h_files:-0}" -gt 0 ]; then
-        output="$output $_w($_g$h_files$_w)"
-    fi
-    output="$output${_w}]"
-
-    echo -n "$output"
-}
-
-# Magic enter functions
-function mnml_me_dirs {
-    local _w="\e[0m"
-    local _g="\e[38;5;244m"
-
-    if [ "$(dirs -p | sed -n '$=')" -gt 1 ]; then
-        local stack="$(dirs)"
-        echo "$_g${stack//\//$_w/$_g}$_w"
-    fi
-}
-
-function mnml_me_ls {
-    if [ "$(uname)" = "Darwin" ] && ! ls --version &> /dev/null; then
-        COLUMNS=$COLUMNS CLICOLOR_FORCE=1 ls -C -G -F
+function prompt_git {
+  local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+  if [ -n "$bname" ]; then
+    if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
+      local _dirty="%{\e[0;31m%}"
+      echo -n "$_dirty$bname "
     else
-        ls -C -F --color="always" -w $COLUMNS
+      local _clean="%{\e[0;32m%}"
+      echo -n "$_clean$bname "
     fi
+  fi
 }
 
-function mnml_me_git {
-    git -c color.status=always status -sb 2> /dev/null
+function prompt_ssh {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo -n "$(hostname -s) "
+  fi
 }
 
-# Wrappers & utils
-# join outputs of components
-function mnml_wrap {
-    local arr=()
-    local cmd_out=""
-    for cmd in ${(P)1}; do
-        cmd_out="$(eval "$cmd")"
-        if [ -n "$cmd_out" ]; then
-            arr+="$cmd_out"
-        fi
-    done
-
-    echo -n "${(j: :)arr}"
+function prompt_pyenv {
+  if [ -n "$VIRTUAL_ENV" ]; then
+    echo -n "🐍 "
+  fi
 }
 
-# expand string as prompt would do
-function mnml_iline {
-    echo "${(%)1}"
+function prompt_status {
+  local _uchar="λ"
+  if [ "$PROMPT_LAST_ERROR" != "0" ]; then
+    local _err="%{\e[0;31m%}"
+    echo -n "$_err%(!.#.$_uchar) "
+  else
+    local _ok="%{\e[0;32m%}"
+    echo -n "$_ok%(!.#.$_uchar) "
+  fi
 }
 
-# display magic enter
-function mnml_me {
-    local output=()
-    local cmd_output=""
-    for cmd in $MNML_MAGICENTER; do
-        cmd_out="$(eval "$cmd")"
-        if [ -n "$cmd_out" ]; then
-            output+="$cmd_out"
-        fi
-    done
-    echo -n "${(j:\n:)output}" | less -XFR
+function prompt_build_left {
+  local _clr="%{\e[0m%}"
+
+  prompt_cwd
+  prompt_ssh
+  prompt_git
+  prompt_pyenv
+  prompt_status
+  echo -n $_clr
+}
+
+function prompt_build_right {
 }
 
 # capture exit status and reset prompt
-function mnml_line_init {
-    MNML_LAST_ERR="$?" # I need to capture this ASAP
-    zle reset-prompt
+function prompt_line_init {
+  PROMPT_LAST_ERROR="$?" # I need to capture this ASAP
+  zle reset-prompt
 }
 
 # redraw prompt on keymap select
-function mnml_keymap_select {
-    zle reset-prompt
+function prompt_keymap_select {
+  zle reset-prompt
 }
 
-# draw infoline if no command is given
-function mnml_buffer_empty {
-    if [ -z "$BUFFER" ]; then
-        mnml_iline "$(mnml_wrap MNML_INFOLN)"
-        mnml_me
-        zle redisplay
-    else
-        zle accept-line
-    fi
-}
-
-# Setup
-autoload -U colors && colors
 setopt prompt_subst
+zle -N zle-line-init prompt_line_init
+zle -N zle-keymap-select prompt_keymap_select
 
-PROMPT='$(mnml_wrap MNML_PROMPT) '
-#RPROMPT='$(mnml_wrap MNML_RPROMPT)'
-
-zle -N zle-line-init mnml_line_init
-zle -N zle-keymap-select mnml_keymap_select
-# zle -N buffer-empty mnml_buffer_empty
-
-# bindkey -M main  "^M" buffer-empty
-# bindkey -M vicmd "^M" buffer-empty
+PROMPT='$(prompt_build_left)'
+# RPROMPT='$(prompt_build_right)'
+RPROMPT=''

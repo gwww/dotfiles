@@ -8,14 +8,14 @@ function prompt_cwd {
 }
 
 function prompt_git {
-  local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-  if [ -n "$bname" ]; then
+  local branch_name="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+  if [ -n "$branch_name" ]; then
     if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
       local _dirty="%{\e[0;31m%}"
-      echo -n "$_dirty$bname "
+      echo -n "$_dirty$branch_name "
     else
       local _clean="%{\e[0;32m%}"
-      echo -n "$_clean$bname "
+      echo -n "$_clean$branch_name "
     fi
   fi
 }
@@ -44,14 +44,14 @@ function prompt_status {
 }
 
 function prompt_build_left {
-  local _clr="%{\e[0m%}"
+  local _reset="%{\e[0m%}"
 
   prompt_cwd
   prompt_ssh
   prompt_git
   prompt_pyenv
   prompt_status
-  echo -n $_clr
+  echo -n $_reset
 }
 
 function prompt_build_right {

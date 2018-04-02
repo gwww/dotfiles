@@ -24,8 +24,6 @@ alias ll='ls -lh'
 alias ls='ls -G'
 alias lsa='ls -lah'
 
-#alias pe=pipenv
-
 alias dotfiles=yadm
 
 alias more=less

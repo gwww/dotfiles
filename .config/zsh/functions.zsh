@@ -21,6 +21,24 @@ function path() {
     print }"
 }
 
+# This was written entirely by Mikael Magnusson (Mikachu)
+# Type '...' to get '../..' with successive .'s adding /..
+function rationalise-dot {
+  local MATCH # keep the regex match from leaking to the environment
+  if [[ $LBUFFER =~ '(^|/| |      |'$'\n''|\||;|&)\.\.$' ]]; then
+    LBUFFER+=/
+    zle self-insert
+    zle self-insert
+  else
+    zle self-insert
+  fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
+bindkey -M isearch . self-insert # without this, typing . aborts incr history search
+setopt auto_cd
+
+
 function _venv_status() {
   if [ -z $VIRTUAL_ENV ]; then
     echo "Inactive"
@@ -33,7 +51,7 @@ function _venv_status() {
   fi
 }
 
-# Small wrapper around pipenv to provice activate/deactivate commands
+# Small wrapper around pipenv to provide activate/deactivate commands
 function pe() {
   if [[ $# = 1 && ${#1} > 1 ]]; then
     if [[ 'activate' =~ "^$1" ]]; then
@@ -57,7 +75,13 @@ function pe() {
       fi
     elif [[ 'status' =~ "^$1" ]]; then
       local s=$(_venv_status)
-      echo "Python venv: $s"
+      if [ "$s" != "Inactive" ]; then
+        local ve=" ($VIRTUAL_ENV)"
+      fi
+      echo "Python venv: $s$ve"
+      pipenv --version
+    elif [[ 'changelog' =~ "^$1" ]]; then
+      curl -vs https://raw.githubusercontent.com/pypa/pipenv/master/HISTORY.txt 2>/dev/null | more
     else
       pipenv $@
     fi
@@ -65,20 +89,3 @@ function pe() {
     pipenv $@
   fi
 }
-
-# This was written entirely by Mikael Magnusson (Mikachu)
-# Type '...' to get '../..' with successive .'s adding /..
-function rationalise-dot {
-  local MATCH # keep the regex match from leaking to the environment
-  if [[ $LBUFFER =~ '(^|/| |      |'$'\n''|\||;|&)\.\.$' ]]; then
-    LBUFFER+=/
-    zle self-insert
-    zle self-insert
-  else
-    zle self-insert
-  fi
-}
-zle -N rationalise-dot
-bindkey . rationalise-dot
-bindkey -M isearch . self-insert # without this, typing . aborts incr history search
-setopt auto_cd

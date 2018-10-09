@@ -10,6 +10,8 @@ for x in ~/bin; do
   esac
 done
 
+eval "$(fasd --init auto)"
+
 export LANG="en_CA.UTF-8"
 export LC_ALL="en_CA.UTF-8"
 
@@ -29,8 +31,12 @@ export VISUAL=vim
 export PIPENV_SHELL_FANCY=1
 export PIPENV_VENV_IN_PROJECT=1
 
+export TWINE_USERNAME=gwww
+
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad
+
+export ELKM1_URL=elk://192.168.1.201
 
 # Setup for good long ability to look back on life...
 export HISTFILE=~/.local/share/zsh/history

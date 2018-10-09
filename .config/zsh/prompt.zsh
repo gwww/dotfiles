@@ -28,7 +28,9 @@ function prompt_ssh {
 
 function prompt_pyenv {
   if [ -n "$VIRTUAL_ENV" ]; then
-    echo -n "🐍 "
+    env_path_list=(${(s:/:)VIRTUAL_ENV})
+    echo -n "%{\e[0;38;5;46m%}"
+    echo -n "(🐍$env_path_list[-2]) "
   fi
 }
 

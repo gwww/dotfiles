@@ -10,7 +10,6 @@ endif
 "------------------------------------------------------------
 " Plugins and most of their config {{{1
 call plug#begin('~/.local/share/vim/plugged')
-"call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'            " Status and tab line
   let g:airline_theme='glenn'
@@ -63,7 +62,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-repeat'             " better '.' handling when repeated
-Plug 'jiangmiao/auto-pairs'         " auto close quotes, brackets
+"Plug 'jiangmiao/auto-pairs'         " auto close quotes, brackets
 Plug 'gwww/vim-bbye'                " delete buffer leaving window structure intact
 Plug 'tpope/vim-commentary'         " toggle comments: <visual>gc, gc<motion>
 Plug 'terryma/vim-expand-region'    " + to expand visual select; _ to shrink
@@ -119,7 +118,7 @@ if has('mouse')
     set mouse=a             " Enable use of the mouse for all modes
 endif
 set formatoptions+=nj       " recognize numbered lists; smart comment joining
-set listchars=tab:▸\ ,trail:· ",eol:¬
+set listchars=tab:▸\ ,trail:◦ ",eol:¬
 set list
 set lazyredraw              " Don't redraw during macros
 
@@ -166,6 +165,7 @@ map             <leader>2  <C-W>s
 map             <leader>3  <C-W>v
 map     <silent><leader>c  :Bdelete<cr>
 map     <silent><leader>e  :Files<cr>
+map     <silent><leader>E  :execute "Files " . input('Directory: ')<cr>
 map     <silent><leader>p  :setlocal paste!<cr>
 nmap            <leader>P  "+P
 map     <silent><leader>w  :call ToggleWrap()<cr>
@@ -217,6 +217,11 @@ hi link htmlLink NONE
 hi link htmlItalic NONE
 hi Search cterm=NONE ctermfg=251 ctermbg=31
 hi cursorLine cterm=NONE ctermbg=238
+" hi ExtraWhitespace ctermbg=red guibg=red
+" " The following alternative may be less obtrusive.
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+" " Try the following if your GUI uses a dark background.
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 
 "------------------------------------------------------------
 " Functions {{{1

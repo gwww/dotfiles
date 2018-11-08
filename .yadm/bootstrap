@@ -43,3 +43,7 @@ if command -v /usr/local/bin/gem >/dev/null 2>&1; then
     gem update --system
     gem install --force bundler
 fi
+
+if [ -f "~/bin/macos.sh" ]; then
+    source ~/bin/macos.sh
+fi

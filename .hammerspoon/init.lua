@@ -66,7 +66,7 @@ function cycleCalls( fn, args )
   end
 end
 
--- This method used to place a window to a position and size on the screen by using 
+-- This method used to place a window to a position and size on the screen by using
 -- four floats instead of pixel sizes. Returns the window instance. Examples:
 --   windowToGrid( window, 0, 0, 0.25, 0.5 );  -- top-left, width: 25%, height: 50%
 --   windowToGrid( someWindow, 0.3, 0.2, 0.5, 0.35 ); -- top: 30%, left: 20%, width: 50%, height: 35%
@@ -135,13 +135,13 @@ end
 
 modal = hs.hotkey.modal.new(modHyper,'a')
 
-function modal:entered() 
-  hs.alert.closeAll(); 
+function modal:entered()
+  hs.alert.closeAll();
   hs.alert.show( "Window manager active", 999999 )
 end
 
-function modal:exited() 
-  hs.alert.closeAll() 
+function modal:exited()
+  hs.alert.closeAll()
 end
 
 modal:bind('','escape', function() modal:exit() end)

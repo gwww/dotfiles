@@ -34,8 +34,8 @@ alias pu=pushd
 alias rake='noglob rake'
 alias run-help=man
 alias rvm-restart='rvm_reload_flag=1 source '\''/Users/glenn/.rvm/scripts/rvm'\'
-alias v="vim"
-alias vi="vim"
-alias emacs="vim"
+alias v="nvim"
+alias vi="nvim"
+alias emacs="nvim"
 alias which-command=whence
 alias xyzzy="echo nothing happens"

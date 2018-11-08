@@ -1,6 +1,45 @@
 #!/bin/bash
 
+echo "Create .local directory structure..."
+mkdir -p ~/.local/share/zsh ~/.local/share/vim ~/local/share/virtualenvs
+mkdir -p ~/.local/share/cups
+
+system_type=$(uname -s)
+if [ "$system_type" = "Darwin" ]; then
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Installing homebrew..."
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        echo "Homebrew already installed. Skipping."
+    fi
+
+    if [ -f "~/.yadm/Brewfile" ]; then
+        echo "Updating homebrew bundle..."
+        brew bundle --file=~/.yadm/Brewfile
+    else
+        echo "Brewfile not found. Skipping brew installs."
+    fi
+fi
+
+# Ensure the my environment is setup
+if [ -f "~/.zshrc" ]; then
+    source ~/.zshrc
+fi
+
 if command -v vim >/dev/null 2>&1; then
-  echo "Bootstraping vim..."
-  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+    echo "Bootstraping vim..."
+    vim '+PlugClean!' '+qall'
+fi
+
+if command -v pyenv >/dev/null 2>&1; then
+    echo "Installing python..."
+    pyenv install 3.7.1
+    pyenv global  3.7.1
+    pip install spritemapper
+fi
+
+if command -v /usr/local/bin/gem >/dev/null 2>&1; then
+    echo "Updating gem..."
+    gem update --system
+    gem install --force bundler
 fi

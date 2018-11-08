@@ -10,6 +10,12 @@ for x in ~/bin; do
   esac
 done
 
+export PYENV_ROOT=~/.local/share/pyenv
+
+# If pyenv shims not already in path, add them
+[[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]] && eval "$(pyenv init -)"
+true
+
 eval "$(fasd --init auto)"
 
 export LANG="en_CA.UTF-8"

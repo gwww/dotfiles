@@ -15,16 +15,17 @@ brew update
 
 echo "Installing brews..."
 brew install elixir
+brew install fasd
 brew install fd
 brew install fzf
 brew install git
 brew install less
-brew install lua
 brew install pandoc
-brew install python
+brew install pyenv
 brew install ripgrep
 brew install rsync
 brew install ruby
+brew install tig
 brew install tree
 brew install vim
 brew install yadm
@@ -36,9 +37,8 @@ brew tap caskroom/cask
 
 brew cask install --appdir='/Applications' alfred
 brew cask alfred link
-# brew cask install --appdir='/Applications' android-file-transfer
 brew cask install --appdir='/Applications' calibre
-brew cask install --appdir='/Applications' deluge
+# brew cask install --appdir='/Applications' deluge
 brew cask install --appdir='/Applications' dropbox
 brew cask install --appdir='/Applications' google-chrome
 brew cask install --appdir='/Applications' hammerspoon

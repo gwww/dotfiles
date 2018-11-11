@@ -31,8 +31,8 @@ export PIP_CONFIG_FILE=~/.config/pip/pip.conf
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 export LESS="-RM"
 export LESSHISTFILE=-
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=nvim
 
 export PIPENV_SHELL_FANCY=1
 export PIPENV_VENV_IN_PROJECT=1

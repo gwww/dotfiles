@@ -3,6 +3,7 @@
 # Default file explorer
 defaults write -g NSFileViewer -string com.binarynights.ForkLift-3
 # defaults delete -g NSFileViewer
+defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.binarynights.ForkLift-3";}'
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true

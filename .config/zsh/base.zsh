@@ -23,7 +23,7 @@ export LC_ALL="en_CA.UTF-8"
 
 export CUPS_CACHEDIR=~/.local/share/cups
 export CUPS_DATADIR=~/.local/share/cups
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"
 export PYLINTHOME=~/.local/share/pylint
 

@@ -27,9 +27,9 @@ alias lsa='ls -lah'
 
 alias dotfiles=yadm
 
+alias cat='bat --style=numbers,header'
 alias more=less
 alias please=sudo !!
-alias po=popd
 alias pu=pushd
 alias rake='noglob rake'
 alias run-help=man

@@ -43,7 +43,7 @@ function _venv_status() {
   if [ -z $VIRTUAL_ENV ]; then
     echo "Inactive"
   else
-    if [ "$PIPENV_ACTIVE" -eq 1 -a "$SHLVL" -gt 1 ]; then
+    if [ "$POETRY_ACTIVE" -eq 1 -a "$SHLVL" -gt 1 ]; then
       echo "Subshell"
     else
       echo "Activated"
@@ -51,41 +51,44 @@ function _venv_status() {
   fi
 }
 
-# Small wrapper around pipenv to provide activate/deactivate commands
-function pe() {
+# Small wrapper around poetry to provide activate/deactivate commands
+function po() {
   if [[ $# = 1 && ${#1} > 1 ]]; then
     if [[ 'activate' =~ "^$1" ]]; then
-      local venv="$(pipenv --venv 2> /dev/null)"
-      if [ -n "$venv" ]; then
-        echo "Activating '$venv'"
-        source $venv/bin/activate
+      if [ -d .venv ]; then
+        source .venv/bin/activate
+        echo "Activated '$VIRTUAL_ENV'."
       else
-        echo "No virtual environment for this directory"
+        echo "No virtual environment in this directory."
       fi
+
     elif [[ 'deactivate' =~ "^$1" ]]; then
       local s=$(_venv_status)
       if [ "$s" = "Activated" ]; then
-        echo "Deactivating '$VIRTUAL_ENV'"
+        echo "Deactivating '$VIRTUAL_ENV'."
         deactivate
       elif [ "$s" = "Subshell" ]; then
-        echo "Exiting '$VIRTUAL_ENV' subshell"
+        echo "Exiting '$VIRTUAL_ENV' subshell."
         exit 0
       else
-        echo "No virtual environment active"
+        echo "No virtual environment active."
       fi
+
     elif [[ 'status' =~ "^$1" ]]; then
       local s=$(_venv_status)
       if [ "$s" != "Inactive" ]; then
         local ve=" ($VIRTUAL_ENV)"
       fi
       echo "Python venv: $s$ve"
-      pipenv --version
+      poetry --version
+
     elif [[ 'changelog' =~ "^$1" ]]; then
-      curl -vs https://raw.githubusercontent.com/pypa/pipenv/master/HISTORY.txt 2>/dev/null | more
+      curl -vs https://raw.githubusercontent.com/sdispater/poetry/master/CHANGELOG.md 2>/dev/null | pandoc -f markdown -t plain | more
+
     else
-      pipenv $@
+      poetry $@
     fi
   else
-    pipenv $@
+    poetry $@
   fi
 }

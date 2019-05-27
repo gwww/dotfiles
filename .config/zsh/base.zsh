@@ -3,7 +3,7 @@
 #
 
 # Add to the path ensuring no duplicates
-for x in ~/bin; do
+for x in ~/bin ~/.poetry/bin /usr/local/opt/ruby/bin; do
   case ":$PATH:" in
     *":$x:"*) :;; # already there
     *) PATH="$x:$PATH";;
@@ -33,9 +33,6 @@ export LESS="-RM"
 export LESSHISTFILE=-
 export EDITOR=nvim
 export VISUAL=nvim
-
-export PIPENV_SHELL_FANCY=1
-export PIPENV_VENV_IN_PROJECT=1
 
 export TWINE_USERNAME=gwww
 

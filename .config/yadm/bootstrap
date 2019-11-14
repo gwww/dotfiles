@@ -13,9 +13,9 @@ if [ "$system_type" = "Darwin" ]; then
         echo "Homebrew already installed. Skipping."
     fi
 
-    if [ -f "~/.yadm/Brewfile" ]; then
+    if [ -f "~/.config/yadm/Brewfile" ]; then
         echo "Updating homebrew bundle..."
-        brew bundle --file=~/.yadm/Brewfile
+        brew bundle --file=~/.config/yadm/Brewfile
     else
         echo "Brewfile not found. Skipping brew installs."
     fi
@@ -26,7 +26,7 @@ if [ -f "~/.zshrc" ]; then
     source ~/.zshrc
 fi
 
-if command -v vim >/dev/null 2>&1; then
+if command -v nvim >/dev/null 2>&1; then
     echo "Bootstraping vim..."
     vim '+PlugClean!' '+qall'
 fi

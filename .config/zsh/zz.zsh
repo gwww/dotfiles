@@ -1,4 +1,5 @@
 # zz - smart directory changer
+# From: http://leahneukirchen.org/dotfiles/.zshrc
 # 14dec2015  +chris+
 # 15dec2015  +chris+ clean up nonexisting paths
 chpwd_zz() {

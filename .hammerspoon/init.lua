@@ -182,8 +182,8 @@ switcher = switcher.new(filter.new():setDefaultFilter{}, {
     highlightColor        = { 0.8, 0.5, 0.0, 0.80 },
     titleBackgroundColor  = { 0.0, 0.0, 0.0, 0.75 },
 })
-hs.hotkey.bind('alt', 'tab', function() switcher:next() end)
-hs.hotkey.bind('alt-shift', 'tab', function() switcher:previous() end)
+-- hs.hotkey.bind('alt', 'tab', function() switcher:next() end)
+-- hs.hotkey.bind('alt-shift', 'tab', function() switcher:previous() end)
 
 -- Finally, show a notification that we finished loading the config
 hs.notify.new( {title='Hammerspoon', subTitle='Configuration loaded'} ):send()

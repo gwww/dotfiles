@@ -1,5 +1,5 @@
 # read markdown files like manpages
-function md() {
+function mdman() {
     pandoc -s -f markdown -t man "$*" | nroff -man
 }
 
@@ -37,7 +37,6 @@ zle -N rationalise-dot
 bindkey . rationalise-dot
 bindkey -M isearch . self-insert # without this, typing . aborts incr history search
 setopt auto_cd
-
 
 function _venv_status() {
   if [ -z $VIRTUAL_ENV ]; then

@@ -18,12 +18,13 @@ alias gst='git status'
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias history='fc -l 1'
 
-alias l='ls -lah'
-alias la='ls -A'
-alias lal='ls -lA'
-alias ll='ls -lh'
-alias ls='ls -G'
-alias lsa='ls -lah'
+alias ls='exa'
+alias l='exa -lah'
+alias la='exa -a'
+alias lal='exa -la'
+alias ll='exa -lh'
+#alias ls='ls -G'
+alias lsa='exa -lah'
 
 alias dotfiles=yadm
 

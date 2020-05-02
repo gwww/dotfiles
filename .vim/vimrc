@@ -64,7 +64,7 @@ Plug 'reedes/vim-pencil'
 "       \   call pencil#init({'wrap': 'hard', 'textwidth': 78})
 "   augroup END,
 
-Plug 'simnalamburt/vim-mundo'
+Plug 'mbbill/undotree'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
@@ -95,7 +95,9 @@ call plug#end()
 filetype indent plugin on
 syntax on
 
-autocmd filetype crontab setlocal nobackup nowritebackup
+autocmd FileType crontab setlocal nobackup nowritebackup
+autocmd FileType yaml setlocal foldmethod=indent
+autocmd FileType c setlocal shiftwidth=4
 
 "------------------------------------------------------------
 " Must have options {{{1
@@ -179,7 +181,7 @@ map     <silent><leader>w  :call ToggleWrap()<cr>
 noremap         <leader>y  "+y
 noremap         <leader>Y  "+y$
 nnoremap <silent> <leader>/ :execute 'Ack! ' . input('Rg/')<CR>
-nnoremap <leader>u :MundoToggle<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 
 map Y y$
 

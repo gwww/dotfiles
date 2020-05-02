@@ -16,8 +16,6 @@ export PYENV_ROOT=~/.local/share/pyenv
 [[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]] && eval "$(pyenv init -)"
 true
 
-eval "$(fasd --init auto)"
-
 export LANG="en_CA.UTF-8"
 export LC_ALL="en_CA.UTF-8"
 
@@ -40,6 +38,8 @@ export TWINE_USERNAME=gwww
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
 export ELKM1_URL=elk://192.168.1.201
+export UPBPIM_URL=serial:///dev/cu.KeySerial1:4800
+export UPBPIM_URL=tcp://192.168.1.14:7000
 
 # Setup for good long ability to look back on life...
 export HISTFILE=~/.local/share/zsh/history

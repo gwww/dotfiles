@@ -3,7 +3,7 @@
 [core]
   autocrlf = input
   pager = less -F -X
-  editor = /usr/local/bin/nvim
+  editor = /usr/local/bin/vim
 [alias]
   co = checkout
   ci = commit

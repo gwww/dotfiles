@@ -8,33 +8,39 @@ system_type=$(uname -s)
 if [ "$system_type" = "Darwin" ]; then
     if ! command -v brew >/dev/null 2>&1; then
         echo "Installing homebrew..."
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     else
         echo "Homebrew already installed. Skipping."
     fi
 
     if [ -f "~/.config/yadm/Brewfile" ]; then
         echo "Updating homebrew bundle..."
-        brew bundle --file=~/.config/yadm/Brewfile
+        brew bundle --verbose --file=~/.config/yadm/Brewfile
     else
         echo "Brewfile not found. Skipping brew installs."
     fi
 fi
 
-# Ensure the my environment is setup
+# Ensure the environment is setup
 if [ -f "~/.zshrc" ]; then
     source ~/.zshrc
 fi
 
-if command -v nvim >/dev/null 2>&1; then
+# Get the latest vim version
+if command -v make-vim >/dev/null 2>&1; then
+    make-vim
+fi
+
+if command -v vim >/dev/null 2>&1; then
     echo "Bootstraping vim..."
     vim '+PlugClean!' '+qall'
 fi
 
 if command -v pyenv >/dev/null 2>&1; then
-    echo "Installing python..."
-    pyenv install 3.7.1
-    pyenv global  3.7.1
+    python_version=$(pyenv install --list | grep -v - | grep -v b | tail -1)
+    echo "Installing Python version $python_version..."
+    pyenv install $python_version
+    pyenv global  $python_version
     pip install spritemapper
 fi
 

@@ -15,7 +15,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-
 call plug#begin('~/.local/share/vim/plugged')
 
 Plug 'vim-airline/vim-airline'            " Status and tab line
@@ -69,7 +68,7 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-repeat'             " better '.' handling when repeated
-"Plug 'jiangmiao/auto-pairs'         " auto close quotes, brackets
+Plug 'jiangmiao/auto-pairs'         " auto close quotes, brackets
 Plug 'gwww/vim-bbye'                " delete buffer leaving window structure intact
 Plug 'tpope/vim-commentary'         " toggle comments: <visual>gc, gc<motion>
 Plug 'terryma/vim-expand-region'    " + to expand visual select; _ to shrink
@@ -79,6 +78,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'wellle/targets.vim'           " amped up text objects
 Plug 'vim-scripts/matchit.zip'      " % command matches if/else/end and more
 Plug 'mattn/emmet-vim'              " quick html/css editing
+let g:user_emmet_leader_key=','
 
 " Snippets support
 " Plug 'MarcWeber/vim-addon-mw-utils'
@@ -146,8 +146,10 @@ if has('gui_running')
     endif
 elseif &term =~ "xterm"
     " Set block/line cursor for regular/insert modes
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    let &t_EI = "\<esc>[2 q" " block cursor for normal mode
+    let &t_SR = "\<esc>[4 q" " underline cursor for replace mode
+    let &t_SI = "\<esc>[6 q" " I beam cursor for insert mode
+    let &t_ut=''
 endif
 
 "------------------------------------------------------------

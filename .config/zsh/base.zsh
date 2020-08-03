@@ -3,7 +3,7 @@
 #
 
 # Add to the path ensuring no duplicates
-for x in ~/bin ~/.poetry/bin /usr/local/opt/ruby/bin; do
+for x in ~/bin ~/.poetry/bin /usr/local/opt/ruby/bin /usr/local/bin; do
   case ":$PATH:" in
     *":$x:"*) :;; # already there
     *) PATH="$x:$PATH";;
@@ -29,13 +29,14 @@ export PIP_CONFIG_FILE=~/.config/pip/pip.conf
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 export LESS="-RM"
 export LESSHISTFILE=-
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=vim
+export VISUAL=vim
 
 export TWINE_USERNAME=gwww
 
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad
+export EXA_COLORS='da=38;5;12:di=38;5;51'
 
 export ELKM1_URL=elk://192.168.1.201
 export UPBPIM_URL=serial:///dev/cu.KeySerial1:4800

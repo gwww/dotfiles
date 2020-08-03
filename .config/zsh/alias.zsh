@@ -5,7 +5,7 @@ alias d='dirs -v | head -10'
 alias g=git
 alias ga='git add'
 alias gb='git branch'
-alias gba='git branch -a'
+alias gbc='git checkout -b'
 alias gbd='git branch -d'
 alias gc='git commit -v'
 alias gcam='git commit --all --message'
@@ -18,15 +18,17 @@ alias gst='git status'
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias history='fc -l 1'
 
+alias gen='fswatch . | xargs -I {} -n 1 pyaml pre-ui-lovelace.yaml -o ../ui-lovelace.yaml'
+
 alias ls='exa'
 alias l='exa -lah'
 alias la='exa -a'
 alias lal='exa -la'
 alias ll='exa -lh'
-#alias ls='ls -G'
-alias lsa='exa -lah'
+alias lrt='exa -lhrs=time'
 
 alias dotfiles=yadm
+alias pdbit='python -m pdb -c continue '
 
 alias cat='bat --style=numbers,header'
 alias more=less

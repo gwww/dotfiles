@@ -11,6 +11,10 @@ echo "Current installed vim version:" $v.$p
 version="$(git ls-remote --tags https://github.com/vim/vim.git | grep 'v8.2.' | sed -nE 's#.*refs/tags/v?([0-9]+(\.[0-9]+)*)$#\1#p' | sort -Vr | head -n 1)"
 
 echo "Latest vim version on github: " $version
+major=$(echo $version | cut -d. -f1)
+minor=$(echo $version | cut -d. -f2)
+patch=$(echo $version | cut -d. -f3)
+
 
 if [[ $v.$p == $version ]]; then
   echo "Latest version of vim already installed."
@@ -22,16 +26,10 @@ if [[ $cont != 'y' ]]; then
   exit 0
 fi
 
-major=$(echo $version | cut -d. -f1)
-minor=$(echo $version | cut -d. -f2)
-patch=$(echo $version | cut -d. -f3)
-
 url="https://github.com/vim/vim/archive/v$version".tar.gz
 
-cd ~
-rm -rf vim-compile
-mkdir vim-compile
-cd vim-compile
+work_dir=$(mktemp -d /tmp/vim.XXXXXX)
+cd $work_dir
 
 echo "Retrieving $url..."
 if ! curl -L --silent $url --output v"$version".tar.gz; then
@@ -64,4 +62,6 @@ make --silent VIMRUNTIMEDIR=/usr/local/share/vim/vim"$major$minor" &>/dev/null
 echo "Installing..."
 make --silent install &>/dev/null
 
+echo "Cleaning up..."
+rm -rf $work_dir
 echo "Done"

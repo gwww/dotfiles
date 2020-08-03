@@ -70,6 +70,7 @@ endif
 " - g:jellybeans_use_term_italics
 
 let s:background_color = "151515"
+let s:background_color = "080808"
 
 " Backwards compatibility
 if exists("g:jellybeans_background_color") || exists("g:jellybeans_background_color_256")
@@ -387,7 +388,7 @@ call s:X("Cursor",s:background_color,"b0d0f0","","","")
 
 call s:X("LineNr","605958",s:background_color,"none",s:termBlack,"")
 call s:X("CursorLineNr","ccc5c4","","none","White","")
-call s:X("Comment","888888","","italic","Grey","")
+call s:X("Comment","999999","","italic","Grey","")
 call s:X("Todo","c7c7c7","","bold","White",s:termBlack)
 
 call s:X("StatusLine","000000","dddddd","italic","","White")
@@ -407,7 +408,7 @@ call s:X("Special","799d6a","","","Green","")
 call s:X("Delimiter","668799","","","Grey","")
 
 call s:X("String","99ad6a","","","Green","")
-call s:X("StringDelimiter","556633","","","DarkGreen","")
+call s:X("StringDelimiter","88aa88","","","DarkGreen","")
 
 call s:X("Identifier","c6b6ee","","","LightCyan","")
 call s:X("Structure","8fbfdc","","","LightCyan","")

@@ -94,16 +94,21 @@ function po() {
 
 function e() {
   if [[ $# != 1 ]]; then
-    echo "Supply an python environment to activate."
-    return
+    echo "Supply directory shortcut to goto."
+    return 1
   fi
   local dir=""
   case $1 in
     pyaml) dir="$HOME/Development/automation/config/pyaml" ;;
     upb)   dir="$HOME/Development/automation/upb/upb-lib" ;;
     elk)   dir="$HOME/Development/automation/elk/elkm1" ;;
-    *)     echo "Unknown environment name: $1"; return ;;
+    *)     echo "Unknown directory shortcut name: $1"; return 2 ;;
   esac
   cd $dir
-  po activate
+  return 0
+}
+
+function ea() {
+  e $*
+  [[ $? != 0 ]] || po activate
 }

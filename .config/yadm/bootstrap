@@ -51,5 +51,5 @@ if command -v /usr/local/bin/gem >/dev/null 2>&1; then
 fi
 
 if [ -f "~/bin/macos.sh" ]; then
-    source ~/bin/macos.sh
+    source ~/.config/yadm/macos.sh
 fi

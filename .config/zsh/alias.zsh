@@ -27,6 +27,13 @@ alias lal='exa -la'
 alias ll='exa -lh'
 alias lrt='exa -lhrs=time'
 
+alias ls='exa'
+alias l='exa'
+alias la='exa -a'
+alias ll='exa -lh'
+alias lal='exa -la'
+alias lrt='exa -lhrs=time'
+
 alias dotfiles=yadm
 alias pdbit='python -m pdb -c continue '
 

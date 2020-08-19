@@ -13,11 +13,11 @@ function chromepdf() {
 function path() {
   echo $PATH | tr ":" "\n" | \
   awk "{ \
-    sub(\"/usr\",   \"$fg_no_bold[green]/usr$reset_color\"); \
-    sub(\"/bin\",   \"$fg_no_bold[blue]/bin$reset_color\"); \
-    sub(\"/opt\",   \"$fg_no_bold[cyan]/opt$reset_color\"); \
-    sub(\"/sbin\",  \"$fg_no_bold[magenta]/sbin$reset_color\"); \
-    sub(\"/local\", \"$fg_no_bold[yellow]/local$reset_color\"); \
+    sub(\"/usr\",   \"$fg[green]/usr$reset_color\"); \
+    sub(\"/bin\",   \"$fg[blue]/bin$reset_color\"); \
+    sub(\"/opt\",   \"$fg[cyan]/opt$reset_color\"); \
+    sub(\"/sbin\",  \"$fg[magenta]/sbin$reset_color\"); \
+    sub(\"/local\", \"$fg[yellow]/local$reset_color\"); \
     print }"
 }
 
@@ -54,23 +54,23 @@ function _venv_status() {
 function po() {
   if [[ $# = 1 && ${#1} > 1 ]]; then
     if [[ 'activate' =~ "^$1" ]]; then
-      if [ -d .venv ]; then
+      if [ -f .venv/bin/activate ]; then
         source .venv/bin/activate
-        echo "Activated '$VIRTUAL_ENV'."
+        echo "$fg_bold[green]Activated '$VIRTUAL_ENV'$reset_color"
       else
-        echo "No virtual environment in this directory."
+        echo "$fg_bold[red]No virtual environment in this directory.$reset_color"
       fi
 
     elif [[ 'deactivate' =~ "^$1" ]]; then
       local s=$(_venv_status)
       if [ "$s" = "Activated" ]; then
-        echo "Deactivating '$VIRTUAL_ENV'."
+        echo "$fg_bold[green]Deactivating '$VIRTUAL_ENV'$reset_color"
         deactivate
       elif [ "$s" = "Subshell" ]; then
-        echo "Exiting '$VIRTUAL_ENV' subshell."
+        echo "$fg_bold[green]Exiting '$VIRTUAL_ENV' subshell$reset_color"
         exit 0
       else
-        echo "No virtual environment active."
+        echo "$fg_bold[red]No virtual environment active.$reset_color"
       fi
 
     elif [[ 'status' =~ "^$1" ]]; then
@@ -92,23 +92,27 @@ function po() {
   fi
 }
 
-function e() {
-  if [[ $# != 1 ]]; then
-    echo "Supply directory shortcut to goto."
+function j() {
+  typeset -A dirs
+  dirs=(
+    elk       ~/Development/automation/elk/elkm1
+    pyaml     ~/Development/automation/config/pyaml
+    upb       ~/Development/automation/upb/upb-lib
+    westmin   ~/Development/automation/config/westmin
+    vim       ~/.vim
+    zsh       ~/.config/zsh
+  )
+  if [[ -z $dirs[$1] ]]; then
+    echo "$fg_bold[red]Unknown shortcut '$1'; use one of: ${(k)dirs}$reset_color"
     return 1
   fi
-  local dir=""
-  case $1 in
-    pyaml) dir="$HOME/Development/automation/config/pyaml" ;;
-    upb)   dir="$HOME/Development/automation/upb/upb-lib" ;;
-    elk)   dir="$HOME/Development/automation/elk/elkm1" ;;
-    *)     echo "Unknown directory shortcut name: $1"; return 2 ;;
-  esac
-  cd $dir
+  cd $dirs[$1]
   return 0
 }
 
-function ea() {
-  e $*
-  [[ $? != 0 ]] || po activate
+function ja() {
+  for dir in "$@"; do
+    j $dir
+    [[ $? == 0 ]] && [[ -f .venv/bin/activate ]] && po activate
+  done
 }

@@ -19,6 +19,8 @@ true
 export LANG="en_CA.UTF-8"
 export LC_ALL="en_CA.UTF-8"
 
+autoload -U colors && colors
+
 export CUPS_CACHEDIR=~/.local/share/cups
 export CUPS_DATADIR=~/.local/share/cups
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages --glob "!.git/*"'
@@ -32,7 +34,7 @@ export LESSHISTFILE=-
 export EDITOR=vim
 export VISUAL=vim
 
-export TWINE_USERNAME=gwww
+# export TWINE_USERNAME=gwww
 
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad

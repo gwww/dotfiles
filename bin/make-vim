@@ -1,23 +1,58 @@
 #!/usr/bin/env bash
 
+# Set the colours you can use
+nocolor='\033[0m'
+red='\033[0;31m'
+green='\033[0;32m'
+orange='\033[0;33m'
+blue='\033[0;34m'
+purple='\033[0;35m'
+cyan='\033[0;36m'
+lightgray='\033[0;37m'
+darkgray='\033[1;30m'
+lightred='\033[1;31m'
+lightgreen='\033[1;32m'
+yellow='\033[1;33m'
+lightblue='\033[1;34m'
+lightpurple='\033[1;35m'
+lightcyan='\033[1;36m'
+white='\033[1;37m'
+
+
+# Echo, may have embedded color
+function cecho() {
+  echo -e "$*${nocolor}"
+}
+
+function error_check() {
+  local err=$?
+  if [ "${err}" -ne "0" ]; then
+    cecho "${red}There were errors when $1 (error code ${err})"
+    read -p "Continue anyway? (y/n) " cont
+    if [[ $cont != 'y' ]]; then
+      exit $err
+    fi
+  fi
+}
+
 # Determine current vim version
 v=$(vim --version | head -1 | cut -d ' ' -f 5)
 p=$(vim --version | grep 'Included patches:' | cut -d '-' -f 2)
 p=$(printf '%04d' $p)
 
-echo "Current installed vim version:" $v.$p
+cecho "Current installed vim version:${yellow}" $v.$p
 
 # Determine latest patch version
 version="$(git ls-remote --tags https://github.com/vim/vim.git | grep 'v8.2.' | sed -nE 's#.*refs/tags/v?([0-9]+(\.[0-9]+)*)$#\1#p' | sort -Vr | head -n 1)"
 
-echo "Latest vim version on github: " $version
+cecho "Latest vim version on github:${lightblue} " $version
 major=$(echo $version | cut -d. -f1)
 minor=$(echo $version | cut -d. -f2)
 patch=$(echo $version | cut -d. -f3)
 
 
 if [[ $v.$p == $version ]]; then
-  echo "Latest version of vim already installed."
+  cecho "${green}Latest version of vim already installed."
   exit 0
 fi
 
@@ -31,15 +66,15 @@ url="https://github.com/vim/vim/archive/v$version".tar.gz
 work_dir=$(mktemp -d /tmp/vim.XXXXXX)
 cd $work_dir
 
-echo "Retrieving $url..."
+cecho "${green}Retrieving $url..."
 if ! curl -L --silent $url --output v"$version".tar.gz; then
-  echo "Does not exist: $url"
+  cecho "${red}Does not exist: $url"
   exit 1
 fi
 tar -xf v"$version".tar.gz
 cd vim-"$version"
 
-echo "Configuring..."
+cecho "${green}Configuring..."
 ./configure \
     --silent \
     --with-features=huge \
@@ -55,13 +90,16 @@ echo "Configuring..."
     --disable-netbeans \
     --disable-rightleft \
     --prefix=/usr/local
+error_check "configuring"
 
-echo "Building..."
+cecho "${green}Building..."
 make --silent VIMRUNTIMEDIR=/usr/local/share/vim/vim"$major$minor" &>/dev/null
+error_check "building (make)"
 
-echo "Installing..."
+cecho "${green}Installing..."
 make --silent install &>/dev/null
+error_check "installing"
 
-echo "Cleaning up..."
+cecho "${green}Cleaning up..."
 rm -rf $work_dir
-echo "Done"
+cecho "${green}Done${red}!!!"

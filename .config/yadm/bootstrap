@@ -37,10 +37,13 @@ if command -v vim >/dev/null 2>&1; then
 fi
 
 if command -v pyenv >/dev/null 2>&1; then
+    # Latest version of python that is not beta...
     python_version=$(pyenv install --list | grep -v - | grep -v b | tail -1)
     echo "Installing Python version $python_version..."
     pyenv install $python_version
     pyenv global  $python_version
+    # Install poetry latest...
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
     pip install spritemapper
 fi
 

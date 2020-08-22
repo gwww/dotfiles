@@ -26,6 +26,12 @@ if [ -f "~/.zshrc" ]; then
     source ~/.zshrc
 fi
 
+# Set default config dir for Hammerspoon
+if [ -d "/Applications/Hammerspoon.app" ]; then
+  defaults write org.hammerspoon.Hammerspoon \
+    MJConfigFile "$HOME/.config/hammerspoon/init.lua"
+fi
+
 # Get the latest vim version
 if command -v make-vim >/dev/null 2>&1; then
     make-vim

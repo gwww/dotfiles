@@ -26,10 +26,13 @@ if [ -f "~/.zshrc" ]; then
     source ~/.zshrc
 fi
 
-# Set default config dir for Hammerspoon
+# Setup Hammerspoon
 if [ -d "/Applications/Hammerspoon.app" ]; then
+  # Set default config dir for Hammerspoon
   defaults write org.hammerspoon.Hammerspoon \
     MJConfigFile "$HOME/.config/hammerspoon/init.lua"
+  # Remap Caps-lock to Right-Control
+  cp ~/.config/hammerspoon/com.glenn.KeyRemapping.plist ~/Library/LaunchAgents
 fi
 
 # Get the latest vim version

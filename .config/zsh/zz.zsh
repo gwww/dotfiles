@@ -1,3 +1,6 @@
+# Disable for now
+return 0
+
 # zz - smart directory changer
 # From: http://leahneukirchen.org/dotfiles/.zshrc
 # 14dec2015  +chris+

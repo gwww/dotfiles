@@ -16,8 +16,8 @@ hotkeys = {}
   -- Window movements...
   hotkeys.left  = cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})
   hotkeys.right = cycleCalls(toGrid, {{0.5,0,0.5,1}, {1/3,0,2/3,1}, {2/3,0,1/3,1}})
-  hotkeys.up    = function() toGrid( {0, 0,   1, 0.3 } ) end
-  hotkeys.down  = function() toGrid( {0, 0.7, 1, 0.3 } ) end
+  hotkeys.up    = function() toGrid({0,0,1,0.3}) end
+  hotkeys.down  = function() toGrid({0,0.7,1,0.3}) end
   hotkeys.space = function() toggleMaximize(hs.window.focusedWindow()) end
 hyper_init(hotkeys)
 

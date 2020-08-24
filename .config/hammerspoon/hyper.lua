@@ -4,8 +4,8 @@ function hyper_init(keysToBind)
 
   local hyperKeyPressed = false
   local hyperKeyComboPressed = false
-  local keyBindings = keysToBind
 
+  local keyBindings = keysToBind
   local eventTap = hs.eventtap.new(
     {
       hs.eventtap.event.types.keyDown,
@@ -14,14 +14,14 @@ function hyper_init(keysToBind)
     function (e)
       -- print("Type: ", e:getType(), "Key code: ", e:getKeyCode(),
       --   "Flags: ", tprint(e:getFlags()))
-      if e:getType() == 12 and e:getKeyCode() == hyperKey then
+      if e:getKeyCode() == hyperKey and e:getType() == 12 then
         if e:getFlags()[hyperKeyFlagName] then
           hyperKeyPressed = true
           hyperKeyComboPressed = false
         else
           hyperKeyPressed = false
           if not hyperKeyComboPressed then
-            hs.eventtap.keyStroke('', 'escape')
+            hs.eventtap.keyStroke('', 'escape', 100000)
           end
         end
       elseif hyperKeyPressed and e:getType() == 10 then
@@ -31,10 +31,10 @@ function hyper_init(keysToBind)
             keyBindings[hs.keycodes.map[e:getKeyCode()]]()
           end
           return true
-        else
-          return false
         end
       end
+
+      return false
     end
   )
   eventTap:start()

@@ -5,11 +5,11 @@ require("window-fns")
 hotkeys = {}
   -- App launch...
   hotkeys.c = caffeinate
-  hotkeys.f = function() hs.application.launchOrFocus( "Forklift" ) end
-  hotkeys.g = function() hs.application.launchOrFocus( "Finder" ) end
+  hotkeys.a = function() hs.application.launchOrFocus( "Forklift" ) end
+  hotkeys.f = function() hs.application.launchOrFocus( "Finder" ) end
   hotkeys.h = function() os.execute( "open ~" ) end
   hotkeys.q = function() hs.application.launchOrFocus( "Firefox" ) end
-  hotkeys.V = function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end
+  hotkeys.v = function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end
   hotkeys.w = function() hs.application.launchOrFocus( "iTerm" ) end
   hotkeys.y = hs.toggleConsole
 

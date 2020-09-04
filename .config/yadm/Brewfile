@@ -30,6 +30,7 @@ cask "qlstephen"
 
 cask "alfred"
 cask "arq"
+cask "authy"
 cask "bitwarden"
 cask "dropbox"
 cask "firefox"

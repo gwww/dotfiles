@@ -2,6 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!-- Map the CapsLock key to Right-Control -->
     <key>Label</key>
     <string>com.glenn.KeyRemapping</string>
     <key>ProgramArguments</key>

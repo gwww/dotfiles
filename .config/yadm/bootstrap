@@ -1,67 +1,117 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
-echo "Create .local directory structure..."
-mkdir -p ~/.local/share/zsh ~/.local/share/vim ~/local/share/virtualenvs
-mkdir -p ~/.local/share/cups
+function run() {
+  if [ $dryrun -eq 1 ]; then
+    echo "Run: " $* | head -c 75 | tr '\n' '; '
+    echo
+  else
+    $*
+  fi
+}
 
-system_type=$(uname -s)
-if [ "$system_type" = "Darwin" ]; then
-    if ! command -v brew >/dev/null 2>&1; then
-        echo "Installing homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    else
-        echo "Homebrew already installed. Skipping."
-    fi
-
-    if [ -f "~/.config/yadm/Brewfile" ]; then
-        echo "Updating homebrew bundle..."
-        brew bundle --verbose --file=~/.config/yadm/Brewfile
-    else
-        echo "Brewfile not found. Skipping brew installs."
-    fi
+if [[ $# = 1 && $1 = '--dryrun' ]]; then
+  dryrun=1
+else
+  dryrun=0
 fi
 
 # Ensure the environment is setup
-if [ -f "~/.zshrc" ]; then
-    source ~/.zshrc
+if [ -f ~/.zshrc ]; then
+  echo "Sourcing ~/.zshrc..."
+  run source ~/.zshrc
 fi
 
+echo "Creating '.local' directory structure..."
+run mkdir -p ~/.local/share/zsh ~/.local/share/vim ~/local/share/virtualenvs
+run mkdir -p ~/.local/share/cups
+
+system_type=$(uname -s)
+
+if [ "$system_type" = "Darwin" ]; then
+  if ! command -v /usr/local/bin/brew >/dev/null 2>&1; then
+    echo "Installing Homebrew..."
+    run /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  fi
+  run brew update
+
+  if [ -f ~/.config/yadm/Brewfile ]; then
+    echo "Updating homebrew bundle..."
+    echo '----------------------'
+    run brew bundle --verbose --file=~/.config/yadm/Brewfile
+    echo '----------------------'
+  else
+    echo "Brewfile not found. Skipping brew installs."
+  fi
+fi
+
+echo "Setting default shell to zsh..."
+if [ -x /usr/local/bin/zsh ]; then
+  if ! grep -q /usr/local/bin/zsh /etc/shells; then
+    sudo echo "/usr/local/bin/zsh" >>/etc/shells
+  fi
+  run chsh -s /usr/local/bin/zsh
+fi
+
+echo "Setting iTerm2 preferences folder to ~/.config/iTerm2..."
+run defaults write com.googlecode.iterm2 PrefsCustomFolder ~/.config/iTerm2
+
 # Setup Hammerspoon
-if [ -d "/Applications/Hammerspoon.app" ]; then
+if [ -d /Applications/Hammerspoon.app ]; then
   # Set default config dir for Hammerspoon
-  defaults write org.hammerspoon.Hammerspoon \
+  echo "Setting Hammerspoon default config dir and remapping Caps Lock..."
+  run defaults write org.hammerspoon.Hammerspoon \
     MJConfigFile "$HOME/.config/hammerspoon/init.lua"
-  # Remap Caps-lock to Right-Control
-  cp ~/.config/hammerspoon/com.glenn.KeyRemapping.plist ~/Library/LaunchAgents
+      # Remap Caps-lock to Right-Control
+      run cp ~/.config/yadm/com.glenn.KeyRemapping.plist ~/Library/LaunchAgents
 fi
 
 # Get the latest vim version
 if command -v make-vim >/dev/null 2>&1; then
-    make-vim
+  echo "Installing latest version of vim..."
+  run make-vim
 fi
 
 if command -v vim >/dev/null 2>&1; then
-    echo "Bootstraping vim..."
-    vim '+PlugClean!' '+qall'
+  echo "Bootstraping vim plugins..."
+  run vim '+PlugClean!' '+qall'
 fi
 
 if command -v pyenv >/dev/null 2>&1; then
-    # Latest version of python that is not beta...
-    python_version=$(pyenv install --list | grep -v - | grep -v b | tail -1)
-    echo "Installing Python version $python_version..."
-    pyenv install $python_version
-    pyenv global  $python_version
-    # Install poetry latest...
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-    pip install spritemapper
+  echo "Installing Python (using pyenv)..."
+  # Latest version of python that is not beta...
+  python_versions=$(pyenv install --list | grep -v - | grep -v b | tail -10)
+  python_version=$(pyenv install --list | grep -v - | grep -v b | tail -1)
+  echo "For reference, the last 10 Python releases were:"
+  echo $python_versions | tr '\n' ' '
+  echo
+
+  echo -n "Enter Python version to install, enter installs $python_version: "
+  read v
+  if [[ $v != '' ]]; then
+    python_version=$v
+  fi
+  echo "Installing Python version $python_version..."
+  run pyenv install $python_version
+  run pyenv global  $python_version
+  # Install poetry latest...
+  echo "Installing Python dependency manager 'poetry'"
+  run python -c "$(curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py)"
+  run pip install spritemapper
 fi
 
-if command -v /usr/local/bin/gem >/dev/null 2>&1; then
-    echo "Updating gem..."
-    gem update --system
-    gem install --force bundler
+if command -v /usr/local/opt/ruby/bin/gem >/dev/null 2>&1; then
+  echo "Updating Ruby 'gem' installer and 'bundler'..."
+  run /usr/local/opt/ruby/bin/gem update --system
+  run /usr/local/opt/ruby/bin/gem install --force bundler
 fi
 
-if [ -f "~/bin/macos.sh" ]; then
-    source ~/.config/yadm/macos.sh
+if [ -f ~/bin/macos.sh ]; then
+  echo "Setting up my MacOS defaults..."
+  run source ~/.config/yadm/macos.sh
 fi
+
+echo '----------------------'
+echo "All done with this script! Next steps:"
+echo "1. Enter software keys for Alfred, Arq, Forklift, and MS Office"
+echo "2. Cleanup Homebrew cache using: 'rm -rf $(brew --cache)'"
+echo "3. Reboot. Some of this installation requires it."

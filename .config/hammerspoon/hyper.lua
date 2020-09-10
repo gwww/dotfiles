@@ -1,7 +1,7 @@
 local function dbg(e)
   local flags = "'"
   for k, v in pairs(e:getFlags()) do
-    flags = flags .. k .. ","
+    flags = flags .. k .. ";"
   end
   flags = flags .. "'"
 
@@ -14,11 +14,22 @@ local function dbg(e)
   print(s)
 end
 
+local hyperKeyChoices = {} -- {keycode, flag}
+hyperKeyChoices.leftCtrl   = {59, "ctrl"}
+hyperKeyChoices.rightCtrl  = {62, "ctrl"}
+hyperKeyChoices.leftAlt    = {58, "alt"}
+hyperKeyChoices.rightAlt   = {61, "alt"}
+hyperKeyChoices.leftCmd    = {55, "cmd"}
+hyperKeyChoices.rightCmd   = {54, "cmd"}
+hyperKeyChoices.leftShift  = {56, "shift"}
+hyperKeyChoices.rightShift = {60, "shift"}
+hyperKeyChoices.fn         = {63, "fn"}
+
 local eventTap = nil
 
-function hyper_init(keysToBind)
-  local hyperKey = 62 -- Const Right control key
-  local hyperKeyFlagName = "ctrl" -- Const flag name
+function hyper_init(key, keysToBind)
+  local hyperKey = hyperKeyChoices[key][1]
+  local hyperKeyFlagName = hyperKeyChoices[key][2]
 
   local hyperKeyPressed = false
   local hyperKeyComboPressed = false
@@ -26,8 +37,8 @@ function hyper_init(keysToBind)
   local keyBindings = keysToBind
   eventTap = hs.eventtap.new(
     {
-      hs.eventtap.event.types.keyDown,
-      hs.eventtap.event.types.flagsChanged
+      hs.eventtap.event.types.keyDown,      -- type 10
+      hs.eventtap.event.types.flagsChanged  -- type 12
     },
     function (e)
       -- dbg(e)
@@ -42,7 +53,7 @@ function hyper_init(keysToBind)
           end
         end
       elseif hyperKeyPressed and e:getType() == 10 then
-        if hs.eventtap.checkKeyboardModifiers()["ctrl"] then
+        if hs.eventtap.checkKeyboardModifiers()[hyperKeyFlagName] then
           hyperKeyComboPressed = true
           if keyBindings[hs.keycodes.map[e:getKeyCode()]] then
             keyBindings[hs.keycodes.map[e:getKeyCode()]]()

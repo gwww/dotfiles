@@ -46,16 +46,16 @@ true
 
 # Setup for good long ability to look back on life...
 export HISTFILE=~/.local/share/zsh/history
-export HISTSIZE=5000
+export HISTSIZE=6000
 export SAVEHIST=5000
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
-setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_dups        # ignore duplication command history list
 setopt hist_ignore_space
 setopt hist_verify
-setopt inc_append_history
-setopt share_history # share command history data
+setopt inc_append_history      # save history entries as soon as they are entered
+setopt share_history           # share command history data
 
 # Enable up/down arrow to search history based on what is already typed
 # Cursor placed at end of line

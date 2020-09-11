@@ -1,3 +1,7 @@
+local _red="%{\e[0;31m%}"
+local _green="%{\e[0;38;5;46m%}"
+local _reset="%{\e[0m%}"
+
 function prompt_cwd {
   local _separator="%{\e[1;38;5;11m%}"
   local _segment="%{\e[0;38;5;14m%}"
@@ -11,11 +15,9 @@ function prompt_git {
   local branch_name="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
   if [ -n "$branch_name" ]; then
     if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
-      local _dirty="%{\e[0;31m%}"
-      echo -n "$_dirty$branch_name "
+      echo -n "$_red$branch_name "
     else
-      local _clean="%{\e[0;32m%}"
-      echo -n "$_clean$branch_name "
+      echo -n "$_green$branch_name "
     fi
   fi
 }
@@ -29,25 +31,20 @@ function prompt_ssh {
 function prompt_pyenv {
   if [ -n "$VIRTUAL_ENV" ]; then
     env_path_list=(${(s:/:)VIRTUAL_ENV})
-    echo -n "%{\e[0;38;5;46m%}"
-    echo -n "(🐍$env_path_list[-2]) "
+    echo -n "$_green(🐍$env_path_list[-2]) "
   fi
 }
 
 function prompt_status {
   local _uchar="λ"
   if [ "$PROMPT_LAST_ERROR" != "0" ]; then
-    local _err="%{\e[0;31m%}"
-    echo -n "$_err%(!.#.$_uchar) "
+    echo -n "$_red%(!.#.$_uchar) "
   else
-    local _ok="%{\e[0;32m%}"
-    echo -n "$_ok%(!.#.$_uchar) "
+    echo -n "$_green%(!.#.$_uchar) "
   fi
 }
 
 function prompt_build_left {
-  local _reset="%{\e[0m%}"
-
   prompt_cwd
   prompt_ssh
   prompt_git

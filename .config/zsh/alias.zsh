@@ -21,13 +21,6 @@ alias history='fc -l 1'
 alias gen='fswatch . | xargs -I {} -n 1 pyaml pre-ui-lovelace.yaml -o ../ui-lovelace.yaml'
 
 alias ls='exa'
-alias l='exa -lah'
-alias la='exa -a'
-alias lal='exa -la'
-alias ll='exa -lh'
-alias lrt='exa -lhrs=time'
-
-alias ls='exa'
 alias l='exa'
 alias la='exa -a'
 alias ll='exa -lh'
@@ -36,6 +29,8 @@ alias lrt='exa -lhrs=time'
 
 alias dotfiles=yadm
 alias pdbit='python -m pdb -c continue '
+
+alias plcat='plutil -convert xml1 -o -'
 
 alias cat='bat --style=numbers,header'
 alias more=less

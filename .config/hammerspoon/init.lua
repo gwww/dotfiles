@@ -13,6 +13,7 @@ hotkeys = {}
   hotkeys.v = function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end
   hotkeys.w = function() hs.application.launchOrFocus( "iTerm" ) end
   hotkeys.y = hs.toggleConsole
+  hotkeys.z = function() hs.application.launchOrFocus( "zoom.us" ) end
 
   -- Window movements...
   hotkeys.left  = cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})

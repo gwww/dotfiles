@@ -88,7 +88,7 @@ if [[ -x /usr/local/bin/bash ]]; then
     run 'sudo printf /usr/local/bin/bash >> /etc/shells'
   fi
 else
-  note "/usr/local/bin/bash not found; not updating /etc/shells."
+  note "/usr/local/bin/bash not found; not adding it to /etc/shells."
 fi
 
 info "Setting iTerm2 preferences folder to ~/.config/iTerm2..."

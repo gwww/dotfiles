@@ -35,8 +35,9 @@ fi
 
 
 info "Creating '.local' directory structure..."
-run mkdir -p ~/.local/share/zsh ~/.local/share/vim ~/local/share/virtualenvs
-run mkdir -p ~/.local/share/cups
+for x in cups poetry pyenv vim virtualenvs zsh; do
+  run mkdir -p $HOME/.local/share/$x
+done
 
 system_type=$(uname -s)
 

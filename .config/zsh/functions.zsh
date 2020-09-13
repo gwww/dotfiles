@@ -23,7 +23,7 @@ function path() {
 
 # This was written entirely by Mikael Magnusson (Mikachu)
 # Type '...' to get '../..' with successive .'s adding /..
-function rationalise-dot {
+function _rationalise-dot {
   local MATCH # keep the regex match from leaking to the environment
   if [[ $LBUFFER =~ '(^|/| |      |'$'\n''|\||;|&)\.\.$' ]]; then
     LBUFFER+=/
@@ -33,8 +33,8 @@ function rationalise-dot {
     zle self-insert
   fi
 }
-zle -N rationalise-dot
-bindkey . rationalise-dot
+zle -N _rationalise-dot
+bindkey . _rationalise-dot
 bindkey -M isearch . self-insert # without this, typing . aborts incr history search
 setopt auto_cd
 

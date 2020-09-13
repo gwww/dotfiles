@@ -9,11 +9,15 @@ autoload -U colors && colors
 
 export CUPS_CACHEDIR=~/.local/share/cups
 export CUPS_DATADIR=~/.local/share/cups
+
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"
+
+export PYTHONSTARTUP=~/.config/python/pythonrc
 export PYLINTHOME=~/.local/share/pylint
-export PIP_CONFIG_FILE=~/.config/pip/pip.conf
-export POETRY_HOME=~/.local/poetry
+export PIP_CONFIG_FILE=~/.config/python/pip.conf
+
+export POETRY_HOME=~/.local/share/poetry
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 export LESS="-RM"
 export LESSHISTFILE=-

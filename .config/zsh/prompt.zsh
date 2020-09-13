@@ -1,20 +1,19 @@
-local _red="%{\e[0;31m%}"
+local _red="%{\e[0;91m%}"
 local _green="%{\e[0;38;5;46m%}"
 local _reset="%{\e[0m%}"
+local _cwd_sep="%{\e[1;38;5;11m%}"
+local _cwd_segment="%{\e[0;38;5;14m%}"
 
-function prompt_cwd {
-  local _separator="%{\e[1;38;5;11m%}"
-  local _segment="%{\e[0;38;5;14m%}"
-
+function __prompt_cwd {
   local cwd="%2~"
   cwd="${(%)cwd}"
-  echo -n "$_segment${cwd//\//$_separator/$_segment} "
+  echo -n "$_cwd_segment${cwd//\//$_cwd_sep/$_cwd_segment} "
 }
 
-function prompt_git {
+function __prompt_git {
   local branch_name="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-  if [ -n "$branch_name" ]; then
-    if [ -n "$(git status --porcelain 2> /dev/null)" ]; then
+  if [[ -n "$branch_name" ]]; then
+    if [[ -n "$(git status --porcelain 2> /dev/null)" ]]; then
       echo -n "$_red$branch_name "
     else
       echo -n "$_green$branch_name "
@@ -22,55 +21,36 @@ function prompt_git {
   fi
 }
 
-function prompt_ssh {
-  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    echo -n "$(hostname -s) "
-  fi
+function __prompt_ssh {
+  [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]] && echo -n "$(hostname -s) "
 }
 
-function prompt_pyenv {
-  if [ -n "$VIRTUAL_ENV" ]; then
+function __prompt_pyenv {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
     env_path_list=(${(s:/:)VIRTUAL_ENV})
     echo -n "$_green(🐍$env_path_list[-2]) "
   fi
 }
 
-function prompt_status {
-  local _uchar="λ"
-  if [ "$PROMPT_LAST_ERROR" != "0" ]; then
-    echo -n "$_red%(!.#.$_uchar) "
-  else
-    echo -n "$_green%(!.#.$_uchar) "
-  fi
+function __prompt_vimshell {
+  [[ -n "$VIMRUNTIME" ]] && echo -n "${_red}VIMSHELL "
 }
 
-function prompt_build_left {
-  prompt_cwd
-  prompt_ssh
-  prompt_git
-  prompt_pyenv
-  prompt_status
+function __prompt_char {
+  echo -n "%(?.$_green.$_red)%(!.#.λ) "
+}
+
+function __display_left_prompt {
+  __prompt_cwd
+  __prompt_ssh
+  __prompt_git
+  __prompt_pyenv
+  __prompt_vimshell
+  __prompt_char
   echo -n $_reset
 }
 
-function prompt_build_right {
-}
-
-# capture exit status and reset prompt
-function prompt_line_init {
-  PROMPT_LAST_ERROR="$?" # I need to capture this ASAP
-  zle reset-prompt
-}
-
-# redraw prompt on keymap select
-function prompt_keymap_select {
-  zle reset-prompt
-}
-
 setopt prompt_subst
-zle -N zle-line-init prompt_line_init
-zle -N zle-keymap-select prompt_keymap_select
 
-PROMPT='$(prompt_build_left)'
-# RPROMPT='$(prompt_build_right)'
+PROMPT='$(__display_left_prompt)'
 RPROMPT=''

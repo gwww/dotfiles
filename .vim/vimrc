@@ -64,6 +64,7 @@ Plug 'reedes/vim-pencil'
 "   augroup END,
 
 Plug 'mbbill/undotree'
+let g:undotree_WindowLayout = 4
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 

@@ -462,12 +462,16 @@
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<string>0</string>
+				<real>0.1440582275390625</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<string>0</string>
+				<real>0.26301076534505252</real>
 				<key>Red Component</key>
-				<string>0.8</string>
+				<real>1</real>
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
@@ -1758,6 +1762,7 @@
 		<string>3.3.6</string>
 		<string>3.3.8</string>
 		<string>3.3.11</string>
+		<string>3.3.12</string>
 		<string>3.3.1</string>
 		<string>3.3.3</string>
 		<string>3.3.9</string>
@@ -1773,8 +1778,9 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Cascadia Mono PL</string>
 		<string>Fira Code</string>
+		<string>Cascadia Mono PL</string>
+		<string>Inconsolata Nerd Font</string>
 		<string>Inconsolata-g for Powerline</string>
 	</array>
 	<key>NoSyncFrame_SessionsPreferences</key>
@@ -1782,14 +1788,14 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{464, 547}</string>
+		<string>{154, 778}</string>
 	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{423, 711}</string>
+		<string>{176, 631}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -1800,7 +1806,11 @@
 	<key>NoSyncInstallationId</key>
 	<string>A68EA2F6-F43E-499D-9791-923A9E549754</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>66</integer>
+	<integer>74</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>587771406.88364005</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -2564,11 +2574,9 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-09-04T16:26:46Z</date>
+	<date>2020-10-08T14:51:12Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
-	<key>SUSkippedVersion</key>
-	<string>3.3.12</string>
 	<key>SUUpdateGroupIdentifier</key>
 	<integer>899840920</integer>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -5567,8 +5575,10 @@
 			</dict>
 		</array>
 	</dict>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.11</string>
+	<string>3.3.12</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

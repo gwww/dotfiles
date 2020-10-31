@@ -92,27 +92,30 @@ function po() {
   fi
 }
 
+SHORTCUTS=~/.config/zsh/j_dirs.txt
+
+declare -A j_dirs
+while read shortcut jump_dir venv; do
+  j_dirs[$shortcut]="$jump_dir $venv"
+done <$SHORTCUTS
+
 function j() {
-  typeset -A dirs
-  dirs=(
-    elk       ~/Development/automation/elk/elkm1
-    pyaml     ~/Development/automation/config/pyaml
-    upb       ~/Development/automation/upb/upb-lib
-    westmin   ~/Development/automation/config/westmin
-    vim       ~/.vim
-    zsh       ~/.config/zsh
-  )
-  if [[ -z $dirs[$1] ]]; then
-    echo "$fg_bold[red]Unknown shortcut '$1'; use one of: ${(k)dirs}$reset_color"
+  if [[ -z $j_dirs[$1] ]]; then
+    echo "$fg_bold[red]Unknown shortcut '$1'; use one of: ${(k)j_dirs}$reset_color"
     return 1
   fi
-  cd $dirs[$1]
+  eval cd $j_dirs[$1]
   return 0
 }
 
 function ja() {
   for dir in "$@"; do
     j $dir
-    [[ $? == 0 ]] && [[ -f .venv/bin/activate ]] && po activate
+    [[ $? == 0 ]] && [[ -f .venv/bin/activate ]] && source .venv/bin/activate
   done
+}
+
+function jedit() {
+  vi $SHORTCUTS
+  source ~/.config/zsh/functions.zsh
 }

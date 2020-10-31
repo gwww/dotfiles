@@ -17,6 +17,8 @@ export PYTHONSTARTUP=~/.config/python/pythonrc
 export PYLINTHOME=~/.local/share/pylint
 export PIP_CONFIG_FILE=~/.config/python/pip.conf
 
+export GNUPGHOME=~/.config/gnupg/gnupg
+
 export POETRY_HOME=~/.local/share/poetry
 export RIPGREP_CONFIG_PATH=~/.config/ripgrep/ripgreprc
 export LESS="-RM"

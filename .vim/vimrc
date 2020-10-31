@@ -69,7 +69,6 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'tpope/vim-repeat'             " better '.' handling when repeated
-Plug 'jiangmiao/auto-pairs'         " auto close quotes, brackets
 Plug 'gwww/vim-bbye'                " delete buffer leaving window structure intact
 Plug 'tpope/vim-commentary'         " toggle comments: <visual>gc, gc<motion>
 Plug 'terryma/vim-expand-region'    " + to expand visual select; _ to shrink
@@ -79,7 +78,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'wellle/targets.vim'           " amped up text objects
 Plug 'vim-scripts/matchit.zip'      " % command matches if/else/end and more
 Plug 'mattn/emmet-vim'              " quick html/css editing
-let g:user_emmet_leader_key=','
+" let g:user_emmet_leader_key=','
 
 " Snippets support
 " Plug 'MarcWeber/vim-addon-mw-utils'

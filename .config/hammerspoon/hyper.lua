@@ -28,8 +28,8 @@ hyperKeyChoices.fn         = {63, "fn"}
 local eventTap = nil
 
 function hyper_init(key, keysToBind)
-  local hyperKey = hyperKeyChoices[key][1]
-  local hyperKeyFlagName = hyperKeyChoices[key][2]
+  local hyperKey <const> = hyperKeyChoices[key][1]
+  local hyperKeyFlagName <const> = hyperKeyChoices[key][2]
 
   local hyperKeyPressed = false
   local hyperKeyComboPressed = false

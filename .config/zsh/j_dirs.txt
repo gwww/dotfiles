@@ -1,0 +1,9 @@
+core      ~/Development/automation/elk/core
+coreelk   ~/Development/automation/elk/core/homeassistant/components/elkm1
+coreupb   ~/Development/automation/elk/core/homeassistant/components/upb
+elk       ~/Development/automation/elk/elkm1
+pyaml     ~/Development/automation/config/pyaml
+upb       ~/Development/automation/upb/upb-lib
+westmin   ~/Development/automation/config/westmin
+vim       ~/.vim
+zsh       ~/.config/zsh

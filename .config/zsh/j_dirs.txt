@@ -1,6 +1,6 @@
-core      ~/Development/automation/elk/core
-coreelk   ~/Development/automation/elk/core/homeassistant/components/elkm1
-coreupb   ~/Development/automation/elk/core/homeassistant/components/upb
+core      ~/Development/automation/ha-core
+coreelk   ~/Development/automation/ha-core/homeassistant/components/elkm1
+coreupb   ~/Development/automation/ha-core/homeassistant/components/upb
 elk       ~/Development/automation/elk/elkm1
 pyaml     ~/Development/automation/config/pyaml
 upb       ~/Development/automation/upb/upb-lib

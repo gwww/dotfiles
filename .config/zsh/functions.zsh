@@ -94,10 +94,14 @@ function po() {
 
 SHORTCUTS=~/.config/zsh/j_dirs.txt
 
-declare -A j_dirs
-while read shortcut jump_dir venv; do
-  j_dirs[$shortcut]="$jump_dir $venv"
-done <$SHORTCUTS
+function __read_jump_dirs() {
+  unset j_dirs
+  declare -gA j_dirs
+  while read shortcut jump_dir venv; do
+    j_dirs[$shortcut]="$jump_dir $venv"
+  done <$SHORTCUTS
+}
+__read_jump_dirs
 
 function j() {
   if [[ -z $j_dirs[$1] ]]; then
@@ -117,5 +121,6 @@ function ja() {
 
 function jedit() {
   vi $SHORTCUTS
-  source ~/.config/zsh/functions.zsh
+  echo "Sourcing new shortcuts..."
+  __read_jump_dirs
 }

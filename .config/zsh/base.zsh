@@ -32,7 +32,7 @@ export VISUAL=vim
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 export EXA_COLORS='da=38;5;12:di=38;5;51'
 
-export ELKM1_URL=elk://192.168.1.201
+export ELKM1_URL=elk://192.168.1.12
 export UPBPIM_URL=serial:///dev/cu.KeySerial1:4800
 export UPBPIM_URL=tcp://192.168.1.14:7000
 #

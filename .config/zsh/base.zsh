@@ -26,8 +26,6 @@ export LESSHISTFILE=-
 export EDITOR=vim
 export VISUAL=vim
 
-# export TWINE_USERNAME=gwww
-
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 export EXA_COLORS='da=38;5;12:di=38;5;51'
@@ -35,6 +33,7 @@ export EXA_COLORS='da=38;5;12:di=38;5;51'
 export ELKM1_URL=elk://192.168.1.12
 export UPBPIM_URL=serial:///dev/cu.KeySerial1:4800
 export UPBPIM_URL=tcp://192.168.1.14:7000
+
 #
 # Add to the path ensuring no duplicates
 for x in ~/bin $POETRY_HOME/bin /usr/local/opt/ruby/bin /usr/local/bin; do

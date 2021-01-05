@@ -1,6 +1,6 @@
 require("caffeine")
-require("hyper")
 require("window-fns")
+HyperKey = require("hyper")
 
 hotkeys = {}
   -- App launch...
@@ -21,7 +21,13 @@ hotkeys = {}
   hotkeys.up    = function() toGrid({0,0,1,0.3}) end
   hotkeys.down  = function() toGrid({0,0.7,1,0.3}) end
   hotkeys.space = function() toggleMaximize(hs.window.focusedWindow()) end
-hyper_init("rightCtrl", hotkeys)
+
+HyperKey:init("rightCtrl", hotkeys)
+
+-- print(collectgarbage("count")*1024)
+-- collectgarbage()
+-- collectgarbage()
+-- print(collectgarbage("count")*1024)
 
 -- Finally, show a notification that we finished loading the config
 hs.notify.new({title='Hammerspoon', subTitle='Configuration loaded'}):send()

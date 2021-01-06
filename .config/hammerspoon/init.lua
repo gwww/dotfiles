@@ -2,32 +2,26 @@ require("caffeine")
 require("window-fns")
 HyperKey = require("hyper")
 
-hotkeys = {}
+HyperKey:init("rightCtrl", {
   -- App launch...
-  hotkeys.c = caffeinate
-  hotkeys.a = function() hs.application.launchOrFocus( "Forklift" ) end
-  hotkeys.f = function() hs.application.launchOrFocus( "Finder" ) end
-  hotkeys.h = function() os.execute( "open ~" ) end
-  hotkeys.q = function() hs.application.launchOrFocus( "Firefox" ) end
-  hotkeys.s = function() hs.application.launchOrFocus( "Slack" ) end
-  hotkeys.v = function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end
-  hotkeys.w = function() hs.application.launchOrFocus( "iTerm" ) end
-  hotkeys.y = hs.toggleConsole
-  hotkeys.z = function() hs.application.launchOrFocus( "zoom.us" ) end
+  a = function() hs.application.launchOrFocus( "Forklift" ) end,
+  c = caffeinate,
+  f = function() hs.application.launchOrFocus( "Finder" ) end,
+  h = function() os.execute( "open ~" ) end,
+  q = function() hs.application.launchOrFocus( "Firefox" ) end,
+  s = function() hs.application.launchOrFocus( "Slack" ) end,
+  v = function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end,
+  w = function() hs.application.launchOrFocus( "iTerm" ) end,
+  y = hs.toggleConsole,
+  z = function() hs.application.launchOrFocus( "zoom.us" ) end,
 
   -- Window movements...
-  hotkeys.left  = cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})
-  hotkeys.right = cycleCalls(toGrid, {{0.5,0,0.5,1}, {1/3,0,2/3,1}, {2/3,0,1/3,1}})
-  hotkeys.up    = function() toGrid({0,0,1,0.3}) end
-  hotkeys.down  = function() toGrid({0,0.7,1,0.3}) end
-  hotkeys.space = function() toggleMaximize(hs.window.focusedWindow()) end
-
-HyperKey:init("rightCtrl", hotkeys)
-
--- print(collectgarbage("count")*1024)
--- collectgarbage()
--- collectgarbage()
--- print(collectgarbage("count")*1024)
+  left  = cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}}),
+  right = cycleCalls(toGrid, {{0.5,0,0.5,1}, {1/3,0,2/3,1}, {2/3,0,1/3,1}}),
+  up    = function() toGrid({0,0,1,0.3}) end,
+  down  = function() toGrid({0,0.7,1,0.3}) end,
+  space = function() toggleMaximize(hs.window.focusedWindow()) end,
+})
 
 -- Finally, show a notification that we finished loading the config
 hs.notify.new({title='Hammerspoon', subTitle='Configuration loaded'}):send()

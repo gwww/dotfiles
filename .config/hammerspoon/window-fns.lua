@@ -45,7 +45,7 @@ function toggleMaximize(window)
   end
 
   local id = window:id()
-  if previousSizes[ id ] == nil then
+  if previousSizes[id] == nil then
     previousSizes[id] = window:frame()
     window:maximize()
   else
@@ -54,4 +54,12 @@ function toggleMaximize(window)
   end
 
   return window
+end
+
+function toggleFullscreen()
+    local win = hs.window.focusedWindow()
+    if not win then
+      return
+    end
+    win:toggleFullScreen()
 end

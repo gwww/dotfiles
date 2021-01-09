@@ -4,7 +4,7 @@ hyper = require("hyper")
 
 ins = hs.inspect.inspect -- ease typing when debugging
 
-local _mappings = {
+local app_bindings = {
   {
     key='a',
     modifiers=nil,
@@ -42,8 +42,9 @@ local _mappings = {
   {
     key='z',
     action=function() hs.application.launchOrFocus( "zoom.us" ) end},
+}
 
-  -- Window movements...
+local movement_bindings = {
   {
     key='left',
     action=cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})},
@@ -61,8 +62,9 @@ local _mappings = {
     action=function() toggleMaximize(hs.window.focusedWindow()) end},
 }
 
--- NOTE: Caps Lock is mapped to F20 using Apple's /usr/bin/hidutil
-hyper.init('F20', _mappings)
+hyper.init('F20') -- NOTE: Caps Lock is mapped to F20 using /usr/bin/hidutil
+hyper.bind(app_bindings)
+hyper.bind(movement_bindings)
 
 -- Last, show a notification that the config is finished loading
 hs.notify.new({title='Hammerspoon', subTitle='Configuration loaded'}):send()

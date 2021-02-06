@@ -25,7 +25,7 @@ function __prompt_ssh {
   [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]] && echo -n "$(hostname -s) "
 }
 
-function __prompt_pyenv {
+function __prompt_python_venv {
   if [[ -n "$VIRTUAL_ENV" ]]; then
     env_path_list=(${(s:/:)VIRTUAL_ENV})
     echo -n "$_green(🐍$env_path_list[-2]) "
@@ -44,7 +44,7 @@ function __display_left_prompt {
   __prompt_cwd
   __prompt_ssh
   __prompt_git
-  __prompt_pyenv
+  __prompt_python_venv
   __prompt_vimshell
   __prompt_char
   echo -n $_reset

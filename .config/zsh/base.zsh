@@ -43,12 +43,17 @@ for x in ~/bin $POETRY_HOME/bin /usr/local/opt/ruby/bin /usr/local/bin; do
   esac
 done
 
-export PYENV_ROOT=~/.local/share/pyenv
+# export PYENV_ROOT=~/.local/share/pyenv
 
-# If pyenv shims not already in path, add them
-[[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]] && eval "$(pyenv init -)"
-true
+# # If pyenv shims not already in path, add them
+# [[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]] && eval "$(pyenv init -)"
+# true
 
+# Setup asdf...
+export ASDF_DATA_DIR=~/.local/share/asdf
+export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$ASDF_DATA_DIR/tool-versions
+source /usr/local/opt/asdf/asdf.sh
+ 
 # Setup for good long ability to look back on life...
 export HISTFILE=~/.local/share/zsh/history
 export HISTSIZE=6000

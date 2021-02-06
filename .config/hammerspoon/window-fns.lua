@@ -57,9 +57,37 @@ function toggleMaximize(window)
 end
 
 function toggleFullscreen()
-    local win = hs.window.focusedWindow()
-    if not win then
-      return
-    end
-    win:toggleFullScreen()
+  local win = hs.window.focusedWindow()
+  if not win then
+    return
+  end
+  win:toggleFullScreen()
+end
+
+function moveWindowScreen(window, direction)
+  if not window then
+    return window
+  end
+
+  if direction == "East" then
+    window:moveOneScreenEast(false, false, 0)
+  else
+    window:moveOneScreenWest(false, false, 0)
+  end
+end
+
+-- Useful helper function for making hs.layout layouts, from @cmsj
+function createWindowLayout(name)
+  local layout = string.format("%s = {\n", name)
+  local wins = hs.window.allWindows()
+  for _,win in ipairs(wins) do
+    local app = win:application():name()
+    local winTitle = win:title()
+    local screen = win:screen():name()
+    local frame = win:frame()
+    local row = string.format('{"%s", "%s", "%s", nil, hs.geometry.rect(%i, %i, %i, %i), nil},\n', app, winTitle, screen, frame.x, frame.y, frame.w, frame.h)
+    layout = layout .. row
+  end
+  layout = layout .. "\n}"
+  print(layout)
 end

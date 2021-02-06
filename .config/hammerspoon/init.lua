@@ -1,65 +1,39 @@
 require("caffeine")
 require("window-fns")
+require("application-watcher")
 hyper = require("hyper")
 
 ins = hs.inspect.inspect -- ease typing when debugging
 
+-- Array of app bindings. Each binding can have a "key", "modifiers", & "action".
 local app_bindings = {
-  {
-    key='a',
-    modifiers=nil,
-    action=function() hs.application.launchOrFocus("Forklift") end},
-  {
-    key='c',
-    action=caffeinate},
-  {
-    key='f',
-    action=function() hs.application.launchOrFocus( "Finder" ) end},
-  {
-    key='h',
-    action=function() os.execute( "open ~" ) end},
-  {
-    key='m',
-    action=function() toggleFullscreen() end},
-  {
-    key='q',
-    action=function() hs.application.launchOrFocus( "Firefox" ) end},
-  {
-    key='r',
-    action=hs.reload},
-  {
-    key='s',
-    action=function() hs.application.launchOrFocus( "Slack" ) end},
-  {
-    key='v',
+  {key='a', action=function() hs.application.launchOrFocus("Forklift") end},
+  {key='c', action=caffeinate},
+  {key='f', action=function() hs.application.launchOrFocus( "Finder" ) end},
+  {key='h', action=function() os.execute( "open ~" ) end},
+  {key='m', action=function() toggleFullscreen() end},
+  {key='q', action=function() hs.application.launchOrFocus( "Firefox" ) end},
+  {key='r', action=hs.reload},
+  {key='s', action=function() hs.application.launchOrFocus( "Slack" ) end},
+  {key='v',
     action=function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end},
-  {
-    key='w',
-    action=function() hs.application.launchOrFocus( "iTerm" ) end},
-  {
-    key='y',
-    action=hs.toggleConsole},
-  {
-    key='z',
-    action=function() hs.application.launchOrFocus( "zoom.us" ) end},
+  {key='w', action=function() hs.application.launchOrFocus( "iTerm" ) end},
+  {key='y', action=hs.toggleConsole},
+  {key='z', action=function() hs.application.launchOrFocus( "zoom.us" ) end},
 }
 
 local movement_bindings = {
-  {
-    key='left',
+  {key='left',
     action=cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})},
-  {
-    key='right',
+  {key='right',
     action=cycleCalls(toGrid, {{0.5,0,0.5,1}, {1/3,0,2/3,1}, {2/3,0,1/3,1}})},
-  {
-    key='up',
-    action=function() toGrid({0,0,1,0.3}) end},
-  {
-    key='down',
-    action=function() toGrid({0,0.7,1,0.3}) end},
-  {
-    key='space',
-    action=function() toggleMaximize(hs.window.focusedWindow()) end},
+  {key='left', modifiers='shift',
+    action=function() moveWindowScreen(hs.window.focusedWindow(), 'West') end},
+  {key='right', modifiers='shift',
+    action=function() moveWindowScreen(hs.window.focusedWindow(), 'East') end},
+  {key='up', action=function() toGrid({0,0,1,0.3}) end},
+  {key='down', action=function() toGrid({0,0.7,1,0.3}) end},
+  {key='space', action=function() toggleMaximize(hs.window.focusedWindow()) end},
 }
 
 hyper.init('F20') -- NOTE: Caps Lock is mapped to F20 using /usr/bin/hidutil

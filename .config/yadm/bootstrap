@@ -35,7 +35,7 @@ fi
 
 
 info "Creating '.local' directory structure..."
-for x in cups poetry pyenv vim virtualenvs zsh; do
+for x in cups poetry asdf vim virtualenvs zsh; do
   run mkdir -p $HOME/.local/share/$x
 done
 
@@ -54,7 +54,6 @@ if [[ "$system_type" == "Darwin" ]]; then
   info "Downloading Mac App Store apps..."
   run brew install mas
   echo "Ensure you are logged into Mac App Store then press enter... " && read
-  run /usr/local/bin/mas install 497799835      # XCode
   run /usr/local/bin/mas install 1289583905     # Pixelmator Pro
   run /usr/local/bin/mas install 1295203466     # Microsoft Remote Desktop
   run /usr/local/bin/mas install 803453959      # Slack
@@ -114,29 +113,33 @@ if executable_exists /usr/local/bin/vim; then
   run /usr/local/bin/vim '+PlugClean!' '+qall'
 fi
 
-if executable_exists /usr/local/bin/pyenv; then
-  info "Installing Python (using pyenv)..."
+if executable_exists /usr/local/bin/asdf; then
+  info "Installing Python (using asdf)..."
+  source /usr/local/opt/asdf/asdf.sh
+  run /usr/local/bin/asdf plugin install python
 
   # Latest version of python that is not beta...
-  python_versions=$(pyenv install --list | grep -E '^\s*[0-9\.]+\s*$' | tail -10)
-  python_version=$(pyenv install --list | grep -E '^\s*[0-9\.]+\s*$' | tail -1)
+  python_versions=$(asdf list all python | grep -E '^\s*[0-9\.]+\s*$' | tail -10)
+  python_version=$(asdf list all python | grep -E '^\s*[0-9\.]+\s*$' | tail -1)
   echo "For reference, the last 10 Python releases were:"
   echo $python_versions | tr '\n' ' '; echo
   echo -n "Enter Python version to install, enter installs $python_version: "
   read v && [[ $v != '' ]] && python_version=$v
 
   info "Installing Python, version $python_version..."
-  run /usr/local/bin/pyenv install $python_version
-  run /usr/local/bin/pyenv global  $python_version
+  run /usr/local/bin/asdf install python $python_version
+  run /usr/local/bin/asdf global python $python_version
+  run rehash
+  run pip install --upgrade pip
 
-  [[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]] && eval "$(pyenv init -)"
   info "Installing Python dependency manager 'poetry'..."
   run 'python -c "$(curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py)"'
-
   run pip install spritemapper
-fi
 
-if executable_exists /usr/local/opt/ruby/bin/gem; then
+  info "Installing Ruby (using asdf)..."
+  run /usr/local/bin/asdf plugin install ruby
+  run /usr/local/bin/asdf install ruby latest
+
   info "Updating Ruby 'gem' installer and 'bundler'..."
   run /usr/local/opt/ruby/bin/gem update --system
   run /usr/local/opt/ruby/bin/gem install --force bundler

@@ -13,7 +13,7 @@ function applicationWatcher(appName, eventType, appObject)
           if appObject:mainWindow() then break; end
           hs.timer.usleep(50000)
         end
-        appObject:focusedWindow():moveToScreen("Color LCD", false, true, 0)
+        appObject:focusedWindow():moveToScreen("Built%-in Retina Display", false, true, 0)
         appObject:focusedWindow():maximize()
       end
     end

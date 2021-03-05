@@ -17,6 +17,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.local/share/vim/plugged')
 
+if has('nvim')
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+endif
+
 Plug 'vim-airline/vim-airline'            " Status and tab line
   let g:airline_theme='glenn'
   let g:airline_powerline_fonts=1

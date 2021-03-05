@@ -41,6 +41,8 @@ alias run-help=man
 alias rvm-restart='rvm_reload_flag=1 source '\''/Users/glenn/.rvm/scripts/rvm'\'
 alias v="vim"
 alias vi="vim"
+alias nv="~/bin/nvim-osx64/bin/nvim"
+alias nvim="~/bin/nvim-osx64/bin/nvim"
 alias emacs="vim"
 alias which-command=whence
 alias xyzzy="echo nothing happens"

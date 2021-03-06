@@ -91,3 +91,47 @@ function createWindowLayout(name)
   layout = layout .. "\n}"
   print(layout)
 end
+
+function forceFocus(win)
+  -- this flickers
+  -- win:application():activate()
+  win:becomeMain()
+  win:raise():focus()
+end
+
+-- smart app launch or focus or cycle windows
+-- From: https://github.com/szymonkaliski/dotfiles
+function smartLaunchOrFocus(launchApps)
+  local frontmostWindow = hs.window.frontmostWindow()
+  local runningWindows  = {}
+
+  launchApps = type(launchApps) == 'table' and launchApps or { launchApps }
+
+  -- filter running applications by apps array
+  local runningApps = hs.fnutils.map(launchApps, function(launchApp)
+    return hs.application.get(launchApp)
+  end)
+
+  -- create table of sorted windows per application
+  hs.fnutils.each(runningApps, function(runningApp)
+    local standardWindows = hs.fnutils.filter(runningApp:allWindows(), function(win)
+      return win:isStandard()
+    end)
+
+    -- concat with all running windows
+    hs.fnutils.concat(runningWindows, standardWindows);
+  end)
+
+  if #runningApps == 0 then
+    -- if no apps are running then launch first one in list
+    hs.application.launchOrFocus(launchApps[1])
+  elseif #runningWindows == 0 then
+    -- if some apps are running, but no windows - force create one
+    hs.application.launchOrFocus(runningApps[1]:name())
+  else
+    -- check if one of windows is already focused
+    local currentIndex = hs.fnutils.indexOf(runningWindows, frontmostWindow)
+    if not currentIndex then currentIndex = 0 end
+    forceFocus(runningWindows[(currentIndex % #runningWindows)+1])
+  end
+end

@@ -7,19 +7,19 @@ ins = hs.inspect.inspect -- ease typing when debugging
 
 -- Array of app bindings. Each binding can have a "key", "modifiers", & "action".
 local app_bindings = {
-  {key='a', action=function() hs.application.launchOrFocus("Forklift") end},
+  {key='a', action=function() smartLaunchOrFocus("Forklift") end},
   {key='c', action=caffeinate},
-  {key='f', action=function() hs.application.launchOrFocus( "Finder" ) end},
+  {key='f', action=function() smartLaunchOrFocus( "Finder" ) end},
   {key='h', action=function() os.execute( "open ~" ) end},
   {key='m', action=function() toggleFullscreen() end},
-  {key='q', action=function() hs.application.launchOrFocus( "Firefox" ) end},
+  {key='q', action=function() smartLaunchOrFocus( "Firefox" ) end},
   {key='r', action=hs.reload},
-  {key='s', action=function() hs.application.launchOrFocus( "Slack" ) end},
+  {key='s', action=function() smartLaunchOrFocus( "Slack" ) end},
   {key='v',
     action=function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end},
-  {key='w', action=function() hs.application.launchOrFocus( "iTerm" ) end},
+  {key='w', action=function() smartLaunchOrFocus( "iTerm" ) end},
   {key='y', action=hs.toggleConsole},
-  {key='z', action=function() hs.application.launchOrFocus( "zoom.us" ) end},
+  {key='z', action=function() smartLaunchOrFocus( "zoom.us" ) end},
 }
 
 local movement_bindings = {
@@ -36,7 +36,7 @@ local movement_bindings = {
   {key='space', action=function() toggleMaximize(hs.window.focusedWindow()) end},
 }
 
-hyper.init('F20') -- NOTE: Caps Lock is mapped to F20 using /usr/bin/hidutil
+hyper.init('F20') -- Caps Lock is mapped to F20 using /usr/bin/hidutil
 hyper.bind(app_bindings)
 hyper.bind(movement_bindings)
 

@@ -220,7 +220,7 @@
 		</dict>
 	</dict>
 	<key>Default Arrangement Name</key>
-	<string>Two terminals</string>
+	<string>Two terminals fullscreen</string>
 	<key>Default Bookmark Guid</key>
 	<string>6B5CF592-834D-4CC3-8E9E-CE1D6806F257</string>
 	<key>DimOnlyText</key>
@@ -342,7 +342,7 @@
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideMenuBarInFullscreen</key>
-	<true/>
+	<false/>
 	<key>HideScrollbar</key>
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
@@ -993,7 +993,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>1</integer>
 			<key>Working Directory</key>
 			<string>/Users/glenn</string>
 			<key>tmux Pane Title</key>

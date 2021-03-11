@@ -18,6 +18,7 @@ local app_bindings = {
   {key='v',
     action=function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end},
   {key='w', action=function() smartLaunchOrFocus( "iTerm" ) end},
+  {key='x', action=function() smartLaunchOrFocus( "Cisco Webex Meetings" ) end},
   {key='y', action=hs.toggleConsole},
   {key='z', action=function() smartLaunchOrFocus( "zoom.us" ) end},
 }

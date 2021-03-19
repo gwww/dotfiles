@@ -1,28 +1,19 @@
 --
 -- Supports:
---   - Escape when hyper key pressed/released without any bindings being invoked
+--   - Escape when hyper pressed then released without any bindings being invoked
 --   - Hyper+key invokes function
---   - Hyper press and held invokes function
+--   - Hooks for when hyper key pressed and released
 --
 -- Ideas for `hyper` came from: https://github.com/evantravers/hammerspoon-config
 --
 
 local module = {}
 
-local function hold_key_fn()
-  if module._presses == 0 then
-    module._hold_key_fn()
-    module._presses = module._presses + 1
-  end
-end
-
-module.init = function(modal_key, hold_key_function, hold_key_timeout)
+module.init = function(modal_key)
   module._pressed = function()
     module._modal:enter()
     module._presses = 0
-    if module._hold_key_fn then
-      module._hold_key_timer = hs.timer.doAfter(module._hold_key_timeout, hold_key_fn)
-    end
+    hs.fnutils.each(module._press_hooks, function(hook) hook() end)
   end
 
   module._released = function()
@@ -32,20 +23,19 @@ module.init = function(modal_key, hold_key_function, hold_key_timeout)
     else
       module._presses = 0
     end
-    if module._hold_key_timer then
-      module._hold_key_timer:stop()
-    end
+    hs.fnutils.each(module._release_hooks, function(hook) hook() end)
   end
 
   module._presses = 0
   module._modal = hs.hotkey.modal.new({}, nil)
-  module._hold_key_fn = hold_key_function
-  if hold_key_timeout then
-    module._hold_key_timeout = hold_key_timeout
-  else
-    module._hold_key_timeout = 1.5
-  end
+  module._press_hooks = {}
+  module._release_hooks = {}
   hs.hotkey.bind({}, modal_key, module._pressed, module._released)
+end
+
+module.addHook = function(press, release)
+  if press then table.insert(module._press_hooks, press) end
+  if release then table.insert(module._release_hooks, release) end
 end
 
 module.bind = function(bindings)

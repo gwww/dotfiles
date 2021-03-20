@@ -8,7 +8,6 @@ local wf = require("windowFunctions")
 ins = hs.inspect.inspect -- ease typing when debugging
 
 hyper.init('F20') -- CapsLock is mapped to F20 using /usr/bin/hidutil
-sl.init(hyper)
 hyper.bind({
   -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
   {key='a', action=function() sl.smartLaunch("Forklift") end},
@@ -36,6 +35,9 @@ hyper.bind({
   {key='down', action=function() wf.toGrid({0,0.7,1,0.3}) end},
   {key='space', action=wf.toggleMaximize},
 })
+
+-- smartLaunch needs to hook into hyper
+sl.init(hyper)
 
 -- Last, show a notification that the config is finished loading
 hs.notify.new({title='Hammerspoon', subTitle='Configuration loaded'}):send()

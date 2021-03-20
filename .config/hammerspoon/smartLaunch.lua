@@ -1,7 +1,6 @@
 local module = {}
 
-local savedWindows = nil
-local lastApp = nil
+local savedWindows = {}
 
 local forceFocus = function(win)
   win:becomeMain()
@@ -9,16 +8,15 @@ local forceFocus = function(win)
 end
 
 module.init = function(hyper)
-  hyper.addHook(nil, function() savedWindows = nil; lastApp = nil end)
+  hyper.addHook(nil, function() savedWindows = {} end)
 end
 
 -- Roughly inspired by: https://github.com/szymonkaliski/dotfiles
 module.smartLaunch = function(launchApp)
   local runningApp = hs.application.get(launchApp)
 
-  if lastApp ~= launchApp then
-    savedWindows = nil
-    lastApp = launchApp
+  if savedWindows.lastApp ~= launchApp then
+    savedWindows = {lastApp = launchApp}
   end
 
   if not runningApp then
@@ -29,7 +27,7 @@ module.smartLaunch = function(launchApp)
     local allWindows = {}
     local index = 0
 
-    if savedWindows then
+    if savedWindows.windows then
       index = savedWindows.index
       allWindows = savedWindows.windows
 

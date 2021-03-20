@@ -10,13 +10,13 @@
 local module = {}
 
 module.init = function(modal_key)
-  module._pressed = function()
+  local modalPressed = function()
     module._modal:enter()
     module._presses = 0
     hs.fnutils.each(module._press_hooks, function(hook) hook() end)
   end
 
-  module._released = function()
+  local modalReleased = function()
     module._modal:exit()
     if module._presses == 0 then
       hs.eventtap.keyStroke('', 'escape', 100000)
@@ -28,7 +28,7 @@ module.init = function(modal_key)
 
   module._presses, module._press_hooks, module._release_hooks = 0, {}, {}
   module._modal = hs.hotkey.modal.new({}, nil)
-  hs.hotkey.bind({}, modal_key, module._pressed, module._released)
+  hs.hotkey.bind({}, modal_key, modalPressed, modalReleased)
 end
 
 module.addHook = function(press, release)

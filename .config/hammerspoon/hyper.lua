@@ -26,10 +26,8 @@ module.init = function(modal_key)
     hs.fnutils.each(module._release_hooks, function(hook) hook() end)
   end
 
-  module._presses = 0
+  module._presses, module._press_hooks, module._release_hooks = 0, {}, {}
   module._modal = hs.hotkey.modal.new({}, nil)
-  module._press_hooks = {}
-  module._release_hooks = {}
   hs.hotkey.bind({}, modal_key, module._pressed, module._released)
 end
 

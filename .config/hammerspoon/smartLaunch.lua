@@ -1,52 +1,37 @@
+-- Roughly inspired by: https://github.com/szymonkaliski/dotfiles
+
 local module = {}
-
-local savedWindows = {}
-
-local forceFocus = function(win)
-  win:becomeMain()
-  win:raise():focus()
-end
+local savedState = {}
 
 module.init = function(hyper)
-  hyper.addHook(nil, function() savedWindows = {} end)
+  hyper.addHook(nil, function() savedState = {} end)
 end
 
--- Roughly inspired by: https://github.com/szymonkaliski/dotfiles
 module.smartLaunch = function(launchApp)
-  local runningApp = hs.application.get(launchApp)
-
-  if savedWindows.lastApp ~= launchApp then
-    savedWindows = {lastApp = launchApp}
+  if savedState.lastApp ~= launchApp then
+    savedState = {lastApp = launchApp}
   end
 
+  local runningApp = hs.application.get(launchApp)
   if not runningApp then
-    -- if app is not running then launch it
     hs.application.launchOrFocus(launchApp)
 
   else
-    local allWindows = {}
-    local index = 0
-
-    if savedWindows.windows then
-      index = savedWindows.index
-      allWindows = savedWindows.windows
-
-    else
-      allWindows = hs.fnutils.filter(runningApp:allWindows(), function(win)
+    if not savedState.windows then
+      local wins = hs.fnutils.filter(runningApp:allWindows(), function(win)
         return win:isStandard()
       end)
-      savedWindows = {windows = allWindows}
-      index = hs.fnutils.indexOf(allWindows, hs.window.frontmostWindow()) or 0
+      savedState.windows = wins
+      savedState.index = hs.fnutils.indexOf(wins, hs.window.frontmostWindow()) or 0
     end
 
-    if #allWindows == 0 then
-      -- if no windows, force create one
+    if #savedState.windows == 0 then
       hs.application.launchOrFocus(runningApp:name())
 
     else
-      -- focus one of the windows
-      forceFocus(allWindows[(index % #allWindows)+1])
-      savedWindows.index = index + 1
+      -- focus a window and set window index for next smartLaunch call
+      savedState.windows[(savedState.index % #savedState.windows)+1]:focus()
+      savedState.index = savedState.index + 1
     end
   end
 end

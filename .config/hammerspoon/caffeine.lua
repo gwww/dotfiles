@@ -1,19 +1,21 @@
-local caffeine = hs.menubar.new(false)
+local menuBar = hs.menubar.new(false)
 
 if hs.caffeinate.get("displayIdle") then
-  caffeine:returnToMenuBar()
-  caffeine:setIcon("caffeine-on.pdf")
+  menuBar:returnToMenuBar()
+  menuBar:setIcon("caffeine-on.pdf")
 end
 
-function caffeinate()
+local caffeinate = function()
   hs.caffeinate.toggle("displayIdle")
   if hs.caffeinate.get("displayIdle") then
-    caffeine:returnToMenuBar()
-    caffeine:setIcon("caffeine-on.pdf")
-    caffeine:setClickCallback(caffeinate)
+    menuBar:returnToMenuBar()
+    menuBar:setIcon("caffeine-on.pdf")
+    menuBar:setClickCallback(caffeinate)
     hs.alert.show("Staying AWAKE!", 2)
   else
-    caffeine:removeFromMenuBar()
+    menuBar:removeFromMenuBar()
     hs.alert.show("Sleepy", 2)
   end
 end
+
+return caffeinate

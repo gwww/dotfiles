@@ -1,14 +1,16 @@
-require("caffeine")
-require("window-fns")
 require("application-watcher")
 
+local caffeinate = require("caffeine")
 local hyper = require("hyper")
 local sl = require("smartLaunch")
+local wf = require("windowFunctions")
 
 ins = hs.inspect.inspect -- ease typing when debugging
 
--- Array of app bindings. Each binding can have a "key", "modifiers", & "action".
-local bindings = {
+hyper.init('F20') -- CapsLock is mapped to F20 using /usr/bin/hidutil
+sl.init(hyper)
+hyper.bind({
+  -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
   {key='a', action=function() sl.smartLaunch("Forklift") end},
   {key='c', action=caffeinate},
   {key='f', action=function() sl.smartLaunch("Finder") end},
@@ -25,21 +27,15 @@ local bindings = {
   {key='z', action=function() sl.smartLaunch("zoom.us") end},
 
   {key='left',
-    action=cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})},
+    action=wf.cycleCalls(wf.toGrid, {{0,0,0.5,1}, {0,0,2/3,1}, {0,0,1/3,1}})},
   {key='right',
-    action=cycleCalls(toGrid, {{0.5,0,0.5,1}, {1/3,0,2/3,1}, {2/3,0,1/3,1}})},
-  {key='left', modifiers='shift',
-    action=function() moveWindowScreen(hs.window.focusedWindow(), 'West') end},
-  {key='right', modifiers='shift',
-    action=function() moveWindowScreen(hs.window.focusedWindow(), 'East') end},
-  {key='up', action=function() toGrid({0,0,1,0.3}) end},
-  {key='down', action=function() toGrid({0,0.7,1,0.3}) end},
-  {key='space', action=function() toggleMaximize(hs.window.focusedWindow()) end},
-}
-
-hyper.init('F20') -- CapsLock is mapped to F20 using /usr/bin/hidutil
-hyper.bind(bindings)
-sl.init(hyper)
+    action=wf.cycleCalls(wf.toGrid, {{0.5,0,0.5,1}, {1/3,0,2/3,1}, {2/3,0,1/3,1}})},
+  {key='left', modifiers='shift', action=function() moveScreen('West') end},
+  {key='right', modifiers='shift', action=function() moveScreen('East') end},
+  {key='up', action=function() wf.toGrid({0,0,1,0.3}) end},
+  {key='down', action=function() wf.toGrid({0,0.7,1,0.3}) end},
+  {key='space', action=wf.toggleMaximize},
+})
 
 -- Last, show a notification that the config is finished loading
 hs.notify.new({title='Hammerspoon', subTitle='Configuration loaded'}):send()

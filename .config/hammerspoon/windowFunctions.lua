@@ -1,48 +1,39 @@
+local module = {}
+
 -- Setup
 hs.window.animationDuration = .1
 
 -- Cycle args for function when called repeatedly
--- e.g: cycleCalls(fn, {{args1...}, ... })
-function cycleCalls(fn, args)
+module.cycleCalls = function(fn, args)
   local argIndex = 0
   return function()
     argIndex = argIndex + 1
     if (argIndex > #args) then
-      argIndex = 1;
+      argIndex = 1
     end
-    fn(args[argIndex]);
+    fn(args[argIndex])
   end
 end
 
--- This method used to place a window to a position and size on the screen by using
--- four floats instead of pixel sizes. Returns the window instance. Examples:
---   windowToGrid(window, 0, 0, 0.25, 0.5);  -- top-left, width: 25%, height: 50%
---   windowToGrid(someWindow, 0.3, 0.2, 0.5, 0.35); top: 30%, left: 20%, width: 50%, height: 35%
-function windowToGrid(window, rect)
-  if not window then
-    return window
-  end
+-- Place window at x, y, w, h position and size on the screen.
+module.toGrid = function(rect)
+  local window = hs.window.focusedWindow()
+  if not window then return nil end
 
   local screen = hs.screen.mainScreen():fullFrame()
-  window:setFrame({
+  return window:setFrame({
     x = math.floor(rect[1] * screen.w + .5) + screen.x,
     y = math.floor(rect[2] * screen.h + .5) + screen.y,
     w = math.floor(rect[3] * screen.w + .5),
     h = math.floor(rect[4] * screen.h + .5)
   })
-  return window
-end
-
-function toGrid(x, y, w, h)
-  windowToGrid(hs.window.focusedWindow(), x, y, w, h);
 end
 
 -- Toggle between full screen and orginal size. Returns the window instance.
 local previousSizes = {}
-function toggleMaximize(window)
-  if not window then
-    return window
-  end
+module.toggleMaximize = function()
+  local window = hs.window.focusedWindow()
+  if not window then return nil end
 
   local id = window:id()
   if previousSizes[id] == nil then
@@ -56,16 +47,17 @@ function toggleMaximize(window)
   return window
 end
 
-function moveWindowScreen(window, direction)
-  if not window then
-    return window
-  end
+moveScreen = function(direction)
+  local window = hs.window.focusedWindow()
+  if not window then return nil end
 
   if direction == "East" then
     window:moveOneScreenEast(false, false, 0)
   else
     window:moveOneScreenWest(false, false, 0)
   end
+
+  return window
 end
 
 -- Useful helper function for making hs.layout layouts, from @cmsj
@@ -83,3 +75,5 @@ function createWindowLayout(name)
   layout = layout .. "\n}"
   print(layout)
 end
+
+return module

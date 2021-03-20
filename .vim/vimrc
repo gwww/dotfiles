@@ -17,6 +17,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.local/share/vim/plugged')
 
+Plug 'embark-theme/vim', { 'as': 'embark' }
+
 if has('nvim')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'

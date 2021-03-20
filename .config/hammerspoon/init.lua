@@ -1,27 +1,28 @@
 require("caffeine")
 require("window-fns")
-require("smartLaunch")
 require("application-watcher")
+
 local hyper = require("hyper")
+local sl = require("smartLaunch")
 
 ins = hs.inspect.inspect -- ease typing when debugging
 
 -- Array of app bindings. Each binding can have a "key", "modifiers", & "action".
 local bindings = {
-  {key='a', action=function() smartLaunch("Forklift") end},
+  {key='a', action=function() sl.smartLaunch("Forklift") end},
   {key='c', action=caffeinate},
-  {key='f', action=function() smartLaunch("Finder") end},
+  {key='f', action=function() sl.smartLaunch("Finder") end},
   {key='h', action=function() os.execute("open ~") end},
   {key='m', action=function() toggleFullscreen() end},
-  {key='q', action=function() smartLaunch("Firefox") end},
+  {key='q', action=function() sl.smartLaunch("Firefox") end},
   {key='r', action=hs.reload},
-  {key='s', action=function() smartLaunch("Slack") end},
+  {key='s', action=function() sl.smartLaunch("Slack") end},
   {key='v',
     action=function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end},
-  {key='w', action=function() smartLaunch("iTerm") end},
-  {key='x', action=function() smartLaunch("Cisco Webex Meetings") end},
+  {key='w', action=function() sl.smartLaunch("iTerm") end},
+  {key='x', action=function() sl.smartLaunch("Cisco Webex Meetings") end},
   {key='y', action=hs.toggleConsole},
-  {key='z', action=function() smartLaunch("zoom.us") end},
+  {key='z', action=function() sl.smartLaunch("zoom.us") end},
 
   {key='left',
     action=cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})},
@@ -36,9 +37,9 @@ local bindings = {
   {key='space', action=function() toggleMaximize(hs.window.focusedWindow()) end},
 }
 
-hyper.init('F20') -- Caps Lock is mapped to F20 using /usr/bin/hidutil
+hyper.init('F20') -- CapsLock is mapped to F20 using /usr/bin/hidutil
 hyper.bind(bindings)
-smartLaunchInit(hyper)
+sl.init(hyper)
 
 -- Last, show a notification that the config is finished loading
 hs.notify.new({title='Hammerspoon', subTitle='Configuration loaded'}):send()

@@ -1,3 +1,5 @@
+local module = {}
+
 local savedWindows = nil
 local lastApp = nil
 
@@ -6,12 +8,12 @@ local forceFocus = function(win)
   win:raise():focus()
 end
 
-smartLaunchInit = function(hyper)
+module.init = function(hyper)
   hyper.addHook(nil, function() savedWindows = nil; lastApp = nil end)
 end
 
 -- Roughly inspired by: https://github.com/szymonkaliski/dotfiles
-smartLaunch = function(launchApp)
+module.smartLaunch = function(launchApp)
   local runningApp = hs.application.get(launchApp)
 
   if lastApp ~= launchApp then
@@ -50,3 +52,5 @@ smartLaunch = function(launchApp)
     end
   end
 end
+
+return module

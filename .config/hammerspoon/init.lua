@@ -2,12 +2,12 @@ require("caffeine")
 require("window-fns")
 require("smartLaunch")
 require("application-watcher")
-hyper = require("hyper")
+local hyper = require("hyper")
 
 ins = hs.inspect.inspect -- ease typing when debugging
 
 -- Array of app bindings. Each binding can have a "key", "modifiers", & "action".
-local app_bindings = {
+local bindings = {
   {key='a', action=function() smartLaunch("Forklift") end},
   {key='c', action=caffeinate},
   {key='f', action=function() smartLaunch("Finder") end},
@@ -22,9 +22,7 @@ local app_bindings = {
   {key='x', action=function() smartLaunch("Cisco Webex Meetings") end},
   {key='y', action=hs.toggleConsole},
   {key='z', action=function() smartLaunch("zoom.us") end},
-}
 
-local movement_bindings = {
   {key='left',
     action=cycleCalls(toGrid, {{0,0,0.5,1},   {0,0,2/3,1},   {0,0,1/3,1}})},
   {key='right',
@@ -39,8 +37,7 @@ local movement_bindings = {
 }
 
 hyper.init('F20') -- Caps Lock is mapped to F20 using /usr/bin/hidutil
-hyper.bind(app_bindings)
-hyper.bind(movement_bindings)
+hyper.bind(bindings)
 smartLaunchInit(hyper)
 
 -- Last, show a notification that the config is finished loading

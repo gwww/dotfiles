@@ -1,8 +1,8 @@
 -- Watch app events
-appWatcher = nil
-moveMe = false
+local appWatcher = nil
+local moveMe = false
 
-function applicationWatcher(appName, eventType, appObject)
+local applicationWatcher = function(appName, eventType, appObject)
   if appName == 'Cisco Webex Meetings' then
     if eventType == hs.application.watcher.launched then
       moveMe = true

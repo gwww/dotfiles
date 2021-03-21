@@ -1,4 +1,4 @@
-require("application-watcher")
+require("applicationWatcher")
 
 local caffeinate = require("caffeine")
 local hyper = require("hyper")

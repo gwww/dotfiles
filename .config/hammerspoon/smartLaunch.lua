@@ -12,8 +12,9 @@ module.smartLaunch = function(launchApp)
     savedState = {lastApp = launchApp}
   end
 
-  local runningApp = hs.application.get(launchApp)
+  local runningApp = hs.application.find(launchApp)
   if not runningApp then
+    hs.alert.show("Launching " .. launchApp, 1.0)
     hs.application.launchOrFocus(launchApp)
 
   else
@@ -26,6 +27,7 @@ module.smartLaunch = function(launchApp)
     end
 
     if #savedState.windows == 0 then
+      hs.alert.show("Creating new " .. launchApp .. " window", 1.0)
       hs.application.launchOrFocus(runningApp:name())
 
     else

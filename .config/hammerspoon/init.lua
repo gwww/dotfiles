@@ -1,16 +1,16 @@
-require("applicationWatcher")
-
+local appWatcher = require("applicationWatcher")
 local caffeinate = require("caffeine")
 local hyper = require("hyper")
 local sl = require("smartLaunch")
 local wf = require("windowFunctions")
 
 ins = hs.inspect.inspect -- ease typing when debugging
+-- hs.application.enableSpotlightForNameSearches(true)
 
 hyper.init('F20') -- CapsLock is mapped to F20 using /usr/bin/hidutil
 hyper.bind({
   -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
-  {key='a', action=function() sl.smartLaunch("Forklift") end},
+  {key='a', action=function() sl.smartLaunch("ForkLift") end},
   {key='c', action=caffeinate},
   {key='f', action=function() sl.smartLaunch("Finder") end},
   {key='h', action=function() os.execute("open ~") end},

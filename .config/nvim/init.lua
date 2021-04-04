@@ -2,7 +2,7 @@
 -- Glenn Waters
 
 -- Lua nvim Helpers {{{
-local api, cmd, fn, g = vim.api, vim.cmd, vim.fn, vim.g
+local cmd, fn, g = vim.cmd, vim.fn, vim.g
 local execute = vim.api.nvim_command
 local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 local map_key = vim.api.nvim_set_keymap
@@ -14,30 +14,36 @@ end
 -- }}}
 
 -- Load the Plugins {{{
-local install_path = fn.stdpath('data')..'/site/pack/paqs/opt/paq-nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/savq/paq-nvim.git ' .. install_path)
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
 end
-cmd 'packadd paq-nvim'
-local paq = require('paq-nvim').paq
-paq {'savq/paq-nvim', opt = true}       -- Plugin manager; self updating
+cmd 'packadd packer.nvim'
+vim.api.nvim_exec([[
+  augroup AllAutoCmds
+    autocmd!
+    autocmd BufWritePost plugins.lua PackerCompile
+  augroup end
+]], false)
 
-paq {'cocopon/iceberg.vim', as='iceberg'}  -- Theme
-paq {'embark-theme/vim', as='embark'}      -- Theme
-paq {'joshdick/onedark.vim', as='onedark'} -- Theme
-
-paq {'nvim-treesitter/nvim-treesitter'} -- Syntax highlighting et. al.
-paq {'haya14busa/is.vim'}               -- Incremental search improvments
-paq {'gwww/vim-bbye'}                   -- Delete buffer leaving window structure
-paq {'tpope/vim-commentary'}            -- Toggle comments: <visual>gc, gc<motion>
-paq {'tpope/vim-endwise'}               -- Auto close begin, do, ...
-paq {'tpope/vim-surround'}              -- Add surround text objects e.g.: cs])
-paq {'tpope/vim-repeat'}                -- Better '.' handling when repeated
-paq {'vim-airline/vim-airline'}         -- Buffer/Status line
-paq {'ConradIrwin/vim-bracketed-paste'} -- No more ':set paste!'
-paq {'nvim-lua/popup.nvim'}             -- Required for telescope
-paq {'nvim-lua/plenary.nvim'}           -- Required for telescope
-paq {'nvim-telescope/telescope.nvim'}   -- Fuzzy finder on steroids
+local use = require('packer').use
+require('packer').startup(function()
+  use {'wbthomason/packer.nvim', opt = true}
+  use 'joshdick/onedark.vim'             -- Theme
+  use 'embark-theme/vim'                 -- Theme
+  use 'nvim-treesitter/nvim-treesitter'  -- Syntax highlighting et. al.
+  use 'haya14busa/is.vim'                -- Incremental search improvments
+  use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
+  use 'tpope/vim-commentary'             -- Toggle comments: <visual>gc, gc<motion>
+  use 'tpope/vim-endwise'                -- Auto close begin, do, ...
+  use 'tpope/vim-surround'               -- Add surround text objects e.g.: cs])
+  use 'tpope/vim-repeat'                 -- Better '.' handling when repeated
+  use 'vim-airline/vim-airline'          -- Buffer/Status line
+  use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
+  use {'lukas-reineke/indent-blankline.nvim', branch="lua" }
+  use {'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
+end)
 -- }}}
 
 -- Plugin Setup {{{
@@ -56,41 +62,45 @@ local indent, width = 4, 80
 cmd 'set formatoptions+=n'                -- Add 'n' to default formatting opts
 cmd 'set whichwrap+=<,>,[,]'              -- Motions across wraped lines
 
-opt('b', 'expandtab', true)               -- Use spaces instead of tabs
-opt('b', 'tabstop', indent)               -- Number of spaces tabs count for
-opt('b', 'softtabstop', indent)           --
-opt('b', 'shiftwidth', indent)            -- Size of an indent
-opt('w', 'wrap', true)                    -- Enable line wrap
-opt('b', 'smartindent', true)             -- Insert indents automatically
-opt('b', 'textwidth', width)              -- Maximum width of text
-opt('o', 'hidden', true)                  -- Enable background buffers
-opt('o', 'wildmode', 'list:longest')      -- Command-line completion mode
+opt('o', 'confirm', true)                 -- Confirm quit on errors
+opt('o', 'hidden', true)                  -- Switch buffers without saving
 opt('o', 'ignorecase', true)              -- Ignore case
+opt('o', 'linebreak', true)               -- Wrap line at natural point
+opt('o', 'listchars', 'tab:→ ,nbsp:␣,trail:•') -- Listchars, duh.
+opt('o', 'matchtime', 2)                  -- Matching bracket time
+opt('o', 'mouse', 'a')                    -- Use mouse in all modes
 opt('o', 'scrolloff', 5 )                 -- Lines of context
 opt('o', 'shiftround', true)              -- Round indent
+opt('o', 'showbreak', '↪')                -- Char to show on wrapped line
+opt('o', 'showmatch', true)               -- Show matching bracket
 opt('o', 'smartcase', true)               -- Don't ignore case with capitals
+opt('o', 'smarttab', true)                -- Smart tab insertion at start of line
 opt('o', 'splitbelow', true)              -- Put new windows below current
 opt('o', 'splitright', true)              -- Put new windows right of current
+opt('b', 'swapfile', false)               -- Disable swapfile
 opt('o', 'termguicolors', true)           -- True color support
+opt('o', 'wildmenu', true)                -- Show menu on cmd line completion
+opt('o', 'wildmode', 'longest:full','full') -- Command-line completion mode
+-- opt('o', 'completeopt', 'menuone,noinsert,noselect')  -- Completion options
+
+opt('b', 'expandtab', true)               -- Use spaces instead of tabs
+opt('b', 'shiftwidth', indent)            -- Size of an indent
+opt('b', 'smartindent', true)             -- Insert indents automatically
+opt('b', 'softtabstop', indent)           --
+opt('b', 'tabstop', indent)               -- Number of spaces tabs count for
+opt('b', 'textwidth', width)              -- Maximum width of text
+opt('w', 'wrap', true)                    -- Enable line wrap
+
 opt('w', 'cursorline', true)              -- Highlight the line with cursor
 opt('w', 'colorcolumn', tostring(width))  -- Line length marker
 opt('w', 'list', true)                    -- Show some invisible characters
 opt('w', 'number', true)                  -- Show line numbers
 -- opt('w', 'relativenumber', true)          -- Relative line numbers
-opt('o', 'mouse', 'a')                    -- Use mouse in all modes
-opt('o', 'showmatch', true)               -- Show matching bracket
-opt('o', 'matchtime', 2)                  -- Matching bracket time
-opt('o', 'smarttab', true)                -- Smart tab insertion at start of line
-opt('o', 'confirm', true)                 -- Confirm quit on errors
-opt('o', 'linebreak', true)               -- Wrap line at natural point
-opt('b', 'swapfile', false)               -- Disable swapfile
-opt('o', 'showbreak', '↪')                -- Char to show on wrapped line
-opt('o', 'listchars', 'tab:→ ,nbsp:␣,trail:•') -- Listchars, duh.
--- opt('o', 'completeopt', 'menuone,noinsert,noselect')  -- Completion options
 -- }}}
 
 -- Key Mappings {{{
 vim.g.mapleader = ','
+vim.g.maplocalleader = ","
 map_key('n', ';', ':', {noremap=true})       -- Easier typing of ':'
 map_key('n', 'j', 'gj', {noremap=true})      -- Down display line
 map_key('n', 'k', 'gk', {noremap=true})      -- Up display line
@@ -132,7 +142,7 @@ init_term = function()
 end
 
 tweak_colours = function()
-  if api.nvim_exec('colorscheme', true) == 'onedark' then
+  if vim.api.nvim_exec('colorscheme', true) == 'onedark' then
     cmd 'highlight CursorLine   guibg=#06181f'
     cmd 'highlight CursorLineNr guifg=Gray70'
     cmd 'highlight MatchParen   guibg=DarkCyan'

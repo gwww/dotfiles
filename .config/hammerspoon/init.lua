@@ -12,6 +12,7 @@ hyper.bind({
   -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
   {key='a', action=function() sl.smartLaunch("ForkLift") end},
   {key='c', action=caffeinate},
+  {key='w', action=function() sl.smartLaunch("WezTerm") end},
   {key='f', action=function() sl.smartLaunch("Finder") end},
   {key='h', action=function() os.execute("open ~") end},
   {key='m', action=function() toggleFullscreen() end},
@@ -20,7 +21,7 @@ hyper.bind({
   {key='s', action=function() sl.smartLaunch("Slack") end},
   {key='v',
     action=function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end},
-  {key='w', action=function() sl.smartLaunch("iTerm") end},
+  {key='e', action=function() sl.smartLaunch("iTerm") end},
   {key='x', action=function() sl.smartLaunch("Cisco Webex Meetings") end},
   {key='y', action=hs.toggleConsole},
   {key='z', action=function() sl.smartLaunch("zoom.us") end},

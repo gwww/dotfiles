@@ -40,7 +40,7 @@ require('packer').startup(function()
   use 'tpope/vim-repeat'                 -- Better '.' handling when repeated
   use 'vim-airline/vim-airline'          -- Buffer/Status line
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
-  use {'lukas-reineke/indent-blankline.nvim', branch="lua" }
+  -- use {'lukas-reineke/indent-blankline.nvim', branch="lua" }
   use {'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
 end)

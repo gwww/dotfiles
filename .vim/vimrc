@@ -23,6 +23,11 @@ if has('nvim')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-treesitter/nvim-treesitter'
+lua <<EOF
+  local ts = require 'nvim-treesitter.configs'
+  ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+EOF
 endif
 
 Plug 'vim-airline/vim-airline'            " Status and tab line
@@ -30,10 +35,12 @@ Plug 'vim-airline/vim-airline'            " Status and tab line
   let g:airline_powerline_fonts=1
   " let g:airline_section_x=''
   let g:airline_section_y=''
-  let g:airline#extensions#whitespace#enabled=0
+  let g:airline#extensions#whitespace#enabled=1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#fnamemod = ':t'
   let g:airline#extensions#tabline#formatter='unique_tail_improved'
+  let g:airline#extensions#whitespace#checks =
+    \  [ 'indent', 'trailing', 'long', 'mixed-indent-file', 'conflicts' ]
   set noshowmode
   set laststatus=2
   set cmdheight=2

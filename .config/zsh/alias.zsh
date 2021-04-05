@@ -41,7 +41,7 @@ alias run-help=man
 alias rvm-restart='rvm_reload_flag=1 source '\''/Users/glenn/.rvm/scripts/rvm'\'
 
 local vim=vim
-local neovim="~/bin/nvim-osx64/bin/nvim"
+local neovim=nvim
 alias v=$neovim
 alias vi=$neovim
 alias emacs=$neovim

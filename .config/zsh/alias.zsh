@@ -46,5 +46,6 @@ alias v=$neovim
 alias vi=$neovim
 alias emacs=$neovim
 
+alias wezterm='/Applications/WezTerm.app/Contents/MacOS/wezterm'
 alias which-command=whence
 alias xyzzy="echo nothing happens"

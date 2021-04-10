@@ -15,7 +15,7 @@ local applicationWatcher = function(appName, eventType, appObject)
           hs.timer.usleep(50000) -- dumb to block; but simple and works well enough
         end
         appObject:focusedWindow():moveToScreen("Built%-in Retina Display", false, true, 0)
-        appObject:focusedWindow():maximize()
+        appObject:focusedWindow():maximize(0)
       end
     end
   end

@@ -9,12 +9,13 @@ config.check_for_updates = false
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
+config.initial_cols = 179
+config.initial_rows = 47
 config.window_padding = {left = 2, right = 2, top = 1, bottom = 1}
-config.line_height = 1.05
 config.font_size = 16.0
-config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
-config.font = wt.font("Inconsolata-g for Powerline")
-config.font = wt.font("Inconsolata Nerd Font")
+config.line_height = 1.05
+-- config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
+config.font = wt.font("Inconsolata")
 config.inactive_pane_hsb = {
   brightness = 1.0,
   saturation = 0.6,

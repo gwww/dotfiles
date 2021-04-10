@@ -1,7 +1,7 @@
 local wt = require 'wezterm'
 
 wt.on("window-config-reloaded", function(window, pane)
-  --   window:perform_action(wt.action{SplitHorizontal={}}, pane)
+  -- window:perform_action(wt.action{SplitHorizontal={}}, pane)
   window:set_right_status(wt.format({
     {Background={Color="blue"}},
     {Text=" Configuration reloaded. "},

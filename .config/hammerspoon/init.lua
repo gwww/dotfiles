@@ -21,7 +21,7 @@ hyper.bind({
   {key='s', action=function() sl.smartLaunch("Slack") end},
   {key='v',
     action=function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end},
-  {key='e', action=function() sl.smartLaunch("iTerm") end},
+  {key='e', action=function() sl.smartLaunch("iTerm2") end},
   {key='x', action=function() sl.smartLaunch("Cisco Webex Meetings") end},
   {key='y', action=hs.toggleConsole},
   {key='z', action=function() sl.smartLaunch("zoom.us") end},

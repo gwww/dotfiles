@@ -40,6 +40,7 @@ require('packer').startup(function()
   use 'tpope/vim-repeat'                 -- Better '.' handling when repeated
   use 'vim-airline/vim-airline'          -- Buffer/Status line
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
+  use 'wellle/targets.vim'
   -- use {'lukas-reineke/indent-blankline.nvim', branch="lua" }
   use {'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
@@ -147,6 +148,7 @@ tweak_colours = function()
     cmd 'highlight CursorLineNr guifg=Gray70'
     cmd 'highlight MatchParen   guibg=DarkCyan'
     cmd 'highlight Normal       guibg=#050e1f'
+    -- cmd 'highlight IncSearch    guibg=DarkCyan'
   end
 end
 
@@ -166,7 +168,7 @@ end
 cmd 'autocmd FileType crontab setlocal nobackup nowritebackup'
 cmd 'autocmd FileType yaml setlocal foldmethod=indent'
 cmd 'autocmd FileType c setlocal shiftwidth=4'
-cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank()'
+cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank({timeout=400})'
 
 cmd 'autocmd ColorScheme * lua tweak_colours()'
 cmd 'autocmd TermOpen * lua init_term()'

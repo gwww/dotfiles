@@ -7,16 +7,18 @@ module.init = function(hyper)
   hyper.addHook(nil, function() savedState = {} end)
 end
 
-module.smartLaunch = function(launchApp)
+module.smartLaunch = function(launchApp, name)
   if savedState.lastApp ~= launchApp then
     savedState = {lastApp = launchApp}
   end
 
+  if not name then name = launchApp end
+
   local runningApp = hs.application.get(launchApp)
 
   if not runningApp then
-    hs.alert.show("Launching " .. launchApp, 1.0)
-    hs.application.launchOrFocus(launchApp)
+    hs.alert.show("Launching " .. name, 1.2)
+    hs.application.open(launchApp)
 
   else
     if not savedState.windows then
@@ -28,8 +30,8 @@ module.smartLaunch = function(launchApp)
     end
 
     if #savedState.windows == 0 then
-      hs.alert.show("Creating new " .. launchApp .. " window", 1.0)
-      hs.application.launchOrFocus(runningApp:name())
+      hs.alert.show("Creating new " .. name .. " window", 1.2)
+      hs.application.open(launchApp)
 
     else
       -- focus a window and set window index for next smartLaunch call

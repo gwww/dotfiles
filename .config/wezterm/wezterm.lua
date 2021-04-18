@@ -16,6 +16,7 @@ config.font_size = 16.0
 config.line_height = 1.05
 -- config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}
 config.font = wt.font("Inconsolata")
+config.warn_about_missing_glyphs = false
 config.inactive_pane_hsb = {
   brightness = 1.0,
   saturation = 0.6,

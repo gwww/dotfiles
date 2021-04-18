@@ -30,7 +30,7 @@ local use = require('packer').use
 require('packer').startup(function()
   use {'wbthomason/packer.nvim', opt = true}
   use 'joshdick/onedark.vim'             -- Theme
-  use 'embark-theme/vim'                 -- Theme
+  use {'embark-theme/vim', as='embark'}  -- Theme
   use 'nvim-treesitter/nvim-treesitter'  -- Syntax highlighting et. al.
   use 'haya14busa/is.vim'                -- Incremental search improvments
   use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
@@ -39,11 +39,13 @@ require('packer').startup(function()
   use 'tpope/vim-surround'               -- Add surround text objects e.g.: cs])
   use 'tpope/vim-repeat'                 -- Better '.' handling when repeated
   use 'vim-airline/vim-airline'          -- Buffer/Status line
+  -- use 'hoob3rt/lualine.nvim'
+  -- use 'jose-elias-alvarez/buftabline.nvim'
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'wellle/targets.vim'
-  -- use {'lukas-reineke/indent-blankline.nvim', branch="lua" }
   use {'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
+  use 'rafcamlet/nvim-luapad'
 end)
 -- }}}
 
@@ -52,6 +54,11 @@ vim.g['airline_powerline_fonts'] = true
 vim.g['airline#extensions#whitespace#enabled'] = false
 vim.g['airline#extensions#tabline#enabled'] = true
 vim.g['airline_section_y'] = ''
+
+-- require('lualine').setup {
+--   options = {theme = 'onedark'},
+-- }
+-- require("buftabline").setup {}
 
 local tree_sitter = require 'nvim-treesitter.configs'
 tree_sitter.setup {ensure_installed = 'maintained', highlight = {enable = true}}
@@ -93,10 +100,8 @@ opt('b', 'textwidth', width)              -- Maximum width of text
 opt('w', 'wrap', true)                    -- Enable line wrap
 
 opt('w', 'cursorline', true)              -- Highlight the line with cursor
-opt('w', 'colorcolumn', tostring(width))  -- Line length marker
 opt('w', 'list', true)                    -- Show some invisible characters
 opt('w', 'number', true)                  -- Show line numbers
--- opt('w', 'relativenumber', true)          -- Relative line numbers
 -- }}}
 
 -- Key Mappings {{{

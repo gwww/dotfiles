@@ -7,7 +7,9 @@ local wf = require("windowFunctions")
 ins = hs.inspect.inspect -- ease typing when debugging
 -- hs.application.enableSpotlightForNameSearches(true)
 
-hyper.init('F20') -- CapsLock is mapped to F20 using /usr/bin/hidutil
+-- CapsLock is mapped to F20 using /usr/bin/hidutil
+hyper.init('F20')
+hyper.addHook(nil, function(count) hyper.escape(count) end)
 hyper.bind({
   -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
   {key='a', action=function() sl.smartLaunch("ForkLift") end},

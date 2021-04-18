@@ -2,12 +2,17 @@
 -- Supports:
 --   - Escape when hyper pressed then released without any bindings being invoked
 --   - Hyper+key invokes function
---   - Hooks for when hyper key pressed and released
+--   - Hooks for when hyper key pressed and/or released
 --
 -- Ideas for `hyper` came from: https://github.com/evantravers/hammerspoon-config
 --
 
 local module = {}
+
+-- Helper
+module.escape = function(count)
+  if count == 0 then hs.eventtap.keyStroke('', 'escape', 100000) end
+end
 
 module.init = function(modal_key)
   local modalPressed = function()
@@ -18,12 +23,7 @@ module.init = function(modal_key)
 
   local modalReleased = function()
     module._modal:exit()
-    if module._presses == 0 then
-      hs.eventtap.keyStroke('', 'escape', 100000)
-    else
-      module._presses = 0
-    end
-    hs.fnutils.each(module._release_hooks, function(hook) hook() end)
+    hs.fnutils.each(module._release_hooks, function(hook) hook(module._presses) end)
   end
 
   module._presses, module._press_hooks, module._release_hooks = 0, {}, {}

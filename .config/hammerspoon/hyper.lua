@@ -1,8 +1,8 @@
 --
 -- Supports:
---   - Escape when hyper pressed then released without any bindings being invoked
 --   - Hyper+key invokes function
 --   - Hooks for when hyper key pressed and/or released
+--     - Hook can be use to generate a key, for example escape
 --
 -- Ideas for `hyper` came from: https://github.com/evantravers/hammerspoon-config
 --

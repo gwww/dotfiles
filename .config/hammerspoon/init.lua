@@ -1,20 +1,20 @@
-local appWatcher = require("applicationWatcher")
-local caffeinate = require("caffeine")
-local hyper = require("hyper")
-local sl = require("smartLaunch")
-local wf = require("windowFunctions")
+appWatcher = require("applicationWatcher")
+caffeinate = require("caffeine")
+hyper = require("hyper")
+sl = require("smartLaunch")
+wf = require("windowFunctions")
 
 ins = hs.inspect.inspect -- ease typing when debugging
 -- hs.application.enableSpotlightForNameSearches(true)
 
 -- CapsLock is mapped to F20 using /usr/bin/hidutil
 hyper.init('F20')
-hyper.addHook(nil, function(count) hyper.escape(count) end)
+hyper.addHook(nil, function(presses) hyper.escape(presses) end)
 hyper.bind({
   -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
   {key='a', action=function() sl.smartLaunch("ForkLift") end},
   {key='c', action=caffeinate},
-  {key='w', action=function() sl.smartLaunch("WezTerm") end},
+  {key='e', action=function() sl.smartLaunch("com.googlecode.iterm2", "iTerm") end},
   {key='f', action=function() sl.smartLaunch("Finder") end},
   {key='h', action=function() os.execute("open ~") end},
   {key='m', action=function() toggleFullscreen() end},
@@ -22,7 +22,7 @@ hyper.bind({
   {key='r', action=hs.reload},
   {key='s', action=function() sl.smartLaunch("Slack") end},
   {key='v', action=function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end},
-  {key='e', action=function() sl.smartLaunch("com.googlecode.iterm2", "iTerm") end},
+  {key='w', action=function() sl.smartLaunch("WezTerm") end},
   {key='x', action=function() sl.smartLaunch("Cisco Webex Meetings") end},
   {key='y', action=hs.toggleConsole},
   {key='z', action=function() sl.smartLaunch("zoom.us") end},

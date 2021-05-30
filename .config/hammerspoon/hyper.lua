@@ -10,8 +10,8 @@
 local module = {}
 
 -- Helper
-module.escape = function(count)
-  if count == 0 then hs.eventtap.keyStroke('', 'escape', 100000) end
+module.escape = function(presses)
+  if presses == 0 then hs.eventtap.keyStroke('', 'escape', 100000) end
 end
 
 module.init = function(modal_key)

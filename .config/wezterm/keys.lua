@@ -14,6 +14,7 @@ end
 mapkey('CMD',       'd', {SplitHorizontal={}})
 mapkey('CMD|SHIFT', 'd', {SplitVertical={}})
 mapkey('CMD',       'e', edit_wezterm_config())
+mapkey('CTRL|SHIFT', 'l', "ShowDebugOverlay")
 mapkey('CMD',       'w', {CloseCurrentPane={confirm=true}})
 mapkey('CMD',       'z', "TogglePaneZoomState")
 

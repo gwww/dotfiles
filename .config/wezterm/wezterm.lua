@@ -7,6 +7,7 @@ require 'events'
 
 config.check_for_updates = false
 config.window_decorations = "RESIZE"
+config.swallow_mouse_click_on_pane_focus = true
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 config.initial_cols = 179

@@ -43,6 +43,7 @@ require('packer').startup(function()
   -- use 'jose-elias-alvarez/buftabline.nvim'
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'wellle/targets.vim'
+  use 'windwp/nvim-autopairs'
   use {'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
   use 'rafcamlet/nvim-luapad'
@@ -59,6 +60,7 @@ vim.g['airline_section_y'] = ''
 --   options = {theme = 'onedark'},
 -- }
 -- require("buftabline").setup {}
+require('nvim-autopairs').setup{}
 
 local tree_sitter = require 'nvim-treesitter.configs'
 tree_sitter.setup {ensure_installed = 'maintained', highlight = {enable = true}}
@@ -96,7 +98,7 @@ opt('b', 'shiftwidth', indent)            -- Size of an indent
 opt('b', 'smartindent', true)             -- Insert indents automatically
 opt('b', 'softtabstop', indent)           --
 opt('b', 'tabstop', indent)               -- Number of spaces tabs count for
-opt('b', 'textwidth', width)              -- Maximum width of text
+-- opt('b', 'textwidth', width)              -- Maximum width of text
 opt('w', 'wrap', true)                    -- Enable line wrap
 
 opt('w', 'cursorline', true)              -- Highlight the line with cursor

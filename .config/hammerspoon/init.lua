@@ -14,6 +14,7 @@ hyper.bind({
   -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
   {key='a', action=function() sl.smartLaunch("ForkLift") end},
   {key='c', action=caffeinate},
+  {key='d', action=function() sl.smartLaunch("Microsoft Teams") end},
   {key='e', action=function() sl.smartLaunch("com.googlecode.iterm2", "iTerm") end},
   {key='f', action=function() sl.smartLaunch("Finder") end},
   {key='h', action=function() os.execute("open ~") end},

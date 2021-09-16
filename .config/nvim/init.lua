@@ -13,24 +13,18 @@ local function opt(scope, key, value)
 end
 -- }}}
 
+vim.g['loaded_python_provider'] = 0
+vim.g['loaded_python3_provider'] = 0
+
 -- Load the Plugins {{{
-local install_path = vim.fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
+  cmd 'packadd packer.nvim'
 end
-cmd 'packadd packer.nvim'
-vim.api.nvim_exec([[
-  augroup AllAutoCmds
-    autocmd!
-    autocmd BufWritePost plugins.lua PackerCompile
-  augroup end
-]], false)
 
-local use = require('packer').use
 require('packer').startup(function()
-  use {'wbthomason/packer.nvim', opt = true}
-  use 'joshdick/onedark.vim'             -- Theme
-  use {'embark-theme/vim', as='embark'}  -- Theme
+  use 'wbthomason/packer.nvim'
   use 'nvim-treesitter/nvim-treesitter'  -- Syntax highlighting et. al.
   use 'haya14busa/is.vim'                -- Incremental search improvments
   use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
@@ -39,15 +33,18 @@ require('packer').startup(function()
   use 'tpope/vim-surround'               -- Add surround text objects e.g.: cs])
   use 'tpope/vim-repeat'                 -- Better '.' handling when repeated
   use 'vim-airline/vim-airline'          -- Buffer/Status line
-  -- use 'hoob3rt/lualine.nvim'
-  -- use 'jose-elias-alvarez/buftabline.nvim'
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'wellle/targets.vim'
   use 'windwp/nvim-autopairs'
   use {'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
-  use 'rafcamlet/nvim-luapad'
 end)
+
+  -- use 'joshdick/onedark.vim'             -- Theme
+  -- use {'embark-theme/vim', as='embark'}  -- Theme
+  -- use 'hoob3rt/lualine.nvim'
+  -- use 'jose-elias-alvarez/buftabline.nvim'
+  -- use 'rafcamlet/nvim-luapad'
 -- }}}
 
 -- Plugin Setup {{{
@@ -69,7 +66,18 @@ tree_sitter.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 -- Setup Options {{{
 local indent, width = 4, 80
 
-cmd 'set formatoptions+=n'                -- Add 'n' to default formatting opts
+cmd 'set formatoptions+=n'
+cmd 'set formatoptions-=o'
+-- stolen from tjdevries
+-- vim.opt.formatoptions = vim.opt.formatoptions
+--   - "a" -- Auto formatting is BAD.
+--   - "t" -- Don't auto format my code. I got linters for that.
+--   + "c" -- In general, I like it when comments respect textwidth
+--   + "q" -- Allow formatting comments w/ gq
+--   + "r" -- But do continue when pressing enter.
+--   + "j" -- Auto-remove comments if possible.
+--   - "2" -- I'm not in gradeschool anymore
+
 cmd 'set whichwrap+=<,>,[,]'              -- Motions across wraped lines
 
 opt('o', 'confirm', true)                 -- Confirm quit on errors
@@ -180,5 +188,5 @@ cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank({timeout=400})'
 cmd 'autocmd ColorScheme * lua tweak_colours()'
 cmd 'autocmd TermOpen * lua init_term()'
 
-cmd 'colorscheme onedark'
+cmd 'colorscheme testcolors'
 -- }}}

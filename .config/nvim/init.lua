@@ -2,19 +2,14 @@
 -- Glenn Waters
 
 -- Lua nvim Helpers {{{
+local o, bo = vim.opt, vim.opt_local
 local cmd, fn, g = vim.cmd, vim.fn, vim.g
 local execute = vim.api.nvim_command
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
 local map_key = vim.api.nvim_set_keymap
-
-local function opt(scope, key, value)
-  scopes[scope][key] = value
-  if scope ~= 'o' then scopes['o'][key] = value end
-end
 -- }}}
 
-vim.g['loaded_python_provider'] = 0
-vim.g['loaded_python3_provider'] = 0
+g.loaded_python_provider = 0
+g.loaded_python3_provider = 0
 
 -- Load the Plugins {{{
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -53,65 +48,46 @@ vim.g['airline#extensions#whitespace#enabled'] = false
 vim.g['airline#extensions#tabline#enabled'] = true
 vim.g['airline_section_y'] = ''
 
--- require('lualine').setup {
---   options = {theme = 'onedark'},
--- }
--- require("buftabline").setup {}
 require('nvim-autopairs').setup{}
 
 local tree_sitter = require 'nvim-treesitter.configs'
 tree_sitter.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 -- }}}
 
--- Setup Options {{{
+-- Options {{{
 local indent, width = 4, 80
 
-cmd 'set formatoptions+=n'
-cmd 'set formatoptions-=o'
--- stolen from tjdevries
--- vim.opt.formatoptions = vim.opt.formatoptions
---   - "a" -- Auto formatting is BAD.
---   - "t" -- Don't auto format my code. I got linters for that.
---   + "c" -- In general, I like it when comments respect textwidth
---   + "q" -- Allow formatting comments w/ gq
---   + "r" -- But do continue when pressing enter.
---   + "j" -- Auto-remove comments if possible.
---   - "2" -- I'm not in gradeschool anymore
-
-cmd 'set whichwrap+=<,>,[,]'              -- Motions across wraped lines
-
-opt('o', 'confirm', true)                 -- Confirm quit on errors
-opt('o', 'hidden', true)                  -- Switch buffers without saving
-opt('o', 'ignorecase', true)              -- Ignore case
-opt('o', 'linebreak', true)               -- Wrap line at natural point
-opt('o', 'listchars', 'tab:→ ,nbsp:␣,trail:•') -- Listchars, duh.
-opt('o', 'matchtime', 2)                  -- Matching bracket time
-opt('o', 'mouse', 'a')                    -- Use mouse in all modes
-opt('o', 'scrolloff', 5 )                 -- Lines of context
-opt('o', 'shiftround', true)              -- Round indent
-opt('o', 'showbreak', '↪')                -- Char to show on wrapped line
-opt('o', 'showmatch', true)               -- Show matching bracket
-opt('o', 'smartcase', true)               -- Don't ignore case with capitals
-opt('o', 'smarttab', true)                -- Smart tab insertion at start of line
-opt('o', 'splitbelow', true)              -- Put new windows below current
-opt('o', 'splitright', true)              -- Put new windows right of current
-opt('b', 'swapfile', false)               -- Disable swapfile
-opt('o', 'termguicolors', true)           -- True color support
-opt('o', 'wildmenu', true)                -- Show menu on cmd line completion
-opt('o', 'wildmode', 'longest:full','full') -- Command-line completion mode
--- opt('o', 'completeopt', 'menuone,noinsert,noselect')  -- Completion options
-
-opt('b', 'expandtab', true)               -- Use spaces instead of tabs
-opt('b', 'shiftwidth', indent)            -- Size of an indent
-opt('b', 'smartindent', true)             -- Insert indents automatically
-opt('b', 'softtabstop', indent)           --
-opt('b', 'tabstop', indent)               -- Number of spaces tabs count for
--- opt('b', 'textwidth', width)              -- Maximum width of text
-opt('w', 'wrap', true)                    -- Enable line wrap
-
-opt('w', 'cursorline', true)              -- Highlight the line with cursor
-opt('w', 'list', true)                    -- Show some invisible characters
-opt('w', 'number', true)                  -- Show line numbers
+o.completeopt = {"menuone", "noselect", "noinsert"}
+o.confirm = true                 -- Confirm quit on errors
+o.cursorline = true              -- Highlight the line with cursor
+o.expandtab = true               -- Use spaces instead of tabs
+o.formatoptions = o.formatoptions + "cjnqr" - "aot2"
+o.hidden = true                  -- Switch buffers without saving
+o.ignorecase = true              -- Ignore case
+o.linebreak = true               -- Wrap line at natural point
+o.list = true                    -- Show some invisible characters
+o.listchars = 'tab:→ ,nbsp:␣,trail:•'
+o.matchtime = 2                  -- Matching bracket time
+o.mouse = "a"                    -- Use mouse in all modes
+o.number = true                  -- Show line numbers
+o.scrolloff = 4                  -- Lines of context
+o.shiftround = true              -- Round indent
+o.showmatch = true               -- Show matching bracket
+o.smartcase = true               -- Don't ignore case with capitals
+o.smarttab = true                -- Smart tab insertion at start of line
+o.splitbelow = true              -- Put new windows below current
+o.splitright = true              -- Put new windows right of current
+o.swapfile = false               -- Disable swapfile
+o.termguicolors = true           -- True color support
+o.shiftwidth = indent            -- Size of an indent
+o.smartindent = true             -- Insert indents automatically
+o.softtabstop = indent
+o.tabstop = indent               -- Number of spaces tabs count for
+-- o.textwidth = width             -- Maximum width of text
+o.whichwrap:append("<,>,[,]")
+o.wildmenu = true
+o.wildmode = {"longest:full", "full"} -- Command-line completion mode
+o.wrap = true                    -- Enable line wrap
 -- }}}
 
 -- Key Mappings {{{
@@ -184,9 +160,10 @@ cmd 'autocmd FileType crontab setlocal nobackup nowritebackup'
 cmd 'autocmd FileType yaml setlocal foldmethod=indent'
 cmd 'autocmd FileType c setlocal shiftwidth=4'
 cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank({timeout=400})'
+cmd 'au BufWinEnter * set formatoptions-=o'
 
 cmd 'autocmd ColorScheme * lua tweak_colours()'
 cmd 'autocmd TermOpen * lua init_term()'
 
-cmd 'colorscheme testcolors'
+cmd 'colorscheme jellybeans-compiled'
 -- }}}

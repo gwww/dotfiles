@@ -20,38 +20,86 @@ end
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
-  use 'nvim-treesitter/nvim-treesitter'  -- Syntax highlighting et. al.
-  use 'haya14busa/is.vim'                -- Incremental search improvments
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      local tree_sitter = require("nvim-treesitter.configs")
+      tree_sitter.setup {
+        ensure_installed = 'maintained',
+        highlight = {enable = true}
+      }
+    end
+  }
+
+  use {
+    'hoob3rt/lualine.nvim',
+    config = function()
+      require("lualine").setup {
+        options = {
+          theme = 'jellybeans',
+          icons_enabled = false,
+        },
+        sections = {
+          lualine_y = {function() return [[%3p%%]] end},
+          lualine_z = {function() return [[%4l/%L:%-3c]] end},
+        },
+      }
+    end
+  }
+
+  use {
+    'jose-elias-alvarez/buftabline.nvim',
+    config = function()
+      require("buftabline").setup {
+        hlgroups = {
+          current = "lualine_a_normal",
+          normal = "lualine_a_inactive",
+          active = "lualine_a_inactive",
+          modified_current = "lualine_a_replace",
+          modified_normal = "lualine_a_inactive",
+          modified_active = "lualine_a_inactive",
+          spacing = "lualine_b_normal",
+        }
+      }
+    end
+  }
+
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require("nvim-autopairs").setup {}
+    end
+  }
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+    }
+  }
+
+  use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
+  use 'haya14busa/is.vim'                -- Incremental search improvments
   use 'tpope/vim-commentary'             -- Toggle comments: <visual>gc, gc<motion>
   use 'tpope/vim-endwise'                -- Auto close begin, do, ...
   use 'tpope/vim-surround'               -- Add surround text objects e.g.: cs])
   use 'tpope/vim-repeat'                 -- Better '.' handling when repeated
-  use 'vim-airline/vim-airline'          -- Buffer/Status line
-  use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'wellle/targets.vim'
-  use 'windwp/nvim-autopairs'
-  use {'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
-end)
 
+  -- Not currently being used
   -- use 'joshdick/onedark.vim'             -- Theme
   -- use {'embark-theme/vim', as='embark'}  -- Theme
-  -- use 'hoob3rt/lualine.nvim'
-  -- use 'jose-elias-alvarez/buftabline.nvim'
   -- use 'rafcamlet/nvim-luapad'
+  -- use 'vim-airline/vim-airline'          -- Buffer/Status line
+end)
 -- }}}
 
 -- Plugin Setup {{{
-vim.g['airline_powerline_fonts'] = true
-vim.g['airline#extensions#whitespace#enabled'] = false
-vim.g['airline#extensions#tabline#enabled'] = true
-vim.g['airline_section_y'] = ''
-
-require('nvim-autopairs').setup{}
-
-local tree_sitter = require 'nvim-treesitter.configs'
-tree_sitter.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+-- local tree_sitter = require 'nvim-treesitter.configs'
+-- tree_sitter.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 -- }}}
 
 -- Options {{{
@@ -134,11 +182,7 @@ init_term = function()
 end
 
 tweak_colours = function()
-  if vim.api.nvim_exec('colorscheme', true) == 'onedark' then
-    cmd 'highlight CursorLine   guibg=#06181f'
-    cmd 'highlight CursorLineNr guifg=Gray70'
-    cmd 'highlight MatchParen   guibg=DarkCyan'
-    cmd 'highlight Normal       guibg=#050e1f'
+  if vim.api.nvim_exec('colorscheme', true) == 'jellybeans' then
     -- cmd 'highlight IncSearch    guibg=DarkCyan'
   end
 end
@@ -160,8 +204,7 @@ cmd 'autocmd FileType crontab setlocal nobackup nowritebackup'
 cmd 'autocmd FileType yaml setlocal foldmethod=indent'
 cmd 'autocmd FileType c setlocal shiftwidth=4'
 cmd 'autocmd TextYankPost * silent! lua vim.highlight.on_yank({timeout=400})'
-cmd 'au BufWinEnter * set formatoptions-=o'
-
+cmd 'autocmd BufWinEnter * set formatoptions-=o'
 cmd 'autocmd ColorScheme * lua tweak_colours()'
 cmd 'autocmd TermOpen * lua init_term()'
 

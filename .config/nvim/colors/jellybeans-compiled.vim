@@ -6,7 +6,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "jellybeans-compiled"
+let colors_name = "jellybeans"
 
 hi SpecialKey     ctermfg=238 ctermbg=234 guifg=#444444 guibg=#1c1c1c
 hi TermCursor     cterm=reverse gui=reverse

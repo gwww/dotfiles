@@ -5,15 +5,18 @@
 local o, bo = vim.opt, vim.opt_local
 local cmd, fn, g = vim.cmd, vim.fn, vim.g
 local execute = vim.api.nvim_command
-local map_key = vim.api.nvim_set_keymap
+map_key = vim.api.nvim_set_keymap
 -- }}}
 
+g.loaded_node_provider = 0
+g.loaded_perl_provider = 0
 g.loaded_python_provider = 0
 g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
 
 -- Load the Plugins {{{
 local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+if fn.empty(vim.fn.glob(install_path)) > 0 then
   execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
   cmd 'packadd packer.nvim'
 end
@@ -29,7 +32,8 @@ require('packer').startup(function()
         ensure_installed = 'maintained',
         highlight = {enable = true}
       }
-    end
+    end,
+    run = ":TSUpdate"
   }
 
   use {
@@ -45,6 +49,19 @@ require('packer').startup(function()
           lualine_z = {function() return [[%4l/%L:%-3c]] end},
         },
       }
+    end
+  }
+
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'},
+    },
+    config = function()
+      map_key('',  '<leader>e', ':Telescope find_files<cr>', {silent=true})
+      map_key('',  '<leader>E', ':Telescope find_files <dir><cr>', {silent=true})
+      map_key('n', '<leader>/', ':Telescope live_grep', {noremap=true})
     end
   }
 
@@ -73,15 +90,13 @@ require('packer').startup(function()
   }
 
   use {
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      {'nvim-lua/popup.nvim'},
-      {'nvim-lua/plenary.nvim'},
-    }
+    'gwww/vim-bbye',  -- Delete buffer leaving window structure
+    config = function()
+      map_key('', '<leader>c', ':Bdelete<cr>', {silent=true})
+    end
   }
 
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
-  use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
   use 'haya14busa/is.vim'                -- Incremental search improvments
   use 'tpope/vim-commentary'             -- Toggle comments: <visual>gc, gc<motion>
   use 'tpope/vim-endwise'                -- Auto close begin, do, ...
@@ -89,17 +104,12 @@ require('packer').startup(function()
   use 'tpope/vim-repeat'                 -- Better '.' handling when repeated
   use 'wellle/targets.vim'
 
-  -- Not currently being used
+  ------ Not currently being used
   -- use 'joshdick/onedark.vim'             -- Theme
   -- use {'embark-theme/vim', as='embark'}  -- Theme
   -- use 'rafcamlet/nvim-luapad'
   -- use 'vim-airline/vim-airline'          -- Buffer/Status line
 end)
--- }}}
-
--- Plugin Setup {{{
--- local tree_sitter = require 'nvim-treesitter.configs'
--- tree_sitter.setup {ensure_installed = 'maintained', highlight = {enable = true}}
 -- }}}
 
 -- Options {{{
@@ -121,6 +131,7 @@ o.number = true                  -- Show line numbers
 o.scrolloff = 4                  -- Lines of context
 o.shiftround = true              -- Round indent
 o.showmatch = true               -- Show matching bracket
+o.showmode = false               -- Don't show input, etc. mode
 o.smartcase = true               -- Don't ignore case with capitals
 o.smarttab = true                -- Smart tab insertion at start of line
 o.splitbelow = true              -- Put new windows below current
@@ -131,11 +142,13 @@ o.shiftwidth = indent            -- Size of an indent
 o.smartindent = true             -- Insert indents automatically
 o.softtabstop = indent
 o.tabstop = indent               -- Number of spaces tabs count for
--- o.textwidth = width             -- Maximum width of text
 o.whichwrap:append("<,>,[,]")
 o.wildmenu = true
 o.wildmode = {"longest:full", "full"} -- Command-line completion mode
 o.wrap = true                    -- Enable line wrap
+
+------ Not currently being used
+-- o.textwidth = width             -- Maximum width of text
 -- }}}
 
 -- Key Mappings {{{
@@ -164,17 +177,13 @@ map_key('v', 'K', ":m '<-2<CR>gv=gv", {noremap=true}) -- Move visual block
 map_key('n', '<tab>', ':bnext<cr>', {noremap=true})   -- Switch buffers
 map_key('n', '<s-tab>', ':bprev<cr>', {noremap=true}) -- Switch buffers
 map_key('', 'Y', 'y$', {})                            -- Yank from cursor to EOL
-map_key('', '<leader>y', '"+y', {noremap=true})       -- Yank to system copy/paste
+map_key('', '<leader>y', '"*y', {noremap=true})       -- Yank to system copy/paste
 
 -- Binding for Plugins & Lua Functions
-map_key('', '<leader>c', ':Bdelete<cr>', {silent=true})
-map_key('', '<leader>e', ':Telescope find_files<cr>', {silent=true})
-map_key('', '<leader>E', ':Telescope find_files <dir><cr>', {silent=true})
-map_key('n', '<leader>/', ':Telescope live_grep', {noremap=true})
 map_key('n', '<leader>w', '<cmd>lua toggle_wrap()<CR>', {silent=true})
 -- }}}
 
--- Lua Support Functions {{{
+-- Support Functions {{{
 init_term = function()
   cmd 'setlocal nonumber norelativenumber'
   cmd 'setlocal nospell'

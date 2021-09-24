@@ -25,6 +25,17 @@ require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('lspconfig').pyright.setup {
+        settings = {
+	  python = {analysis = {extraPaths = {".."}}}
+	}
+      }
+    end,
+  }
+
+  use {
     'nvim-treesitter/nvim-treesitter',
     config = function()
       local tree_sitter = require("nvim-treesitter.configs")
@@ -52,6 +63,8 @@ require('packer').startup(function()
     end
   }
 
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -62,7 +75,11 @@ require('packer').startup(function()
       map_key('',  '<leader>e', ':Telescope find_files<cr>', {silent=true})
       map_key('',  '<leader>E', ':Telescope find_files <dir><cr>', {silent=true})
       map_key('n', '<leader>/', ':Telescope live_grep', {noremap=true})
-    end
+
+      fzf = {}  -- Take all the default options
+
+      require('telescope').load_extension('fzf')
+    end,
   }
 
   use {

@@ -6,6 +6,8 @@
 	<false/>
 	<key>AlternateMouseScroll</key>
 	<true/>
+	<key>AlwaysAcceptFirstMouse</key>
+	<false/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Glenn</key>

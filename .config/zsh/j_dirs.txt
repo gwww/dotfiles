@@ -1,6 +1,7 @@
 core      ~/Development/automation/ha-core
 coreelk   ~/Development/automation/ha-core/homeassistant/components/elkm1
 coreupb   ~/Development/automation/ha-core/homeassistant/components/upb
+coreenv   ~/Development/automation/environment-canada/core/homeassistant/components/environment_canada
 elk       ~/Development/automation/elk/elkm1
 pyaml     ~/Development/automation/config/pyaml
 upb       ~/Development/automation/upb/upb-lib

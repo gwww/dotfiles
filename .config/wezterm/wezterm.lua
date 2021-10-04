@@ -12,7 +12,7 @@ config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 config.initial_cols = 179
 config.initial_rows = 47
-config.window_padding = {left = 2, right = 2, top = 1, bottom = 1}
+config.window_padding = {left = 8, right = 2, top = 1, bottom = 1}
 config.font_size = 16.0
 config.line_height = 1.05
 -- config.harfbuzz_features = {"calt=0", "clig=0", "liga=0"}

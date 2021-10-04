@@ -15,6 +15,8 @@ alias gd='git diff'
 alias ghi='git hist'
 alias gst='git status'
 
+alias lg='lazygit'
+
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias history='fc -l 1'
 

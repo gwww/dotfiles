@@ -42,6 +42,7 @@ function _G.__telescope_open(fn)
 end
 
 U.map('n', '<leader>e', "<CMD>lua __telescope_open('find_files')<CR>")
+U.map('n', '<leader>b', "<CMD>lua __telescope_open('file_browser')<CR>")
 U.map('n', '<leader>/', "<CMD>lua __telescope_open('live_grep')<CR>")
 
 -- Fuzzy find active buffers

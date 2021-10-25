@@ -8,7 +8,9 @@ require("lualine").setup {
     lualine_z = {function() return [[%4l/%L:%-3c]] end},
   },
   tabline = {
-    lualine_a = {'buffers'},
+    lualine_a = {
+      {'buffers', show_filename_only = false}
+    },
   },
 }
 

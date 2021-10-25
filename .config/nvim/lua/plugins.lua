@@ -16,6 +16,8 @@ end)
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+
   use {
     'neovim/nvim-lspconfig',
     config = function() require('plugins.lsp-config') end,
@@ -25,7 +27,7 @@ return require('packer').startup(function()
     config = function() require('nvim-web-devicons').setup() end,
   }
   use {
-    'shadmansaleh/lualine.nvim',
+    'nvim-lualine/lualine.nvim',
     config = function() require('plugins.lualine') end
   }
   use {
@@ -65,6 +67,7 @@ return require('packer').startup(function()
       config = function() require('plugins.fterm') end,
   }
 
+  use 'nathom/filetype.nvim'             -- Detect type of file
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
   use 'haya14busa/is.vim'                -- Incremental search improvments

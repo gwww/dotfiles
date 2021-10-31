@@ -26,16 +26,8 @@ else
   dryrun=0
 fi
 
-if [[ -f $HOME/.zshrc ]]; then
-  info "Sourcing ~/.zshrc..."
-  run source $HOME/.zshrc
-else
-  error "$HOME/.zshrc not found"
-fi
-
-
 info "Creating '.local' directory structure..."
-for x in cups poetry asdf vim virtualenvs zsh; do
+for x in cups poetry asdf vim nvim wezterm virtualenvs zsh; do
   run mkdir -p $HOME/.local/share/$x
 done
 
@@ -43,20 +35,30 @@ system_type=$(uname -s)
 
 if [[ "$system_type" == "Darwin" ]]; then
   info "Homebrew install and brew installs..."
-  if ! executable_exists /usr/local/bin/brew; then
+  if ! executable_exists brew; then
     info "Installing Homebrew..."
     run '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
   else
     note "Homebrew already installed."
   fi
+fi
+
+if [[ -f $HOME/.zshrc ]]; then
+  info "Sourcing ~/.zshrc..."
+  run source $HOME/.zshrc
+else
+  error "$HOME/.zshrc not found"
+fi
+
+if executable_exists brew; then
   run brew update
 
   info "Downloading Mac App Store apps..."
   run brew install mas
   echo "Ensure you are logged into Mac App Store then press enter... " && read
-  run /usr/local/bin/mas install 1289583905     # Pixelmator Pro
-  run /usr/local/bin/mas install 1295203466     # Microsoft Remote Desktop
-  run /usr/local/bin/mas install 803453959      # Slack
+  run mas install 1289583905     # Pixelmator Pro
+  run mas install 1295203466     # Microsoft Remote Desktop
+  run mas install 803453959      # Slack
 
   echo "Installing XCode Command Line Tools..."
   echo "A dialog may appear; press enter when ready to start installing... " && read
@@ -98,25 +100,27 @@ if [[ -d /Applications/Hammerspoon.app ]]; then
   info "Setting Hammerspoon default config dir and remapping CapsLock..."
   run defaults write org.hammerspoon.Hammerspoon \
     MJConfigFile "$HOME/.config/hammerspoon/init.lua"
+  run mkdir -p $HOME/Library/LaunchAgents
   run cp ~/.config/yadm/com.glenn.KeyRemapping.plist ~/Library/LaunchAgents
 else
   note "Hammerspoon not installed; not setting it up."
 fi
 
-if executable_exists $HOME/bin/make-vim; then
-  info "Installing latest version of vim..."
-  run $HOME/bin/make-vim
-fi
+# if executable_exists $HOME/bin/make-vim; then
+#   info "Installing latest version of vim..."
+#   run $HOME/bin/make-vim
+# fi
 
-if executable_exists /usr/local/bin/vim; then
-  info "Bootstraping vim plugins..."
-  run /usr/local/bin/vim '+PlugClean!' '+qall'
-fi
+# if executable_exists /usr/local/bin/vim; then
+#   info "Bootstraping vim plugins..."
+#   run /usr/local/bin/vim '+PlugClean!' '+qall'
+# fi
 
-if executable_exists /usr/local/bin/asdf; then
+if executable_exists asdf; then
+  . $(brew --prefix asdf)/asdf.sh
+
   info "Installing Python (using asdf)..."
-  source /usr/local/opt/asdf/asdf.sh
-  run /usr/local/bin/asdf plugin install python
+  run asdf plugin install python
 
   # Latest version of python that is not beta...
   python_versions=$(asdf list all python | grep -E '^\s*[0-9\.]+\s*$' | tail -10)
@@ -127,8 +131,8 @@ if executable_exists /usr/local/bin/asdf; then
   read v && [[ $v != '' ]] && python_version=$v
 
   info "Installing Python, version $python_version..."
-  run /usr/local/bin/asdf install python $python_version
-  run /usr/local/bin/asdf global python $python_version
+  run asdf install python $python_version
+  run asdf global python $python_version
   run rehash
   run pip install --upgrade pip
 
@@ -137,15 +141,15 @@ if executable_exists /usr/local/bin/asdf; then
   run pip install spritemapper
 
   info "Installing Ruby (using asdf)..."
-  run /usr/local/bin/asdf plugin install ruby
-  run /usr/local/bin/asdf install ruby latest
+  run asdf plugin install ruby
+  run asdf install ruby latest
 
   info "Updating Ruby 'gem' installer and 'bundler'..."
   run /usr/local/opt/ruby/bin/gem update --system
   run /usr/local/opt/ruby/bin/gem install --force bundler
 fi
 
-if [[ -f $HOME/bin/macos.sh ]]; then
+if [[ -f $HOME/.config/yadm/macos.sh ]]; then
   info "Setting up my MacOS defaults..."
   run source ~/.config/yadm/macos.sh
 fi

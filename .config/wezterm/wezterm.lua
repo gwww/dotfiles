@@ -29,4 +29,7 @@ config.colors = {
   foreground = "#e0e0e0",
 }
 
+-- Experimental
+-- config.use_fancy_tab_bar = true
+
 return config

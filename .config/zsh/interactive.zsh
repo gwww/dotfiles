@@ -42,21 +42,16 @@ export LESS_TERMCAP_so=$'\E[38;33;246m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[04;38;5;146m'
 
-# Add to the path ensuring no duplicates
-for x in ~/bin ~/bin/nvim-osx64/bin $POETRY_HOME/bin /usr/local/opt/ruby/bin /usr/local/bin; do
-  case ":$PATH:" in
-    *":$x:"*) :;; # already there
-    *) PATH="$x:$PATH";;
-  esac
-done
-
-# export PYENV_ROOT=~/.local/share/pyenv
-
-# # If pyenv shims not already in path, add them
-# [[ ":$PATH:" != *":$PYENV_ROOT/shims:"* ]] && eval "$(pyenv init -)"
-# true
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -x /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+path=(~/bin $POETRY_HOME/bin /usr/local/opt/ruby/bin /usr/local/bin $path)
+typeset -U path # remove duplicates from path
+export PATH
 
 # Setup asdf...
 export ASDF_DATA_DIR=~/.local/share/asdf
 export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$ASDF_DATA_DIR/tool-versions
-source /usr/local/opt/asdf/asdf.sh
+. $(brew --prefix asdf)/asdf.sh

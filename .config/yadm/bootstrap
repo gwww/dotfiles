@@ -34,7 +34,7 @@ done
 system_type=$(uname -s)
 
 if [[ "$system_type" == "Darwin" ]]; then
-  info "Homebrew install and brew installs..."
+  info "Installing Homebrew..."
   if ! executable_exists brew; then
     info "Installing Homebrew..."
     run '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
@@ -51,6 +51,7 @@ else
 fi
 
 if executable_exists brew; then
+  info "Homebrew installing brews..."
   run brew update
 
   info "Downloading Mac App Store apps..."

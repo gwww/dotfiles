@@ -1,24 +1,17 @@
 #!/usr/bin/env zsh
 
-function run() {
-  echo "Run:" $*
-  if [[ $dryrun == 0 ]]; then
-    eval $*
-  fi
-}
+source ~/.config/yadm/bootstrap-utils.sh
 
-function executable_exists() { command -v $1 >/dev/null 2>&1 }
-
-function info() { printf "%s\n" "$fg[green]$*$reset_color" }
-
-function note() { printf "Note: %s\n" "$fg[blue]$*$reset_color" }
-
-function error() {
-  printf "Error: %s\n" "$fg[red]$*$reset_color"
-  exit 1
-}
+typeset -A languages_to_install
+languages_to_install=(
+    [python]="3.9.7"
+    [ruby]="latest"
+    [nodejs]="latest"
+)
 
 autoload -U colors && colors
+
+work_dir=$(mktemp -d /tmp/rebuild.XXXXXX)
 
 if [[ $# == 1 && $1 == '--dryrun' ]]; then
   dryrun=1
@@ -26,7 +19,7 @@ else
   dryrun=0
 fi
 
-info "Creating '.local' directory structure..."
+step "Creating '.local' directory structure..."
 for x in cups poetry asdf vim nvim wezterm virtualenvs zsh; do
   run mkdir -p $HOME/.local/share/$x
 done
@@ -34,7 +27,7 @@ done
 system_type=$(uname -s)
 
 if [[ "$system_type" == "Darwin" ]]; then
-  info "Installing Homebrew..."
+  step "Installing Homebrew..."
   if ! executable_exists brew; then
     info "Installing Homebrew..."
     run '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
@@ -43,6 +36,7 @@ if [[ "$system_type" == "Darwin" ]]; then
   fi
 fi
 
+step "Source .zshrc"
 if [[ -f $HOME/.zshrc ]]; then
   info "Sourcing ~/.zshrc..."
   run source $HOME/.zshrc
@@ -50,6 +44,7 @@ else
   error "$HOME/.zshrc not found"
 fi
 
+step "Homebrew install"
 if executable_exists brew; then
   info "Homebrew installing brews..."
   run brew update
@@ -61,44 +56,32 @@ if executable_exists brew; then
   run mas install 1295203466     # Microsoft Remote Desktop
   run mas install 803453959      # Slack
 
-  echo "Installing XCode Command Line Tools..."
-  echo "A dialog may appear; press enter when ready to start installing... " && read
-  run xcode-select --install
-  run rehash
+  # info "Installing XCode Command Line Tools..."
+  # info "A dialog may appear; press enter when ready to start installing... "
+  # read
+  # run xcode-select --install
+  # run rehash
 
   if [[ -f $HOME/.config/yadm/Brewfile ]]; then
-    info "Installing Homebrew bundle..."
-    echo '----------------------'
+    step "Installing Homebrew bundle..."
     run brew bundle --verbose --file=~/.config/yadm/Brewfile
-    echo '----------------------'
   else
     error "Cannot brew bundle install; $HOME/.config/yadm/Brewfile not found."
   fi
 fi
 
-info "Updating /etc/shells and setting default shell to zsh..."
-if [[ -x /usr/local/bin/zsh ]]; then
-  if ! grep -q '^/usr/local/bin/zsh$' /etc/shells; then
-    run 'sudo printf /usr/local/bin/zsh >> /etc/shells'
-  fi
-  run chsh -s /usr/local/bin/zsh
-else
-  note "/usr/local/bin/zsh not found; not updating default shell"
-fi
+step "Updating /etc/shells and setting default shell to zsh..."
+update_shells zsh
+update_shells bash
+run chsh -s /usr/local/bin/zsh
 
-if [[ -x /usr/local/bin/bash ]]; then
-  if ! grep -q '^/usr/local/bin/bash$' /etc/shells; then
-    run 'sudo printf /usr/local/bin/bash >> /etc/shells'
-  fi
-else
-  note "/usr/local/bin/bash not found; not adding it to /etc/shells."
-fi
-
-info "Setting iTerm2 preferences folder to ~/.config/iTerm2..."
+step "Setting iTerm2 preferences folder to ~/.config/iTerm2..."
 run defaults write com.googlecode.iterm2 PrefsCustomFolder ~/.config/iTerm2
 
+step "Hammerspoon setup"
 if [[ -d /Applications/Hammerspoon.app ]]; then
   info "Setting Hammerspoon default config dir and remapping CapsLock..."
+  info "A reboot is required for the key mapping to take place"
   run defaults write org.hammerspoon.Hammerspoon \
     MJConfigFile "$HOME/.config/hammerspoon/init.lua"
   run mkdir -p $HOME/Library/LaunchAgents
@@ -107,56 +90,32 @@ else
   note "Hammerspoon not installed; not setting it up."
 fi
 
-# if executable_exists $HOME/bin/make-vim; then
-#   info "Installing latest version of vim..."
-#   run $HOME/bin/make-vim
-# fi
+step "Getting some installers. Unfortunately, the easiest thing is that they are manually installed."
+info "Some are required for future steps in this script (e.g.: GnuPG)."
+install_dmg GnuPG https://sourceforge.net/projects/gpgosx/files/GnuPG-2.3.3.dmg/download
 
-# if executable_exists /usr/local/bin/vim; then
-#   info "Bootstraping vim plugins..."
-#   run /usr/local/bin/vim '+PlugClean!' '+qall'
-# fi
-
+step "Languages install using ASDF"
 if executable_exists asdf; then
   . $(brew --prefix asdf)/asdf.sh
-
-  info "Installing Python (using asdf)..."
-  run asdf plugin install python
-
-  # Latest version of python that is not beta...
-  python_versions=$(asdf list all python | grep -E '^\s*[0-9\.]+\s*$' | tail -10)
-  python_version=$(asdf list all python | grep -E '^\s*[0-9\.]+\s*$' | tail -1)
-  echo "For reference, the last 10 Python releases were:"
-  echo $python_versions | tr '\n' ' '; echo
-  echo -n "Enter Python version to install, enter installs $python_version: "
-  read v && [[ $v != '' ]] && python_version=$v
-
-  info "Installing Python, version $python_version..."
-  run asdf install python $python_version
-  run asdf global python $python_version
-  run rehash
-  run pip install --upgrade pip
+  for lang in ${(k)languages_to_install}; do
+    install_language $lang $languages_to_install[$lang]
+  done
 
   info "Installing Python dependency manager 'poetry'..."
   run 'python -c "$(curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py)"'
+  run pip install --upgrade pip
   run pip install spritemapper
 
-  info "Installing Ruby (using asdf)..."
-  run asdf plugin install ruby
-  run asdf install ruby latest
-
   info "Updating Ruby 'gem' installer and 'bundler'..."
-  run /usr/local/opt/ruby/bin/gem update --system
-  run /usr/local/opt/ruby/bin/gem install --force bundler
+  run gem update --system
 fi
 
 if [[ -f $HOME/.config/yadm/macos.sh ]]; then
-  info "Setting up my MacOS defaults..."
+  step "Setting up my MacOS defaults..."
   run source ~/.config/yadm/macos.sh
 fi
 
-info '----------------------'
-info "All done with this script! Next steps:"
-info "1. Enter software keys for Alfred, Arq, Forklift, and MS Office"
-info '2. Cleanup Homebrew cache using: "rm -rf $(brew --cache)"'
-info "3. Reboot. Some of this installation requires it."
+step "All done with this script! Next steps:"
+info "=> Enter software keys for Alfred, Arq, Forklift, and MS Office"
+info '=> Cleanup Homebrew cache using: "rm -rf $(brew --cache)"'
+info "=> Reboot. Some of this installation requires it."

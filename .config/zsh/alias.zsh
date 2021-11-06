@@ -49,5 +49,6 @@ alias vi=$neovim
 alias emacs=$neovim
 
 alias wezterm='/Applications/WezTerm.app/Contents/MacOS/wezterm'
+alias sign_wezterm='codesign --force --deep --sign - /Applications/WezTerm.app'
 alias which-command=whence
 alias xyzzy="echo nothing happens"

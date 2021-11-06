@@ -11,8 +11,6 @@ languages_to_install=(
 
 autoload -U colors && colors
 
-work_dir=$(mktemp -d /tmp/rebuild.XXXXXX)
-
 if [[ $# == 1 && $1 == '--dryrun' ]]; then
   dryrun=1
 else
@@ -93,6 +91,10 @@ fi
 step "Getting some installers. Unfortunately, the easiest thing is that they are manually installed."
 info "Some are required for future steps in this script (e.g.: GnuPG)."
 install_dmg GnuPG https://sourceforge.net/projects/gpgosx/files/GnuPG-2.3.3.dmg/download
+
+mkdir -p $GNUPGHOME
+chmod 700 $GNUPGHOME
+gpg --list-keys  # Creates the files so that nodejs install will work
 
 step "Languages install using ASDF"
 if executable_exists asdf; then

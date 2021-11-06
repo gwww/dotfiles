@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+work_dir=$(mktemp -d /tmp/rebuild.XXXXXX)
+
 function executable_exists() {command -v $1 >/dev/null 2>&1 }
 
 step_number=1

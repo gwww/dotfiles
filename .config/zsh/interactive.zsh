@@ -2,19 +2,21 @@
 # All things interactive shell
 #
 
+path=(~/bin $POETRY_HOME/bin /usr/local/bin $path)
+
 if [[ -x /opt/homebrew/bin/brew ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 elif [[ -x /usr/local/bin/brew ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
 fi
-path=(~/bin $POETRY_HOME/bin /usr/local/opt/ruby/bin /usr/local/bin $path)
-typeset -U path # remove duplicates from path
-export PATH
+rehash
 
-# Setup asdf...
 export ASDF_DATA_DIR=~/.local/share/asdf
 export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$ASDF_DATA_DIR/tool-versions
 source $(brew --prefix asdf)/asdf.sh
+
+typeset -U path # remove duplicates from path
+export PATH
 
 export EDITOR=$(brew --prefix neovim)/bin/nvim
 export VISUAL=$(brew --prefix neovim)/bin/nvim

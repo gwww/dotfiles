@@ -82,7 +82,7 @@ function po() {
       poetry --version
 
     elif [[ 'changelog' =~ "^$1" ]]; then
-      curl -vs https://raw.githubusercontent.com/sdispater/poetry/master/CHANGELOG.md 2>/dev/null | pandoc -f markdown -t plain | more
+      curl -vs https://raw.githubusercontent.com/python-poetry/poetry/master/CHANGELOG.md 2>/dev/null | pandoc -f markdown -t plain | more
 
     else
       poetry $@

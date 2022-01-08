@@ -2,25 +2,6 @@
 # All things interactive shell
 #
 
-path=(~/bin $POETRY_HOME/bin /usr/local/bin $path)
-
-if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -x /usr/local/bin/brew ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-fi
-rehash
-
-export ASDF_DATA_DIR=~/.local/share/asdf
-export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$ASDF_DATA_DIR/tool-versions
-source $(brew --prefix asdf)/libexec/asdf.sh
-
-typeset -U path # remove duplicates from path
-export PATH
-
-export EDITOR=$(brew --prefix neovim)/bin/nvim
-export VISUAL=$(brew --prefix neovim)/bin/nvim
-
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"
 
@@ -29,7 +10,6 @@ export LESSHISTFILE=-
 
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad
-export EXA_COLORS='da=38;5;2:di=38;5;51'
 
 export ELKM1_URL=elk://192.168.1.12
 export UPBPIM_URL=serial:///dev/cu.KeySerial1:4800

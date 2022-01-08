@@ -11,7 +11,6 @@ g.loaded_ruby_provider = 0
 cmd 'colorscheme jellybeans-compiled'
 
 o.termguicolors = true
-o.hidden = true -- This is 0.6 default
 o.scrolloff = 8
 o.scrolloff = 4
 o.number = true

@@ -22,12 +22,13 @@ alias history='fc -l 1'
 
 alias gen='fswatch . | xargs -I {} -n 1 pyaml pre-ui-lovelace.yaml -o ../ui-lovelace.yaml'
 
-alias ls='exa'
-alias l='exa'
-alias la='exa -a'
-alias ll='exa -lh'
-alias lal='exa -la'
-alias lrt='exa -lhrs=time'
+local ls='/bin/ls -G'
+alias l=$ls
+alias ls=$ls
+alias la="$ls -a"
+alias ll="$ls -hl"
+alias lla="$ls -hla"
+alias lrt="$ls -hlart"
 
 alias dotfiles=yadm
 alias pdbit='python -m pdb -c continue '

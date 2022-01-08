@@ -23,13 +23,26 @@ config.inactive_pane_hsb = {
   saturation = 0.6,
   brightness = 0.5,
 }
+config.window_frame = {
+  font_size = 13.0,
+  font = wt.font("Roboto")
+}
 config.colors = {
   cursor_bg = "#e0e0e0",
   cursor_border = "#e0e0e0",
   foreground = "#e0e0e0",
-}
 
--- Experimental
--- config.use_fancy_tab_bar = true
+  tab_bar = {
+    background = "#030303",
+    active_tab = {
+      fg_color = "#7CFC00",
+      bg_color = "#2b2042",
+    },
+    inactive_tab = {
+      fg_color = "#a0a0a0",
+      bg_color = "#1b1032",
+    },
+  },
+}
 
 return config

@@ -16,6 +16,11 @@ end)
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  -- use {
+  --   'lewis6991/impatient.nvim',
+  --   config = function() require('impatient') end,
+  -- }
+
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
   use {

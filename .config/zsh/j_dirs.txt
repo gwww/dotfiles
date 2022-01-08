@@ -1,10 +1,10 @@
-core      ~/Development/automation/ha-core
-coreelk   ~/Development/automation/ha-core/homeassistant/components/elkm1
-coreupb   ~/Development/automation/ha-core/homeassistant/components/upb
-coreenv   ~/Development/automation/environment-canada/core/homeassistant/components/environment_canada
-elk       ~/Development/automation/elk/elkm1
+core      ~/Development/automation/core
+coreelk   ~/Development/automation/core/homeassistant/components/elkm1
+coreupb   ~/Development/automation/core/homeassistant/components/upb
+coreenv   ~/Development/automation/core/homeassistant/components/environment_canada
+elk       ~/Development/automation/elkm1
 pyaml     ~/Development/automation/config/pyaml
-upb       ~/Development/automation/upb/upb-lib
+upb       ~/Development/automation/upb-lib
 westmin   ~/Development/automation/config/westmin
-vim       ~/.vim
+vim       ~/.config/nvim
 zsh       ~/.config/zsh

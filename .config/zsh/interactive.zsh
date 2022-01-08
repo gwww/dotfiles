@@ -13,7 +13,7 @@ rehash
 
 export ASDF_DATA_DIR=~/.local/share/asdf
 export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$ASDF_DATA_DIR/tool-versions
-source $(brew --prefix asdf)/asdf.sh
+source $(brew --prefix asdf)/libexec/asdf.sh
 
 typeset -U path # remove duplicates from path
 export PATH

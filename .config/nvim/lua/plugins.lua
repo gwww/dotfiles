@@ -72,7 +72,10 @@ return require('packer').startup(function()
       config = function() require('plugins.fterm') end,
   }
 
+  -- Consider switching to native nvim filetype.lua
+  -- https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
   use 'nathom/filetype.nvim'             -- Detect type of file
+
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
   use 'haya14busa/is.vim'                -- Incremental search improvments

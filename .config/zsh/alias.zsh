@@ -1,3 +1,4 @@
+alias reprofile='source ~/.zshenv; source ~/.zshrc'
 alias _=sudo
 alias d='dirs -v | head -10'
 
@@ -27,6 +28,7 @@ alias l=$ls
 alias ls=$ls
 alias la="$ls -a"
 alias ll="$ls -hl"
+alias lal="$ls -ahl"
 alias lla="$ls -hla"
 alias lrt="$ls -hlart"
 

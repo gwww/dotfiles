@@ -5,6 +5,8 @@
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-messages --glob "!.git/*"'
 export FZF_DEFAULT_OPTS="--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"
 
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+
 export LESS="-RM"
 export LESSHISTFILE=-
 

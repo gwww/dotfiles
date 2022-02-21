@@ -30,6 +30,8 @@ config.window_frame = {
 config.colors = {
   cursor_bg = "#e0e0e0",
   cursor_border = "#e0e0e0",
+
+  background = "#181818",
   foreground = "#e0e0e0",
 
   tab_bar = {

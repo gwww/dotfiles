@@ -8,7 +8,7 @@ g.loaded_python_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 
-cmd 'colorscheme jellybeans-compiled'
+cmd 'colorscheme onedark'
 
 o.termguicolors = true
 o.scrolloff = 8

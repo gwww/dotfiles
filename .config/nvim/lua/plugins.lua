@@ -86,7 +86,8 @@ return require('packer').startup(function()
   use 'ap/vim-css-color'
   use 'wellle/targets.vim'
 
-  ------ Not currently being used
-  -- use 'joshdick/onedark.vim'             -- Theme
-  -- use {'embark-theme/vim', as='embark'}  -- Theme
+  use {
+    'ful1e5/onedark.nvim',
+    config = function() require('plugins.onedark') end
+  }
 end)

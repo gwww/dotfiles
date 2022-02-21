@@ -20,3 +20,5 @@
   path = ~/.config/git/gitconfig.private
 [pull]
 	rebase = false
+[init]
+	defaultBranch = main

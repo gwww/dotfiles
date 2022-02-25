@@ -8,6 +8,7 @@ U.map('n', '<tab>', ':bnext<cr>')       -- Switch buffers
 U.map('n', '<s-tab>', ':bprev<cr>')     -- Switch buffers
 U.map('n', '<leader>c', ':Bdelete<cr>') -- Close buffer
 U.map('n', ';', ':', {silent=false})    -- Easier typing of ':'
+U.map('n', '<enter>', ':noh<enter><cr>')-- Enter key turns off hilighted searches
 U.map('', '<PageUp>', '<C-u>')          -- Normal mode PageUp
 U.map('', '<PageDown>', '<C-d>')        -- Normal mode PageDown
 U.map('i', '<PageUp>', '<C-o><C-u>')    -- Input mode PageUp

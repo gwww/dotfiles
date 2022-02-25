@@ -7,6 +7,8 @@ require('settings')
 require('autocmd')
 require('keybinds')
 
+vim.cmd 'colorscheme jellybeans-compiled'
+
 -- For debugging purpose
 function _G.dump(...)
     local objects = vim.tbl_map(vim.inspect, { ... })

@@ -24,6 +24,7 @@ hi DiffChange         ctermbg=24 guibg=#2B5B77
 hi DiffDelete         ctermfg=16 ctermbg=52 guifg=#40000A guibg=#700009
 hi DiffText           cterm=reverse ctermfg=81 ctermbg=16 gui=reverse guifg=#8fbfdc guibg=#000000
 hi Directory          ctermfg=186 guifg=#dad085
+hi EndOfBuffer        guifg=#101215 guibg=#101215
 hi Error              ctermfg=15 ctermbg=9 guifg=White guibg=Red
 hi ErrorMsg           ctermbg=88 guibg=#902020
 hi FloatShadow        guibg=Black blend=80

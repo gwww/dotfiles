@@ -16,10 +16,7 @@ end)
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  -- use {
-  --   'lewis6991/impatient.nvim',
-  --   config = function() require('impatient') end,
-  -- }
+  -- use {'lewis6991/impatient.nvim', config = function() require('impatient') end}
 
   use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
 
@@ -78,7 +75,7 @@ return require('packer').startup(function()
 
   use 'ConradIrwin/vim-bracketed-paste'  -- No more ':set paste!'
   use 'gwww/vim-bbye'                    -- Delete buffer leaving window structure
-  use 'haya14busa/is.vim'                -- Incremental search improvments
+  -- use 'haya14busa/is.vim'                -- Incremental search improvments
   use 'tpope/vim-commentary'             -- Toggle comments: <visual>gc, gc<motion>
   use 'tpope/vim-endwise'                -- Auto close begin, do, ...
   use 'tpope/vim-surround'               -- Add surround text objects e.g.: cs])
@@ -87,7 +84,7 @@ return require('packer').startup(function()
   use 'wellle/targets.vim'
 
   use {
-    'ful1e5/onedark.nvim',
-    config = function() require('plugins.onedark') end
+    'EdenEast/nightfox.nvim',
+    config = function() require('plugins.nightfox') end
   }
 end)

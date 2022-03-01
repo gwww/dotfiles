@@ -1,0 +1,37 @@
+@-moz-document domain(fastmail.com) {
+    body {
+        /* Theme using a base color, specified using HSL color space */
+        /* These colors are based on using a light theme */
+        --base-color: 39 77%;   /* Hue and Saturation */
+        --base-lightness: 95%;  /* Lightness */
+
+        /* No need to touch colors from here on down, they are based on the base color */
+        --theme-base: hsl(var(--base-color) var(--base-lightness));
+        --theme-dark1: hsl(var(--base-color) calc(var(--base-lightness) - 5%));
+        --theme-dark2: hsl(var(--base-color) calc(var(--base-lightness) - 10%));
+
+        --ui-page-color-bg: var(--theme-base);
+        --ui-page-color-bg-backdrop: var(--theme-dark1);
+        --ui-sidebar-color-bg: var(--theme-base);
+        --ui-sidebar-color-bg-selected: var(--theme-dark2);
+        --ui-page-color-bg-focused: var(--theme-dark1);
+        --ui-button-subtle-color-bg-hover: var(--theme-dark2);
+        --ui-altsurface-color-bg: var(--theme-dark1);
+        --ui-page-color-border-subtle: #ddd;
+    }
+    @media screen {
+        /* Make message viewing and composition more readable */
+        .v-MessageCard, .v-RichText-input {
+            font-size: 115%;
+        }
+    }
+    /* Make the message list a bit more readable */
+    .v-MailboxItem {
+        font-size: 110% !important;
+    }
+
+    /* Tweaks -- make things look a tad nicer */
+    .v-AgendaDay-dateNumber {
+        font-size: 150% !important;
+    }
+}

@@ -7,7 +7,7 @@ require('settings')
 require('autocmd')
 require('keybinds')
 
-vim.cmd 'colorscheme jellybeans-compiled'
+-- vim.cmd 'colorscheme jellybeans-compiled'
 
 -- For debugging purpose
 function _G.dump(...)

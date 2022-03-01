@@ -41,18 +41,7 @@ function _G.__telescope_open(fn)
     })
 end
 
-U.map('n', '<leader>e', "<CMD>lua __telescope_open('find_files')<CR>")
-U.map('n', '<leader>b', "<CMD>lua __telescope_open('file_browser')<CR>")
-U.map('n', '<leader>/', "<CMD>lua __telescope_open('live_grep')<CR>")
-
--- Fuzzy find active buffers
--- U.map('n', "'b", "<CMD>lua __telescope_open('buffers')<CR>")
-
--- Fuzzy find history buffers
--- U.map('n', "'i", "<CMD>lua __telescope_open('oldfiles')<CR>")
-
--- Fuzzy find changed files in git
--- U.map('n', "'c", "<CMD>lua __telescope_open('git_status')<CR>")
-
--- Fuzzy find register
--- U.map('n', "'g", "<CMD>lua __telescope_open('registers')<CR>")
+U.map('n', '<leader>e', "<cmd>lua require('telescope.builtin').find_files()<cr>")
+U.map('n', '<leader>b', "<cmd>lua require('telescope.builtin').buffers()<cr>")
+U.map('n', '<leader>h', "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+U.map('n', '<leader>/', "<cmd>lua require('telescope.builtin').live_grep()<cr>")

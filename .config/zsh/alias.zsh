@@ -37,7 +37,7 @@ alias pdbit='python -m pdb -c continue '
 
 alias plcat='plutil -convert xml1 -o -'
 
-alias cat='bat --style=numbers,header'
+alias cat='bat --paging=always --theme=TwoDark --style=numbers,header'
 alias more=less
 alias please=sudo !!
 alias pu=pushd

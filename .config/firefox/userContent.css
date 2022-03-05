@@ -19,6 +19,9 @@
         --ui-altsurface-color-bg: var(--theme-dark1);
         --ui-page-color-border-subtle: #ddd;
     }
+    span[style*="background-color:rgb(255, 255, 255)"] {
+        background-color: var(--theme-base) !important;
+    }
     @media screen {
         /* Make message viewing and composition more readable */
         .v-MessageCard, .v-RichText-input {

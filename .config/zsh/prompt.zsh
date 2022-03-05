@@ -1,8 +1,9 @@
 local _red="%{\e[0;91m%}"
-local _green="%{\e[0;38;5;46m%}"
+local _green="%{\e[0;38;5;40m%}"
+local _python="%{\e[0;38;5;39m%}"
 local _reset="%{\e[0m%}"
 local _cwd_sep="%{\e[1;38;5;11m%}"
-local _cwd_segment="%{\e[0;38;5;14m%}"
+local _cwd_segment="%{\e[0;38;5;51m%}"
 
 function __prompt_cwd {
   local cwd="%2~"
@@ -14,9 +15,9 @@ function __prompt_git {
   local branch_name="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
   if [[ -n "$branch_name" ]]; then
     if [[ -n "$(git status --porcelain 2> /dev/null)" ]]; then
-      echo -n "$_red$branch_name "
+      echo -n "$_red $branch_name "
     else
-      echo -n "$_green$branch_name "
+      echo -n "$_green $branch_name "
     fi
   fi
 }
@@ -28,7 +29,8 @@ function __prompt_ssh {
 function __prompt_python_venv {
   if [[ -n "$VIRTUAL_ENV" ]]; then
     env_path_list=(${(s:/:)VIRTUAL_ENV})
-    echo -n "$_green(🐍$env_path_list[-2]) "
+    echo -n "$_green$_python $env_path_list[-2]$_green "
+    # echo -n "$_green(🐍$env_path_list[-2]) "
   fi
 }
 

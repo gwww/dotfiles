@@ -18,6 +18,7 @@
         --ui-button-subtle-color-bg-hover: var(--theme-dark2);
         --ui-altsurface-color-bg: var(--theme-dark1);
         --ui-page-color-border-subtle: #ddd;
+        --ui-page-color-bg-selected: var(--theme-dark2)
     }
     span[style*="background-color:rgb(255, 255, 255)"] {
         background-color: var(--theme-base) !important;

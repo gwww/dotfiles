@@ -1,1 +1,1 @@
-#for config (~/.config/zsh/*.env) source $config
+for config (~/.config/zsh/*.env) source $config

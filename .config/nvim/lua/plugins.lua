@@ -85,6 +85,7 @@ return require('packer').startup(function()
 
   use {
     'EdenEast/nightfox.nvim',
+    tag = "v1.0.0",
     config = function() require('plugins.nightfox') end
   }
 end)

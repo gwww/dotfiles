@@ -54,12 +54,18 @@ function _venv_status() {
 function po() {
   if [[ $# = 1 && ${#1} > 1 ]]; then
     if [[ 'activate' =~ "^$1" ]]; then
-      if [ -f .venv/bin/activate ]; then
-        source .venv/bin/activate
-        echo "$fg_bold[green]Activated '$VIRTUAL_ENV'$reset_color"
-      else
-        echo "$fg_bold[red]No virtual environment in this directory.$reset_color"
-      fi
+      local script="venv/bin/activate"
+      local git="$(git rev-parse --show-toplevel 2> /dev/null)/"
+      local VENV_DIRS=(".$script" "$script" "$git.$script" "$git$script")
+      typeset -U VENV_DIRS # remove duplicates from path
+      for dir in $VENV_DIRS; do
+        if [ -f $dir ]; then
+          source $dir
+          echo "$fg_bold[green]Activated '$VIRTUAL_ENV'$reset_color"
+          return
+        fi
+      done
+      echo "$fg_bold[red]No virtual environment found.$reset_color"
 
     elif [[ 'deactivate' =~ "^$1" ]]; then
       local s=$(_venv_status)

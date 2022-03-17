@@ -5,6 +5,5 @@ coreenv   ~/Development/automation/core/homeassistant/components/environment_can
 elk       ~/Development/automation/elkm1
 pyaml     ~/Development/automation/config/pyaml
 upb       ~/Development/automation/upb-lib
-westmin   ~/Development/automation/config/westmin
 vim       ~/.config/nvim
 zsh       ~/.config/zsh

@@ -1,21 +1,19 @@
-local nightfox = require("nightfox")
-
-nightfox.setup {
-  fox = "nightfox",
-  styles = {
-    comments = "italic",
-    -- keywords = "bold",
-    -- functions = "italic,bold",
-  },
+require("nightfox").setup {
   options = {
+    styles = {
+      comments = "italic",
+      -- keywords = "bold",
+      -- functions = "italic,bold",
+    },
   },
-  colors = {
-    bg = "#111720",
-    bg_highlight = "#131a24",
+  pallets = {
+    nightfox = {
+      bg1 = "#111720",
+      bg3 = "#1b2533",
+    },
   },
-  hlgroups = {
+  groups = {
   },
 }
 
--- vim.cmd "colorscheme nightfox"
-nightfox.load()
+vim.cmd "colorscheme nightfox"

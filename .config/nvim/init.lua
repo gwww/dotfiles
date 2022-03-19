@@ -1,11 +1,13 @@
 -- Glenn nvim config.
--- Based off of: https://github.com/numToStr/dotfiles
+-- Based very loosely off of: https://github.com/numToStr/dotfiles
+
+pcall(require, "impatient")
 
 require('builtins')
-require('plugins')
+require('keybinds') -- Call early to set leader
 require('settings')
+require('plugins')
 require('autocmd')
-require('keybinds')
 
 -- vim.cmd 'colorscheme jellybeans-compiled'
 

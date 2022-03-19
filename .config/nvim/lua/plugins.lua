@@ -12,7 +12,7 @@ require("au2").group("PackerGroup", function(grp)
     grp.BufWritePost = { "plugins.lua", "source <afile> | PackerCompile" }
 end)
 
-return require("packer").startup(function()
+return require("packer").startup(function(use)
     use {
         {"nvim-telescope/telescope.nvim", config=function() require("plugins.telescope") end,
           requires="nvim-lua/plenary.nvim"},
@@ -24,6 +24,7 @@ return require("packer").startup(function()
     use  "ggandor/lightspeed.nvim"
     use  "gwww/vim-bbye"
     use {"kyazdani42/nvim-web-devicons", config=function() require("nvim-web-devicons").setup() end}
+    use  "lewis6991/impatient.nvim"
     -- Consider switching to native nvim filetype.lua
     -- https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
     use  "nathom/filetype.nvim"

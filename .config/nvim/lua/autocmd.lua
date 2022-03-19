@@ -8,7 +8,6 @@ au2.group("MyFileTypes", {
 })
 
 au2.TextYankPost = function()
-    -- vim.highlight.on_yank({higroup="Visual", timeout=500})
     vim.highlight.on_yank({timeout=400})
 end
 

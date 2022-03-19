@@ -14,11 +14,6 @@ end)
 
 return require("packer").startup(function()
     use {
-        {"nvim-treesitter/nvim-treesitter", config=function() require("plugins.treesitter") end, run=":TSUpdate"},
-        {"nvim-treesitter/nvim-treesitter-textobjects", after="nvim-treesitter"},
-        {"nvim-treesitter/nvim-treesitter-refactor", after="nvim-treesitter"},
-    }
-    use {
         {"nvim-telescope/telescope.nvim", config=function() require("plugins.telescope") end,
           requires="nvim-lua/plenary.nvim"},
         {"nvim-telescope/telescope-fzf-native.nvim", config=function() require("telescope").load_extension("fzf") end,
@@ -36,6 +31,9 @@ return require("packer").startup(function()
     use {"neovim/nvim-lspconfig", config=function() require("plugins.lsp-config") end}
     use {"numToStr/FTerm.nvim", config=function() require("plugins.fterm") end}
     use {"nvim-lualine/lualine.nvim", config=function() require("plugins.lualine") end}
+    use {"nvim-treesitter/nvim-treesitter", config=function() require("plugins.treesitter") end, run=":TSUpdate"}
+    use {"nvim-treesitter/nvim-treesitter-textobjects", after="nvim-treesitter"}
+    use {"nvim-treesitter/nvim-treesitter-refactor", after="nvim-treesitter"}
     use {"TimUntersberger/neogit", requires="nvim-lua/plenary.nvim"}
     use  "tpope/vim-commentary"
     use  "tpope/vim-endwise"

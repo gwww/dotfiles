@@ -10,6 +10,7 @@ require("nightfox").setup {
     nightfox = {
       bg1 = "#111720",
       bg3 = "#1b2533",
+      comment = "#7687a0",
     },
   },
   groups = {

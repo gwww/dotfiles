@@ -9,7 +9,8 @@ ins = hs.inspect.inspect -- ease typing when debugging
 
 -- CapsLock is mapped to F20 using /usr/bin/hidutil
 hyper.init('F20')
-hyper.addHook(nil, function(presses) hyper.escape(presses) end)
+-- hyper.addHook(nil, function(presses) hyper.escape(presses) end)
+hyper.addHook(nil, function(presses) end) -- ignore hyper key press/realease
 hyper.bind({
   -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
   {key='a', action=function() sl.smartLaunch("ForkLift") end},

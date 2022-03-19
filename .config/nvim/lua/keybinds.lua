@@ -1,6 +1,6 @@
 local U = require('utils')
 
-U.map('n', ',', '<Nop>') -- Curious??
+-- U.map('n', ',', '<Nop>')
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
@@ -16,6 +16,8 @@ U.map('i', '<PageDown>', '<C-o><C-d>')  -- Input mode PageDown
 U.map('n', '<leader>w', ':update<CR>')  -- Save this buffer
 U.map('n', '<leader>W', ':wall<CR>')    -- Save all buffers
 U.map('n', '<leader>1', "<C-w>o")       -- Close window splits
+U.map('n', '<leader>y', '"+yy')         -- Normal mode yank into clipboard
+U.map('v', '<leader>y', '"+y')          -- Visual mode yank into clipboard
 
 -- Better handling of movement on word wrap
 U.map('n', 'j', "v:count==0 ? 'gj' : 'j'", {expr = true})

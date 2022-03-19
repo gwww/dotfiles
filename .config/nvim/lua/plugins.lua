@@ -21,7 +21,6 @@ return require("packer").startup(function()
         },
         {"nvim-telescope/telescope-symbols.nvim", after="telescope.nvim"}
     }
-    use {"EdenEast/nightfox.nvim", config=function() require("plugins.nightfox") end}
     use  "ggandor/lightspeed.nvim"
     use  "gwww/vim-bbye"
     use {"kyazdani42/nvim-web-devicons", config=function() require("nvim-web-devicons").setup() end}
@@ -42,6 +41,7 @@ return require("packer").startup(function()
     use  "wbthomason/packer.nvim"
     use  "wellle/targets.vim"
     use {"windwp/nvim-autopairs", config=function() require("nvim-autopairs").setup {} end}
+    use {"EdenEast/nightfox.nvim", config=function() require("plugins.nightfox") end}
 
     if packer_bootstrap then
         require("packer").sync()

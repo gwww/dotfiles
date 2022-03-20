@@ -9,7 +9,7 @@ require('settings')
 require('plugins')
 require('autocmd')
 
--- vim.cmd 'colorscheme jellybeans-compiled'
+vim.cmd "colorscheme nightfox"
 
 -- For debugging purpose
 function _G.dump(...)

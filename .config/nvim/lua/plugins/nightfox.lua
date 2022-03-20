@@ -16,5 +16,3 @@ require("nightfox").setup {
   groups = {
   },
 }
-
-vim.cmd "colorscheme nightfox"

@@ -13,27 +13,30 @@ require("au2").group("PackerGroup", function(grp)
 end)
 
 return require("packer").startup(function(use)
-    use {
-        {"nvim-telescope/telescope.nvim", config=function() require("plugins.telescope") end,
-          requires="nvim-lua/plenary.nvim"},
-        {"nvim-telescope/telescope-fzf-native.nvim", config=function() require("telescope").load_extension("fzf") end,
-          run="make", after="telescope.nvim",
-        },
-        {"nvim-telescope/telescope-symbols.nvim", after="telescope.nvim"}
-    }
     use  "ggandor/lightspeed.nvim"
     use  "gwww/vim-bbye"
     use {"kyazdani42/nvim-web-devicons", config=function() require("nvim-web-devicons").setup() end}
     use  "lewis6991/impatient.nvim"
+
     -- Consider switching to native nvim filetype.lua
     -- https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
     use  "nathom/filetype.nvim"
+
     use {"neovim/nvim-lspconfig", config=function() require("plugins.lsp-config") end}
+
     use {"numToStr/FTerm.nvim", config=function() require("plugins.fterm") end}
     use {"nvim-lualine/lualine.nvim", config=function() require("plugins.lualine") end}
+
+    use {"nvim-telescope/telescope.nvim", requires="nvim-lua/plenary.nvim",
+          config=function() require("plugins.telescope") end}
+    use {"nvim-telescope/telescope-fzf-native.nvim", run="make", after="telescope.nvim",
+          config=function() require("telescope").load_extension("fzf") end}
+    use {"nvim-telescope/telescope-symbols.nvim", after="telescope.nvim"}
+
     use {"nvim-treesitter/nvim-treesitter", config=function() require("plugins.treesitter") end, run=":TSUpdate"}
     use {"nvim-treesitter/nvim-treesitter-textobjects", after="nvim-treesitter"}
     use {"nvim-treesitter/nvim-treesitter-refactor", after="nvim-treesitter"}
+
     use {"TimUntersberger/neogit", requires="nvim-lua/plenary.nvim"}
     use  "tpope/vim-commentary"
     use  "tpope/vim-endwise"
@@ -42,6 +45,7 @@ return require("packer").startup(function(use)
     use  "wbthomason/packer.nvim"
     use  "wellle/targets.vim"
     use {"windwp/nvim-autopairs", config=function() require("nvim-autopairs").setup {} end}
+
     use {"EdenEast/nightfox.nvim", config=function() require("plugins.nightfox") end}
 
     if packer_bootstrap then

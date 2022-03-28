@@ -6,4 +6,5 @@ elk       ~/Development/automation/elkm1
 pyaml     ~/Development/automation/config/pyaml
 upb       ~/Development/automation/upb-lib
 vim       ~/.config/nvim
+wezterm   ~/.config/wezterm
 zsh       ~/.config/zsh

@@ -27,19 +27,12 @@ require('telescope').setup {
     extensions = {
         fzf = {
             fuzzy = true,
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = 'smart_case', -- "smart_case" | "ignore_case" | "respect_case"
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = 'smart_case', -- smart_case | ignore_case | respect_case
         },
     },
 }
-
-function _G.__telescope_open(fn)
-    U.move_cursor_from_tree()
-    finders[fn]({
-        hidden = true,
-    })
-end
 
 U.map('n', '<leader>e', "<cmd>lua require('telescope.builtin').find_files()<cr>")
 U.map('n', '<leader>b', "<cmd>lua require('telescope.builtin').buffers()<cr>")

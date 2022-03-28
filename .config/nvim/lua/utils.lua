@@ -2,15 +2,30 @@ local api = vim.api
 local cmd = api.nvim_command
 
 local U = {}
+U.mappings = {}
+
+function U.nvim_set_keymap_shim(mode, lhs, rhs, options)
+    local key = mode .. lhs
+    if U.mappings[key] then
+      print("Duplicate key mapping: ", key, rhs)
+    else
+      U.mappings[key] = 1
+    end
+    U.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+-- Create a shim so that nvim_set_keymap can be wrapped
+function U.setup_nvim_set_keymap_shim(mode, key, result, opts)
+  U.nvim_set_keymap = _G.vim.api.nvim_set_keymap
+  _G.vim.api.nvim_set_keymap = U.nvim_set_keymap_shim
+end
 
 -- Key mapping
 function U.map(mode, key, result, opts)
     local options = { noremap = true, silent = true, expr = false }
-
     if opts then
         options = vim.tbl_extend('keep', opts, options)
     end
-
     api.nvim_set_keymap(mode, key, result, options)
 end
 

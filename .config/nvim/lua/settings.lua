@@ -1,5 +1,3 @@
-local U = require('utils')
-
 local cmd, g, o = vim.cmd, vim.g, vim.opt
 
 g.loaded_node_provider = 0
@@ -37,6 +35,7 @@ o.list = true                    -- Show some invisible characters
 o.whichwrap:append("<,>,[,]")
 o.listchars = 'tab:→ ,nbsp:␣,trail:•'
 o.wildmode = {"longest:full", "full"} -- Command-line completion mode
+o.wildignorecase = true
 
 _G.P = function(v)
   print(vim.inspect(v))

@@ -3,7 +3,7 @@ local cmd = vim.cmd
 
 au2.group("MyFileTypes", {
     {"FileType", "crontab", "setlocal nobackup nowritebackup"},
-    {"FileType", "lua",     "setlocal shiftwidth=2"},
+    {"FileType", "lua",     "setlocal shiftwidth=4"},
     {"FileType", "yaml",    "setlocal foldmethod=indent"},
 })
 

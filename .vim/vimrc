@@ -242,8 +242,8 @@ imap <PageDown> <C-O><C-D>
 
 "------------------------------------------------------------
 " Colour {{{1
-colorscheme glenn
-"colorscheme jellybeans
+"colorscheme glenn
+colorscheme jellybeans
 hi link htmlLink NONE
 hi link htmlItalic NONE
 "hi Search cterm=NONE ctermfg=251 ctermbg=31

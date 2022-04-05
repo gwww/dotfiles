@@ -1,7 +1,13 @@
-require("null-ls").setup({
+local U = require("utils")
+local nls = require("null-ls")
+
+nls.setup({
     sources = {
-        require("null-ls").builtins.formatting.stylua,
-        require("null-ls").builtins.diagnostics.eslint,
-        require("null-ls").builtins.completion.spell,
+        nls.builtins.formatting.stylua,
+        nls.builtins.formatting.black,
+        nls.builtins.formatting.isort,
+        -- nls.builtins.completion.spell,
     },
 })
+
+U.map("n", "<leader>nf", "<cmd>lua vim.lsp.buf.formatting_sync()<cr>")

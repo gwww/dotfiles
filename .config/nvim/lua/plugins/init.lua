@@ -16,9 +16,15 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 end
 
 -- Automatically run :PackerCompile whenever plugins.lua is updated
-require("au2").group("PackerGroup", function(grp)
-    grp.BufWritePost = { "*/nvim/lua/plugins/init.lua", "source <afile> | PackerCompile" }
-end)
+-- require("au2").group("PackerGroup", function(grp)
+--     grp.BufWritePost = { "*/nvim/lua/plugins/init.lua", "source <afile> | PackerCompile" }
+-- end)
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = vim.api.nvim_create_augroup("gwww", { clear = false }),
+    pattern = "*/nvim/lua/plugins/init.lua",
+    command = "source <afile> | PackerCompile",
+})
 
 return require("packer").startup({
     -- config = {
@@ -79,7 +85,7 @@ return require("packer").startup({
 
         -- Consider switching to native nvim filetype.lua in nvim 0.7
         -- https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
-        use("nathom/filetype.nvim")
+        -- use("nathom/filetype.nvim")
 
         -- Colourscheme
         use({

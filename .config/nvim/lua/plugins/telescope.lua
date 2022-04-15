@@ -2,6 +2,15 @@ local U = require("utils")
 local finders = require("telescope.builtin")
 local actions = require("telescope.actions")
 
+-- Global for now; fix when 0.7 comes out
+glenn_smart_find_files = function()
+    local opts = {}
+    local ok = pcall(require("telescope.builtin").git_files, opts)
+    if not ok then
+        require("telescope.builtin").find_files(opts)
+    end
+end
+
 require("telescope").setup({
     defaults = {
         prompt_prefix = " λ ",
@@ -34,7 +43,15 @@ require("telescope").setup({
     },
 })
 
-U.map("n", "<leader>e", "<cmd>lua require('telescope.builtin').find_files()<cr>")
-U.map("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>")
-U.map("n", "<leader>h", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
-U.map("n", "<leader>/", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+U.map("n", "<leader>e", function()
+    require("telescope.builtin").find_files()
+end)
+U.map("n", "<leader>b", function()
+    require("telescope.builtin").buffers()
+end)
+U.map("n", "<leader>h", function()
+    require("telescope.builtin").help_tags()
+end)
+U.map("n", "<leader>/", function()
+    require("telescope.builtin").live_grep()
+end)

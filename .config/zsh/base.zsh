@@ -19,6 +19,9 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 elif [[ -x /usr/local/bin/brew ]]; then
     eval "$(/usr/local/bin/brew shellenv)"
 fi
+
+eval "$(zoxide init zsh)"
+
 rehash
 
 export ASDF_DATA_DIR=~/.local/share/asdf

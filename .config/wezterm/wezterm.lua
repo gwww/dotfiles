@@ -11,6 +11,8 @@ config.swallow_mouse_click_on_pane_focus = true
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
 
+config.enable_csi_u_key_encoding = true
+
 config.initial_rows = 50
 config.initial_cols = 180
 

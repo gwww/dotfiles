@@ -2,7 +2,8 @@
   ui = auto
 [core]
   autocrlf = input
-  pager = less -F -X
+  ; pager = less -F -X
+    pager = delta --syntax-theme zenburn
   editor = nvim
 [alias]
   co = checkout
@@ -19,6 +20,16 @@
 [include]
   path = ~/.config/git/gitconfig.private
 [pull]
-	rebase = false
+  rebase = false
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  line-numbers = true
+  side-by-side = true
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default

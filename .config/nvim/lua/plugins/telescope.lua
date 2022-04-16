@@ -1,4 +1,4 @@
-local U = require("utils")
+local map = require("utils").map
 local finders = require("telescope.builtin")
 local actions = require("telescope.actions")
 
@@ -43,15 +43,15 @@ require("telescope").setup({
     },
 })
 
-U.map("n", "<leader>e", function()
+map("n", "<leader>e", function()
     require("telescope.builtin").find_files()
 end)
-U.map("n", "<leader>b", function()
+map("n", "<leader>b", function()
     require("telescope.builtin").buffers()
 end)
-U.map("n", "<leader>h", function()
+map("n", "<leader>h", function()
     require("telescope.builtin").help_tags()
 end)
-U.map("n", "<leader>/", function()
+map("n", "<leader>/", function()
     require("telescope.builtin").live_grep()
 end)

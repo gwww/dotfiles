@@ -1,9 +1,11 @@
 -- Configuring lsp servers
-local U = require("utils")
+local map = require("utils").map
 
 require("lspconfig").pyright.setup({
     on_attach = function()
-        U.map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", { buffer = 0 })
+        map("n", "K", function()
+            vim.lsp.buf.hover()
+        end, { buffer = true })
     end,
     flags = { debounce_text_changes = 300 },
     settings = {

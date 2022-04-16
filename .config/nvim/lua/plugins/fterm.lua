@@ -1,10 +1,10 @@
-local U = require("utils")
+local map = require("utils").map
 
 require("FTerm").setup({ dimensions = { height = 0.9, width = 0.9 } })
 
-U.map("n", "<leader>t", "<CMD>lua require('FTerm').toggle()<CR>")
-U.map(
-    "n",
-    "<leader>g",
-    "<CMD>lua require('FTerm'):new({cmd = 'lazygit', dimensions={height=0.9,width=0.9}}):open()<CR>"
-)
+map("n", "<leader>t", function()
+    require("FTerm").toggle()
+end)
+map("n", "<leader>g", function()
+    require("FTerm"):new({ cmd = "lazygit", dimensions = { height = 0.9, width = 0.9 } }):open()
+end)

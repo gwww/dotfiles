@@ -1,4 +1,4 @@
-local U = require("utils")
+local map = require("utils").map
 local nls = require("null-ls")
 
 nls.setup({
@@ -11,4 +11,6 @@ nls.setup({
     },
 })
 
-U.map("n", "<leader>nf", "<cmd>lua vim.lsp.buf.formatting_sync()<cr>")
+map("n", "<leader>nf", function()
+    vim.lsp.buf.formatting_sync()
+end)

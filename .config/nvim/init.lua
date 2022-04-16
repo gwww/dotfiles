@@ -7,6 +7,7 @@ function _G.dump(...)
     print(unpack(objects))
 end
 
+-- Compiled cache of plugins
 pcall(require, "impatient")
 
 require("builtins")

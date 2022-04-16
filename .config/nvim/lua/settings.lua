@@ -1,11 +1,5 @@
 local cmd, g, o = vim.cmd, vim.g, vim.opt
 
-g.loaded_node_provider = 0
-g.loaded_perl_provider = 0
-g.loaded_python_provider = 0
-g.loaded_python3_provider = 0
-g.loaded_ruby_provider = 0
-
 o.termguicolors = true
 o.scrolloff = 8
 o.scrolloff = 4

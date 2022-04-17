@@ -3,13 +3,23 @@
 cd ~
 
 # Create your config here...
-dirs_to_search_recursively=(
+
+# This is a list of dirs/files to find files that are in `yadm list`
+find_existing_recursively=(
     bin
     .config
     .vim
 )
 
+# As above but don't search recursively
+find_existing_nonrecursively=(
+    .
+)
+
+# A list of dirs/files that will be ignored if not found in `yadm list`
 ignore_files_and_dirs=(
+    .CFUserTextEncoding
+    .DS_Store
     .config/nvim/plugin/packer_compiled.lua
     .config/gh
     .config/git/gitconfig.private
@@ -19,7 +29,9 @@ ignore_files_and_dirs=(
 
 # Code, don't change from this point
 find_list=$(mktemp -t find_list)
-find ${dirs_to_search_recursively[*]} -type f | sort >$find_list
+find ${find_existing_recursively[*]} -type f >$find_list
+find ${find_existing_nonrecursively[*]} -maxdepth 1 -type f | awk '{sub("^./",""); print}' >>$find_list
+sort -o $find_list $find_list
 
 yadm_list=$(mktemp -t yadm_list)
 yadm list >$yadm_list

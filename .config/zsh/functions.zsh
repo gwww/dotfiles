@@ -98,35 +98,35 @@ function po() {
   fi
 }
 
-SHORTCUTS=~/.config/zsh/j_dirs.txt
-
-function __read_jump_dirs() {
-  unset j_dirs
-  declare -gA j_dirs
-  while read shortcut jump_dir venv; do
-    j_dirs[$shortcut]="$jump_dir $venv"
-  done <$SHORTCUTS
-}
-__read_jump_dirs
-
-function j() {
-  if [[ -z $j_dirs[$1] ]]; then
-    echo "$fg_bold[red]Unknown shortcut '$1'; use one of: ${(k)j_dirs}$reset_color"
-    return 1
-  fi
-  eval cd $j_dirs[$1]
-  return 0
-}
-
-function ja() {
-  for dir in "$@"; do
-    j $dir
-    [[ $? == 0 ]] && [[ -f .venv/bin/activate ]] && source .venv/bin/activate
-  done
-}
-
-function jedit() {
-  vi $SHORTCUTS
-  echo "Sourcing new shortcuts..."
-  __read_jump_dirs
-}
+# SHORTCUTS=~/.config/zsh/j_dirs.txt
+#
+# function __read_jump_dirs() {
+#   unset j_dirs
+#   declare -gA j_dirs
+#   while read shortcut jump_dir venv; do
+#     j_dirs[$shortcut]="$jump_dir $venv"
+#   done <$SHORTCUTS
+# }
+# __read_jump_dirs
+#
+# function j() {
+#   if [[ -z $j_dirs[$1] ]]; then
+#     echo "$fg_bold[red]Unknown shortcut '$1'; use one of: ${(k)j_dirs}$reset_color"
+#     return 1
+#   fi
+#   eval cd $j_dirs[$1]
+#   return 0
+# }
+#
+# function ja() {
+#   for dir in "$@"; do
+#     j $dir
+#     [[ $? == 0 ]] && [[ -f .venv/bin/activate ]] && source .venv/bin/activate
+#   done
+# }
+#
+# function jedit() {
+#   vi $SHORTCUTS
+#   echo "Sourcing new shortcuts..."
+#   __read_jump_dirs
+# }

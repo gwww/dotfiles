@@ -18,6 +18,8 @@ alias gst='git status'
 
 alias lg='lazygit'
 
+alias j=z
+
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias history='fc -l 1'
 

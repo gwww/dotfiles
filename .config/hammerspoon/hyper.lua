@@ -7,45 +7,53 @@
 -- Ideas for `hyper` came from: https://github.com/evantravers/hammerspoon-config
 --
 
-local module = {}
+local M = {}
 
 -- Helper
-module.escape = function(presses)
-  if presses == 0 then hs.eventtap.keyStroke('', 'escape', 100000) end
+M.escape = function(presses)
+    if presses == 0 then
+        hs.eventtap.keyStroke("", "escape", 100000)
+    end
 end
 
-module.init = function(modal_key)
-  local modalPressed = function()
-    module._modal:enter()
-    module._presses = 0
-    hs.fnutils.each(module._press_hooks, function(hook) hook() end)
-  end
+M.init = function(modal_key)
+    local modalPressed = function()
+        M._modal:enter()
+        M._presses = 0
+        hs.fnutils.each(M._press_hooks, function(hook)
+            hook()
+        end)
+    end
 
-  local modalReleased = function()
-    module._modal:exit()
-    hs.fnutils.each(module._release_hooks, function(hook) hook(module._presses) end)
-  end
+    local modalReleased = function()
+        M._modal:exit()
+        hs.fnutils.each(M._release_hooks, function(hook)
+            hook(M._presses)
+        end)
+    end
 
-  module._presses, module._press_hooks, module._release_hooks = 0, {}, {}
-  module._modal = hs.hotkey.modal.new({}, nil)
-  hs.hotkey.bind({}, modal_key, modalPressed, modalReleased)
+    M._presses, M._press_hooks, M._release_hooks = 0, {}, {}
+    M._modal = hs.hotkey.modal.new({}, nil)
+    hs.hotkey.bind({}, modal_key, modalPressed, modalReleased)
 end
 
-module.addHook = function(press, release)
-  if press then table.insert(module._press_hooks, press) end
-  if release then table.insert(module._release_hooks, release) end
+M.addHook = function(press, release)
+    if press then
+        table.insert(M._press_hooks, press)
+    end
+    if release then
+        table.insert(M._release_hooks, release)
+    end
 end
 
-module.bind = function(bindings)
-  bindings = bindings.key and {bindings} or bindings
-  hs.fnutils.map(bindings, function(binding)
-    module._modal:bind(binding.modifiers, binding.key,
-      function()
-        module._presses = module._presses + 1
-        binding.action()
-      end
-    )
-  end)
+M.bind = function(bindings)
+    bindings = bindings.key and { bindings } or bindings
+    hs.fnutils.map(bindings, function(binding)
+        M._modal:bind(binding.modifiers, binding.key, function()
+            M._presses = M._presses + 1
+            binding.action()
+        end)
+    end)
 end
 
-return module
+return M

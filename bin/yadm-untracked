@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+cd ~
+
+dirs_to_search_recursively=(.config bin .vim)
+ignore_files=(
+    .config/nvim/plugin/packer_compiled.lua
+    .config/git/gitconfig.private
+    .vim/autoload/plug.vim
+)
+
+find_list=$(mktemp -t find_list)
+yadm_list=$(mktemp -t yadm_list)
+
+find ${dirs_to_search_recursively[*]} -type f | sort >$find_list
+
+yadm list >$yadm_list
+printf "%s\n" "${ignore_files[@]}" >>$yadm_list
+sort -o $yadm_list $yadm_list
+
+comm -23 $find_list $yadm_list
+
+rm -f $find_list $yadm_list

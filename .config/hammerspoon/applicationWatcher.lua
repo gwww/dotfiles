@@ -10,7 +10,7 @@ local applicationWatcher = function(appName, eventType, appObject)
         elseif eventType == hs.application.watcher.activated then
             if moveMe then
                 moveMe = false
-                for i = 1, 40 do
+                for _ = 1, 40 do
                     if appObject:mainWindow() then
                         break
                     end

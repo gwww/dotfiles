@@ -35,7 +35,7 @@ config.colors = {
   cursor_bg = "#e0e0e0",
   cursor_border = "#e0e0e0",
 
-  background = "#181818",
+  background = "#151515",
   foreground = "#e0e0e0",
 
   tab_bar = {
@@ -46,7 +46,7 @@ config.colors = {
     },
     inactive_tab = {
       fg_color = "#a0a0a0",
-      bg_color = "#2b2042",
+      bg_color = "#202020",
     },
   },
 }

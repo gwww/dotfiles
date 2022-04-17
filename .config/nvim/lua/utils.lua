@@ -1,5 +1,3 @@
-local api = vim.api
-
 local U = {}
 
 -- vim.keymap.set got it almost perfect, except for default for silent

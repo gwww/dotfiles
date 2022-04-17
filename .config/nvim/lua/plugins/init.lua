@@ -21,7 +21,7 @@ end
 -- end)
 
 vim.api.nvim_create_autocmd("BufWritePost", {
-    group = vim.api.nvim_create_augroup("gwww", { clear = false }),
+    group = vim.api.nvim_create_augroup("Packer", { clear = false }),
     pattern = "*/nvim/lua/plugins/init.lua",
     command = "source <afile> | PackerCompile",
 })
@@ -83,10 +83,6 @@ return require("packer").startup({
             end,
         })
 
-        -- Consider switching to native nvim filetype.lua in nvim 0.7
-        -- https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
-        -- use("nathom/filetype.nvim")
-
         -- Colourscheme
         use({
             "EdenEast/nightfox.nvim",
@@ -139,7 +135,7 @@ return require("packer").startup({
         })
 
         -- Git
-        use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+        -- use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
 
         -- Good ole vim plugins
         use({ "gwww/vim-bbye" })

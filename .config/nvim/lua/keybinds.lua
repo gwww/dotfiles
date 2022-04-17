@@ -1,6 +1,6 @@
 local map = require("utils").map
 
--- U.map('n', ',', '<Nop>')
+map({ "n", "v" }, ",", "<Nop>")
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 
@@ -43,3 +43,9 @@ map("v", "<", "<gv")
 
 -- From ThePrimeagen - don't understand why its useful yet
 map("x", "<leader>p", '"_dP')
+
+-- Diagnostics
+map("n", "<leader>d", vim.diagnostic.setloclist)
+map("n", "[d", vim.diagnostic.goto_prev)
+map("n", "]d", vim.diagnostic.goto_next)
+map("n", "<M-k>", vim.lsp.buf.signature_help)

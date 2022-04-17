@@ -43,9 +43,7 @@ require("telescope").setup({
     },
 })
 
-map("n", "<leader>e", function()
-    require("telescope.builtin").find_files()
-end)
+map("n", "<leader>e", require("telescope.builtin").find_files)
 map("n", "<leader>b", function()
     require("telescope.builtin").buffers()
 end)

@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 
-cd ~
-
 # Create your config here...
 
-# This is a list of dirs/files to find files that are in `yadm list`
-find_existing_recursively=(
+# Using `find` this list contains directories or files that are
+# expected to be found in a `yadm list -a`. `find` will search
+# recursively through these to produce a list of files.
+yadm_tracked_recursively=(
     bin
     .config
     .vim
 )
 
 # As above but don't search recursively
-find_existing_nonrecursively=(
-    .
+yadm_tracked_nonrecursively=(
+    ~
 )
 
 # A list of dirs/files that will be ignored if not found in `yadm list`
+# Dirs are recursively searched for files. i.e.: this list of files are
+# OK to be untracked by `yadm`.
 ignore_files_and_dirs=(
     .CFUserTextEncoding
     .DS_Store
@@ -26,11 +28,18 @@ ignore_files_and_dirs=(
     .vim/autoload/plug.vim
 )
 
-
 # Code, don't change from this point
+
+cd $HOME
+
 find_list=$(mktemp -t find_list)
-find ${find_existing_recursively[*]} -type f >$find_list
-find ${find_existing_nonrecursively[*]} -maxdepth 1 -type f | awk '{sub("^./",""); print}' >>$find_list
+find ${yadm_tracked_recursively[*]} -type f >$find_list
+find ${yadm_tracked_nonrecursively[*]} -maxdepth 1 -type f | \
+    awk "{ \
+        sub(\"^\./\", \"\"); \
+        sub(\"^$HOME/\", \"\"); \
+        print \
+    }" >>$find_list
 sort -o $find_list $find_list
 
 yadm_list=$(mktemp -t yadm_list)
@@ -38,7 +47,7 @@ yadm list >$yadm_list
 find ${ignore_files_and_dirs[*]} -type f >>$yadm_list
 sort -o $yadm_list $yadm_list
 
-# Find the files not in `yadm list`
+# Show the files not in `yadm list`
 comm -23 $find_list $yadm_list
 
 rm -f $find_list $yadm_list

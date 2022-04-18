@@ -48,6 +48,6 @@ find ${ignore_files_and_dirs[*]} -type f >>$yadm_list
 sort -o $yadm_list $yadm_list
 
 # Show the files not in `yadm list`
-comm -23 $find_list $yadm_list
+comm -23 $find_list $yadm_list | awk '{sub("^", "~/"); print}'
 
 rm -f $find_list $yadm_list

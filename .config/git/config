@@ -1,35 +1,31 @@
 [color]
-  ui = auto
+    ui = auto
 [core]
-  autocrlf = input
-  ; pager = less -F -X
+    autocrlf = input
+    ; pager = less -F -X
     pager = delta --syntax-theme zenburn
-  editor = nvim
+    editor = nvim
 [alias]
-  co = checkout
-  ci = commit
-  st = status
-  br = branch
-  hist = log --pretty=format:'%C(auto)%h %ad | %s%d [%an]' --graph --date=short
-  type = cat-file -t
-  dump = cat-file -p
-  dsf = "!f() { [ \"$GIT_PREFIX\" != \"\"  ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX;  }; f"
-
+    type = cat-file -t
+    dump = cat-file -p
+    dsf = "!f() { [ \"$GIT_PREFIX\" != \"\"  ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX;  }; f"
+    hist = log --pretty=format:'%C(auto)%h %ad | %s%d [%an]' --graph --date=short
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset [%an]' --abbrev-commit --date=relative
 [push]
-  default = simple
+    default = simple
 [include]
-  path = ~/.config/git/gitconfig.private
+    path = ~/.config/git/gitconfig.private
 [pull]
-  rebase = false
+    rebase = true
 [init]
-  defaultBranch = main
+    defaultBranch = main
 [interactive]
-  diffFilter = delta --color-only
+    diffFilter = delta --color-only
 [delta]
-  navigate = true  # use n and N to move between diff sections
-  line-numbers = true
-  side-by-side = true
+    navigate = true  # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = true
 [merge]
-  conflictstyle = diff3
+    conflictStyle = diff3
 [diff]
-  colorMoved = default
+    colorMoved = default

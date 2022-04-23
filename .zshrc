@@ -1,1 +1,1 @@
-for config (~/.config/zsh/*.zsh) source $config
+for config (~/.config/zsh/rc.*) source $config

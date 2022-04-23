@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Enable up/down arrow to search history based on what is already typed
 # Cursor placed at end of line
 autoload -U up-line-or-beginning-search

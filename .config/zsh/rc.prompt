@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 local _red="%{\e[0;91m%}"
 local _green="%{\e[0;38;5;40m%}"
 local _python="%{\e[0;38;5;39m%}"

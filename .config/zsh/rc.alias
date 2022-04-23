@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 alias reprofile='source ~/.zshenv; source ~/.zshrc'
 alias _=sudo
 alias d='dirs -v | head -10'
@@ -17,8 +19,6 @@ alias ghi='git hist'
 alias gst='git status'
 
 alias lg='lazygit'
-
-alias j=z
 
 alias grep='grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 alias history='fc -l 1'

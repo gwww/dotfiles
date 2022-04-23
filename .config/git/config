@@ -9,8 +9,8 @@
     type = cat-file -t
     dump = cat-file -p
     dsf = "!f() { [ \"$GIT_PREFIX\" != \"\"  ] && cd "$GIT_PREFIX"; git diff --color $@ | diff-so-fancy | less --tabs=4 -RFX;  }; f"
-    hist = log --pretty=format:'%C(auto)%h %ad | %s%d [%an]' --graph --date=short
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset [%an]' --abbrev-commit --date=relative
+    hist = log --pretty=format:'%C(auto)%h %ad %s%d [%an]' --graph --date=short
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%an]%Creset' --abbrev-commit --date=relative
 [push]
     default = simple
 [include]

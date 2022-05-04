@@ -12,6 +12,8 @@ export POETRY_VIRTUALENVS_IN_PROJECT=true
 export LESS="-RMXF"
 export LESSHISTFILE=-
 
+export HOMEBREW_NO_ENV_HINTS=1
+
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 

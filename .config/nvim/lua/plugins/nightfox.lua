@@ -8,14 +8,14 @@ require("nightfox").setup({
     },
     palettes = {
         nightfox = {
-            -- bg1 = "#111720",
             bg1 = Color.from_hsl(216, 31, 8):to_css(),
-            -- bg3 = "#1b2533",
             bg3 = Color.from_hsl(216, 31, 12):to_css(),
             comment = "#7687a0",
         },
     },
-    groups = {},
+    groups = {
+        DiffText = { bg = "darkgreen" },
+    },
 })
 
 vim.cmd("colorscheme nightfox")

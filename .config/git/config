@@ -27,5 +27,8 @@
     side-by-side = true
 [merge]
     conflictStyle = diff3
+    tool = nvimdiff1
+    keepBackup = false
+    trustExitCode = true
 [diff]
     colorMoved = default

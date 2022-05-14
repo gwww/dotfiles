@@ -117,6 +117,13 @@ return require("packer").startup({
             end,
         })
 
+        use({
+            "luukvbaal/nnn.nvim",
+            config = function()
+                require("nnn").setup()
+            end,
+        })
+
         -- Good ole vim plugins
         use({ "gwww/vim-bbye" })
         use({ "tpope/vim-surround" })

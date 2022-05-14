@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 
+# To run, first setup the 3 arrays described below then `yadm-untracked`
+# can be run without any arguments. If you wish to create an alias to run
+# this as, for example `yadm untracked` then the following command will
+# add the alias: `yadm gitconfig alias.untracked '!<PATH>/yadm-untracked'`
+
+# Possible improvements:
+# - Rather than editing the script to configure have a separate config
+# - Reduce the amount of configuration; I have not figured out a way to 
+#   get rid of the non-recursive and ignore. The recursive list could be
+#   built from the directories that are present in `yadm list`
+
 # Edit your config here...
 
-# The directories and files are searched recursively to build a list of files
-# that are expected to be tracked with `yadm`. Items in this list are relative
-# to the root of your YADM repo (which is $HOME for most people)
+# The directories and files in this list are searched recursively to build
+# a list of files that you expect are tracked with `yadm`. Items in this
+# list are relative to the root of your YADM repo (which is $HOME for most).
 yadm_tracked_recursively=(bin .config .vim)
 
 # Same as above but don't search recursively
@@ -24,17 +35,14 @@ ignore_files_and_dirs=(
 # Code, don't change from this point
 #########################################################################
 
-root_dir=`yadm enter echo '$GIT_WORK_TREE'`
-cd $root_dir
+root=`yadm enter echo '$GIT_WORK_TREE'`
+
+cd $root
 
 find_list=$(mktemp -t find_list)
 find ${yadm_tracked_recursively[*]} -type f >$find_list
-find ${yadm_tracked_nonrecursively[*]} -maxdepth 1 -type f | \
-    awk "{ \
-        sub(\"^\./\", \"\"); \
-        sub(\"^$root_dir/\", \"\"); \
-        print \
-    }" >>$find_list
+find ${yadm_tracked_nonrecursively[*]} -maxdepth 1 -type f |
+  awk "{sub(\"^\./\", \"\"); sub(\"^$root/\", \"\"); print }" >>$find_list
 sort -o $find_list $find_list
 
 yadm_list=$(mktemp -t yadm_list)

@@ -1,24 +1,17 @@
 #!/usr/bin/env bash
 
-# Create your config here...
+# Edit your config here...
 
-# Using `find` this list contains directories or files that are
-# expected to be found in a `yadm list -a`. `find` will search
-# recursively through these to produce a list of files.
-yadm_tracked_recursively=(
-    bin
-    .config
-    .vim
-)
+# The directories and files are searched recursively to build a list of files
+# that are expected to be tracked with `yadm`. Items in this list are relative
+# to the root of your YADM repo (which is $HOME for most people)
+yadm_tracked_recursively=(bin .config .vim)
 
-# As above but don't search recursively
-yadm_tracked_nonrecursively=(
-    ~
-)
+# Same as above but don't search recursively
+yadm_tracked_nonrecursively=(.)
 
-# A list of dirs/files that will be ignored if not found in `yadm list`
-# Dirs are recursively searched for files. i.e.: this list of files are
-# OK to be untracked by `yadm`.
+# A list of directories and files that will not be reported as untracked if
+# found in the above two searches.
 ignore_files_and_dirs=(
     .CFUserTextEncoding
     .DS_Store
@@ -29,15 +22,17 @@ ignore_files_and_dirs=(
 )
 
 # Code, don't change from this point
+#########################################################################
 
-cd $HOME
+root_dir=`yadm enter echo '$GIT_WORK_TREE'`
+cd $root_dir
 
 find_list=$(mktemp -t find_list)
 find ${yadm_tracked_recursively[*]} -type f >$find_list
 find ${yadm_tracked_nonrecursively[*]} -maxdepth 1 -type f | \
     awk "{ \
         sub(\"^\./\", \"\"); \
-        sub(\"^$HOME/\", \"\"); \
+        sub(\"^$root_dir/\", \"\"); \
         print \
     }" >>$find_list
 sort -o $find_list $find_list
@@ -48,6 +43,6 @@ find ${ignore_files_and_dirs[*]} -type f >>$yadm_list
 sort -o $yadm_list $yadm_list
 
 # Show the files not in `yadm list`
-comm -23 $find_list $yadm_list | awk '{sub("^", "~/"); print}'
+comm -23 $find_list $yadm_list
 
 rm -f $find_list $yadm_list

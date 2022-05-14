@@ -14,7 +14,9 @@ require("nightfox").setup({
         },
     },
     groups = {
-        DiffText = { bg = "darkgreen" },
+        nightfox = {
+            DiffText = { bg = "darkgreen" },
+        }
     },
 })
 

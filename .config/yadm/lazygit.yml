@@ -1,0 +1,4 @@
+keybinding:
+  files:
+    # avoid "stage/unstage all" since it hangs lazygit, cause I guess it tries to list all files
+    toggleStagedAll: '<c-a>'

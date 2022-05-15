@@ -36,6 +36,7 @@ alias lal="$ls -ahl"
 alias lla="$ls -hla"
 alias lrt="$ls -hlart"
 
+# From: https://github.com/Mellbourn/dotfiles
 alias yl='lazygit --use-config-file "$HOME/.config/yadm/lazygit.yml,$HOME/Library/Application Support/lazygit/config.yml" --work-tree ~ --git-dir ~/.local/share/yadm/repo.git'
 
 alias pdbit='python -m pdb -c continue '

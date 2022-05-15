@@ -36,7 +36,8 @@ alias lal="$ls -ahl"
 alias lla="$ls -hla"
 alias lrt="$ls -hlart"
 
-alias dotfiles=yadm
+alias yl='lazygit --use-config-file "$HOME/.config/yadm/lazygit.yml,$HOME/Library/Application Support/lazygit/config.yml" --work-tree ~ --git-dir ~/.local/share/yadm/repo.git'
+
 alias pdbit='python -m pdb -c continue '
 
 alias plcat='plutil -convert xml1 -o -'

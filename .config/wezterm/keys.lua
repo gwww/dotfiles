@@ -7,7 +7,7 @@ end
 
 local edit_wezterm_config = function()
   local files = "wezterm.lua keys.lua events.lua"
-  local args = {os.getenv("SHELL"), "-c", "exec $VISUAL " .. files}
+  local args = {os.getenv("SHELL"), "-l", "-c", "exec $VISUAL " .. files}
   return {SpawnCommandInNewTab = {cwd=wt.config_dir, args=args}}
 end
 

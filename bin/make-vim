@@ -48,7 +48,8 @@ else
 fi
 
 # Determine latest patch version
-version="$(git ls-remote --tags https://github.com/vim/vim.git | grep 'v8.2.' | sed -nE 's#.*refs/tags/v?([0-9]+(\.[0-9]+)*)$#\1#p' | sort -Vr | head -n 1)"
+version="$(git ls-remote --tags https://github.com/vim/vim.git | grep 'v9.0.' | sed -nE 's#.*refs/tags/v?([0-9]+(\.[0-9]+)*)$#\1#p' | sort -Vr | head -n 1)"
+# version="$(git ls-remote --tags https://github.com/vim/vim.git | grep 'v8.2.' | sed -nE 's#.*refs/tags/v?([0-9]+(\.[0-9]+)*)$#\1#p' | sort -Vr | head -n 1)"
 
 cecho "Latest vim version on github:${green} " $version
 major=$(echo $version | cut -d. -f1)

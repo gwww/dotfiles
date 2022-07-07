@@ -6,9 +6,7 @@ local actions = require("telescope.actions")
 glenn_smart_find_files = function()
     local opts = {}
     local ok = pcall(require("telescope.builtin").git_files, opts)
-    if not ok then
-        require("telescope.builtin").find_files(opts)
-    end
+    if not ok then require("telescope.builtin").find_files(opts) end
 end
 
 require("telescope").setup({
@@ -24,9 +22,7 @@ require("telescope").setup({
                 ["<ESC>"] = actions.close,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
-                ["<C-o>"] = function()
-                    return
-                end,
+                ["<C-o>"] = function() return end,
                 ["<TAB>"] = actions.toggle_selection + actions.move_selection_next,
                 ["<C-s>"] = actions.send_selected_to_qflist,
                 ["<C-q>"] = actions.send_to_qflist,
@@ -44,12 +40,6 @@ require("telescope").setup({
 })
 
 map("n", "<leader>e", require("telescope.builtin").find_files)
-map("n", "<leader>b", function()
-    require("telescope.builtin").buffers()
-end)
-map("n", "<leader>h", function()
-    require("telescope.builtin").help_tags()
-end)
-map("n", "<leader>/", function()
-    require("telescope.builtin").live_grep()
-end)
+map("n", "<leader>b", function() require("telescope.builtin").buffers() end)
+map("n", "<leader>h", function() require("telescope.builtin").help_tags() end)
+map("n", "<leader>/", function() require("telescope.builtin").live_grep() end)

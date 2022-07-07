@@ -6,14 +6,10 @@ require("lualine").setup({
     },
     sections = {
         lualine_y = {
-            function()
-                return [[%3p%%]]
-            end,
+            function() return [[%3p%%]] end,
         },
         lualine_z = {
-            function()
-                return [[%4l/%L:%-3c]]
-            end,
+            function() return [[%4l/%L:%-3c]] end,
         },
     },
     tabline = {

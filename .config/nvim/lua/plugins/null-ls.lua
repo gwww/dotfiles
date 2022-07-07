@@ -11,6 +11,4 @@ nls.setup({
     },
 })
 
-map("n", "<leader>nf", function()
-    vim.lsp.buf.formatting_sync()
-end)
+map("n", "<leader>nf", function() vim.lsp.buf.formatting_sync() end)

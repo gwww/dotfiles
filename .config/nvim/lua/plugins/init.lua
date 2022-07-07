@@ -23,9 +23,7 @@ return require("packer").startup({
         -- Syntax parsing
         use({
             "nvim-treesitter/nvim-treesitter",
-            config = function()
-                require("plugins.treesitter")
-            end,
+            config = function() require("plugins.treesitter") end,
             run = ":TSUpdate",
         })
         use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
@@ -36,17 +34,13 @@ return require("packer").startup({
         use({
             "nvim-telescope/telescope.nvim",
             requires = "nvim-lua/plenary.nvim",
-            config = function()
-                require("plugins.telescope")
-            end,
+            config = function() require("plugins.telescope") end,
         })
         use({
             "nvim-telescope/telescope-fzf-native.nvim",
             run = "make",
             after = "telescope.nvim",
-            config = function()
-                require("telescope").load_extension("fzf")
-            end,
+            config = function() require("telescope").load_extension("fzf") end,
         })
         use({ "nvim-telescope/telescope-symbols.nvim", after = "telescope.nvim" })
         use({ "RRethy/nvim-treesitter-endwise" })
@@ -54,32 +48,24 @@ return require("packer").startup({
         -- Language server
         use({
             "neovim/nvim-lspconfig",
-            config = function()
-                require("plugins.lsp-config")
-            end,
+            config = function() require("plugins.lsp-config") end,
         })
 
         use({
             "jose-elias-alvarez/null-ls.nvim",
-            config = function()
-                require("plugins.null-ls")
-            end,
+            config = function() require("plugins.null-ls") end,
         })
 
         -- Colourscheme
         use({
             "EdenEast/nightfox.nvim",
-            config = function()
-                require("plugins.nightfox")
-            end,
+            config = function() require("plugins.nightfox") end,
         })
 
         -- Auto generate pairs
         use({
             "windwp/nvim-autopairs",
-            config = function()
-                require("nvim-autopairs").setup({})
-            end,
+            config = function() require("nvim-autopairs").setup({}) end,
         })
 
         -- Better s/f/t commands
@@ -88,40 +74,30 @@ return require("packer").startup({
         -- Developer Icons
         use({
             "kyazdani42/nvim-web-devicons",
-            config = function()
-                require("nvim-web-devicons").setup()
-            end,
+            config = function() require("nvim-web-devicons").setup() end,
         })
 
         -- Floating Terminal
         use({
             "numToStr/FTerm.nvim",
-            config = function()
-                require("plugins.fterm")
-            end,
+            config = function() require("plugins.fterm") end,
         })
 
         -- Status and Tab lines
         use({
             "nvim-lualine/lualine.nvim",
-            config = function()
-                require("plugins.lualine")
-            end,
+            config = function() require("plugins.lualine") end,
         })
 
         -- Add/remove comments
         use({
             "numToStr/Comment.nvim",
-            config = function()
-                require("Comment").setup()
-            end,
+            config = function() require("Comment").setup() end,
         })
 
         use({
             "luukvbaal/nnn.nvim",
-            config = function()
-                require("nnn").setup()
-            end,
+            config = function() require("nnn").setup() end,
         })
 
         -- Good ole vim plugins
@@ -130,8 +106,6 @@ return require("packer").startup({
         use({ "tpope/vim-repeat" })
         use({ "tpope/vim-unimpaired" })
 
-        if packer_bootstrap then
-            require("packer").sync()
-        end
+        if packer_bootstrap then require("packer").sync() end
     end,
 })

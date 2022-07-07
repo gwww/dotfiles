@@ -1,6 +1,5 @@
 local config = {}
 
-local os = require 'os'
 local wt = require 'wezterm'
 config.keys = require 'keys'
 require 'events'

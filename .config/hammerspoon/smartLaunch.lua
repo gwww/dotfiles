@@ -4,19 +4,13 @@ local M = {}
 M._savedState = {}
 
 M.init = function(hyper)
-    hyper.addHook(nil, function()
-        M._savedState = {}
-    end)
+    hyper.addHook(nil, function() M._savedState = {} end)
 end
 
 M.smartLaunch = function(launchApp, name)
-    if M._savedState.lastApp ~= launchApp then
-        M._savedState = { lastApp = launchApp }
-    end
+    if M._savedState.lastApp ~= launchApp then M._savedState = { lastApp = launchApp } end
 
-    if not name then
-        name = launchApp
-    end
+    if not name then name = launchApp end
 
     local runningApp = hs.application.get(launchApp)
 
@@ -25,9 +19,10 @@ M.smartLaunch = function(launchApp, name)
         hs.application.open(launchApp)
     else
         if not M._savedState.windows then
-            local windows = hs.fnutils.filter(runningApp:allWindows(), function(win)
-                return win:isStandard()
-            end)
+            local windows = hs.fnutils.filter(
+                runningApp:allWindows(),
+                function(win) return win:isStandard() end
+            )
             M._savedState.windows = windows
             M._savedState.index = hs.fnutils.indexOf(windows, hs.window.frontmostWindow()) or 0
         end

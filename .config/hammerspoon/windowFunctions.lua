@@ -8,9 +8,7 @@ M.cycleCalls = function(fn, args)
     local argIndex = 0
     return function()
         argIndex = argIndex + 1
-        if argIndex > #args then
-            argIndex = 1
-        end
+        if argIndex > #args then argIndex = 1 end
         fn(args[argIndex])
     end
 end
@@ -18,9 +16,7 @@ end
 -- Place window at x, y, w, h position and size on the screen.
 M.toGrid = function(rect)
     local window = hs.window.focusedWindow()
-    if not window then
-        return nil
-    end
+    if not window then return nil end
 
     local screen = hs.screen.mainScreen():fullFrame()
     return window:setFrame({
@@ -35,9 +31,7 @@ end
 local previousSizes = {}
 M.toggleMaximize = function()
     local window = hs.window.focusedWindow()
-    if not window then
-        return nil
-    end
+    if not window then return nil end
 
     local id = window:id()
     if previousSizes[id] == nil then
@@ -53,9 +47,7 @@ end
 
 M.moveScreen = function(direction)
     local window = hs.window.focusedWindow()
-    if not window then
-        return nil
-    end
+    if not window then return nil end
 
     if direction == "East" then
         window:moveOneScreenEast(false, false, 0)

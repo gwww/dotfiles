@@ -17,66 +17,46 @@ hyper.bind({
     -- Table of app bindings. Each binding can have a "key", "modifiers", & "action".
     {
         key = "a",
-        action = function()
-            sl.smartLaunch("ForkLift")
-        end,
+        action = function() sl.smartLaunch("ForkLift") end,
     },
     { key = "c", action = caffeinate },
     {
         key = "d",
-        action = function()
-            sl.smartLaunch("Microsoft Teams")
-        end,
+        action = function() sl.smartLaunch("Microsoft Teams") end,
     },
     {
         key = "e",
-        action = function()
-            sl.smartLaunch("com.googlecode.iterm2", "iTerm")
-        end,
+        action = function() sl.smartLaunch("com.googlecode.iterm2", "iTerm") end,
     },
     {
         key = "f",
-        action = function()
-            sl.smartLaunch("Finder")
-        end,
+        action = function() sl.smartLaunch("Finder") end,
     },
     {
         key = "h",
-        action = function()
-            os.execute("open ~")
-        end,
+        action = function() os.execute("open ~") end,
     },
     {
         key = "q",
-        action = function()
-            sl.smartLaunch("Firefox")
-        end,
+        action = function() sl.smartLaunch("Firefox") end,
     },
     { key = "r", action = hs.reload },
     {
         key = "s",
-        action = function()
-            sl.smartLaunch("Slack")
-        end,
+        action = function() sl.smartLaunch("Slack") end,
     },
     {
         key = "v",
-        action = function()
-            hs.eventtap.keyStrokes(hs.pasteboard.getContents())
-        end,
+        action = function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end,
     },
     {
         key = "w",
-        action = function()
-            sl.smartLaunch("WezTerm")
-        end,
+        action = function() sl.smartLaunch("WezTerm") end,
     },
     { key = "y", action = hs.toggleConsole },
     {
         key = "z",
-        action = function()
-            sl.smartLaunch("zoom.us")
-        end,
+        action = function() sl.smartLaunch("zoom.us") end,
     },
 
     {
@@ -96,28 +76,20 @@ hyper.bind({
     {
         key = "left",
         modifiers = "shift",
-        action = function()
-            wf.moveScreen("West")
-        end,
+        action = function() wf.moveScreen("West") end,
     },
     {
         key = "right",
         modifiers = "shift",
-        action = function()
-            wf.moveScreen("East")
-        end,
+        action = function() wf.moveScreen("East") end,
     },
     {
         key = "up",
-        action = function()
-            wf.toGrid({ 0, 0, 1, 0.3 })
-        end,
+        action = function() wf.toGrid({ 0, 0, 1, 0.3 }) end,
     },
     {
         key = "down",
-        action = function()
-            wf.toGrid({ 0, 0.7, 1, 0.3 })
-        end,
+        action = function() wf.toGrid({ 0, 0.7, 1, 0.3 }) end,
     },
     { key = "space", action = wf.toggleMaximize },
 })

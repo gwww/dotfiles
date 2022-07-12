@@ -11,9 +11,7 @@ local applicationWatcher = function(appName, eventType, appObject)
             if moveMe then
                 moveMe = false
                 for _ = 1, 40 do
-                    if appObject:mainWindow() then
-                        break
-                    end
+                    if appObject:mainWindow() then break end
                     hs.timer.usleep(50000) -- dumb to block; but simple and works well enough
                 end
                 appObject:focusedWindow():moveToScreen("Built%-in Retina Display", false, true, 0)

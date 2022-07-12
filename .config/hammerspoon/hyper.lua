@@ -11,25 +11,19 @@ local M = {}
 
 -- Helper
 M.escape = function(presses)
-    if presses == 0 then
-        hs.eventtap.keyStroke("", "escape", 100000)
-    end
+    if presses == 0 then hs.eventtap.keyStroke("", "escape", 100000) end
 end
 
 M.init = function(modal_key)
     local modalPressed = function()
         M._modal:enter()
         M._presses = 0
-        hs.fnutils.each(M._press_hooks, function(hook)
-            hook()
-        end)
+        hs.fnutils.each(M._press_hooks, function(hook) hook() end)
     end
 
     local modalReleased = function()
         M._modal:exit()
-        hs.fnutils.each(M._release_hooks, function(hook)
-            hook(M._presses)
-        end)
+        hs.fnutils.each(M._release_hooks, function(hook) hook(M._presses) end)
     end
 
     M._presses, M._press_hooks, M._release_hooks = 0, {}, {}
@@ -38,12 +32,8 @@ M.init = function(modal_key)
 end
 
 M.addHook = function(press, release)
-    if press then
-        table.insert(M._press_hooks, press)
-    end
-    if release then
-        table.insert(M._release_hooks, release)
-    end
+    if press then table.insert(M._press_hooks, press) end
+    if release then table.insert(M._release_hooks, release) end
 end
 
 M.bind = function(bindings)

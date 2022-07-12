@@ -1,8 +1,8 @@
 local config = {}
 
-local wt = require 'wezterm'
-config.keys = require 'keys'
-require 'events'
+local wt = require("wezterm")
+config.keys = require("keys")
+require("events")
 
 config.check_for_updates = false
 config.window_decorations = "RESIZE"
@@ -15,39 +15,39 @@ config.enable_csi_u_key_encoding = true
 -- config.initial_rows = 50
 -- config.initial_cols = 180
 
-config.window_padding = {left = 8, right = 2, top = 1, bottom = 1}
+config.window_padding = { left = 8, right = 2, top = 1, bottom = 1 }
 
 config.font_size = 16.5
 config.line_height = 1.05
-config.font = wt.font("Inconsolata", {weight="Regular"})
+config.font = wt.font("Inconsolata", { weight = "Regular" })
 config.warn_about_missing_glyphs = false
 
 config.inactive_pane_hsb = {
-  saturation = 0.6,
-  brightness = 0.5,
+    saturation = 0.6,
+    brightness = 0.5,
 }
 config.window_frame = {
-  font_size = 13.0,
-  font = wt.font("Roboto")
+    font_size = 13.0,
+    font = wt.font("Roboto"),
 }
 config.colors = {
-  cursor_bg = "#e0e0e0",
-  cursor_border = "#e0e0e0",
+    cursor_bg = "#e0e0e0",
+    cursor_border = "#e0e0e0",
 
-  background = "#151515",
-  foreground = "#e0e0e0",
+    background = "#151515",
+    foreground = "#e0e0e0",
 
-  tab_bar = {
-    background = "#030303",
-    active_tab = {
-      fg_color = "#7CFC00",
-      bg_color = "#181818",
+    tab_bar = {
+        background = "#030303",
+        active_tab = {
+            fg_color = "#7CFC00",
+            bg_color = "#181818",
+        },
+        inactive_tab = {
+            fg_color = "#a0a0a0",
+            bg_color = "#202020",
+        },
     },
-    inactive_tab = {
-      fg_color = "#a0a0a0",
-      bg_color = "#202020",
-    },
-  },
 }
 
 return config

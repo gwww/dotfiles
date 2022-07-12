@@ -12,8 +12,8 @@ config.hide_tab_bar_if_only_one_tab = false
 
 config.enable_csi_u_key_encoding = true
 
-config.initial_rows = 50
-config.initial_cols = 180
+-- config.initial_rows = 50
+-- config.initial_cols = 180
 
 config.window_padding = {left = 8, right = 2, top = 1, bottom = 1}
 

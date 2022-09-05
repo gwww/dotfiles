@@ -58,11 +58,11 @@ function po() {
     if [[ 'activate' =~ "^$1" ]]; then
       local script="venv/bin/activate"
       local git="$(git rev-parse --show-toplevel 2> /dev/null)/"
-      local VENV_DIRS=(".$script" "$script" "$git.$script" "$git$script")
-      typeset -U VENV_DIRS # remove duplicates from path
-      for dir in $VENV_DIRS; do
-        if [ -f $dir ]; then
-          source $dir
+      local SCRIPT_PLACES=(".$script" "$script" "$git.$script" "$git$script")
+      typeset -U SCRIPT_PLACES # remove duplicates from path
+      for scrpt in $SCRIPT_PLACES; do
+        if [ -f $scrpt ]; then
+          source $scrpt
           echo "$fg_bold[green]Activated '$VIRTUAL_ENV'$reset_color"
           return
         fi

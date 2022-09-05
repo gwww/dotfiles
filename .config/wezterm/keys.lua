@@ -6,15 +6,15 @@ local mapkey =
 
 local edit_wezterm_config = function()
     local files = "wezterm.lua keys.lua events.lua"
-    local args = { os.getenv("SHELL"), "-li", "-c", "exec $VISUAL " .. files }
-    return { SpawnCommandInNewTab = { cwd = wt.config_dir, args = args } }
+    local args = { os.getenv("SHELL"), "-lic", "exec $VISUAL " .. files }
+    return wt.action.SpawnCommandInNewTab {cwd=wt.config_dir, args=args}
 end
 
-mapkey("CMD", "d", { SplitHorizontal = {} })
-mapkey("CMD|SHIFT", "d", { SplitVertical = {} })
+mapkey("CMD", "d", wt.action.SplitHorizontal)
+mapkey("CMD|SHIFT", "d", wt.action.SplitVertical)
 mapkey("CMD", "e", edit_wezterm_config())
 mapkey("CTRL|SHIFT", "l", "ShowDebugOverlay")
-mapkey("CMD", "w", { CloseCurrentPane = { confirm = true } })
+mapkey("CMD", "w", wt.action.CloseCurrentPane {confirm = true})
 mapkey("CMD", "z", "TogglePaneZoomState")
 
 return keys

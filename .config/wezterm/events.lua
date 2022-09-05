@@ -8,7 +8,9 @@ wt.on(
 -- This produces a window split horizontally into two equal parts
 wt.on("gui-startup", function()
     local tab, pane, window = wt.mux.spawn_window({})
-    window:gui_window():maximize()
+    if wt.gui.screens().active.name == "Built-in Retina Display" then
+        window:gui_window():maximize()
+    end
     -- pane:split {size=0.3}
     -- pane:split {direction="Left", size=0.5}
 end)

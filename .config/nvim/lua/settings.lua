@@ -37,3 +37,10 @@ _G.P = function(v)
     print(vim.inspect(v))
     return v
 end
+
+vim.filetype.add({
+    extension = {
+        jsonnet = "jsonnet",
+        libsonnet = "jsonnet",
+    },
+})

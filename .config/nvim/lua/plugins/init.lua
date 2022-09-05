@@ -33,6 +33,7 @@ return require("packer").startup({
         -- Telescope
         use({
             "nvim-telescope/telescope.nvim",
+            branch = "0.1.x",
             requires = "nvim-lua/plenary.nvim",
             config = function() require("plugins.telescope") end,
         })
@@ -60,6 +61,7 @@ return require("packer").startup({
         use({
             "EdenEast/nightfox.nvim",
             config = function() require("plugins.nightfox") end,
+            run = ":NightfoxCompile",
         })
 
         -- Auto generate pairs

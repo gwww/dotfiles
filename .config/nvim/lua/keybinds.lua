@@ -21,8 +21,8 @@ map("n", "<leader>W", ":wall<CR>") -- Save all buffers
 map("n", "<leader>1", "<C-w>o") -- Close window splits
 
 map("n", "Y", "yg$")
-map("n", "<leader>y", '"+y') -- Normal mode yank into clipboard
-map("v", "<leader>y", '"+y') -- Visual mode yank into clipboard
+map("n", "<leader>y", '"*y') -- Normal mode yank into clipboard
+map("v", "<leader>y", '"*y') -- Visual mode yank into clipboard
 map("n", "<leader>Y", '"+Y', { remap = true })
 
 -- Better handling of movement on word wrap

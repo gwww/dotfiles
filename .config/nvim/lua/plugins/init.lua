@@ -71,7 +71,7 @@ return require("packer").startup({
         })
 
         -- Better s/f/t commands
-        use({ "ggandor/lightspeed.nvim" })
+        use({ "ggandor/leap.nvim" })
 
         -- Developer Icons
         use({
@@ -98,13 +98,14 @@ return require("packer").startup({
         })
 
         use({
-            "luukvbaal/nnn.nvim",
-            config = function() require("nnn").setup() end,
+            "kylechui/nvim-surround",
+            tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+            config = function() require("nvim-surround").setup() end,
         })
 
         -- Good ole vim plugins
         use({ "gwww/vim-bbye" })
-        use({ "tpope/vim-surround" })
+        -- use({ "tpope/vim-surround" })
         use({ "tpope/vim-repeat" })
         use({ "tpope/vim-unimpaired" })
 

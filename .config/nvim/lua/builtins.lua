@@ -1,9 +1,5 @@
 local g = vim.g
 
--- Use the new filetype.lua
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
-
 -- Turn off providers (was because slowed startup)
 g.loaded_node_provider = 0
 g.loaded_perl_provider = 0

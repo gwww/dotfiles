@@ -74,9 +74,12 @@ return require("packer").startup({
         use({ "ggandor/leap.nvim" })
 
         -- Developer Icons
+        use({ "nvim-tree/nvim-web-devicons" })
+
+        -- Tree file explorer
         use({
-            "kyazdani42/nvim-web-devicons",
-            config = function() require("nvim-web-devicons").setup() end,
+            "nvim-tree/nvim-tree.lua",
+            config = function() require("nvim-tree").setup() end,
         })
 
         -- Floating Terminal

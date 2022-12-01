@@ -18,6 +18,8 @@ map("i", "<PageDown>", "<C-o><C-d>") -- Input mode PageDown
 map("n", "<leader>w", ":update<CR>") -- Save this buffer
 map("n", "<leader>W", ":wall<CR>") -- Save all buffers
 
+map("n", "<leader>E", ":NvimTreeToggle<CR>")
+
 map("n", "<leader>1", "<C-w>o") -- Close window splits
 
 map("n", "Y", "yg$")

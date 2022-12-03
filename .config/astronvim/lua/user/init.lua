@@ -1,4 +1,26 @@
 return {
+    colorscheme = "nightfox",
+
+    -- Diagnostics configuration for when diagnostics are on
+    diagnostics = {
+        underline = false,
+        update_in_insert = false,
+    },
+
+    lsp = {
+        -- Add to the global LSP on_attach function
+        on_attach = function(client, bufnr) client.config.flags["debounce_text_changes"] = 500 end,
+    },
+
+    mappings = {
+        n = {
+            [";"] = { ":", silent = false, desc = "Quick cmd" },
+            ["<enter>"] = { ":noh<enter><cr>", silent = true, desc = "No highlight" },
+            j = { "v:count==0 ? 'gj' : 'j'", expr = true },
+            k = { "v:count==0 ? 'gk' : 'k'", expr = true },
+        },
+    },
+
     options = {
         opt = {
             completeopt = "menuone,noinsert,noselect",
@@ -14,10 +36,4 @@ return {
         },
     },
 
-    lsp = {
-        -- Add to the global LSP on_attach function
-        on_attach = function(client, bufnr) client.config.flags["debounce_text_changes"] = 450 end,
-    },
-
-    colorscheme = "nightfox",
 }

@@ -11,14 +11,12 @@ return {
         g = {
             mapleader = ",",
             maplocalleader = ",",
-        }
+        },
     },
 
     lsp = {
         -- Add to the global LSP on_attach function
-        on_attach = function(client, bufnr)
-            client.config.flags["debounce_text_changes"] = 450
-        end,
+        on_attach = function(client, bufnr) client.config.flags["debounce_text_changes"] = 450 end,
     },
 
     colorscheme = "nightfox",

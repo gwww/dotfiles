@@ -1,3 +1,3 @@
 return {
-    completion = { completeopt = "menuone,noinsert" }
+    completion = { completeopt = "menuone,noinsert" },
 }

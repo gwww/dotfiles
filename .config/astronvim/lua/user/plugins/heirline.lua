@@ -3,7 +3,7 @@ local ruler = { provider = " %4l/%L:%-3c %3p%%" }
 return {
     {
         hl = { fg = "fg", bg = "bg" },
-        astronvim.status.component.mode { mode_text = {} },
+        astronvim.status.component.mode({ mode_text = {} }),
         astronvim.status.component.git_branch(),
         astronvim.status.component.file_info(),
         astronvim.status.component.git_diff(),
@@ -14,6 +14,6 @@ return {
         astronvim.status.component.lsp(),
         astronvim.status.component.treesitter(),
         ruler,
-        astronvim.status.component.mode { surround = { separator = "right" } },
+        astronvim.status.component.mode({ surround = { separator = "right" } }),
     },
 }

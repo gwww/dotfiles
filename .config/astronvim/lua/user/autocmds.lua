@@ -12,12 +12,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 vim.api.nvim_create_autocmd("FileType", {
     group = gwww_augroup,
-    pattern = "lua",
-    callback = function() vim.bo.shiftwidth = 4 end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-    group = gwww_augroup,
     pattern = "yaml",
     callback = function() vim.wo.foldmethod = "indent" end,
 })

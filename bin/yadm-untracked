@@ -43,7 +43,11 @@
 # .    vim/autoload/plug.vim
 # )
 
-if [[ $# -ne 1 ]]; then
+if [[ $# -eq 0 ]]; then
+    config="$HOME/.config/yadm/yadm-untracked.conf"
+elif [[ $# -eq 1 ]]; then
+    config=$1
+else
     echo 'Usage: yadm-untracked <config-file>'
     exit 1
 fi
@@ -52,7 +56,7 @@ yadm_tracked_recursively=()
 yadm_tracked_nonrecursively=()
 ignore_files_and_dirs=()
 
-source $1
+source $config || exit 1
 
 root=`yadm enter echo '$GIT_WORK_TREE'`
 

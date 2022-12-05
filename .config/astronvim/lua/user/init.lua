@@ -20,19 +20,25 @@ return {
             k = { "v:count==0 ? 'gk' : 'k'", expr = true },
             ["<leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" },
             ["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+            ["<leader>y"] = { '"*y', desc = "Yank to clipboard" },
 
             ["<leader>ff"] = false,
             ["<leader>h"] = false,
         },
+        v = {
+            ["<leader>y"] = { '"*y', desc = "Yank to clipboard" },
+        }
     },
 
     options = {
         opt = {
+            clipboard = '',
             completeopt = "menuone,noinsert,noselect",
             confirm = true, -- Confirm quit on errors
             cmdheight = 1, -- Override cmdheight=0
             linebreak = true, -- Break at "natural" spot on wrap
             relativenumber = false, -- Override
+            wildmode = "longest:full",
             wrap = true, -- Wrap lines
         },
         g = {

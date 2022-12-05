@@ -20,7 +20,9 @@ return {
             k = { "v:count==0 ? 'gk' : 'k'", expr = true },
             ["<leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" },
             ["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
+
             ["<leader>ff"] = false,
+            ["<leader>h"] = false,
         },
     },
 

@@ -1,7 +1,7 @@
 return {
     -- Disabled plugins:
     ["goolord/alpha-nvim"] = { disable = true },
-    -- ["max397574/better-escape.nvim"] = { disable = true },
+    ["onsails/lspkind.nvim"] = { disable = true },
 
     -- Added plugins:
     ["nvim-treesitter/playground"] = {

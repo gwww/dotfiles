@@ -18,8 +18,12 @@ config.enable_csi_u_key_encoding = true
 config.window_padding = { left = 8, right = 2, top = 1, bottom = 1 }
 
 config.font_size = 16.5
-config.line_height = 1.05
-config.font = wt.font("Inconsolata", { weight = "Regular" })
+config.line_height = 1.10
+config.font = wt.font_with_fallback({
+    { family = "Inconsolata", weight = "Regular" },
+    { family = "Symbols Nerd Font Mono", scale = 0.80 },
+})
+
 config.warn_about_missing_glyphs = false
 
 config.inactive_pane_hsb = {

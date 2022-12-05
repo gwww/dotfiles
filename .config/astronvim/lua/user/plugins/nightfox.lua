@@ -16,7 +16,7 @@ require("nightfox").setup({
     groups = {
         nightfox = {
             DiffText = { bg = "darkgreen" },
-            IndentBlanklineContextChar = { fg = "#444444" },
+            IndentBlanklineContextChar = { fg = "#383838" },
         },
     },
 })

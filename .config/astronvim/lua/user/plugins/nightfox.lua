@@ -16,10 +16,8 @@ require("nightfox").setup {
   groups = {
     nightfox = {
       DiffText = { bg = "darkgreen" },
-      IndentBlanklineContextChar = { fg = "#383838" },
-      LspReferenceText = { bg = "#202B3C" },
-      LspReferenceRead = { bg = "#202B3C" },
-      LspReferenceWrite = { bg = "#202B3C" },
+      IndentBlanklineChar = { fg = "#282828" },
+      IndentBlanklineContextChar = { fg = "#3f3f3f" },
     },
   },
 }

@@ -8,7 +8,11 @@ return {
   },
 
   lsp = {
-    -- Add to the global LSP on_attach function
-    on_attach = function(client) client.config.flags["debounce_text_changes"] = 500 end,
+    on_attach = function(client, bufnr)
+      client.config.flags["debounce_text_changes"] = 500
+      if client.server_capabilities.documentHighlightProvider then
+        vim.api.nvim_del_augroup_by_name(vim.fn.printf("lsp_document_highlight_%d", bufnr))
+      end
+    end,
   },
 }

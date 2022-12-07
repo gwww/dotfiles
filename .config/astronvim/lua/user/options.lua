@@ -10,7 +10,7 @@ return {
     linebreak = true, -- Break at "natural" spot on wrap
     relativenumber = false, -- Override
     wrap = true, -- Wrap lines
-    whichwrap = "b,s,<,>,h,l,[,]",
+    whichwrap = "b,s,<,>,[,]",
   },
   g = {
     mapleader = ",",

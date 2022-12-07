@@ -1,5 +1,5 @@
 return {
-  colorscheme = "nightfox",
+  colorscheme = "default_theme",
 
   -- Diagnostics configuration for when diagnostics are on
   diagnostics = {

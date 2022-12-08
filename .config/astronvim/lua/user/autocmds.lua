@@ -5,11 +5,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   callback = function() vim.opt.formatoptions = vim.opt.formatoptions - "o" end,
 })
 
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = gwww_augroup,
-  callback = function() vim.highlight.on_yank { timeout = 400 } end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   group = gwww_augroup,
   pattern = "yaml",

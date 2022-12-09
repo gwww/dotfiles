@@ -1,3 +1,4 @@
+H = require("user.utils.hsl")
 return {
-  bg = "#0e131b",
+  bg = H.hslToHex(216, 31, 8)
 }

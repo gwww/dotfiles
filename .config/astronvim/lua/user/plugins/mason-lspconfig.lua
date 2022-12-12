@@ -5,6 +5,7 @@ return {
     "jsonls",
     "pyright",
     "sumneko_lua",
+    "svelte",
     "tsserver",
     "yamlls",
   },

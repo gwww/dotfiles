@@ -8,7 +8,6 @@ return {
     ["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
     ["<leader>y"] = { '"*y', desc = "Yank to clipboard" },
 
-    ["<leader>ff"] = false,
     ["<leader>h"] = false,
   },
   v = {

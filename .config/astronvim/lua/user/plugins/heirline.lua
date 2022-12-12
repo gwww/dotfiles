@@ -1,5 +1,3 @@
-local ruler = { provider = " %4l/%L:%-3c %3p%%" }
-
 return {
   {
     hl = { fg = "fg", bg = "bg" },
@@ -13,7 +11,7 @@ return {
     astronvim.status.component.fill(),
     astronvim.status.component.lsp(),
     astronvim.status.component.treesitter(),
-    ruler,
+    { provider = " %4l/%L:%-3c %3p%%" },
     astronvim.status.component.mode { surround = { separator = "right" } },
   },
 }

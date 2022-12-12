@@ -30,6 +30,10 @@ return {
   window = {
     documentation = { max_width = 40 },
   },
+  enabled = function()
+    local context = require("cmp.config.context")
+    return not (context.in_treesitter_capture("comment") == true or context.in_syntax_group("Comment"))
+  end,
   formatting = {
     fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)

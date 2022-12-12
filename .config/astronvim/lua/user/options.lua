@@ -11,10 +11,9 @@ return {
     linebreak = true, -- Break at "natural" spot on wrap
     relativenumber = false, -- Override
     wrap = true, -- Wrap lines
-    whichwrap = "b,s,<,>,[,]",
+    whichwrap = "b,s,<,>,[,]", -- Motions that will wrap to prev/next line
   },
   g = {
     mapleader = ",",
-    maplocalleader = ",",
   },
 }

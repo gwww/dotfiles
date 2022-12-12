@@ -1,12 +1,4 @@
-local gwww_augroup = vim.api.nvim_create_augroup("gwww", { clear = false })
-
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  group = gwww_augroup,
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("gwww", { clear = false }),
   callback = function() vim.opt.formatoptions = vim.opt.formatoptions - "o" end,
 })
-
--- vim.api.nvim_create_autocmd("FileType", {
---   group = gwww_augroup,
---   pattern = "yaml",
---   callback = function() vim.wo.foldmethod = "indent" end,
--- })

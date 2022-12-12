@@ -1,6 +1,7 @@
 return {
   opt = {
     completeopt = "menuone,noinsert,noselect",
+    timeoutlen = 500,
     wildmode = "longest:full,full",
     wildignorecase = true,
 

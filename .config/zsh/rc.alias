@@ -56,6 +56,7 @@ local neovim=nvim
 alias v=$neovim
 alias vi=$neovim
 alias emacs=$neovim
+alias lv=~/.local/bin/lvim
 
 alias wezterm='/Applications/WezTerm.app/Contents/MacOS/wezterm'
 alias sign_wezterm='codesign --force --deep --sign - /Applications/WezTerm.app'

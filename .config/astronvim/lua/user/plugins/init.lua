@@ -8,6 +8,8 @@ return {
     cmd = "TSHighlightCapturesUnderCursor",
   },
 
+  ["folke/neodev.nvim"] = {},
+
   ["EdenEast/nightfox.nvim"] = {
     run = ":NightfoxCompile",
     config = function() require "user.plugins.nightfox" end,

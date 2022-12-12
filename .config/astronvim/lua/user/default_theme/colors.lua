@@ -1,4 +1,4 @@
-H = require("user.utils.hsl")
+H = require "user.utils.hsl"
 return {
-  bg = H.hslToHex(216, 31, 8)
+  bg = H.hslToHex(216, 31, 8),
 }

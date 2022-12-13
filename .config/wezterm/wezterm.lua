@@ -1,7 +1,8 @@
-local config = {}
-
 local wt = require("wezterm")
+
+local config = {}
 config.keys = require("keys")
+
 require("events")
 
 config.check_for_updates = false
@@ -9,12 +10,8 @@ config.window_decorations = "RESIZE"
 config.swallow_mouse_click_on_pane_focus = true
 config.enable_tab_bar = true
 config.hide_tab_bar_if_only_one_tab = false
-
+config.force_reverse_video_cursor = true
 config.enable_csi_u_key_encoding = true
-
--- config.initial_rows = 50
--- config.initial_cols = 180
-
 config.window_padding = { left = 8, right = 2, top = 1, bottom = 1 }
 
 config.font_size = 16.5
@@ -23,7 +20,6 @@ config.font = wt.font_with_fallback({
     { family = "Inconsolata", weight = "Regular" },
     { family = "Symbols Nerd Font Mono", scale = 0.80 },
 })
-
 config.warn_about_missing_glyphs = false
 
 config.inactive_pane_hsb = {
@@ -35,9 +31,6 @@ config.window_frame = {
     font = wt.font("Roboto"),
 }
 config.colors = {
-    cursor_bg = "#e0e0e0",
-    cursor_border = "#e0e0e0",
-
     background = "#151515",
     foreground = "#e0e0e0",
 

@@ -1,5 +1,5 @@
 return {
-  colorscheme = "nightfox",
+  colorscheme = "default_theme",
 
   diagnostics = {
     underline = false,

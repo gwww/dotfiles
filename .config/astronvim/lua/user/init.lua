@@ -6,5 +6,9 @@ return {
     update_in_insert = false,
   },
 
-  lsp = require("user.lsp")
+  lsp = require("user.lsp"),
+
+  updater = {
+    channel = "nightly",
+  },
 }

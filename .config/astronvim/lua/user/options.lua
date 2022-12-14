@@ -1,7 +1,6 @@
 return {
   opt = {
     completeopt = "menuone,noinsert,noselect",
-    timeoutlen = 500,
     wildmode = "longest:full,full",
     wildignorecase = true,
 
@@ -15,5 +14,6 @@ return {
   },
   g = {
     mapleader = ",",
+    heirline_bufferline = true, -- enable heirline bufferline (TODO v3: remove this option and make it default)
   },
 }

@@ -3,6 +3,7 @@ return {
   ["goolord/alpha-nvim"] = { disable = true },
   ["onsails/lspkind.nvim"] = { disable = true },
   ["akinsho/bufferline.nvim"] = { disable = true }, -- TODO remove in v3
+  ["lukas-reineke/indent-blankline.nvim"] = { disable = true },
 
   -- Added plugins:
   ["nvim-treesitter/playground"] = {

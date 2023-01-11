@@ -10,6 +10,14 @@ return {
   heirline = require("user.heirline"),
   lsp = require("user.lsp"),
 
+  luasnip = {
+    vscode = {
+      paths = {
+        "~/.config/astronvim/lua/user/snippets",
+      },
+    },
+  },
+
   -- updater = {
   --   channel = "nightly",
   -- },

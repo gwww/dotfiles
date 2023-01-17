@@ -7,7 +7,9 @@ return {
   },
 
   highlights = {
-    NeoTreeTitleBar = { fg = "#dddddd" }
+    init = {
+      NeoTreeTitleBar = { fg = "#cccccc" }
+    }
   },
 
   default_theme = require("user.astronvim_theme"),

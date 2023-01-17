@@ -6,6 +6,10 @@ return {
     update_in_insert = false,
   },
 
+  highlights = {
+    NeoTreeTitleBar = { fg = "#dddddd" }
+  },
+
   default_theme = require("user.astronvim_theme"),
   heirline = require("user.heirline"),
   lsp = require("user.lsp"),

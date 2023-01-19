@@ -16,4 +16,7 @@ return {
     run = ":NightfoxCompile",
     config = function() require "user.plugins.nightfox" end,
   },
+  ["nvim-neo-tree/neo-tree.nvim"] = {
+    config = function() require "user.plugins.neo-tree" end,
+  }
 }

@@ -19,6 +19,11 @@ alias ghi='git hist'
 alias gst='git status'
 
 alias lg='lazygit'
+# From: https://github.com/Mellbourn/dotfiles
+alias yl='lazygit --use-config-file "$HOME/.config/yadm/lazygit.yml,$HOME/Library/Application Support/lazygit/config.yml" \
+  --work-tree ~ --git-dir ~/.local/share/yadm/repo.git'
+
+alias pn='pnpm'
 
 alias tt='echo -n "\x1b]0;wezterm\x1b\\"'
 
@@ -35,9 +40,6 @@ alias ll="$ls -hl"
 alias lal="$ls -ahl"
 alias lla="$ls -hla"
 alias lrt="$ls -hlart"
-
-# From: https://github.com/Mellbourn/dotfiles
-alias yl='lazygit --use-config-file "$HOME/.config/yadm/lazygit.yml,$HOME/Library/Application Support/lazygit/config.yml" --work-tree ~ --git-dir ~/.local/share/yadm/repo.git'
 
 alias pdbit='python -m pdb -c continue '
 
@@ -59,6 +61,6 @@ alias emacs=$neovim
 alias lv=~/.local/bin/lvim
 
 alias wezterm='/Applications/WezTerm.app/Contents/MacOS/wezterm'
-alias sign_wezterm='codesign --force --deep --sign - /Applications/WezTerm.app'
+# alias sign_wezterm='codesign --force --deep --sign - /Applications/WezTerm.app'
 alias which-command=whence
 alias xyzzy="echo nothing happens"

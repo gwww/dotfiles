@@ -1,5 +1,5 @@
 return {
-  colorscheme = "default_theme",
+  colorscheme = "astronvim",
 
   diagnostics = {
     underline = false,
@@ -8,13 +8,9 @@ return {
 
   highlights = {
     init = {
-      NeoTreeTitleBar = { fg = "#cccccc" }
-    }
+      NeoTreeTitleBar = { fg = "#cccccc" },
+    },
   },
-
-  default_theme = require("user.astronvim_theme"),
-  heirline = require("user.heirline"),
-  lsp = require("user.lsp"),
 
   luasnip = {
     vscode = {
@@ -23,6 +19,9 @@ return {
       },
     },
   },
+  astronvim_theme = require "user.astronvim_theme",
+  heirline = require "user.heirline",
+  lsp = require "user.lsp",
 
   -- updater = {
   --   channel = "nightly",

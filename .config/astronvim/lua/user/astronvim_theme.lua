@@ -13,5 +13,5 @@ return {
     hl.IndentBlanklineChar.fg = "#282828"
     hl.IndentBlanklineContextChar.fg = "#3f3f3f"
     return hl
-  end
+  end,
 }

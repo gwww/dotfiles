@@ -7,8 +7,6 @@ return {
     ["<leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" },
     ["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" },
     ["<leader>y"] = { '"*y', desc = "Yank to clipboard" },
-
-    ["<leader>h"] = false,
   },
   v = {
     ["<leader>y"] = { '"*y', desc = "Yank to clipboard" },

@@ -1,6 +1,8 @@
 return {
-  defaults = {
-    prompt_prefix = " λ ",
-    initial_mode = "insert",
+  "nvim-telescope/telescope.nvim",
+  opts = {
+    defaults = {
+      prompt_prefix = " λ ",
+    },
   },
 }

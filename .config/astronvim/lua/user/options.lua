@@ -1,7 +1,7 @@
 return {
   opt = {
-    completeopt = "menuone,noinsert,noselect",
-    wildmode = "longest:full,full",
+    -- completeopt = "menuone,noinsert,noselect",
+    -- wildmode = "longest:full,full",
     wildignorecase = true,
 
     clipboard = "", -- Don't save to system clipboard; use keymap
@@ -14,6 +14,5 @@ return {
   },
   g = {
     mapleader = ",",
-    heirline_bufferline = true, -- enable heirline bufferline (TODO v3: remove this option and make it default)
   },
 }

@@ -1,4 +1,4 @@
-H = require "user.utils.hsl"
+local H = require "user.utils.hsl"
 
 return {
   "AstroNvim/astrotheme",

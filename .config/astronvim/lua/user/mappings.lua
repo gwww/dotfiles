@@ -1,7 +1,5 @@
 local map = { n = {}, i = {}, v = {} }
-local input = map.i
-local normal = map.n
-local visual = map.v
+local input, normal, visual = map.i, map.n, map.v
 
 normal[';'] = { ":", silent = false, desc = "Quick cmd" }
 normal["<enter>"] = { ":noh<enter><cr>", silent = true, desc = "No highlight" }

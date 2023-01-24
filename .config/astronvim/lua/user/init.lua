@@ -1,5 +1,5 @@
 return {
-  colorscheme = "astronvim",
+  colorscheme = "astrodark",
 
   diagnostics = {
     underline = false,
@@ -19,7 +19,6 @@ return {
       },
     },
   },
-  astronvim_theme = require "user.astronvim_theme",
   heirline = require "user.heirline",
   lsp = require "user.lsp",
 

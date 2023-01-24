@@ -5,9 +5,6 @@ normal[';'] = { ":", silent = false, desc = "Quick cmd" }
 normal["<enter>"] = { "<cmd>noh<enter><cr>", silent = true, desc = "No highlight" }
 normal["<esc>"] = { "<cmd>noh<cr>", silent = true, desc = "No highlight" }
 
-normal['j'] = { "v:count==0 ? 'gj' : 'j'", expr = true }
-normal['k'] = { "v:count==0 ? 'gk' : 'k'", expr = true }
-
 normal["<leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
 normal["<leader><leader>"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
 normal["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" }

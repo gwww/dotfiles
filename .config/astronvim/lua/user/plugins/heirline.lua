@@ -16,5 +16,6 @@ return {
       { provider = " %4l/%L:%-3c %3p%%" },
       astronvim.status.component.mode { surround = { separator = "right" } },
     }
+    return opts
   end,
 }

@@ -2,7 +2,8 @@ local map = { n = {}, i = {}, v = {} }
 local input, normal, visual = map.i, map.n, map.v
 
 normal[';'] = { ":", silent = false, desc = "Quick cmd" }
-normal["<enter>"] = { ":noh<enter><cr>", silent = true, desc = "No highlight" }
+normal["<enter>"] = { "<cmd>noh<enter><cr>", silent = true, desc = "No highlight" }
+normal["<esc>"] = { "<cmd>noh<cr>", silent = true, desc = "No highlight" }
 
 normal['j'] = { "v:count==0 ? 'gj' : 'j'", expr = true }
 normal['k'] = { "v:count==0 ? 'gk' : 'k'", expr = true }

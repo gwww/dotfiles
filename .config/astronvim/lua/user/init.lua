@@ -12,13 +12,6 @@ return {
     },
   },
 
-  luasnip = {
-    vscode = {
-      paths = {
-        "~/.config/astronvim/lua/user/snippets",
-      },
-    },
-  },
   heirline = require "user.heirline",
   lsp = require "user.lsp",
 

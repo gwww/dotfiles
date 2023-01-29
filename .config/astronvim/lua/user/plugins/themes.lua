@@ -7,7 +7,7 @@ return {
     priority = 1000,
     opts = {
       terminal_colors = false,
-      palette = {
+      palettes = {
         astrodark = {
           bg = H.hslToHex(216, 31, 8),
           purple = "#f3ddb7",

@@ -1,7 +1,7 @@
 return {
   opt = {
     -- completeopt = "menuone,noinsert,noselect",
-    -- wildmode = "longest:full,full",
+    wildmode = "longest:full,full",
     wildignorecase = true,
 
     clipboard = "", -- Don't save to system clipboard; use keymap

@@ -9,8 +9,8 @@ normal["<leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
 normal["<leader><leader>"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
 normal["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" }
 
-normal['L'] = { "<cmd>bnext<cr>", desc = "Next buffer" }
-normal['H'] = { "<cmd>bprev<cr>", desc = "Prev buffer" }
+normal['L'] = { function() astronvim.nav_buf(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" }
+normal['H'] = { function() astronvim.nav_buf(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Previous buffer" }
 
 normal["<leader>y"] = { '"*y', desc = "Yank to clipboard" }
 visual["<leader>y"] = { '"*y', desc = "Yank to clipboard" }

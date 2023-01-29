@@ -15,7 +15,9 @@ return {
   heirline = require "user.heirline",
   lsp = require "user.lsp",
 
-  -- updater = {
-  --   channel = "nightly",
-  -- },
+  updater = {
+    channel = "nightly",
+    branch = "v3",
+    pin_plugins = true,
+  },
 }

@@ -18,6 +18,6 @@ return {
   updater = {
     channel = "nightly",
     branch = "v3",
-    pin_plugins = true,
+    pin_plugins = nil,
   },
 }

@@ -1,6 +1,6 @@
 local wt = require("wezterm")
 
-local config = {}
+local config = wt.config_builder()
 config.keys = require("keys")
 
 require("events")
@@ -17,9 +17,9 @@ config.window_padding = { left = 8, right = 2, top = 1, bottom = 1 }
 config.font_size = 16.5
 config.line_height = 1.10
 config.font = wt.font_with_fallback({
-    { family = "Inconsolata", weight = "Regular" },
-    { family = "Symbols Nerd Font Mono", scale = 0.80 },
-})
+        { family = "Inconsolata",            weight = "Regular" },
+        { family = "Symbols Nerd Font Mono", scale = 0.80 },
+    })
 config.warn_about_missing_glyphs = false
 
 config.inactive_pane_hsb = {
@@ -33,7 +33,6 @@ config.window_frame = {
 config.colors = {
     background = "#151515",
     foreground = "#e0e0e0",
-
     tab_bar = {
         background = "#030303",
         active_tab = {
@@ -46,5 +45,9 @@ config.colors = {
         },
     },
 }
+
+config.command_palette_font_size = 14.0
+config.command_palette_bg_color = "#b4caf0"
+config.command_palette_fg_color = "#222222"
 
 return config

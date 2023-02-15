@@ -14,6 +14,11 @@ return {
                 prompt_prefix = " Select buffer>  ",
                 sort_lastused = true,
                 initial_mode = "normal",
+                mappings = {
+                    n = {
+                        d = require('telescope.actions').delete_buffer,
+                    },
+                },
             },
         },
     },

@@ -7,7 +7,6 @@ normal["<esc>"] = { "<cmd>noh<cr>", silent = true, desc = "No highlight" }
 
 normal["<leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
 normal["<leader><leader>"] = { "<cmd>Telescope buffers<cr>", desc = "Find buffers" }
--- normal["<leader>E"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle NeoTree" }
 
 normal['L'] = {
     function() require("core.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,

@@ -2,24 +2,22 @@ local H = require "user.utils.hsl"
 
 return {
   {
-    "AstroNvim/astrotheme",
-    -- lazy = false,
-    priority = 1000,
+    "catppuccin/nvim",
+    name = "catppuccin",
     opts = {
-      terminal_colors = false,
-      palettes = {
-        astrodark = {
-          bg = H.hslToHex(216, 31, 8),
-          purple = "#f3ddb7",
-          red = "#A6FCFF",
-        }
+      dim_inactive = { enabled = true, percentage = 0.25 },
+      styles = {
+        conditionals = {},
       },
-
-      highlights = {
-        astrodark = {
-          Comment = { italic = true },
-          CursorLine = { bg = H.hslToHex(216, 31, 12) },
-        }
+      highlight_overrides = {
+        mocha = function(c)
+          return {
+            Normal = { bg = c.mantle },
+            StatusLine = { bg = c.base },
+            ["@tag.attribute"] = { style = {} },
+            ["@parameter"] = { style = {} },
+          }
+        end,
       },
     },
   },
@@ -50,3 +48,27 @@ return {
     },
   },
 }
+
+-- {
+--   "AstroNvim/astrotheme",
+--   -- lazy = false,
+--   priority = 1000,
+--   opts = {
+--     terminal_colors = false,
+--     palettes = {
+--       astrodark = {
+--         bg = H.hslToHex(216, 31, 8),
+--         purple = "#f3ddb7",
+--         red = "#A6FCFF",
+--       }
+--     },
+--
+--     highlights = {
+--       astrodark = {
+--         Comment = { italic = true },
+--         CursorLine = { bg = H.hslToHex(216, 31, 12) },
+--       }
+--     },
+--   },
+-- },
+--

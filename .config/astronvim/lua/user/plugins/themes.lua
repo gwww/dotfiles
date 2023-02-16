@@ -14,6 +14,7 @@ return {
           return {
             Normal = { bg = c.mantle },
             StatusLine = { bg = c.base },
+            Comment = { fg = "#7687a0" },
             ["@tag.attribute"] = { style = {} },
             ["@parameter"] = { style = {} },
           }

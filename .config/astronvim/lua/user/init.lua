@@ -1,5 +1,5 @@
 return {
-  colorscheme = "catppuccin-mocha",
+  colorscheme = "catppuccin",
   diagnostics = {
     underline = false,
     update_in_insert = false,

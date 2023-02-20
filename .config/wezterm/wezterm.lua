@@ -17,9 +17,9 @@ config.window_padding = { left = 8, right = 2, top = 1, bottom = 1 }
 config.font_size = 16.5
 config.line_height = 1.10
 config.font = wt.font_with_fallback({
-        { family = "Inconsolata",            weight = "Regular" },
-        { family = "Symbols Nerd Font Mono", scale = 0.80 },
-    })
+    { family = "Inconsolata",            weight = "Regular" },
+    { family = "Symbols Nerd Font Mono", scale = 0.80 },
+})
 config.warn_about_missing_glyphs = false
 
 config.inactive_pane_hsb = {
@@ -30,6 +30,7 @@ config.window_frame = {
     font_size = 13.0,
     font = wt.font("Roboto"),
 }
+-- config.color_scheme = "Catppuccin Mocha"
 config.colors = {
     background = "#151515",
     foreground = "#e0e0e0",

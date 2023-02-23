@@ -15,7 +15,8 @@ return {
             Normal = { bg = c.mantle },
             StatusLine = { bg = c.base },
             Comment = { fg = "#7687a0" },
-            WinBar = { bg = "#073278" },
+            WinBar = { bg = "#052457" },
+            -- WinBar = { bg = "#073278" },
             ["@tag.attribute"] = { style = {} },
             ["@parameter"] = { style = {} },
           }

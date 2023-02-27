@@ -9,11 +9,11 @@ normal["<leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
 normal["<space>"] = { "<cmd>Telescope buffers<cr>", desc = "Find buffers" }
 
 normal['L'] = {
-    function() require("core.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
+    function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
     desc = "Next buffer"
 }
 normal['H'] = {
-    function() require("core.utils.buffer").nav( -(vim.v.count > 0 and vim.v.count or 1)) end,
+    function() require("astronvim.utils.buffer").nav( -(vim.v.count > 0 and vim.v.count or 1)) end,
     desc = "Previous buffer"
 }
 

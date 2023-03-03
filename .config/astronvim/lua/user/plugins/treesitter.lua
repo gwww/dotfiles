@@ -17,6 +17,6 @@ return {
       "toml",
       "typescript",
       "yaml",
-    }
+    },
   },
 }

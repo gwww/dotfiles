@@ -15,8 +15,8 @@ return {
             Normal = { bg = c.mantle },
             StatusLine = { bg = c.base },
             Comment = { fg = "#7687a0" },
+            WhichkeyFloat = { bg = "#052457" },
             WinBar = { bg = "#052457" },
-            -- WinBar = { bg = "#073278" },
             ["@tag.attribute"] = { style = {} },
             ["@parameter"] = { style = {} },
           }
@@ -51,27 +51,3 @@ return {
     },
   },
 }
-
--- {
---   "AstroNvim/astrotheme",
---   -- lazy = false,
---   priority = 1000,
---   opts = {
---     terminal_colors = false,
---     palettes = {
---       astrodark = {
---         bg = H.hslToHex(216, 31, 8),
---         purple = "#f3ddb7",
---         red = "#A6FCFF",
---       }
---     },
---
---     highlights = {
---       astrodark = {
---         Comment = { italic = true },
---         CursorLine = { bg = H.hslToHex(216, 31, 12) },
---       }
---     },
---   },
--- },
---

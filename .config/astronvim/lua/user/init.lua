@@ -13,7 +13,7 @@ return {
   lsp = require "user.lsp",
   updater = {
     channel = "nightly",
-    branch = "v3",
-    pin_plugins = nil,
+    -- branch = "v3",
+    -- pin_plugins = nil,
   },
 }

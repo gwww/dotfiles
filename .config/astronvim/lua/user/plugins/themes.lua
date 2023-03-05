@@ -13,6 +13,7 @@ return {
         mocha = function(c)
           return {
             Normal = { bg = c.mantle },
+            SignColumn = { bg = c.base },
             StatusLine = { bg = c.base },
             Comment = { fg = "#7687a0" },
             WhichkeyFloat = { bg = "#052457" },

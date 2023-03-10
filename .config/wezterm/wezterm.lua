@@ -3,6 +3,8 @@ local wt = require("wezterm")
 local config = wt.config_builder()
 config.keys = require("keys")
 
+config.front_end = "WebGpu"
+
 require("events")
 
 config.check_for_updates = false

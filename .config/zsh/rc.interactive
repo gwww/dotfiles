@@ -42,14 +42,13 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Colourized man pages
 # Source: https://github.com/imkira/dotfiles/blob/master/.zsh/colored-man-pages.zsh
-export LESS_TERMCAP_mb=$'\033[01;31m'
-export LESS_TERMCAP_md=$'\033[01;38;5;74m'
-export LESS_TERMCAP_me=$'\033[0m'
-export LESS_TERMCAP_se=$'\033[0m'
-export LESS_TERMCAP_so=$'\033[38;33;246m'
-export LESS_TERMCAP_ue=$'\033[0m'
-export LESS_TERMCAP_us=$'\033[04;38;5;146m'
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[38;33;246m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[04;38;5;146m'
 
-# tabtab source for packages (used by pnpm)
-# uninstall by removing these lines
+# tabtab source for packages (used by pnpm); uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true

@@ -1,5 +1,3 @@
-local H = require "user.utils.hsl"
-
 return {
   {
     "catppuccin/nvim",

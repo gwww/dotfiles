@@ -54,11 +54,11 @@ alias run-help=man
 alias rvm-restart='rvm_reload_flag=1 source '\''/Users/glenn/.rvm/scripts/rvm'\'
 
 local vim=vim
-local neovim=~/bin/nvim-macos/bin/nvim
+# local neovim=~/bin/nvim-macos/bin/nvim
+local neovim=nvim
 alias v=$neovim
 alias vi=$neovim
 alias emacs=$neovim
-alias lv=~/.local/bin/lvim
 
 alias wezterm='/Applications/WezTerm.app/Contents/MacOS/wezterm'
 # alias sign_wezterm='codesign --force --deep --sign - /Applications/WezTerm.app'

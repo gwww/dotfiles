@@ -1,10 +1,10 @@
 return {
-	attributes = {
-		buffer_active = { italic = false },
-	},
+  attributes = {
+    buffer_active = { italic = false },
+  },
 
-	separators = {
-		left = { "", " " },
-		right = { " ", "" },
-	},
+  separators = {
+    left = { "", " " },
+    right = { " ", "" },
+  },
 }

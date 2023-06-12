@@ -7,7 +7,7 @@ return {
       automatic_installation = true,
       ensure_installed = {
         "html",
-        "jsonls",
+        -- "jsonls",
         "pyright",
         "lua_ls",
         "svelte",

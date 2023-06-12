@@ -20,7 +20,7 @@ export HOMEBREW_NO_ENV_HINTS=1
 # xyzzy :)
 export LSCOLORS=Gxfxcxdxbxegedabagacad
 
-export ELKM1_URL=elk://192.168.1.12
+export ELKM1_URL=elk://192.168.2.12
 export UPBPIM_URL=serial:///dev/cu.KeySerial1:4800
 export UPBPIM_URL=tcp://192.168.1.14:7000
 

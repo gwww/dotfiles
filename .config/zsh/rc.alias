@@ -18,6 +18,8 @@ alias gd='git diff'
 alias ghi='git hist'
 alias gst='git status'
 
+alias brewdeps='brew leaves | xargs brew deps --formula --for-each | sed "s/^.*:/$(tput setaf 4)&$(tput sgr0)/"'
+
 alias lg='lazygit'
 # From: https://github.com/Mellbourn/dotfiles
 alias yl='lazygit --use-config-file "$HOME/.config/yadm/lazygit.yml,$HOME/Library/Application Support/lazygit/config.yml" \

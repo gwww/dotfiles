@@ -12,6 +12,7 @@ return {
     sessionoptions = { "buffers", "curdir", "tabpages", "winsize" },
     showtabline = 0, -- Disable the tabline with the buffer list
     timeoutlen = 300,
+    title = false,
     wrap = true, -- Wrap lines
     whichwrap = "b,s,<,>,[,]", -- Motions that will wrap to prev/next line
   },

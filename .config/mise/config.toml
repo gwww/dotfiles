@@ -1,4 +1,4 @@
 [tools]
 node = "21"
-python = ["3.11", "3.12"]
+python = "3.12"
 bun = "1"

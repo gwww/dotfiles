@@ -1,21 +1,3 @@
-set -gx LANG en_CA.UTF-8
-set -gx LC_ALL en_CA.UTF-8
-set -gx LC_CTYPE en_CA.UTF-8
-set -gx PYTHONSTARTUP ~/.config/python/pythonrc
-set -gx PYLINTHOME ~/.local/share/pylint
-set -gx PIP_CONFIG_FILE ~/.config/python/pip.conf
-set -gx GNUPGHOME ~/.local/share/gnupg
-set -gx POETRY_HOME ~/.local/share/pypoetry
-set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc
-set -gx PNPM_HOME /Users/glenn/Library/pnpm
-
-set -gx CUPS_CACHEDIR ~/.local/state/cups
-set -gx CUPS_STATEDIR ~/.local/state/cups
-set -gx CUPS_DATADIR ~/.local/state/cups
-
-set -l brewcmd (path filter /opt/homebrew/bin/brew /usr/local/bin/brew)[1]; and $brewcmd shellenv | source
-set -gx PATH ~/bin $POETRY_HOME/bin $PNPM_HOME $PATH
-
 status is-interactive; or return 0
 
 fish_config theme choose 'Catppuccin Mocha'
@@ -62,8 +44,8 @@ abbr --add xyzzy echo nothing happens
 abbr --add rtx echo Command moved to "mise"
 abbr --add plcat plutil -convert xml1 -o -
 
-# set -gx EDITOR $HOMEBREW_PREFIX/opt/nvim/bin/nvim
-# set -gx VISUAL $HOMEBREW_PREFIX/opt/nvim/bin/nvim
+set -gx EDITOR $HOMEBREW_PREFIX/bin/nvim
+set -gx VISUAL $HOMEBREW_PREFIX/bin/nvim
 
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
 set -gx FZF_DEFAULT_OPTS "--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"

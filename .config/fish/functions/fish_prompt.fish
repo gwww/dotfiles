@@ -1,5 +1,6 @@
 function fish_prompt --description 'Write out the prompt'
-  set -l stat $status
+  test $status -ne 0; and set -l c (set_color red); or set -l c (set_color green)
+  fish_is_root_user; and set -l prompt_char $c'#'; or set -l prompt_char $c'λ'
 
   echo -n (set_color 7df9aa)(date +%H:%M:%S)' '
   test -n "$SSH_CLIENT" -o -n "$SSH_TTY"; and echo -n (hostname -s)' '
@@ -14,7 +15,5 @@ function fish_prompt --description 'Write out the prompt'
     echo -n (set_color $c) $branch' '
   end
 
-  fish_is_root_user; and set -l prompt_char '#'; or set -l prompt_char 'λ'
-  test $stat -ne 0; and set -l c "red"; or set -l c "green"
-  echo -n (set_color $c)$prompt_char (set_color normal)
+  echo -n $prompt_char (set_color normal)
 end

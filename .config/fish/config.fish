@@ -1,3 +1,20 @@
+set -gx LANG en_CA.UTF-8
+set -gx LC_ALL en_CA.UTF-8
+set -gx LC_CTYPE en_CA.UTF-8
+set -gx PYTHONSTARTUP ~/.config/python/pythonrc
+set -gx PYLINTHOME ~/.local/share/pylint
+set -gx PIP_CONFIG_FILE ~/.config/python/pip.conf
+set -gx GNUPGHOME ~/.local/share/gnupg
+set -gx POETRY_HOME ~/.local/share/pypoetry
+set -gx RIPGREP_CONFIG_PATH ~/.config/ripgrep/ripgreprc
+set -gx PNPM_HOME /Users/glenn/Library/pnpm
+
+set -gx CUPS_CACHEDIR ~/.local/state/cups
+set -gx CUPS_STATEDIR ~/.local/state/cups
+set -gx CUPS_DATADIR ~/.local/state/cups
+
+set -l brewcmd (path filter /opt/homebrew/bin/brew /usr/local/bin/brew)[1]; and $brewcmd shellenv | source
+set -gx PATH ~/bin $POETRY_HOME/bin $PNPM_HOME $PATH
 
 status is-interactive; or return 0
 
@@ -45,32 +62,23 @@ abbr --add xyzzy echo nothing happens
 abbr --add rtx echo Command moved to "mise"
 abbr --add plcat plutil -convert xml1 -o -
 
-set -gx EDITOR=$HOMEBREW_PREFIX/opt/nvim/bin/nvim
-set -gx VISUAL=$HOMEBREW_PREFIX/opt/nvim/bin/nvim
+# set -gx EDITOR $HOMEBREW_PREFIX/opt/nvim/bin/nvim
+# set -gx VISUAL $HOMEBREW_PREFIX/opt/nvim/bin/nvim
 
-set -gx FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-set -gx FZF_DEFAULT_OPTS="--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"
-set -gx POETRY_VIRTUALENVS_IN_PROJECT=true
-set -gx LESS="-RMXF"
-set -gx LESSHISTFILE=-
-set -gx HOMEBREW_NO_ENV_HINTS=1
-set -gx VIRTUAL_ENV_DISABLE_PROMPT=1 # Disable python virtualenv activate from modifying prompt
+set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
+set -gx FZF_DEFAULT_OPTS "--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"
+set -gx POETRY_VIRTUALENVS_IN_PROJECT true
+set -gx LESS "-RMXF"
+set -gx LESSHISTFILE -
+set -gx HOMEBREW_NO_ENV_HINTS 1
+set -gx VIRTUAL_ENV_DISABLE_PROMPT 1 # Disable python virtualenv activate from modifying prompt
+set -gx NNN_COLORS '2365'
 
 # xyzzy :)
-set -gx LSCOLORS=Gxfxcxdxbxegedabagacad
+set -gx LSCOLORS Gxfxcxdxbxegedabagacad
 
-set -gx ELKM1_URL=elk://192.168.2.12
-set -gx UPBPIM_URL=serial:///dev/cu.KeySerial1:4800
-set -gx UPBPIM_URL=tcp://192.168.1.14:7000
-
-
-# Colourized man pages
-set -gx LESS_TERMCAP_md (set_color --bold 0087ff) # start bold
-set -gx LESS_TERMCAP_md (set_color --bold 00d7ff) # start bold
-set -gx LESS_TERMCAP_me (set_color normal) # end bold
-set -gx LESS_TERMCAP_us (set_color --underline 5fff5f) # start underline
-set -gx LESS_TERMCAP_ue (set_color normal) # end underline
-# set -gx LESS_TERMCAP_so (set_color --reverse afafd7) # start standout
-# set -gx LESS_TERMCAP_se (set_color normal) # end standout
+set -gx ELKM1_URL elk://192.168.2.12
+set -gx UPBPIM_URL serial:///dev/cu.KeySerial1:4800
+set -gx UPBPIM_URL tcp://192.168.1.14:7000
 
 zoxide init fish | source

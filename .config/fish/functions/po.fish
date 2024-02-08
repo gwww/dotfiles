@@ -1,21 +1,18 @@
 # Wrapper around poetry to provide additional commands
+# Assumes git, poetry, and python are installed.
 
 function _venv_status
   if test -z "$VIRTUAL_ENV"
     echo "Inactive"
   else
-    if test "x$POETRY_ACTIVE" = "x1"
-      echo "Subshell"
-    else
-      echo "Activated"
-    end
+    test "x$POETRY_ACTIVE" = "x1"; and echo "Subshell"; or echo "Activated"
   end
 end
 
 function po
-  if test (count $argv) -eq 1 -a (string length $argv[1]) -ge 2
-    if string match "$argv[1]*" activate >/dev/null
-      set -l script "venv/bin/activate.fish"
+  if test (count $argv) -eq 1 && test (string length $argv[1]) -ge 2
+    if string match "$argv[1]*" "activate" >/dev/null
+      set -l script venv/bin/activate.fish
       set -l git (git rev-parse --show-toplevel 2> /dev/null)/
       set -l SCRIPT_PLACES .$script $git.$script $script $git$script
       # typeset -U SCRIPT_PLACES # remove duplicates from path
@@ -23,12 +20,12 @@ function po
         if test -f $scrpt
           source $scrpt
           echo (set_color green)Activated \'$VIRTUAL_ENV\'(set_color normal)
-          return
+          return 0
         end
       end
       echo (set_color red)No virtual environment found.(set_color normal)
 
-    else if string match "$argv[1]*" deactivate >/dev/null
+    else if string match "$argv[1]*" "deactivate" >/dev/null
       set -l s (_venv_status)
       if test $s = "Activated"
         echo (set_color green)Deactivating \'$VIRTUAL_ENV\'(set_color normal)
@@ -38,9 +35,10 @@ function po
         exit 0
       else
         echo (set_color red)No virtual environment active.(set_color normal)
+        return 1
       end
 
-    else if string match "$argv[1]*" status >/dev/null
+    else if string match "$argv[1]*" "status" >/dev/null
       set -l s (_venv_status)
       if test $s != "Inactive"
         set -l ve " ($VIRTUAL_ENV)"
@@ -49,7 +47,7 @@ function po
       echo Python: (which python) \((python --version)\)
       poetry --version
 
-    else if string match "$argv[1]*" changelog >/dev/null
+    else if string match "$argv[1]*" "changelog" >/dev/null
       curl -vs https://raw.githubusercontent.com/python-poetry/poetry/master/CHANGELOG.md 2>/dev/null | pandoc -f markdown -t plain | more
 
     else

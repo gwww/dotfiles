@@ -12,7 +12,8 @@ function man --wraps man --description 'Format and display manual pages'
     set -lx LESS_TERMCAP_se $normal
     set -lx LESS_TERMCAP_us $underline
     set -lx LESS_TERMCAP_ue $normal
-    set -lx LESS '-R -s'
+    set -lx LESS '-RMXFs'
+    set -lx MANWIDTH 99
 
     command man $argv
 end

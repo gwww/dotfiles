@@ -9,7 +9,7 @@ function _venv_status
   end
 end
 
-function po
+function po --wraps poetry --description 'Add a couple of commands to poetry'
   if test (count $argv) -eq 1 && test (string length $argv[1]) -ge 2
     if string match "$argv[1]*" "activate" >/dev/null
       set -l script venv/bin/activate.fish

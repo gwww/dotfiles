@@ -11,10 +11,11 @@ set -gx LESSHISTFILE -
 set -gx HOMEBREW_NO_ENV_HINTS 1
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1 # Disable python virtualenv activate from modifying prompt
 set -gx NNN_COLORS '2365'
+set -gx BAT_THEME TwoDark
+set -gx BAT_STYLE numbers,changes
 
 # xyzzy :)
 set -gx LSCOLORS Gxfxcxdxbxegedabagacad
 
 set -gx ELKM1_URL elk://192.168.2.12
-set -gx UPBPIM_URL serial:///dev/cu.KeySerial1:4800
 set -gx UPBPIM_URL tcp://192.168.1.14:7000

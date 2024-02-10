@@ -13,7 +13,6 @@ abbr --add ghi git hist
 abbr --add gst git status
 
 # File listing abbreviations...
-abbr --add l ls
 abbr --add la ls -a
 abbr --add ll ls -hl
 abbr --add lal ls -ahl

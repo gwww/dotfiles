@@ -21,7 +21,6 @@ pcall(require, "pre-setup")
 
 lazy.setup({
   { "AstroNvim/AstroNvim", branch = "v4", import = "astronvim.plugins" }, -- TODO: change `branch="v4"` to `version="^4"` on release
-  { "machakann/vim-sandwich", event = "User AstroFile" },
 
   { import = "plugins" }, -- import my plugins
 }, {

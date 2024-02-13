@@ -24,7 +24,7 @@ lazy.setup({
 
   { import = "plugins" }, -- import my plugins
 }, {
-  -- install = { colorscheme = { "astrodark", "habamax" } },
+  install = { colorscheme = { "catppuccin", "astrodark", "habamax" } },
   lockfile = vim.fn.stdpath "data" .. "/lazy-lock.json",
   performance = {
     rtp = {

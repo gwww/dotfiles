@@ -16,7 +16,7 @@ normal["H"] = {
 normal["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
 visual["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
 
-normal["<enter>"] = { "<cmd>noh<enter><cr>", silent = true, desc = "No highlight" }
+normal["<enter>"] = { "<cmd>noh<Enter><cr>", silent = true, desc = "No highlight" }
 normal["<esc>"] = { "<cmd>noh<cr>", silent = true, desc = "No highlight" }
 
 normal["<A-j>"] = { ":m .+1<cr>==", desc = "Move down" }
@@ -30,6 +30,7 @@ return {
   "AstroNvim/astrocore",
   opts = {
     mappings = keymap,
+    on_keys = { auto_hlsearch = false },
     options = {
       opt = {
         wildmode = "longest:full,full",
@@ -45,6 +46,8 @@ return {
         title = false,
         wrap = true, -- Wrap lines
         whichwrap = "b,s,<,>,[,]", -- Motions that will wrap to prev/next line
+
+        showbreak = "↪ ",
       },
     },
   },

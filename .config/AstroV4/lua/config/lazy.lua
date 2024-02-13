@@ -14,6 +14,8 @@ if not lazy_loaded then
   vim.cmd.quit()
 end
 
+vim.g.mapleader = ","
+
 ---@type LazyConfig
 lazy.setup({
   { "AstroNvim/AstroNvim", branch = "v4", import = "astronvim.plugins" }, -- TODO: change `branch="v4"` to `version="^4"` on release

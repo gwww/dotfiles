@@ -1,6 +1,6 @@
 -- Define key mappings as separate table, just so I can organize it better
-local map = { n = {}, i = {}, v = {} }
-local input, normal, visual = map.i, map.n, map.v
+local keymap = { n = {}, i = {}, v = {} }
+local input, normal, visual = keymap.i, keymap.n, keymap.v
 
 normal[";"] = { ":", silent = false, desc = "Quick cmd" }
 normal["<Leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
@@ -29,6 +29,23 @@ input["<A-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up" }
 return {
   "AstroNvim/astrocore",
   opts = {
-    mappings = map,
+    mappings = keymap,
+    options = {
+      opt = {
+        wildmode = "longest:full,full",
+        wildignorecase = true,
+        clipboard = "", -- Don't save to system clipboard; use keymap
+        confirm = true, -- Confirm quit on errors
+        cmdheight = 1, -- Override cmdheight=0
+        linebreak = true, -- Break at "natural" spot on wrap
+        relativenumber = false, -- Override
+        sessionoptions = { "buffers", "curdir", "tabpages", "winsize" },
+        showtabline = 0, -- Disable the tabline with the buffer list
+        timeoutlen = 300,
+        title = false,
+        wrap = true, -- Wrap lines
+        whichwrap = "b,s,<,>,[,]", -- Motions that will wrap to prev/next line
+      },
+    },
   },
 }

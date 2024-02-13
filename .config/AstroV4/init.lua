@@ -17,7 +17,7 @@ if not lazy_loaded then
   vim.cmd.quit()
 end
 
-pcall(require, "global-options")
+pcall(require, "pre-setup")
 
 lazy.setup({
   { "AstroNvim/AstroNvim", branch = "v4", import = "astronvim.plugins" }, -- TODO: change `branch="v4"` to `version="^4"` on release
@@ -34,4 +34,4 @@ lazy.setup({
   },
 })
 
-pcall(require, "polish")
+pcall(require, "post-setup")

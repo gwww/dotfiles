@@ -13,7 +13,7 @@ return {
       status.component.fill(),
       status.component.cmd_info(),
       status.component.fill(),
-      status.component.lsp(),
+      status.component.lsp { lsp_progress = false },
       status.component.treesitter(),
       { provider = " %4l/%L:%-3c %3p%%" },
       status.component.mode { surround = { separator = "right" } },

@@ -1,4 +1,3 @@
-
 function yl --description 'Start lazygit on the .dotfiles bare YADM repo'
     # From: https://github.com/Mellbourn/dotfiles
     lazygit \

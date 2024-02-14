@@ -26,6 +26,7 @@ normal["<A-k>"] = { ":m .-2<cr>==", desc = "Move up" }
 visual["<A-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up" }
 input["<A-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up" }
 
+-- Config Docs: https://github.com/AstroNvim/astrocore#%EF%B8%8F-configuration
 return {
   "AstroNvim/astrocore",
   opts = {

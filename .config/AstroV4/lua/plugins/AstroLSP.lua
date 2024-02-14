@@ -1,6 +1,7 @@
 if true then return {} end -- REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
+-- Config Docs: https://github.com/AstroNvim/astrolsp#%EF%B8%8F-configuration
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",

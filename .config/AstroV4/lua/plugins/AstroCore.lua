@@ -36,6 +36,15 @@ input["<A-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up" }
 return {
   "AstroNvim/astrocore",
   opts = {
+    autocmds = {
+      gwww = { -- Autocmd group
+        {
+          event = { "FileType" },
+          desc = "Remove formatoption 'o'",
+          callback = function() vim.opt.formatoptions = vim.opt.formatoptions - "o" end,
+        },
+      },
+    },
     mappings = keymap,
     on_keys = { auto_hlsearch = false },
     options = {

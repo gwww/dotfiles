@@ -4,7 +4,13 @@ local input, normal, visual = keymap.i, keymap.n, keymap.v
 
 normal[";"] = { ":", silent = false, desc = "Quick cmd" }
 normal["<Leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
-normal["<space>"] = { "<cmd>Telescope buffers<cr>", desc = "Find buffers" }
+-- normal["<space>"] = { "<cmd>Telescope buffers<cr>", desc = "Find buffers" }
+normal["<space>"] = {
+  function()
+    if #vim.t.bufs > 1 then vim.api.nvim_command "Telescope buffers" end
+  end,
+  desc = "Find buffers",
+}
 normal["L"] = {
   function() require("astrocore.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end,
   desc = "Next buffer",

@@ -2,6 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   opts = function(_, opts)
     local builtin = require "telescope.builtin"
+    local actions = require "telescope.actions"
     local state = require "telescope.actions.state"
 
     return require("astrocore").extend_tbl(opts, {
@@ -9,7 +10,7 @@ return {
         prompt_prefix = " λ  ",
         mappings = {
           i = {
-            jk = require("telescope.actions").close,
+            jk = actions.close,
           },
         },
       },
@@ -23,8 +24,8 @@ return {
           -- entry_maker = require("telescope.buffer_entry").gen_from_buffer(),
           mappings = {
             n = {
-              c = require("telescope.actions").delete_buffer,
-              ["<space>"] = require("telescope.actions").select_default,
+              c = actions.delete_buffer,
+              ["<space>"] = actions.select_default,
               ["<C-Space>"] = function() builtin.find_files { default_text = state.get_current_line() } end,
             },
             i = {

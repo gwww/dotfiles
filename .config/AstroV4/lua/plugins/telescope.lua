@@ -20,7 +20,7 @@ return {
           initial_mode = "normal",
           path_display = { "smart" },
           ignore_current_buffer = true,
-          entry_maker = require("telescope.buffer_entry").gen_from_buffer(),
+          -- entry_maker = require("telescope.buffer_entry").gen_from_buffer(),
           mappings = {
             n = {
               c = require("telescope.actions").delete_buffer,

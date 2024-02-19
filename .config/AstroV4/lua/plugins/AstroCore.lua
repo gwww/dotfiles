@@ -10,8 +10,11 @@ normal["<space>"] = {
   end,
   desc = "Find buffers",
 }
+
 normal["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
 visual["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
+normal["<Leader>P"] = { '"*p', desc = "Paste from clipboard" }
+
 normal["<enter>"] = { "<cmd>noh<Enter><cr>", silent = true, desc = "No highlight" }
 normal["<Leader>w"] = { function() require("smart-splits").start_resize_mode() end, desc = "Enter window resize mode" }
 

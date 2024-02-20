@@ -11,6 +11,8 @@ normal["<space>"] = {
   desc = "Find buffers",
 }
 
+normal["H"] = { "<cmd>Inspect<cr>" }
+
 normal["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
 visual["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
 normal["<Leader>P"] = { '"*p', desc = "Paste from clipboard" }

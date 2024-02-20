@@ -4,7 +4,9 @@ return {
     opts.ensure_installed = require("astrocore").list_insert_unique(
       opts.ensure_installed,
       "bash",
+      "c",
       "css",
+      "elixir",
       "fish",
       "gitcommit",
       "gitignore",

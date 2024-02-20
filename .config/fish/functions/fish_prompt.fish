@@ -9,9 +9,15 @@ function fish_prompt --description 'Write out the prompt'
   # Python VENV
   test -n "$VIRTUAL_ENV"; and echo -n (set_color 00d7ff) (string split -r -m 2 -f 2 '/' $VIRTUAL_ENV)' '
    
-  set -l branch (command git branch --show-current 2> /dev/null)
-  if test -n "$branch"
-    test -n "$(git status --porcelain 2> /dev/null)"; and set -l c "red"; or set -l c "green"
+  set -l git_status (git status --branch --porcelain=2 2> /dev/null)
+  if test -n "$git_status"
+    set -l branch (string match -r '^# branch.head (.*)' $git_status)[2]
+    set -l c "yellow"
+    if [ $branch = "(detached)" ]
+      set branch (string match -r '^# branch.oid (.......)' $git_status)[2]
+    else
+      test -z (string match -r '^[^#]' $git_status); and set c "green"; or set c "red"
+    end
     echo -n (set_color $c) $branch' '
   end
 

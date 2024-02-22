@@ -12,10 +12,15 @@ function fish_prompt --description 'Write out the prompt'
   set -l git_status (git status --branch --porcelain=2 2> /dev/null)
   if test -n "$git_status"
     set -l branch (string match -r '^# branch.head (.*)' $git_status)[2]
-    set -l c "yellow"
+    set -l c "brmagenta"
+    set -l updown ""
     if [ $branch = "(detached)" ]
       set branch (string match -r '^# branch.oid (.......)' $git_status)[2]
     else
+      set updown (string match -r '^# branch.ab [+-]?([\d]+) [+-]?([\d]+)' $git_status)
+      if [ "$updown[2] $updown[3]" != "0 0" ]
+        echo -n (set_color bryellow) $updown[2]$updown[3]' '
+      end
       test -z (string match -r '^[^#]' $git_status); and set c "green"; or set c "red"
     end
     echo -n (set_color $c) $branch' '

@@ -2,8 +2,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(
-        opts.ensure_installed,
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
         "html",
         -- "jsonls",
         "pyright",
@@ -11,21 +10,20 @@ return {
         "svelte",
         "tailwindcss",
         "tsserver",
-        "yamlls"
-      )
+        "yamlls",
+      })
     end,
   },
 
   {
     "jay-babu/mason-null-ls.nvim",
     opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(
-        opts.ensure_installed,
+      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
         "black",
         "isort",
         "prettier",
-        "stylua"
-      )
+        "stylua",
+      })
     end,
   },
 

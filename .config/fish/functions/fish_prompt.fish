@@ -4,7 +4,7 @@ function fish_prompt --description 'Write out the prompt'
 
   echo -n (set_color 7df9aa)(date +%H:%M:%S)' '
   test -n "$SSH_CLIENT" -o -n "$SSH_TTY"; and echo -n (hostname -s)' '
-  echo -n (set_color 00ffff) (prompt_pwd -D 2)' '
+  echo -n (set_color 00ffff) (prompt_pwd -D 3)' '
 
   # Python VENV
   test -n "$VIRTUAL_ENV"; and echo -n (set_color 00d7ff) (string split -r -m 2 -f 2 '/' $VIRTUAL_ENV)' '

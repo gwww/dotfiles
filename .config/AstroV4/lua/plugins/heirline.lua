@@ -5,10 +5,10 @@ return {
 
     opts.statusline = {
       hl = { fg = "fg", bg = "bg" },
-      status.component.mode { mode_text = {} },
+      status.component.mode { mode_text = { padding = { left = 1, right = 1 } } },
       status.component.git_branch(),
-      status.component.git_diff(),
       status.component.file_info { filename = {}, filetype = false, file_modified = { padding = { left = 1 } } },
+      status.component.git_diff(),
       status.component.diagnostics(),
       status.component.fill(),
       status.component.cmd_info(),
@@ -41,6 +41,5 @@ return {
         padding = { left = 0 },
       },
     }
-    -- return opts
   end,
 }

@@ -6,8 +6,8 @@ wt.on(
 )
 
 -- This produces a window split horizontally into two equal parts
-wt.on("gui-startup", function()
-    local tab, pane, window = wt.mux.spawn_window({})
+wt.on("gui-startup", function(cmd)
+    local tab, pane, window = wt.mux.spawn_window(cmd or {})
     if wt.gui.screens().active.name == "Built-in Retina Display" then
         window:gui_window():maximize()
     end

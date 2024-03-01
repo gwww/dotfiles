@@ -8,7 +8,7 @@ return {
       status.component.mode { mode_text = {} },
       status.component.git_branch(),
       status.component.git_diff(),
-      status.component.file_info { filename = {}, filetype = false },
+      status.component.file_info { filename = {}, filetype = false, file_modified = { padding = { left = 1 } } },
       status.component.diagnostics(),
       status.component.fill(),
       status.component.cmd_info(),

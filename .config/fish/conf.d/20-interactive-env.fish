@@ -19,5 +19,3 @@ set -gx LSCOLORS Gxfxcxdxbxegedabagacad
 
 set -gx ELKM1_URL elk://192.168.2.12
 set -gx UPBPIM_URL tcp://192.168.1.14:7000
-
-set -gx NVIM_APPNAME AstroV4

@@ -21,6 +21,7 @@ abbr --add lrt ls -hlart
 
 # Misc...
 abbr --add brewdeps 'brew leaves | xargs brew deps --formula --for-each | sed "s/^.*:/$(tput setaf 10)&$(tput sgr0)/"'
+abbr --add brewdump 'brew bundle dump --file - | egrep "$(brew leaves | xargs printf \'"%s"|\')tap|cask"'
 abbr --add lg lazygit
 abbr --add vi nvim
 abbr --add wezterm /Applications/WezTerm.app/Contents/MacOS/wezterm

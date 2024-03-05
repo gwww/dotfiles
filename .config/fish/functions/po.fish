@@ -10,8 +10,8 @@ function _venv_status
 end
 
 function po --wraps poetry --description 'Add a couple of commands to poetry'
-  if test (count $argv) -eq 1 && test (string length $argv[1]) -ge 2
-    if string match "$argv[1]*" "activate" >/dev/null
+  if test (count $argv) -eq 1 && test (string length -- $argv[1]) -ge 2
+    if string match -- "$argv[1]*" "activate" >/dev/null
       set -l script venv/bin/activate.fish
       set -l git (git rev-parse --show-toplevel 2> /dev/null)/
       set -l SCRIPT_PLACES .$script $git.$script $script $git$script
@@ -25,7 +25,7 @@ function po --wraps poetry --description 'Add a couple of commands to poetry'
       end
       echo (set_color red)No virtual environment found.(set_color normal)
 
-    else if string match "$argv[1]*" "deactivate" >/dev/null
+    else if string match -- "$argv[1]*" "deactivate" >/dev/null
       set -l s (_venv_status)
       if test $s = "Activated"
         echo (set_color green)Deactivating \'$VIRTUAL_ENV\'(set_color normal)
@@ -38,7 +38,7 @@ function po --wraps poetry --description 'Add a couple of commands to poetry'
         return 1
       end
 
-    else if string match "$argv[1]*" "status" >/dev/null
+    else if string match -- "$argv[1]*" "status" >/dev/null
       set -l s (_venv_status)
       if test $s != "Inactive"
         set -l ve " ($VIRTUAL_ENV)"
@@ -47,7 +47,7 @@ function po --wraps poetry --description 'Add a couple of commands to poetry'
       echo Python: (which python) \((python --version)\)
       poetry --version
 
-    else if string match "$argv[1]*" "changelog" >/dev/null
+    else if string match -- "$argv[1]*" "changelog" >/dev/null
       curl -vs https://raw.githubusercontent.com/python-poetry/poetry/master/CHANGELOG.md 2>/dev/null | pandoc -f markdown -t plain | more
 
     else

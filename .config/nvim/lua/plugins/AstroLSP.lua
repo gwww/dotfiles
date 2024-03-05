@@ -3,12 +3,6 @@
 return {
   "AstroNvim/astrolsp",
   opts = {
-    -- vim.diagnostics.config({...}))
-    diagnostics = {
-      underline = false,
-      update_in_insert = false,
-    },
-
     -- formatting = {
     --   disabled = {
     --     "lua_ls",

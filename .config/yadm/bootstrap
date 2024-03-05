@@ -79,7 +79,7 @@ if executable_exists mise then
   path=($HOME/.local/share/mise/shims $path)
 
   info "Installing various Python bits"
-  curl -sSL https://install.python-poetry.org | python3 -
+  run 'python -c "$(curl -sSL https://install.python-poetry.org)"'
   run pip install --upgrade pip
   run pip install spritemapper
 

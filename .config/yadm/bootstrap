@@ -1,15 +1,9 @@
 #!/usr/bin/env zsh
 
-source ~/.config/yadm/bootstrap-utils.sh
-
-typeset -A languages_to_install
-languages_to_install=(
-    [python]="3.9.7"
-    [ruby]="latest"
-    [nodejs]="latest"
-)
-
+source $HOME/.config/yadm/bootstrap-utils.sh
 autoload -U colors && colors
+
+path=(/opt/homebrew/bin /usr/local/bin $path)
 
 if [[ $# == 1 && $1 == '--dryrun' ]]; then
   dryrun=1
@@ -17,107 +11,90 @@ else
   dryrun=0
 fi
 
-step "Creating '.local' directory structure..."
-for x in cups poetry asdf vim nvim wezterm virtualenvs zsh; do
+step "Creating '.local/share' directory structure..."
+for x in cups ; do
   run mkdir -p $HOME/.local/share/$x
 done
 
-system_type=$(uname -s)
+step "Installing XCode Command Line Tools..."
+run xcode-select --install
+info "Press enter after XCode tools install is complete..."
+warn "Manual intervention may be required!"
+read
 
+system_type=$(uname -s)
 if [[ "$system_type" == "Darwin" ]]; then
-  step "Installing Homebrew..."
   if ! executable_exists brew; then
-    info "Installing Homebrew..."
+    step "Installing Homebrew..."
     run '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"'
   else
     note "Homebrew already installed."
   fi
 fi
 
-step "Source .zshrc"
-if [[ -f $HOME/.zshrc ]]; then
-  info "Sourcing ~/.zshrc..."
-  run source $HOME/.zshrc
-else
-  error "$HOME/.zshrc not found"
-fi
-
-step "Homebrew install"
 if executable_exists brew; then
-  info "Homebrew installing brews..."
   run brew update
+
+  if [[ -f $HOME/.config/yadm/Brewfile ]]; then
+    step "Installing Homebrew bundle"
+    run brew bundle install --verbose --file=$HOME/.config/yadm/Brewfile
+  fi
+
+  if [[ -f $HOME/.config/yadm/Casks ]]; then
+    step "Installing Homebrew Casks"
+    while IFS= read -r cask; do
+      run brew install $cask
+      run rm -rf /opt/homebrew/Caskroom/$cask
+    done < $HOME/.config/yadm/Casks
+  fi
 
   info "Downloading Mac App Store apps..."
   run brew install mas
   echo "Ensure you are logged into Mac App Store then press enter... " && read
   run mas install 1289583905     # Pixelmator Pro
   run mas install 1295203466     # Microsoft Remote Desktop
-  run mas install 803453959      # Slack
-
-  # info "Installing XCode Command Line Tools..."
-  # info "A dialog may appear; press enter when ready to start installing... "
-  # read
-  # run xcode-select --install
-  # run rehash
-
-  if [[ -f $HOME/.config/yadm/Brewfile ]]; then
-    step "Installing Homebrew bundle..."
-    run brew bundle --verbose --file=~/.config/yadm/Brewfile
-  else
-    error "Cannot brew bundle install; $HOME/.config/yadm/Brewfile not found."
-  fi
+  # run mas install 803453959      # Slack
+  run brew uninstall mas
 fi
 
-step "Updating /etc/shells and setting default shell to zsh..."
-update_shells zsh
+step "Updating /etc/shells and setting default shell to fish..."
+update_shells fish
 update_shells bash
-run chsh -s /usr/local/bin/zsh
-
-step "Setting iTerm2 preferences folder to ~/.config/iTerm2..."
-run defaults write com.googlecode.iterm2 PrefsCustomFolder ~/.config/iTerm2
+run chsh -s /opt/homebrew/bin/fish
 
 step "Hammerspoon setup"
 if [[ -d /Applications/Hammerspoon.app ]]; then
   info "Setting Hammerspoon default config dir and remapping CapsLock..."
   info "A reboot is required for the key mapping to take place"
-  run defaults write org.hammerspoon.Hammerspoon \
-    MJConfigFile "$HOME/.config/hammerspoon/init.lua"
+  run defaults write org.hammerspoon.Hammerspoon MJConfigFile "$HOME/.config/hammerspoon/init.lua"
   run mkdir -p $HOME/Library/LaunchAgents
   run cp ~/.config/yadm/com.glenn.KeyRemapping.plist ~/Library/LaunchAgents
 else
   note "Hammerspoon not installed; not setting it up."
 fi
 
-step "Getting some installers. Unfortunately, the easiest thing is that they are manually installed."
-info "Some are required for future steps in this script (e.g.: GnuPG)."
-install_dmg GnuPG https://sourceforge.net/projects/gpgosx/files/GnuPG-2.3.3.dmg/download
+step "Install using mise"
+if executable_exists mise then
+  run mise install
+  path=($HOME/.local/share/mise/shims $path)
 
-mkdir -p $GNUPGHOME
-chmod 700 $GNUPGHOME
-gpg --list-keys  # Creates the files so that nodejs install will work
-
-step "Languages install using ASDF"
-if executable_exists asdf; then
-  . $(brew --prefix asdf)/asdf.sh
-  for lang in ${(k)languages_to_install}; do
-    install_language $lang $languages_to_install[$lang]
-  done
-
-  info "Installing Python dependency manager 'poetry'..."
-  run 'python -c "$(curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py)"'
+  info "Installing various Python bits"
+  curl -sSL https://install.python-poetry.org | python3 -
   run pip install --upgrade pip
   run pip install spritemapper
 
-  info "Updating Ruby 'gem' installer and 'bundler'..."
-  run gem update --system
+  # info "Updating Ruby 'gem' installer and 'bundler'..."
+  # run gem update --system
 fi
 
 if [[ -f $HOME/.config/yadm/macos.sh ]]; then
-  step "Setting up my MacOS defaults..."
+  step "Setting up MacOS defaults"
   run source ~/.config/yadm/macos.sh
 fi
 
-step "All done with this script! Next steps:"
-info "=> Enter software keys for Alfred, Arq, Forklift, and MS Office"
-info '=> Cleanup Homebrew cache using: "rm -rf $(brew --cache)"'
-info "=> Reboot. Some of this installation requires it."
+step "All done with this script!"
+info "Next steps:"
+info "1. Enter software keys for Alfred, Arq, & Forklift."
+info "2. Download MS Office"
+info '3. Cleanup Homebrew cache using: "rm -rf $(brew --cache)"'
+info "4. Reboot. Some of this installation requires it."

@@ -24,17 +24,6 @@ function run() {
   fi
 }
 
-function install_language() {
-  language=$1
-  version=$2
-
-  info "Installing $language version $version (using asdf)..."
-  run asdf plugin install ${language:l}
-  run asdf install python $version
-  run asdf global python $version
-  run rehash
-}
-
 function install_dmg() {
   dmg_name=$1
   dmg_url=$2
@@ -51,7 +40,7 @@ function install_dmg() {
 
 function update_shells() {
   shell=$1
-  bin=$(brew --prefix ${shell})/bin/${shell}
+  bin=/opt/homebrew/bin/${shell}
 
   if [[ -x ${bin} ]]; then
     if ! grep -q "^${bin}$" /etc/shells; then

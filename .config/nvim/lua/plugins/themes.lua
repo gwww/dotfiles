@@ -23,4 +23,15 @@ return {
       },
     },
   },
+  {
+    "gbprod/nord.nvim",
+    opts = {
+      on_highlights = function(highlights, colors)
+        highlights.Normal.bg = "#272b35"
+        highlights.SignColumn.bg = "#272b35"
+        highlights.CursorLine.bg = "#2e3440"
+        highlights.CursorLine.bg = "#313844"
+      end,
+    },
+  },
 }

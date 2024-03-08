@@ -2,7 +2,8 @@
 return {
   "AstroNvim/astroui",
   opts = {
-    colorscheme = "catppuccin",
+    -- colorscheme = "catppuccin",
+    colorscheme = "nord",
     status = {
       separators = {
         left = { "", " " },

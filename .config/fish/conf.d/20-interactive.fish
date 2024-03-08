@@ -12,7 +12,7 @@ set -gx LESSHISTFILE -
 set -gx HOMEBREW_NO_ENV_HINTS 1
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1 # Disable python virtualenv activate from modifying prompt
 set -gx NNN_COLORS '2365'
-set -gx BAT_THEME TwoDark
+set -gx BAT_THEME Nord
 set -gx BAT_STYLE numbers,changes
 
 # xyzzy :)

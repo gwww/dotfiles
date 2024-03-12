@@ -1,25 +1,17 @@
 -- Config Docs: https://github.com/AstroNvim/astroui#%EF%B8%8F-configuration
-local nord_mods = {
-  Normal = { bg = "#272b35" },
-  SignColumn = { bg = "#272b35" },
-  CursorLine = { bg = "#2e3440" },
-}
+local base, mantle = "#1e2129", "#23262f"
+local color_mods = { Normal = { bg = base }, SignColumn = { bg = base }, CursorLine = { bg = "#23262f" } }
 
 return {
   {
     "AstroNvim/astroui",
     opts = {
-      colorscheme = "onenord",
+      colorscheme = "catppuccin-mocha",
       highlights = {
-        nord = nord_mods,
-        onenord = nord_mods,
+        nord = color_mods,
+        onenord = color_mods,
       },
-      status = {
-        separators = {
-          left = { "", " " },
-          right = { " ", "" },
-        },
-      },
+      status = { separators = { left = { "", " " }, right = { " ", "" } } },
     },
   },
   {
@@ -29,6 +21,7 @@ return {
     priority = 1000,
     opts = {
       dim_inactive = { enabled = true, shade = "light", percentage = 0.25 },
+      color_overrides = { mocha = { base = base, mantle = mantle, crust = "#474747" } },
     },
   },
   { "gbprod/nord.nvim", lazy = true, priority = 1000 },

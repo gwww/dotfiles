@@ -7,9 +7,8 @@ config.font = wt.font_with_fallback {
   { family = "Symbols Nerd Font Mono", scale = 0.80 },
 }
 config.check_for_updates = false
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = "nordfox"
 config.colors = { background = "hsl(223, 15%, 14%)" }
-config.command_palette_font_size = 14.0
 config.command_palette_bg_color = "#b4caf0"
 config.command_palette_fg_color = "#222222"
 config.force_reverse_video_cursor = true

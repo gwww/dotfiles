@@ -7,9 +7,9 @@ osascript -e 'tell application "System Preferences" to quit'
 #
 # ForkLift: Use ForkLift as default file explorer where possible
 #
-defaults write -g NSFileViewer -string com.binarynights.ForkLift-3
+defaults write -g NSFileViewer -string com.binarynights.ForkLift
 defaults write com.apple.LaunchServices/com.apple.launchservices.secure LSHandlers -array-add \
-  '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.binarynights.ForkLift-3";}'
+  '{LSHandlerContentType="public.folder";LSHandlerRoleAll="com.binarynights.ForkLift";}'
 
 #
 # Finder defaults

@@ -1,0 +1,5 @@
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    selectedLineBgColor:
+      - "#323232" # set to `default` to have no background colour

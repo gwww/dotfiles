@@ -1,5 +1,7 @@
 status is-login; or return 0
 
+set -gx XDG_CONFIG_HOME ~/.config
+
 set -gx LANG en_CA.UTF-8
 set -gx LC_ALL en_CA.UTF-8
 set -gx LC_CTYPE en_CA.UTF-8

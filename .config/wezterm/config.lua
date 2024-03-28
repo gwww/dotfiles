@@ -3,8 +3,8 @@ local config = wt.config_builder()
 
 config.font_size = 16.5
 config.font = wt.font_with_fallback {
-  { family = "Inconsolata", weight = "Regular" },
-  { family = "Symbols Nerd Font Mono", scale = 0.80 },
+  { family = "Inconsolata",            weight = "Regular" },
+  { family = "Symbols Nerd Font Mono", scale = 0.85 },
 }
 config.check_for_updates = false
 config.color_scheme = "nordfox"

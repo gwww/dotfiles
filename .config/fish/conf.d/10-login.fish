@@ -24,4 +24,4 @@ set -gx CUPS_STATEDIR ~/.local/state/cups
 set -gx CUPS_DATADIR ~/.local/state/cups
 
 set -l brewcmd (path filter /opt/homebrew/bin/brew /usr/local/bin/brew)[1]; and $brewcmd shellenv | source
-set -gx PATH ~/bin $POETRY_HOME/bin ~/.local/share/mise/shims $PNPM_HOME $PATH
+set -gx PATH ~/local/bin $POETRY_HOME/bin ~/.local/share/mise/shims $PNPM_HOME $PATH

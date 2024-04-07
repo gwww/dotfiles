@@ -21,6 +21,15 @@ set -gx LSCOLORS Gxfxcxdxbxegedabagacad
 set -gx ELKM1_URL elk://192.168.2.12
 set -gx UPBPIM_URL tcp://192.168.1.14:7000
 
+######## Aliases...
+set -l eza eza --group-directories-first
+alias l    "$eza"
+alias l    "$eza --all"
+alias ll   "$eza --long"
+alias lla  "$eza --long --all"
+alias lrt  "$eza --long --sort=time --reverse"
+alias tree "$eza --tree"
+
 ######## Abbreviations...
 
 # Git abbreviations
@@ -34,13 +43,6 @@ abbr --add gco git checkout
 abbr --add gd git diff
 abbr --add ghi git hist
 abbr --add gst git status
-
-# File listing abbreviations...
-abbr --add la ls -a
-abbr --add ll ls -hl
-abbr --add lal ls -ahl
-abbr --add lla ls -hla
-abbr --add lrt ls -hlart
 
 # Misc abbreviations
 abbr --add brewdeps 'brew leaves | xargs brew deps --formula --for-each | sed "s/^.*:/$(tput setaf 10)&$(tput sgr0)/"'

@@ -24,7 +24,8 @@ set -gx UPBPIM_URL tcp://192.168.1.14:7000
 ######## Aliases...
 set -l eza eza --group-directories-first
 alias l    "$eza"
-alias l    "$eza --all"
+alias ls   "$eza"
+alias la   "$eza --all"
 alias ll   "$eza --long"
 alias lla  "$eza --long --all"
 alias lrt  "$eza --long --sort=time --reverse"

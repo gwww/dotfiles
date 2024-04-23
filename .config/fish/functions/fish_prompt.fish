@@ -21,7 +21,7 @@ function fish_prompt --description 'Write out the prompt'
       if [ "$updown[2] $updown[3]" != "0 0" ]
         echo -n (set_color bryellow) $updown[2]$updown[3]' '
       end
-      test -z (string match -r '^[^#]' $git_status); and set c "green"; or set c "red"
+      test -z "$(string match -r '^[^#]' $git_status)"; and set c "green"; or set c "red"
     end
     echo -n (set_color $c) $branch' '
   end

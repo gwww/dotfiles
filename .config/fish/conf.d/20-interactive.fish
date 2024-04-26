@@ -1,11 +1,22 @@
 status is-interactive; or return 0
 
+######## Bootstrap fisher
+set fisher_path $XDG_DATA_HOME/fish
+if not test -f "$fisher_path/functions/fisher.fish"
+  echo Installing fisher...
+  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+  pushd $fisher_path
+  ln -sf functions vendor_functions.d
+  ln -sf conf.d vendor_conf.d
+  ln -sf completions vendor_completions.d
+  popd
+  fisher update
+end
+
 ######## Environment
 set -gx EDITOR $HOMEBREW_PREFIX/bin/nvim
 set -gx VISUAL $HOMEBREW_PREFIX/bin/nvim
 
-set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
-set -gx FZF_DEFAULT_OPTS "--inline-info --color fg:-1,bg:-1,hl:45,fg+:3,bg+:233,hl+:229,info:150,prompt:110,spinner:150,pointer:167,marker:174"
 set -gx POETRY_VIRTUALENVS_IN_PROJECT true
 set -gx LESS "-RMXF"
 set -gx LESSHISTFILE -
@@ -21,7 +32,7 @@ set -gx LSCOLORS Gxfxcxdxbxegedabagacad
 set -gx ELKM1_URL elk://192.168.2.12
 set -gx UPBPIM_URL tcp://192.168.1.14:7000
 
-######## Aliases...
+######## Aliases
 set -l eza eza --group-directories-first
 alias l    "$eza"
 alias ls   "$eza"
@@ -31,7 +42,7 @@ alias lla  "$eza --long --all"
 alias lrt  "$eza --long --sort=time --reverse"
 alias tree "$eza --tree"
 
-######## Abbreviations...
+######## Abbreviations
 
 # Git abbreviations
 abbr --add ga git add
@@ -54,6 +65,6 @@ abbr --add wezterm /Applications/WezTerm.app/Contents/MacOS/wezterm
 abbr --add xyzzy echo nothing happens
 abbr --add plcat plutil -convert xml1 -o -
 
-############ Misc
+############ Setup theme, keybinds, ...
 fish_config theme choose 'Catppuccin Mocha'
 zoxide init fish | source

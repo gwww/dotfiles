@@ -5,13 +5,14 @@ set fisher_path $__fish_user_data_dir
 
 if not test -f "$fisher_path/functions/fisher.fish"
   echo Installing fisher...
-  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 
   pushd $fisher_path
-  not test -L vendor_conf.d; and ln -s conf.d vendor_conf.d
-  not test -L vendor_functions.d; and ln -s functions vendor_functions.d
-  not test -L vendor_completions.d; and ln -s completions vendor_completions.d
+  mkdir -p vendor_{conf,functions,completions}.d
+  not test -L conf.d;      and ln -s vendor_conf.d        conf.d
+  not test -L functions;   and ln -s vendor_functions.d   functions
+  not test -L completions; and ln -s vendor_completions.d completions
   popd
 
+  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
   fisher update
 end

@@ -1,18 +1,5 @@
 status is-interactive; or return 0
 
-######## Bootstrap fisher
-set fisher_path $XDG_DATA_HOME/fish
-if not test -f "$fisher_path/functions/fisher.fish"
-  echo Installing fisher...
-  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-  pushd $fisher_path
-  ln -sf functions vendor_functions.d
-  ln -sf conf.d vendor_conf.d
-  ln -sf completions vendor_completions.d
-  popd
-  fisher update
-end
-
 ######## Environment
 set -gx EDITOR $HOMEBREW_PREFIX/bin/nvim
 set -gx VISUAL $HOMEBREW_PREFIX/bin/nvim

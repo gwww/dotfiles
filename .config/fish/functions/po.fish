@@ -50,6 +50,10 @@ function po --wraps poetry --description 'Add a couple of commands to poetry'
     else if string match -- "$argv[1]*" "changelog" >/dev/null
       curl -vs https://raw.githubusercontent.com/python-poetry/poetry/master/CHANGELOG.md 2>/dev/null | pandoc -f markdown -t plain | more
 
+    else if string match -- "$argv[1]*" "reinstall" >/dev/null
+      rm -rf ~/.local/share/pypoetry
+      curl -sSL https://install.python-poetry.org | sed 's/symlinks=False/symlinks=True/' | python3 -
+
     else
       poetry $argv
     end

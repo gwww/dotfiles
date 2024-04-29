@@ -51,7 +51,10 @@ function po --wraps poetry --description 'Add a couple of commands to poetry'
       curl -vs https://raw.githubusercontent.com/python-poetry/poetry/master/CHANGELOG.md 2>/dev/null | pandoc -f markdown -t plain | more
 
     else if string match -- "$argv[1]*" "reinstall" >/dev/null
+      # This command works for both first time install and reinstall
+      # Cleanup potential previous install
       rm -rf ~/.local/share/pypoetry
+      # From: https://github.com/python-poetry/install.python-poetry.org/issues/24#issuecomment-2016821135
       curl -sSL https://install.python-poetry.org | sed 's/symlinks=False/symlinks=True/' | python3 -
 
     else

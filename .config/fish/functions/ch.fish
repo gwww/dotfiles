@@ -34,6 +34,8 @@ function ch --description 'Display the changelog for the named argument'
       else
         echo "Must specify version of git. e.g.: '2.43.1'"
       end
+    else
+      echo "Changelog for '$argv[1]' not supported."
     end
   else
     echo "Usage: ch <program>"

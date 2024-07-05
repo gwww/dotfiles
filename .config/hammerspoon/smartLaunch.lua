@@ -12,7 +12,7 @@ M.smartLaunch = function(launchApp, name)
 
   if not name then name = launchApp end
 
-  local runningApp = hs.application.get(launchApp)
+  local runningApp = hs.application.find(launchApp, true, true)
 
   if not runningApp then
     hs.alert.show("Launching " .. name, 1.2)

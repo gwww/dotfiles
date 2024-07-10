@@ -49,6 +49,7 @@ abbr --add brewdump 'brew bundle dump --file - | egrep "$(brew leaves | xargs pr
 abbr --add lg lazygit
 abbr --add vi nvim
 abbr --add wezterm /Applications/WezTerm.app/Contents/MacOS/wezterm
+abbr --add ghostty /Applications/Ghostty.app/Contents/MacOS/ghostty
 abbr --add xyzzy echo nothing happens
 abbr --add plcat plutil -convert xml1 -o -
 

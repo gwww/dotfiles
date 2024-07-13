@@ -2,7 +2,7 @@ function fish_prompt --description 'Write out the prompt'
   test $status -ne 0; and set -l c (set_color red); or set -l c (set_color green)
   fish_is_root_user; and set -l prompt_char $c'#'; or set -l prompt_char $c'λ'
 
-  echo -en "\e]133;A\a"
+  # echo -en "\e]133;A\a"
 
   echo -n (set_color 7df9aa)(date +%H:%M:%S)' '
   test -n "$SSH_CLIENT" -o -n "$SSH_TTY"; and echo -n (hostname -s)' '
@@ -31,13 +31,13 @@ function fish_prompt --description 'Write out the prompt'
 
   echo -n $prompt_char (set_color normal)
 
-  echo -en "\e]133;B\a"
+  # echo -en "\e]133;B\a"
 end
 
 function _mark_output_start --on-event fish_preexec
-  printf '\e]133;C;cmdline_url=%s\a' (string escape -- "$argv")
+  # printf '\e]133;C;cmdline_url=%s\a' (string escape -- "$argv")
 end
 
 function _mark_output_end --on-event fish_postexec
-  echo -en "\e]133;D;$status\a"
+  # echo -en "\e]133;D;$status\a"
 end

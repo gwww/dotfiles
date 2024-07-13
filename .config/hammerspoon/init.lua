@@ -43,9 +43,13 @@ hyper.bind {
   },
   {
     key = "w",
-    action = function() sl.smartLaunch("net.kovidgoyal.kitty", "kitty") end,
+    action = function() sl.smartLaunch("com.mitchellh.ghostty", "ghostty") end,
   },
-  { key = "y",     action = hs.toggleConsole },
+  -- {
+  --   key = "w",
+  --   action = function() sl.smartLaunch("net.kovidgoyal.kitty", "kitty") end,
+  -- },
+  { key = "y", action = hs.toggleConsole },
   {
     key = "z",
     action = function() sl.smartLaunch "zoom.us" end,

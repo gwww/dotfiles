@@ -22,7 +22,7 @@ hyper.bind {
   { key = "c", action = caffeinate },
   {
     key = "f",
-    action = function() sl.smartLaunch "Finder" end,
+    action = function() sl.smartLaunch("com.apple.finder", "Finder") end,
   },
   {
     key = "h",
@@ -30,7 +30,7 @@ hyper.bind {
   },
   {
     key = "q",
-    action = function() sl.smartLaunch "Firefox" end,
+    action = function() sl.smartLaunch("org.mozilla.firefox", "Firefox") end,
   },
   { key = "r", action = hs.reload },
   {
@@ -39,20 +39,16 @@ hyper.bind {
   },
   {
     key = "e",
-    action = function() sl.smartLaunch "WezTerm" end,
+    action = function() sl.smartLaunch("com.github.wez.wezterm", "WezTerm") end,
   },
   {
     key = "w",
-    action = function() sl.smartLaunch("com.mitchellh.ghostty", "ghostty") end,
+    action = function() sl.smartLaunch("com.mitchellh.ghostty", "Ghostty") end,
   },
-  -- {
-  --   key = "w",
-  --   action = function() sl.smartLaunch("net.kovidgoyal.kitty", "kitty") end,
-  -- },
-  { key = "y", action = hs.toggleConsole },
+  { key = "y",     action = hs.toggleConsole },
   {
     key = "z",
-    action = function() sl.smartLaunch "zoom.us" end,
+    action = function() sl.smartLaunch("us.zoom.xos", "Zoom") end,
   },
 
   {

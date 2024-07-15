@@ -5,4 +5,5 @@ return {
   { "lukas-reineke/indent-blankline.nvim", enabled = false },
   { "AstroNvim/astrotheme", enabled = false },
   { "RRethy/vim-illuminate", enabled = false },
+  { "max397574/better-escape.nvim", enabled = false },
 }

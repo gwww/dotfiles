@@ -38,6 +38,11 @@ return {
           desc = "Remove formatoption 'o'",
           callback = function() vim.opt.formatoptions = vim.opt.formatoptions - "o" end,
         },
+        {
+          event = { "BufWritePre" },
+          desc = "Format on write",
+          callback = function(args) require("conform").format { bufnr = args.buf } end,
+        },
       },
     },
     -- vim.diagnostics.config({...}))
@@ -59,7 +64,7 @@ return {
         sessionoptions = { "buffers", "curdir", "tabpages", "winsize" },
         showbreak = "↪ ",
         showtabline = 0, -- Disable the tabline with the buffer list
-        timeoutlen = 300,
+        timeoutlen = 500,
         title = false,
         wrap = true, -- Wrap lines
         whichwrap = "b,s,<,>,[,]", -- Motions that will wrap to prev/next line

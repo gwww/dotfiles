@@ -24,6 +24,7 @@ set -l eza eza --group-directories-first
 alias l    "$eza"
 alias ls   "$eza"
 alias la   "$eza --all"
+alias lal  "$eza --long --all"
 alias ll   "$eza --long"
 alias lla  "$eza --long --all"
 alias lrt  "$eza --long --sort=time --reverse"

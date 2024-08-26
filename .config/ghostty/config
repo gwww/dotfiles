@@ -1,8 +1,8 @@
 # vim: set ft=conf:
 
 font-family = "Inconsolata"
-font-family-bold = "Inconsolata"
-font-style-bold = "Medium"
+# font-family-bold = "Inconsolata"
+# font-style-bold = "Medium"
 font-size = 16.5
 font-feature = -calt
 font-feature = -liga 

@@ -22,7 +22,6 @@ pcall(require, "pre-setup")
 
 lazy.setup({
   { "AstroNvim/AstroNvim", version = "^4", import = "astronvim.plugins" },
-  { import = "astrocommunity" },
   { import = "plugins" },
 }, {
   install = { colorscheme = { "nord", "catppuccin", "astrodark", "habamax" } },

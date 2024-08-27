@@ -38,11 +38,6 @@ return {
           desc = "Remove formatoption 'o'",
           callback = function() vim.opt.formatoptions = vim.opt.formatoptions - "o" end,
         },
-        {
-          event = { "BufWritePre" },
-          desc = "Format on write",
-          callback = function(args) require("conform").format { bufnr = args.buf } end,
-        },
       },
     },
     -- vim.diagnostics.config({...}))

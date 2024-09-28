@@ -10,37 +10,27 @@ return {
   },
 
   {
-    "williamboman/mason-lspconfig.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
-        "html",
-        "pyright",
-        "lua_ls",
-        "ruff",
-        "svelte",
-        "tailwindcss",
-        "ts_ls",
-        "yamlls",
-      })
-    end,
-  },
-
-  {
-    "jay-babu/mason-null-ls.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = {
+      ensure_installed = {
+        "html-lsp",
+        "lua-language-server",
         "prettier",
+        "pyright",
+        "ruff",
         "stylua",
-      })
-    end,
+        "svelte-language-server",
+        "tailwindcss-language-server",
+        "typescript-language-server",
+        "yaml-language-server",
+      },
+    },
   },
 
   {
     "stevearc/conform.nvim",
     opts = {
-      format_on_save = {
-        lsp_format = "fallback",
-      },
+      format_on_save = { lsp_format = "fallback" },
       formatters_by_ft = {
         python = { "ruff_organize_imports", "ruff_format" },
       },

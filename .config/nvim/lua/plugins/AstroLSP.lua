@@ -19,7 +19,7 @@ return {
         "ruff",
         "svelte",
         "tailwindcss",
-        "tsserver",
+        "ts_ls",
         "yamlls",
       })
     end,

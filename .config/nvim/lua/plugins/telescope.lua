@@ -9,9 +9,7 @@ return {
       defaults = {
         prompt_prefix = " λ  ",
         mappings = {
-          i = {
-            jk = actions.close,
-          },
+          i = { jk = actions.close },
         },
       },
       pickers = {
@@ -28,19 +26,13 @@ return {
               ["<space>"] = actions.select_default,
               ["<C-Space>"] = function() builtin.find_files { default_text = state.get_current_line() } end,
             },
-            i = {
-              ["<C-Space>"] = function() builtin.find_files { default_text = state.get_current_line() } end,
-            },
+            i = { ["<C-Space>"] = function() builtin.find_files { default_text = state.get_current_line() } end },
           },
         },
         find_files = {
           mappings = {
-            n = {
-              ["<C-Space>"] = function() builtin.buffers { default_text = state.get_current_line() } end,
-            },
-            i = {
-              ["<C-Space>"] = function() builtin.buffers { default_text = state.get_current_line() } end,
-            },
+            n = { ["<C-Space>"] = function() builtin.buffers { default_text = state.get_current_line() } end },
+            i = { ["<C-Space>"] = function() builtin.buffers { default_text = state.get_current_line() } end },
           },
         },
       },

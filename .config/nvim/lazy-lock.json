@@ -3,7 +3,7 @@
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "LuaSnip": { "branch": "master", "commit": "03c8e67eb7293c404845b3982db895d59c0d1538" },
   "aerial.nvim": { "branch": "master", "commit": "fa75fd0286788c6c5a65ec46aafbfaf7b7826b74" },
-  "astrocore": { "branch": "main", "commit": "b2caf55bd935f7aca1e0405bb89edefa006905e1" },
+  "astrocore": { "branch": "main", "commit": "d687e4b66b93783dfdafee1e64d363b7706056ff" },
   "astrolsp": { "branch": "main", "commit": "5d92b868586c4b79298003b307e8dc3e9a357816" },
   "astroui": { "branch": "main", "commit": "7adeb60d76939d3cd66c9852e0e8621bd42014dd" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },

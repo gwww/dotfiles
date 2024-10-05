@@ -48,6 +48,12 @@ return {
     mappings = keymap,
     on_keys = { auto_hlsearch = false },
     options = {
+      g = {
+        loaded_node_provider = 0,
+        loaded_perl_provider = 0,
+        loaded_python3_provider = 0,
+        loaded_ruby_provider = 0,
+      },
       opt = {
         wildmode = "longest:full,full",
         wildignorecase = true,

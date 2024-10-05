@@ -1,11 +1,8 @@
 # vim: set ft=conf:
 
 font-family = "Inconsolata"
-# font-family-bold = "Inconsolata"
-# font-style-bold = "Medium"
 font-size = 16.5
 font-feature = -calt
-font-feature = -liga 
 font-feature = -dlig
 
 background = #1e2129
@@ -16,7 +13,6 @@ mouse-hide-while-typing = true
 
 macos-titlebar-style = tabs
 macos-non-native-fullscreen = true
-# window-decoration = false
 
 # fullscreen = true
 window-height = 1000
@@ -24,5 +20,3 @@ window-width = 1000
 
 keybind = cmd+right=text:\x05
 keybind = cmd+left=text:\x01
-keybind = alt+left=esc:b
-keybind = alt+right=esc:f

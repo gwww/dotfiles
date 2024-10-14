@@ -5,6 +5,21 @@ return {
   dependencies = { "rafamadriz/friendly-snippets" },
   opts = {
     highlight = { use_nvim_cmp_as_default = true },
+    windows = {
+      autocomplete = {
+        border = "rounded",
+        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+      },
+      documentation = {
+        auto_show = true,
+        border = "rounded",
+        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+      },
+      signature_help = {
+        border = "rounded",
+        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
+      },
+    },
   },
   specs = {
     -- disable built in completion plugins

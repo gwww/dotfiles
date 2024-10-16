@@ -1,6 +1,6 @@
 # vim: set ft=conf:
 
-font-family = "Inconsolata"
+font-family = Inconsolata
 font-size = 16.5
 font-feature = -calt
 font-feature = -dlig

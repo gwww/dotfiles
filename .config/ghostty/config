@@ -13,7 +13,6 @@ mouse-hide-while-typing = true
 
 macos-titlebar-style = tabs
 macos-non-native-fullscreen = true
-macos-option-as-alt = left
 
 # fullscreen = true
 window-height = 1000

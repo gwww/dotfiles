@@ -4,6 +4,7 @@ return {
   version = "v0.*",
   dependencies = { "rafamadriz/friendly-snippets" },
   opts = {
+    keymap = { preset = "super-tab" },
     highlight = { use_nvim_cmp_as_default = true },
     windows = {
       autocomplete = {

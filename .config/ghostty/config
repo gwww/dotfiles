@@ -20,3 +20,4 @@ window-width = 1000
 
 keybind = cmd+right=text:\x05
 keybind = cmd+left=text:\x01
+keybind = cmd+backspace=text:\x15

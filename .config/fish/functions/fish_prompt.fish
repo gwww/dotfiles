@@ -2,9 +2,8 @@ function fish_prompt --description 'Write out the prompt'
   test $status -ne 0; and set -l c (set_color red); or set -l c (set_color green)
   fish_is_root_user; and set -l prompt_char $c'#'; or set -l prompt_char $c'λ'
 
-  echo -n (set_color 7df9aa)(date +%H:%M:%S)' '
   test -n "$SSH_CLIENT" -o -n "$SSH_TTY"; and echo -n (hostname -s)' '
-  echo -n (set_color 00ffff) (prompt_pwd -D 3)' '
+  echo -n (set_color 00ffff)(prompt_pwd -D 3)' '
 
   # Python VENV
   test -n "$VIRTUAL_ENV"; and echo -n (set_color 00d7ff) (string split -r -m 2 -f 2 '/' $VIRTUAL_ENV)' '

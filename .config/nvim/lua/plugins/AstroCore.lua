@@ -43,7 +43,6 @@ return {
     -- vim.diagnostics.config({...}))
     diagnostics = {
       underline = false,
-      update_in_insert = false,
     },
     mappings = keymap,
     on_keys = { auto_hlsearch = false },

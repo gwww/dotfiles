@@ -4,9 +4,7 @@ return {
     "AstroNvim/astroui",
     opts = {
       colorscheme = "nordfox",
-      highlights = {
-        nordfox = { CursorLine = { bg = "#23262f" } },
-      },
+      highlights = { nordfox = { CursorLine = { bg = "#23262f" } } },
       status = { separators = { left = { "", " " }, right = { " ", "" } } },
     },
   },
@@ -15,11 +13,7 @@ return {
     lazy = true,
     priority = 1000,
     opts = {
-      palettes = {
-        nordfox = {
-          bg1 = "#1e2129",
-        },
-      },
+      palettes = { nordfox = { bg1 = "#1e2129" } },
     },
   },
 }

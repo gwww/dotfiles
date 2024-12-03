@@ -3,20 +3,32 @@ return {
   event = "InsertEnter",
   version = "v0.*",
   dependencies = { "rafamadriz/friendly-snippets" },
+
+  --- @module 'blink.cmp'
+  --- @type blink.cmp.Config
   opts = {
-    keymap = { preset = "super-tab" },
-    highlight = { use_nvim_cmp_as_default = true },
-    windows = {
-      autocomplete = {
+    --- @diagnostic disable: missing-fields
+    keymap = {
+      preset = "super-tab",
+    },
+    appearance = {
+      use_nvim_cmp_as_default = true,
+    },
+    completion = {
+      menu = {
         border = "rounded",
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
       },
       documentation = {
         auto_show = true,
-        border = "rounded",
-        winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        window = {
+          border = "rounded",
+          winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+        },
       },
-      signature_help = {
+    },
+    signature = {
+      window = {
         border = "rounded",
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
       },

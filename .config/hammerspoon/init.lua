@@ -30,7 +30,8 @@ hyper.bind {
   },
   {
     key = "q",
-    action = function() sl.smartLaunch("org.mozilla.firefox", "Firefox") end,
+    -- action = function() sl.smartLaunch("org.mozilla.firefox", "Firefox") end,
+    action = function() sl.smartLaunch("org.mozilla.com.zen.browser", "Zen Browser") end,
   },
   { key = "r", action = hs.reload },
   {
@@ -38,14 +39,10 @@ hyper.bind {
     action = function() hs.eventtap.keyStrokes(hs.pasteboard.getContents()) end,
   },
   {
-    key = "e",
-    action = function() sl.smartLaunch("com.github.wez.wezterm", "WezTerm") end,
-  },
-  {
     key = "w",
     action = function() sl.smartLaunch("com.mitchellh.ghostty", "Ghostty") end,
   },
-  { key = "y",     action = hs.toggleConsole },
+  { key = "y", action = hs.toggleConsole },
   {
     key = "z",
     action = function() sl.smartLaunch("us.zoom.xos", "Zoom") end,

@@ -19,6 +19,7 @@ macos-option-as-alt = true
 window-height = 1000
 window-width = 1000
 
-keybind = cmd+right=text:\x05
-keybind = cmd+left=text:\x01
 keybind = cmd+backspace=text:\x15
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
+window-save-state = always

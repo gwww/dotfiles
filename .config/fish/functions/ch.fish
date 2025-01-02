@@ -16,6 +16,8 @@ function ch --description 'Display the changelog for the named argument'
       _md_file https://raw.githubusercontent.com/sharkdp/fd/master/CHANGELOG.md
     else if string match -- "$argv[1]" "fzf" >/dev/null
       _md_file https://raw.githubusercontent.com/junegunn/fzf/master/CHANGELOG.md
+    else if string match -- "$argv[1]" "jj" >/dev/null
+      _md_file https://raw.githubusercontent.com/jj-vcs/jj/refs/heads/main/CHANGELOG.md
     else if string match -- "$argv[1]" "mise" >/dev/null
       _md_file https://raw.githubusercontent.com/jdx/mise/main/CHANGELOG.md
     else if string match -- "$argv[1]" "poetry" >/dev/null

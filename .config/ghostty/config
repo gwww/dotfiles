@@ -2,8 +2,8 @@
 
 font-family = Inconsolata
 font-size = 16.5
-font-feature = -calt
-font-feature = -dlig
+font-feature = -calt, -dlig
+# font-feature = -dlig
 
 background = #1e2129
 adjust-cell-height = 10%

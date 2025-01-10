@@ -31,7 +31,7 @@ hyper.bind {
   {
     key = "q",
     -- action = function() sl.smartLaunch("org.mozilla.firefox", "Firefox") end,
-    action = function() sl.smartLaunch("org.mozilla.com.zen.browser", "Zen Browser") end,
+    action = function() sl.smartLaunch("app.zen-browser.zen", "Zen Browser") end,
   },
   { key = "r", action = hs.reload },
   {

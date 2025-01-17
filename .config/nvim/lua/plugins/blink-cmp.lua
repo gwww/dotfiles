@@ -1,18 +1,52 @@
+local function has_words_before()
+  local line, col = (unpack or table.unpack)(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+end
+
 return {
-  "Saghen/blink.cmp",
-  event = "InsertEnter",
+  "saghen/blink.cmp",
+  dependencies = "rafamadriz/friendly-snippets",
   version = "v0.*",
-  dependencies = { "rafamadriz/friendly-snippets" },
+  opts_extend = { "sources.default" },
 
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
   opts = {
-    --- @diagnostic disable: missing-fields
     keymap = {
-      preset = "super-tab",
-    },
-    appearance = {
-      use_nvim_cmp_as_default = true,
+      -- preset = "super-tab",
+      ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<Up>"] = { "select_prev", "fallback" },
+      ["<Down>"] = { "select_next", "fallback" },
+      ["<C-n>"] = { "select_next", "show" },
+      ["<C-p>"] = { "select_prev", "show" },
+      ["<C-j>"] = { "select_next", "fallback" },
+      ["<C-k>"] = { "select_prev", "fallback" },
+      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-e>"] = { "hide", "fallback" },
+      ["<CR>"] = { "accept", "fallback" },
+      ["<Tab>"] = {
+        function(cmp)
+          if cmp.is_visible() then
+            return cmp.select_next()
+          elseif cmp.snippet_active { direction = 1 } then
+            return cmp.snippet_forward()
+          elseif has_words_before() then
+            return cmp.show()
+          end
+        end,
+        "fallback",
+      },
+      ["<S-Tab>"] = {
+        function(cmp)
+          if cmp.is_visible() then
+            return cmp.select_prev()
+          elseif cmp.snippet_active { direction = -1 } then
+            return cmp.snippet_backward()
+          end
+        end,
+        "fallback",
+      },
     },
     completion = {
       menu = {
@@ -20,7 +54,6 @@ return {
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
       },
       documentation = {
-        auto_show = true,
         window = {
           border = "rounded",
           winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
@@ -32,6 +65,9 @@ return {
         border = "rounded",
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
       },
+    },
+    sources = {
+      cmdline = {},
     },
   },
   specs = {

@@ -44,7 +44,6 @@ return {
           end,
           desc = "Find files",
         }
-        maps.n["<Leader>e"] = maps.n["<Leader>ff"]
         maps.n["<Leader>fF"] = {
           function() require("snacks").picker.files { hidden = true, ignored = true } end,
           desc = "Find all files",
@@ -59,6 +58,7 @@ return {
         maps.n["<Leader>fr"] = { function() require("snacks").picker.registers() end, desc = "Find registers" }
         maps.n["<Leader>fs"] = { function() require("snacks").picker.smart() end, desc = "Find buffers/recent/files" }
         maps.n["<Leader>ft"] = { function() require("snacks").picker.colorschemes() end, desc = "Find themes" }
+        maps.n["<Leader>fu"] = { function() require("snacks").picker.undo() end, desc = "Undo list" }
         if vim.fn.executable "rg" == 1 then
           maps.n["<Leader>fw"] = { function() require("snacks").picker.grep() end, desc = "Find words" }
           maps.n["<Leader>fW"] = {
@@ -68,6 +68,21 @@ return {
         end
         maps.n["<Leader>lD"] = { function() require("snacks").picker.diagnostics() end, desc = "Search diagnostics" }
         maps.n["<Leader>ls"] = { function() require("snacks").picker.lsp_symbols() end, desc = "Search symbols" }
+
+        maps.n["<Leader>e"] = maps.n["<Leader>ff"]
+        maps.n["<space>"] = {
+          function()
+            if #vim.t.bufs > 1 then
+              require("snacks").picker.buffers {
+                current = false,
+                win = {
+                  input = { keys = { ["<Space>"] = { "confirm", mode = { "n", "i" } } } },
+                },
+              }
+            end
+          end,
+          desc = "Find buffers",
+        }
       end,
     },
     {

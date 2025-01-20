@@ -6,6 +6,12 @@ return {
   opts = { picker = { ui_select = true } },
   specs = {
     {
+      "AstroNvim/astroui",
+      opts = {
+        highlights = { init = { SnacksPickerDir = { fg = "#626875" } } },
+      },
+    },
+    {
       "AstroNvim/astrocore",
       opts = function(_, opts)
         local maps = opts.mappings

@@ -10,7 +10,6 @@ return {
     maps.n["H"] = { "<cmd>Inspect<cr>" }
     maps.n["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
     maps.v["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
-    -- maps.n["<Leader>P"] = { '"*p', desc = "Paste from clipboard" }
     maps.n["<enter>"] = { "<cmd>noh<Enter><cr>", silent = true, desc = "No highlight" }
     maps.n["<Leader>w"] =
       { function() require("smart-splits").start_resize_mode() end, desc = "Enter window resize mode" }
@@ -26,7 +25,6 @@ return {
     o.g.loaded_perl_provider = 0
     o.g.loaded_ruby_provider = 0
     o.g.loaded_python_provider = 0
-
     o.opt.clipboard = "" -- Don't save to system clipboard; use keymap
     o.opt.cmdheight = 1 -- Override cmdheight=0
     o.opt.relativenumber = false -- Override
@@ -37,6 +35,6 @@ return {
     o.opt.whichwrap = "b,s,<,>,[,]" -- Motions that will wrap to prev/next line
     o.opt.wildignorecase = true
     o.opt.wildmode = "longest:full,full"
-    o.opt.wrap = true -- Wrap lines
+    o.opt.wrap = true
   end,
 }

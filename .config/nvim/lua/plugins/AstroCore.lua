@@ -1,74 +1,42 @@
--- Define key mappings as separate table, just so I can organize it better
-local keymap = { n = {}, i = {}, v = {} }
-local input, normal, visual = keymap.i, keymap.n, keymap.v
-
-normal[";"] = { ":", silent = false, desc = "Enter command mode" }
-normal["<Leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
-normal["<space>"] = {
-  function()
-    if #vim.t.bufs > 1 then vim.api.nvim_command "Telescope buffers" end
-  end,
-  desc = "Find buffers",
-}
-
-normal["H"] = { "<cmd>Inspect<cr>" }
-
-normal["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
-visual["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
-normal["<Leader>P"] = { '"*p', desc = "Paste from clipboard" }
-
-normal["<enter>"] = { "<cmd>noh<Enter><cr>", silent = true, desc = "No highlight" }
-normal["<Leader>w"] = { function() require("smart-splits").start_resize_mode() end, desc = "Enter window resize mode" }
-
-normal["<A-j>"] = { ":m .+1<cr>==", desc = "Move down" }
-visual["<A-j>"] = { ":m '>+1<cr>gv=gv", desc = "Move down" }
-input["<A-j>"] = { "<Esc>:m .+1<cr>==gi", desc = "Move down" }
-normal["<A-k>"] = { ":m .-2<cr>==", desc = "Move up" }
-visual["<A-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up" }
-input["<A-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up" }
-
 -- Config Docs: https://github.com/AstroNvim/astrocore#%EF%B8%8F-configuration
 return {
   "AstroNvim/astrocore",
-  opts = {
-    autocmds = {
-      gwww = { -- Autocmd group
-        {
-          event = { "FileType" },
-          desc = "Remove formatoption 'o'",
-          callback = function() vim.opt.formatoptions = vim.opt.formatoptions - "o" end,
-        },
-      },
-    },
-    -- vim.diagnostics.config({...}))
-    diagnostics = {
-      underline = false,
-    },
-    mappings = keymap,
-    on_keys = { auto_hlsearch = false },
-    options = {
-      g = {
-        loaded_node_provider = 0,
-        loaded_perl_provider = 0,
-        loaded_python3_provider = 0,
-        loaded_ruby_provider = 0,
-      },
-      opt = {
-        wildmode = "longest:full,full",
-        wildignorecase = true,
-        clipboard = "", -- Don't save to system clipboard; use keymap
-        confirm = true, -- Confirm quit on errors
-        cmdheight = 1, -- Override cmdheight=0
-        linebreak = true, -- Break at "natural" spot on wrap
-        relativenumber = false, -- Override
-        sessionoptions = { "buffers", "curdir", "tabpages", "winsize" },
-        showbreak = "↪ ",
-        showtabline = 0, -- Disable the tabline with the buffer list
-        timeoutlen = 500,
-        title = false,
-        wrap = true, -- Wrap lines
-        whichwrap = "b,s,<,>,[,]", -- Motions that will wrap to prev/next line
-      },
-    },
-  },
+  opts = function(_, opts)
+    opts.diagnostics.underline = false
+    opts.on_keys.auto_hlsearch = false
+
+    local maps = opts.mappings
+    maps.n[";"] = { ":", silent = false, desc = "Enter command mode" }
+    maps.n["H"] = { "<cmd>Inspect<cr>" }
+    maps.n["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
+    maps.v["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
+    -- maps.n["<Leader>P"] = { '"*p', desc = "Paste from clipboard" }
+    maps.n["<enter>"] = { "<cmd>noh<Enter><cr>", silent = true, desc = "No highlight" }
+    maps.n["<Leader>w"] =
+      { function() require("smart-splits").start_resize_mode() end, desc = "Enter window resize mode" }
+    maps.n["<A-j>"] = { ":m .+1<cr>==", desc = "Move down" }
+    maps.v["<A-j>"] = { ":m '>+1<cr>gv=gv", desc = "Move down" }
+    maps.i["<A-j>"] = { "<Esc>:m .+1<cr>==gi", desc = "Move down" }
+    maps.n["<A-k>"] = { ":m .-2<cr>==", desc = "Move up" }
+    maps.v["<A-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up" }
+    maps.i["<A-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up" }
+
+    local o = opts.options
+    o.g.loaded_node_provider = 0
+    o.g.loaded_perl_provider = 0
+    o.g.loaded_ruby_provider = 0
+    o.g.loaded_python_provider = 0
+
+    o.opt.clipboard = "" -- Don't save to system clipboard; use keymap
+    o.opt.cmdheight = 1 -- Override cmdheight=0
+    o.opt.relativenumber = false -- Override
+    o.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
+    o.opt.showbreak = "↪ "
+    o.opt.showtabline = 0 -- Disable the tabline with the buffer list
+    o.opt.title = false
+    o.opt.whichwrap = "b,s,<,>,[,]" -- Motions that will wrap to prev/next line
+    o.opt.wildignorecase = true
+    o.opt.wildmode = "longest:full,full"
+    o.opt.wrap = true -- Wrap lines
+  end,
 }

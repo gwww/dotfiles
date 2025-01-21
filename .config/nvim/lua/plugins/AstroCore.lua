@@ -10,7 +10,7 @@ return {
     maps.n["H"] = { "<cmd>Inspect<cr>" }
     maps.n["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
     maps.v["<Leader>y"] = { '"*y', desc = "Yank to clipboard" }
-    maps.n["<enter>"] = { "<cmd>noh<Enter><cr>", silent = true, desc = "No highlight" }
+    maps.n["<Enter>"] = { "<cmd>noh<Enter><cr>", silent = true, desc = "No highlight" }
     maps.n["<Leader>w"] =
       { function() require("smart-splits").start_resize_mode() end, desc = "Enter window resize mode" }
     maps.n["<A-j>"] = { ":m .+1<cr>==", desc = "Move down" }

@@ -81,9 +81,7 @@ return {
             if #vim.t.bufs > 1 then
               require("snacks").picker.buffers {
                 current = false,
-                win = {
-                  input = { keys = { ["<Space>"] = { "confirm", mode = { "n", "i" } } } },
-                },
+                win = { input = { keys = { ["<Space>"] = { "confirm", mode = { "n", "i" } } } } },
               }
             end
           end,

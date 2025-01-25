@@ -45,7 +45,10 @@ return {
         maps.n["<Leader>fo"] = { function() p.recent() end, desc = "Find old files" }
         maps.n["<Leader>fO"] = { function() p.recent { cwd = true } end, desc = "Find old files (cwd)" }
         maps.n["<Leader>fr"] = { function() p.registers() end, desc = "Find registers" }
-        maps.n["<Leader>fs"] = { function() p.smart() end, desc = "Find buffers/recent/files" }
+        maps.n["<Leader>fs"] = {
+          function() p.smart { multi = { { source = "buffers", current = false }, "files" } } end,
+          desc = "Find buffers/files",
+        }
         maps.n["<Leader>ft"] = { function() p.colorschemes() end, desc = "Find themes" }
         maps.n["<Leader>fu"] = { function() p.undo() end, desc = "Undo list" }
         if vim.fn.executable "rg" == 1 then

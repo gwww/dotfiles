@@ -38,4 +38,19 @@ return {
       },
     })
   end,
+  specs = {
+    {
+      "AstroNvim/astrocore",
+      opts = function(_, opts)
+        local maps = opts.mappings
+        maps.n["<Leader>e"] = { "<cmd>Telescope find_files<cr>", desc = "Find files" }
+        maps.n["<space>"] = {
+          function()
+            if #vim.t.bufs > 1 then vim.api.nvim_command "Telescope buffers" end
+          end,
+          desc = "Find buffers",
+        }
+      end,
+    },
+  },
 }

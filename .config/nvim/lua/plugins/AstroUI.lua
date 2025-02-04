@@ -13,7 +13,8 @@ return {
     lazy = true,
     priority = 1000,
     opts = {
-      palettes = { nordfox = { bg1 = "#1e2129" } },
+      -- palettes = { nordfox = { bg1 = "#1e2129" } },
+      palettes = { nordfox = { bg1 = "#16181e" } },
     },
   },
 }

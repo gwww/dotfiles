@@ -46,7 +46,8 @@ return {
         maps.n["<Leader>fO"] = { function() p.recent { cwd = true } end, desc = "Find old files (cwd)" }
         maps.n["<Leader>fr"] = { function() p.registers() end, desc = "Find registers" }
         maps.n["<Leader>fs"] = {
-          function() p.smart { multi = { { source = "buffers", current = false }, "files" } } end,
+          -- function() p.smart { multi = { { source = "buffers", current = false }, "files" } } end,
+          function() p.smart { multi = { { source = "buffers", current = false } } } end,
           desc = "Find buffers/files",
         }
         maps.n["<Leader>ft"] = { function() p.colorschemes() end, desc = "Find themes" }
@@ -65,6 +66,11 @@ return {
             if #vim.t.bufs > 1 then
               p.buffers {
                 current = false,
+                preview = "none",
+                layout = {
+                  preset = "vscode",
+                },
+                on_show = function() vim.cmd.stopinsert() end,
                 win = { input = { keys = { ["<Space>"] = { "confirm", mode = { "n", "i" } } } } },
               }
             end
@@ -112,6 +118,7 @@ return {
         window = { mappings = { F = "find_in_dir" } },
       },
     },
+    -- { "folke/snacks.nvim", enabled = false },
     { "nvim-telescope/telescope.nvim", enabled = false },
     { "stevearc/dressing.nvim", opts = { select = { enabled = false } } },
   },

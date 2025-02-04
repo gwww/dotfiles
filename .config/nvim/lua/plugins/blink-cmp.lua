@@ -13,16 +13,8 @@ return {
   --- @type blink.cmp.Config
   opts = {
     keymap = {
-      -- preset = "super-tab",
+      preset = "super-tab",
       ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
-      ["<Up>"] = { "select_prev", "fallback" },
-      ["<Down>"] = { "select_next", "fallback" },
-      ["<C-n>"] = { "select_next", "show" },
-      ["<C-p>"] = { "select_prev", "show" },
-      ["<C-j>"] = { "select_next", "fallback" },
-      ["<C-k>"] = { "select_prev", "fallback" },
-      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
-      ["<C-d>"] = { "scroll_documentation_down", "fallback" },
       ["<C-e>"] = { "hide", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = {

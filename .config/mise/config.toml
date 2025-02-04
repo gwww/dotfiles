@@ -2,7 +2,7 @@
 MISE_NODE_VERIFY = "false"
 
 [tools]
-node = "21"
+node = "23"
 python = "3.12"
 bun = "1"
 go = "1.22"

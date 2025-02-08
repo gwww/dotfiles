@@ -27,7 +27,7 @@ return {
         maps.n["<Leader>f'"] = { function() p.marks() end, desc = "Find marks" }
         maps.n["<Leader>fl"] = { function() p.lines() end, desc = "Find lines" }
         maps.n["<Leader>fa"] = {
-          function() p.files { cwd = vim.fn.stdpath "config", desc = "Config Files" } end,
+          function() p.files { dirs = { vim.fn.stdpath "config" }, desc = "Config Files" } end,
           desc = "Find AstroNvim config files",
         }
         maps.n["<Leader>fb"] = { function() p.buffers() end, desc = "Find buffers" }
@@ -42,8 +42,8 @@ return {
         maps.n["<Leader>fh"] = { function() p.help() end, desc = "Find help" }
         maps.n["<Leader>fk"] = { function() p.keymaps() end, desc = "Find keymaps" }
         maps.n["<Leader>fm"] = { function() p.man() end, desc = "Find man" }
+        maps.n["<Leader>fn"] = { function() p.notifications() end, desc = "Notification history" }
         maps.n["<Leader>fo"] = { function() p.recent() end, desc = "Find old files" }
-        maps.n["<Leader>fO"] = { function() p.recent { cwd = true } end, desc = "Find old files (cwd)" }
         maps.n["<Leader>fr"] = { function() p.registers() end, desc = "Find registers" }
         maps.n["<Leader>fs"] = {
           -- function() p.smart { multi = { { source = "buffers", current = false }, "files" } } end,
@@ -80,31 +80,6 @@ return {
       end,
     },
     {
-      "folke/todo-comments.nvim",
-      optional = true,
-      dependencies = { "folke/snacks.nvim" },
-      specs = {
-        {
-          "AstroNvim/astrocore",
-          opts = {
-            mappings = {
-              n = {
-                ["<Leader>fT"] = {
-                  function()
-                    if not package.loaded["todo-comments"] then -- make sure to load todo-comments
-                      require("lazy").load { plugins = { "todo-comments.nvim" } }
-                    end
-                    p.todo_comments()
-                  end,
-                  desc = "Todo Comments",
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-    {
       "nvim-neo-tree/neo-tree.nvim",
       optional = true,
       opts = {
@@ -112,7 +87,7 @@ return {
           find_in_dir = function(state)
             local node = state.tree:get_node()
             local path = node.type == "file" and node:get_parent_id() or node:get_id()
-            p.files { cwd = path }
+            require("snacks").picker.files { cwd = path }
           end,
         },
         window = { mappings = { F = "find_in_dir" } },

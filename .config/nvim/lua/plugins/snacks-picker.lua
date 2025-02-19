@@ -15,6 +15,22 @@ return {
       opts = function(_, opts)
         local maps = opts.mappings
         maps.n["<Leader>e"] = maps.n["<Leader>ff"]
+        maps.n["<Leader>E"] = {
+          function()
+            local explorer = require("snacks").picker.get { source = "explorer" }
+            if #explorer == 0 then
+              require("snacks").picker.explorer {
+                win = {
+                  input = { keys = { ["<Esc>"] = false } },
+                  list = { keys = { ["<Esc>"] = false } },
+                },
+              }
+            else
+              explorer[1]:focus()
+            end
+          end,
+          desc = "Snacks Explorer",
+        }
         maps.n["<space>"] = {
           function()
             if #vim.t.bufs > 1 then
@@ -31,5 +47,6 @@ return {
         }
       end,
     },
+    { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   },
 }

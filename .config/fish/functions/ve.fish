@@ -47,7 +47,7 @@ function __status
     end
   end
   echo Python: (which python) \((python --version)\)
-  uv --version
+  echo uv: (which uv) \((uv --version)\)
 end
 
 function ve --description 'Activate/deactivate python virtual environment'

@@ -58,9 +58,8 @@ return {
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
       },
     },
-    sources = {
-      cmdline = {},
-    },
+    fuzzy = { sorts = { "exact", "score", "sort_text" } },
+    cmdline = { sources = {} },
   },
   specs = {
     -- disable built in completion plugins

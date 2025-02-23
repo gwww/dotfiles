@@ -8,8 +8,13 @@ return {
   --- @type blink.cmp.Config
   opts = {
     keymap = { preset = "super-tab" },
+    cmdline = {
+      keymap = { preset = "super-tab", ["<CR>"] = { "accept_and_enter", "fallback" } },
+    },
+    -- fuzzy = { sorts = { "exact", "score", "sort_text" } },
     completion = {
       trigger = { show_in_snippet = false },
+      list = { selection = { preselect = false } },
       menu = {
         border = "rounded",
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
@@ -27,8 +32,6 @@ return {
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder",
       },
     },
-    fuzzy = { sorts = { "exact", "score", "sort_text" } },
-    cmdline = { sources = {} },
   },
   specs = {
     -- disable built in completion plugins

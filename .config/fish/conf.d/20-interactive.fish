@@ -52,6 +52,7 @@ abbr --add lg lazygit
 abbr --add vi nvim
 abbr --add xyzzy echo nothing happens
 abbr --add plcat plutil -convert xml1 -o -
+abbr --add gdu gdu-go
 
 ############ Setup theme, keybinds, ...
 fish_config theme choose 'Catppuccin Mocha'

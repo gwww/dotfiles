@@ -4,7 +4,6 @@ status is-interactive; or return 0
 set -gx EDITOR $HOMEBREW_PREFIX/bin/nvim
 set -gx VISUAL $HOMEBREW_PREFIX/bin/nvim
 
-set -gx POETRY_VIRTUALENVS_IN_PROJECT true
 set -gx LESS "-RMXF"
 set -gx LESSHISTFILE -
 set -gx HOMEBREW_NO_ENV_HINTS 1
@@ -17,7 +16,6 @@ set -gx BAT_STYLE numbers,changes
 set -gx LSCOLORS Gxfxcxdxbxegedabagacad
 
 set -gx ELKM1_URL elk://192.168.2.12
-# set -gx UPBPIM_URL tcp://192.168.1.14:7000
 set -gx UPBPIM_URL serial:///dev/tty.usbserial-FTE2FZBJ
 
 ######## Aliases

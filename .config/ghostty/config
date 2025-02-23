@@ -4,7 +4,8 @@ font-family = Inconsolata
 font-size = 16.5
 font-feature = -calt, -dlig
 font-thicken = true
-font-thicken-strength = 70
+# font-thicken-strength = 70
+font-style-bold = false
 
 background = #1e2129
 adjust-cell-height = 10%

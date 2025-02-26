@@ -17,16 +17,20 @@ return {
         maps.n["<Leader>e"] = maps.n["<Leader>ff"]
         maps.n["<Leader>E"] = {
           function()
-            local explorer = require("snacks").picker.get { source = "explorer" }
-            if #explorer == 0 then
+            local explorer = require("snacks").picker.get({ source = "explorer" })[1]
+            if explorer then
+              if explorer:is_focused() then
+                explorer:close()
+              else
+                explorer:focus()
+              end
+            else
               require("snacks").picker.explorer {
                 win = {
                   input = { keys = { ["<Esc>"] = false } },
                   list = { keys = { ["<Esc>"] = false } },
                 },
               }
-            else
-              explorer[1]:focus()
             end
           end,
           desc = "Snacks Explorer",

@@ -13,6 +13,8 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %Cblue[%an]%Creset' --abbrev-commit --date=relative
 [push]
     default = simple
+	autoSetupRemote = true
+	followTags = true
 [include]
     path = ~/.config/git/gitconfig.private
 [pull]
@@ -31,4 +33,18 @@
     keepBackup = false
     trustExitCode = true
 [diff]
-    colorMoved = default
+    colorMoved = plain
+	algorithm = histogram
+	renames = true
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+[help]
+	autocorrect = prompt
+[log]
+	date = iso

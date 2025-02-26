@@ -20,6 +20,8 @@ return {
     maps.v["<A-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up" }
     maps.i["<A-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up" }
 
+    maps.n["<C-Q>"] = nil
+
     local o = opts.options
     o.g.loaded_node_provider = 0
     o.g.loaded_perl_provider = 0

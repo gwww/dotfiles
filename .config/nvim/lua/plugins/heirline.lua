@@ -17,7 +17,16 @@ return {
       status.component.fill(),
       status.component.cmd_info(),
       status.component.fill(),
-      status.component.lsp { lsp_progress = false },
+      status.component.lsp {
+        lsp_progress = false,
+        lsp_client_names = {
+          mappings = {
+            ruff = "ruff+",
+            ruff_organize_imports = "ruff+",
+            ruff_format = "ruff+",
+          },
+        },
+      },
       status.component.treesitter(),
       { provider = " %4l/%L:%-3c %3p%%" },
       status.component.mode { surround = { separator = "right" } },

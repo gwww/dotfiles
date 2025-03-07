@@ -9,9 +9,12 @@ return {
   opts = {
     keymap = { preset = "super-tab" },
     cmdline = {
-      keymap = { preset = "super-tab", ["<CR>"] = { "accept_and_enter", "fallback" } },
+      keymap = { preset = "cmdline", ["<CR>"] = { "accept_and_enter", "fallback" } },
     },
-    -- fuzzy = { sorts = { "exact", "score", "sort_text" } },
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+      -- sorts = { "exact", "score", "sort_text" },
+    },
     completion = {
       trigger = { show_in_snippet = false },
       list = { selection = { preselect = false } },

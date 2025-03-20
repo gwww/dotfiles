@@ -15,6 +15,7 @@ if not lazy_loaded then
   vim.cmd.quit()
 end
 
+pcall(require, "debug-helpers")
 pcall(require, "pre-setup")
 
 lazy.setup({

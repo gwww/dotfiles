@@ -5,8 +5,6 @@ _G.bt = function(...) Debug.backtrace(...) end
 
 Debug.log = {}
 
-local log_buf_id
-
 _G.dbg = function(...)
   local c = select("#", ...)
   local parts = {} ---@type string[]
@@ -17,7 +15,7 @@ _G.dbg = function(...)
 
   local msg = table.concat(parts, " ")
   local _, ms = vim.uv.gettimeofday()
-  local date = os.date "%m-%d %H:%M:%S" .. string.format(".%-3d ", ms % 1000)
+  local date = os.date "%m-%d %H:%M:%S" .. string.format(".%-03d ", ms % 1000)
   if #msg < 120 then
     table.insert(Debug.log, date .. msg:gsub("%s+", " "))
   else
@@ -33,11 +31,15 @@ _G.dbg = function(...)
   end
 end
 
+local log_buf_id
 Debug.show_log = function()
   if log_buf_id == nil or not vim.api.nvim_buf_is_valid(log_buf_id) then
-    log_buf_id = vim.api.nvim_create_buf(true, true)
+    log_buf_id = vim.api.nvim_create_buf(true, false)
+  elseif not vim.api.nvim_buf_is_loaded(log_buf_id) then
+    vim.api.nvim_set_option_value("buflisted", true, { buf = log_buf_id })
   end
   vim.api.nvim_win_set_buf(0, log_buf_id)
+  vim.api.nvim_buf_set_name(log_buf_id, "debug.log")
   vim.api.nvim_buf_set_lines(log_buf_id, 0, -1, false, Debug.log)
 end
 

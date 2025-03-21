@@ -4,8 +4,13 @@ return {
     "AstroNvim/astrolsp",
     opts = {
       config = {
-        ruff = { on_attach = function(client) client.server_capabilities.hoverProvider = false end },
+        ruff = {
+          on_attach = function(client) client.server_capabilities.hoverProvider = false end,
+          init_options = { settings = { lint = { enable = false } } },
+        },
+        pyright = { settings = { pyright = { disableOrganizeImports = true } } },
       },
+      formatting = { format_on_save = { ignore_filetypes = { "lua" } } },
     },
   },
 

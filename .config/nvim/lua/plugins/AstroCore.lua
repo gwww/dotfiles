@@ -20,6 +20,9 @@ return {
     maps.v["<A-k>"] = { ":m '<-2<cr>gv=gv", desc = "Move up" }
     maps.i["<A-k>"] = { "<Esc>:m .-2<cr>==gi", desc = "Move up" }
 
+    maps.n["<Leader>dd"] = { function() Debug.show_log() end }
+    maps.n["<Leader>dc"] = { function() Debug.clear_log() end }
+
     maps.n["<C-Q>"] = nil
 
     local o = opts.options

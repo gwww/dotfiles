@@ -33,7 +33,6 @@ end
 
 local log_buf_id
 Debug.show_log = function()
-  dbg "Showing log..."
   if log_buf_id == nil or not vim.api.nvim_buf_is_valid(log_buf_id) then
     log_buf_id = vim.api.nvim_create_buf(true, true)
     -- elseif not vim.api.nvim_buf_is_loaded(log_buf_id) then
@@ -48,17 +47,23 @@ end
 Debug.clear_log = function()
   Debug.log = {}
   vim.cmd 'echo "Cleared log"'
+  dbg "Cleared log"
 end
 
 Debug.backtrace = function(...)
   if select("#", ...) > 0 then dbg(...) end
 
-  local lines = { "Trackback" }
-  for level = 2, 20 do
+  local lines = { "Trackback..." }
+  for level = 3, 20 do
     local info = debug.getinfo(level, "Sln")
-    if info and info.what ~= "C" and info.source ~= "lua" and not info.source:find("debug-helpers.lua", 1, true) then
-      local line = "- `" .. vim.fn.fnamemodify(info.source:sub(2), ":p:~:.") .. "`:" .. info.currentline
-      if info.name then line = line .. " _in_ **" .. info.name .. "**" end
+    if not info then break end
+    if info.what ~= "C" and info.source ~= "lua" then
+      local line = "- " .. vim.fn.fnamemodify(info.source:sub(2), ":p:~:.") .. ":" .. info.currentline
+      if info.name then
+        line = line .. " in " .. info.name .. "()"
+      else
+        line = line .. " in _anonymous_()"
+      end
       table.insert(lines, line)
     end
   end

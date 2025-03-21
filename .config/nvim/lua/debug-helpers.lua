@@ -1,4 +1,6 @@
--- Define main Debug config table to be able to use it in scripts
+-- From and lots of my tweaks:
+--   https://github.com/echasnovski/nvim/tree/6c742dbf4e87792d113f42301a7206d5134191fc/plugin
+--   https://github.com/folke/snacks.nvim/blob/main/lua/snacks/debug.lua
 
 _G.Debug = {}
 _G.bt = function(...) Debug.backtrace(...) end

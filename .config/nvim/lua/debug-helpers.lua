@@ -15,14 +15,14 @@ _G.dbg = function(...)
 
   local msg = table.concat(parts, " ")
   local _, ms = vim.uv.gettimeofday()
-  local date = os.date "%m-%d %H:%M:%S" .. string.format(".%-03d ", ms % 1000)
+  local date = os.date "%m-%d %H:%M:%S." .. string.format("%.3d ", ms % 1000)
   if #msg < 120 then
     table.insert(Debug.log, date .. msg:gsub("%s+", " "))
   else
     local d = date
     for _, v in ipairs(vim.split(msg, "\n")) do
       table.insert(Debug.log, d .. v)
-      d = "                    "
+      d = "                   "
     end
   end
   if #Debug.log > 2000 then
@@ -33,11 +33,13 @@ end
 
 local log_buf_id
 Debug.show_log = function()
+  dbg "Showing log..."
   if log_buf_id == nil or not vim.api.nvim_buf_is_valid(log_buf_id) then
-    log_buf_id = vim.api.nvim_create_buf(true, false)
-  elseif not vim.api.nvim_buf_is_loaded(log_buf_id) then
-    vim.api.nvim_set_option_value("buflisted", true, { buf = log_buf_id })
+    log_buf_id = vim.api.nvim_create_buf(true, true)
+    -- elseif not vim.api.nvim_buf_is_loaded(log_buf_id) then
   end
+  vim.api.nvim_set_option_value("buflisted", true, { buf = log_buf_id })
+  vim.api.nvim_set_option_value("buftype", "nowrite", { buf = log_buf_id })
   vim.api.nvim_win_set_buf(0, log_buf_id)
   vim.api.nvim_buf_set_name(log_buf_id, "debug.log")
   vim.api.nvim_buf_set_lines(log_buf_id, 0, -1, false, Debug.log)
@@ -51,14 +53,14 @@ end
 Debug.backtrace = function(...)
   if select("#", ...) > 0 then dbg(...) end
 
-  dbg "----- Backtrace START"
+  local lines = { "Trackback" }
   for level = 2, 20 do
     local info = debug.getinfo(level, "Sln")
     if info and info.what ~= "C" and info.source ~= "lua" and not info.source:find("debug-helpers.lua", 1, true) then
       local line = "- `" .. vim.fn.fnamemodify(info.source:sub(2), ":p:~:.") .. "`:" .. info.currentline
       if info.name then line = line .. " _in_ **" .. info.name .. "**" end
-      dbg(line)
+      table.insert(lines, line)
     end
   end
-  dbg "----- Backtrace END"
+  dbg(table.concat(lines, "\n"))
 end

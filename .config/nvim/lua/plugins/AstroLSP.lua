@@ -10,7 +10,7 @@ return {
         },
         pyright = { settings = { pyright = { disableOrganizeImports = true } } },
       },
-      formatting = { format_on_save = { ignore_filetypes = { "lua" } } },
+      -- formatting = { format_on_save = { ignore_filetypes = { "lua" } } },
     },
   },
 

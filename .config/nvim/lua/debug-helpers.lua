@@ -63,7 +63,17 @@ end
 local log_buf_id
 Debug.show_log = function()
   if log_buf_id == nil or not vim.api.nvim_buf_is_valid(log_buf_id) then
-    log_buf_id = vim.api.nvim_create_buf(true, true)
+    local info = vim.fn.getbufinfo("%")[1]
+    if
+      info.changed ~= 0
+      or info.name ~= ""
+      or vim.bo[info.bufnr].buftype ~= ""
+      or vim.bo[info.bufnr].filetype ~= ""
+    then
+      log_buf_id = vim.api.nvim_create_buf(true, true)
+    else
+      log_buf_id = info.bufnr
+    end
   end
   vim.api.nvim_set_option_value("buflisted", true, { buf = log_buf_id })
   vim.api.nvim_set_option_value("buftype", "nowrite", { buf = log_buf_id })

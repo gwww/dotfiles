@@ -75,9 +75,11 @@ Debug.show_log = function()
       log_buf_id = info.bufnr
     end
   end
+
+  local info = vim.fn.getbufinfo(log_buf_id)[1]
+  vim.api.nvim_win_set_buf(info.windows[1] or 0, log_buf_id)
   vim.api.nvim_set_option_value("buflisted", true, { buf = log_buf_id })
   vim.api.nvim_set_option_value("buftype", "nowrite", { buf = log_buf_id })
-  vim.api.nvim_win_set_buf(0, log_buf_id)
   vim.api.nvim_buf_set_name(log_buf_id, "debug.log")
   vim.api.nvim_buf_set_lines(log_buf_id, 0, -1, false, Debug.log)
 end

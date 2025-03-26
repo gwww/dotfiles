@@ -1,39 +1,16 @@
 return {
   "stevearc/oil.nvim",
   cmd = "Oil",
-  dependencies = {
+  opts = {
+    columns = { "icon", "permissions", "size", "mtime" },
+    keymaps = { ["q"] = { "actions.close", mode = "n" } },
+  },
+  specs = {
     {
       "AstroNvim/astrocore",
       opts = {
         mappings = {
-          n = {
-            ["<Leader>o"] = { function() require("oil").open() end, desc = "Open folder in Oil" },
-          },
-        },
-        autocmds = {
-          oil_settings = {
-            {
-              event = "FileType",
-              desc = "Disable view saving for oil buffers",
-              pattern = "oil",
-              callback = function(args) vim.b[args.buf].view_activated = false end,
-            },
-            {
-              event = "User",
-              pattern = "OilActionsPost",
-              desc = "Close buffers when files are deleted in Oil",
-              callback = function(args)
-                if args.data.err then return end
-                for _, action in ipairs(args.data.actions) do
-                  if action.type == "delete" then
-                    local _, path = require("oil.util").parse_url(action.url)
-                    local bufnr = vim.fn.bufnr(path)
-                    if bufnr ~= -1 then require("astrocore.buffer").wipe(bufnr, true) end
-                  end
-                end
-              end,
-            },
-          },
+          n = { ["<Leader>o"] = { function() require("oil").open() end, desc = "Open folder in Oil" } },
         },
       },
     },
@@ -57,15 +34,4 @@ return {
       end,
     },
   },
-  opts = function()
-    local get_icon = require("astroui").get_icon
-    return {
-      columns = {
-        { "icon", default_file = get_icon "DefaultFile", directory = get_icon "FolderClosed" },
-        "permissions",
-        "size",
-        "mtime",
-      },
-    }
-  end,
 }

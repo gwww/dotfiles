@@ -1,29 +1,28 @@
 return {
   "saghen/blink.cmp",
   dependencies = "rafamadriz/friendly-snippets",
-  version = "v0.*",
-  opts_extend = { "sources.default" },
+  version = "^1",
+  opts_extend = { "sources.default", "cmdline.sources" },
 
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
   opts = {
     keymap = { preset = "super-tab" },
     cmdline = {
-      keymap = { preset = "cmdline", ["<CR>"] = { "accept_and_enter", "fallback" } },
+      completion = {
+        menu = {
+          auto_show = function(_) return vim.fn.getcmdtype() == ":" end,
+        },
+        list = { selection = { preselect = false } },
+      },
     },
-    fuzzy = {
-      implementation = "prefer_rust_with_warning",
-      -- sorts = { "exact", "score", "sort_text" },
-    },
+    fuzzy = { sorts = { "exact", "score", "sort_text" } },
     completion = {
       trigger = { show_in_snippet = false },
       list = { selection = { preselect = false } },
       menu = {
         border = "rounded",
         winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
-        auto_show = function(ctx)
-          return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-        end,
       },
       documentation = {
         window = {

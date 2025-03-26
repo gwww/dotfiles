@@ -4,7 +4,12 @@ return {
     "AstroNvim/astroui",
     opts = {
       colorscheme = "nordfox",
-      highlights = { nordfox = { CursorLine = { bg = "#23262f" } } },
+      highlights = {
+        nordfox = {
+          CursorLine = { bg = "#23262f" },
+          BlinkCmpLabelMatch = { fg = "#f0d399" },
+        },
+      },
       status = { separators = { left = { "", " " }, right = { " ", "" } } },
     },
   },

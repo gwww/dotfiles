@@ -20,12 +20,13 @@ return {
       dependencies = { "AstroNvim/astroui", opts = { status = { winbar = { enabled = { filetype = { "^oil$" } } } } } },
       opts = function(_, opts)
         if opts.winbar then
+          dbg(opts)
           local status = require "astroui.status"
           table.insert(opts.winbar, 1, {
             condition = function(self) return status.condition.buffer_matches({ filetype = "^oil$" }, self.bufnr) end,
             status.component.separated_path {
               padding = { left = 2 },
-              max_depth = false,
+              max_depth = 99,
               suffix = false,
               path_func = function(self) return require("oil").get_current_dir(self.bufnr) end,
             },

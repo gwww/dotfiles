@@ -7,7 +7,7 @@ return {
   opts = {
     cmdline = {
       completion = {
-        menu = { auto_show = function(ctx) return ctx.mode == "cmdline" and #ctx.line > 2 end },
+        menu = { auto_show = function(ctx) return vim.fn.getcmdtype() == ":" and #ctx.line > 2 end },
         list = { selection = { preselect = false } },
       },
       keymap = { ["<Right>"] = { nil }, ["<Left>"] = { nil } },

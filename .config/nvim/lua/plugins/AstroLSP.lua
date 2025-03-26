@@ -10,7 +10,6 @@ return {
         },
         pyright = { settings = { pyright = { disableOrganizeImports = true } } },
       },
-      -- formatting = { format_on_save = { ignore_filetypes = { "lua" } } },
     },
   },
 
@@ -35,7 +34,7 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
-      format_on_save = { lsp_format = "fallback" },
+      -- format_on_save = { lsp_format = "fallback" },
       formatters_by_ft = {
         python = { "ruff_organize_imports", "ruff_format" },
       },

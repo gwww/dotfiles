@@ -21,7 +21,7 @@ window-height = 1000
 window-width = 1000
 
 keybind = cmd+backspace=text:\x15
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+# keybind = global:cmd+grave_accent=toggle_quick_terminal
 
 window-save-state = always
 link-url = false

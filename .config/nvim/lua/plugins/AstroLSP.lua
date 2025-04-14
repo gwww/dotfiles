@@ -6,9 +6,7 @@ return {
       config = {
         ruff = {
           on_attach = function(client) client.server_capabilities.hoverProvider = false end,
-          init_options = { settings = { lint = { enable = false } } },
         },
-        pyright = { settings = { pyright = { disableOrganizeImports = true } } },
       },
     },
   },
@@ -34,7 +32,7 @@ return {
   {
     "stevearc/conform.nvim",
     opts = {
-      -- format_on_save = { lsp_format = "fallback" },
+      format_on_save = { lsp_format = "fallback" },
       formatters_by_ft = {
         python = { "ruff_organize_imports", "ruff_format" },
       },

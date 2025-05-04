@@ -12,7 +12,7 @@
 
     --ui-page-color-bg: var(--theme-base);
     --ui-page-color-bg-backdrop: var(--theme-dark1);
-    --ui-sidebar-color-bg: var(--theme-base);
+    --ui-sidebar-color-bg: var(--theme-dark1);
     --ui-sidebar-color-bg-selected: var(--theme-dark2);
     --ui-page-color-bg-focused: var(--theme-dark1);
     --ui-button-subtle-color-bg-hover: var(--theme-dark2);

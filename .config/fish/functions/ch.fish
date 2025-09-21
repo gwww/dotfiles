@@ -31,6 +31,8 @@ function ch --description 'Display the changelog for the named argument'
     else if string match -- "$argv[1]" "zoxide" >/dev/null
       _md_file https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/CHANGELOG.md
 
+    else if string match -- "$argv[1]" "fish" >/dev/null
+      _releases_page https://github.com/fish-shell/fish-shell/blob/master/CHANGELOG.rst
     else if string match -- "$argv[1]" "lazygit" >/dev/null
       _releases_page https://github.com/jesseduffield/lazygit/releases
     else if string match -- "$argv[1]" "neovim" >/dev/null

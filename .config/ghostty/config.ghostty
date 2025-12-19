@@ -17,8 +17,8 @@ macos-titlebar-style = tabs
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
 
-window-height = 1000
-window-width = 1000
+# window-height = 1000
+# window-width = 1000
 
 keybind = cmd+backspace=text:\x15
 # keybind = global:cmd+grave_accent=toggle_quick_terminal

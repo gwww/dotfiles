@@ -2,6 +2,8 @@
 --   https://github.com/echasnovski/nvim/tree/6c742dbf4e87792d113f42301a7206d5134191fc/plugin
 --   https://github.com/folke/snacks.nvim/blob/main/lua/snacks/debug.lua
 
+local log_buf_id
+
 _G.Debug = {}
 _G.bt = function(...) Debug.backtrace(...) end
 
@@ -16,7 +18,10 @@ local _prune_log = function()
   if #Debug.log > 3000 then Debug.log = { unpack(Debug.log, 3000 - 3000 / 4) } end
 end
 
-local _add_to_log = function(prefix, data) table.insert(Debug.log, prefix .. data) end
+local _add_to_log = function(prefix, data)
+  table.insert(Debug.log, prefix .. data)
+  -- if log_buf_id ~= nil then vim.api.nvim_buf_set_lines(log_buf_id, 0, -1, false, Debug.log) end
+end
 
 _G.dbg = function(...)
   local c = select("#", ...)
@@ -27,14 +32,13 @@ _G.dbg = function(...)
   end
 
   local msg = table.concat(parts, " ")
-  local date = _date()
   if #msg < 120 then
-    table.insert(Debug.log, date .. msg:gsub("%s+", " "))
+    _add_to_log(_date(), msg:gsub("%s+", " "))
   else
-    local d = date
+    local d = _date()
     for _, v in ipairs(vim.split(msg, "\n")) do
-      table.insert(Debug.log, d .. v)
-      d = "                   "
+      _add_to_log(d, v)
+      d = "    "
     end
   end
   _prune_log()
@@ -54,13 +58,12 @@ Debug.backtrace = function(...)
       else
         line = line .. " in _anonymous_()"
       end
-      _add_to_log("                   ", line)
+      _add_to_log("    ", line)
     end
   end
   _prune_log()
 end
 
-local log_buf_id
 Debug.show_log = function()
   if log_buf_id == nil or not vim.api.nvim_buf_is_valid(log_buf_id) then
     local info = vim.fn.getbufinfo("%")[1]

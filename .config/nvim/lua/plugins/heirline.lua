@@ -22,8 +22,9 @@ return {
         lsp_client_names = {
           mappings = {
             ruff = "ruff+",
-            ruff_organize_imports = "ruff+",
+            ruff_fix = "ruff+",
             ruff_format = "ruff+",
+            ruff_organize_imports = "ruff+",
           },
         },
       },

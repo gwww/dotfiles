@@ -19,7 +19,12 @@ pcall(require, "debug-helpers")
 pcall(require, "pre-setup")
 
 lazy.setup({
-  { "AstroNvim/AstroNvim", version = "^5", import = "astronvim.plugins" },
+  -- { "AstroNvim/AstroNvim", version = "^5", import = "astronvim.plugins" },
+  { "AstroNvim/AstroNvim", branch = "v6", import = "astronvim.plugins" },
+  { "AstroNvim/astrolsp", branch = "v4" },
+  { "AstroNvim/astrocore", branch = "v3" },
+  { "AstroNvim/astroui", branch = "v4" },
+
   { import = "plugins" },
 }, {
   install = { colorscheme = { "nord", "catppuccin", "astrodark", "habamax" } },

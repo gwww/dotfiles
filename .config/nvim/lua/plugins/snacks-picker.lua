@@ -3,6 +3,7 @@ return {
   opts = {
     dashboard = { enabled = false },
     indent = { enabled = false },
+    words = { enabled = false },
     picker = { ui_select = true },
   },
   specs = {

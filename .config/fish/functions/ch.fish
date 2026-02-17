@@ -28,6 +28,8 @@ function ch --description 'Display the changelog for the named argument'
       _md_file https://raw.githubusercontent.com/astral-sh/ruff/main/CHANGELOG.md
     else if string match -- "$argv[1]" "uv" >/dev/null
       _md_file https://raw.githubusercontent.com/astral-sh/uv/main/CHANGELOG.md
+    else if string match -- "$argv[1]" "ty" >/dev/null
+      _md_file https://raw.githubusercontent.com/astral-sh/ty/main/CHANGELOG.md
     else if string match -- "$argv[1]" "zoxide" >/dev/null
       _md_file https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/CHANGELOG.md
 

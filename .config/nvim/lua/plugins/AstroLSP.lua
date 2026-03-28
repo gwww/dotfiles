@@ -6,12 +6,12 @@ return {
       config = {
         ruff = {
           on_attach = function(client) client.server_capabilities.hoverProvider = false end,
-          init_options = {
-            settings = {
-              -- Disable linting to use Ruff exclusively as a formatter
-              lint = { enable = false },
-            },
-          },
+          -- init_options = {
+          --   settings = {
+          --     -- Disable linting to use Ruff exclusively as a formatter
+          --     lint = { enable = false },
+          --   },
+          -- },
         },
       },
     },
@@ -25,7 +25,7 @@ return {
         "lua-language-server",
         "prettier",
         -- "pyright",
-        "ty",
+        -- "ty",
         "ruff",
         "stylua",
         -- "svelte-language-server",

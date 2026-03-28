@@ -1,5 +1,7 @@
 # vim: set ft=conf:
 
+auto-update-channel = stable
+
 font-family = Inconsolata
 font-size = 16.5
 font-feature = -calt, -dlig
@@ -25,3 +27,5 @@ keybind = cmd+backspace=text:\x15
 
 window-save-state = always
 # link-url = false
+
+split-divider-color = #d3d3d3

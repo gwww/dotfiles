@@ -1,0 +1,45 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.3-beta.2",
+  "schemes" : [
+    {
+      "buttons" : {
+        "universalBackForward" : false
+      },
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc52b",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : {
+          "horizontal" : 2.46,
+          "vertical" : 1.51
+        },
+        "distance" : {
+          "vertical" : "auto"
+        },
+        "reverse" : true,
+        "speed" : {
+          "vertical" : 31.87
+        }
+      }
+    },
+    {
+      "buttons" : {
+        "universalBackForward" : true
+      },
+      "if" : {
+        "app" : "com.binarynights.ForkLift",
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xc52b",
+          "productName" : "USB Receiver",
+          "vendorID" : "0x46d"
+        }
+      }
+    }
+  ]
+}

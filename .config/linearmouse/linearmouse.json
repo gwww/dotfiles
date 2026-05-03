@@ -1,5 +1,5 @@
 {
-  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.3-beta.2",
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.11.1-beta.2",
   "schemes" : [
     {
       "buttons" : {
@@ -16,14 +16,25 @@
       "scrolling" : {
         "acceleration" : {
           "horizontal" : 2.46,
-          "vertical" : 1.51
+          "vertical" : 1
         },
         "distance" : {
           "vertical" : "auto"
         },
         "reverse" : true,
+        "smoothed" : {
+          "vertical" : {
+            "acceleration" : 1.1,
+            "bouncing" : false,
+            "enabled" : true,
+            "inertia" : 0.74,
+            "preset" : "easeInOut",
+            "response" : 0.68,
+            "speed" : 1.02
+          }
+        },
         "speed" : {
-          "vertical" : 31.87
+          "vertical" : 0
         }
       }
     },

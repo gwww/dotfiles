@@ -2,8 +2,13 @@ gui:
   nerdFontsVersion: "3"
   theme:
     selectedLineBgColor:
-      - "#323232" # set to `default` to have no background colour
+      - "#505050" # set to `default` to have no background colour
 
   expandFocusedSidePanel: true
   expandedSidePanelWeight: 3
   showDivergenceFromBaseBranch: arrowAndNumber # or 'onlyArrow'
+
+git:
+  pagers:
+    - externalDiffCommand: difft --color=always
+    # - externalDiffCommand: difft --color=always --display=inline

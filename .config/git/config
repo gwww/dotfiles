@@ -35,6 +35,7 @@
     colorMoved = plain
 	algorithm = histogram
 	renames = true
+	external = difft
 [branch]
 	sort = -committerdate
 [tag]

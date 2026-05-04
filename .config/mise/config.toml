@@ -3,8 +3,13 @@ MISE_NODE_VERIFY = "false"
 
 [tools]
 bun = "1"
-go = "1.22"
+go = "1.26"
 node = "25.8"
 python = "3.14"
 ruby = "3.4"
-rust = "1.93.1"
+rust = "1.95"
+
+[settings]
+
+[settings.ruby]
+compile = false

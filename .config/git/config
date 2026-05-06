@@ -3,8 +3,8 @@
 [core]
     autocrlf = input
     ; pager = less -F -X
-    ; pager = delta --syntax-theme zenburn
-    pager = bat
+    pager = delta --syntax-theme zenburn
+    ; pager = bat
     editor = nvim
 [alias]
     type = cat-file -t
@@ -21,12 +21,12 @@
     rebase = true
 [init]
     defaultBranch = main
-; [interactive]
-;     diffFilter = delta --color-only
-; [delta]
-;     navigate = true  # use n and N to move between diff sections
-;     line-numbers = true
-;     side-by-side = true
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = true
 [merge]
     conflictStyle = diff3
     tool = nvimdiff1
@@ -36,7 +36,7 @@
     colorMoved = plain
 	algorithm = histogram
 	renames = true
-	external = difft
+	; external = delta
 [branch]
 	sort = -committerdate
 [tag]

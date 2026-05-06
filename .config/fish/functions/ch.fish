@@ -30,11 +30,13 @@ function ch --description 'Display the changelog for the named argument'
       _md_file https://raw.githubusercontent.com/astral-sh/uv/main/CHANGELOG.md
     else if string match -- "$argv[1]" "ty" >/dev/null
       _md_file https://raw.githubusercontent.com/astral-sh/ty/main/CHANGELOG.md
+    else if string match -- "$argv[1]" "yazi" >/dev/null
+      _md_file https://raw.githubusercontent.com/sxyazi/yazi/refs/heads/main/CHANGELOG.md
     else if string match -- "$argv[1]" "zoxide" >/dev/null
       _md_file https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/CHANGELOG.md
 
     else if string match -- "$argv[1]" "fish" >/dev/null
-      _releases_page https://github.com/fish-shell/fish-shell/blob/master/CHANGELOG.rst
+      _releases_page https://github.com/fish-shell/fish-shell/releases
     else if string match -- "$argv[1]" "lazygit" >/dev/null
       _releases_page https://github.com/jesseduffield/lazygit/releases
     else if string match -- "$argv[1]" "neovim" >/dev/null

@@ -41,6 +41,8 @@ function ch --description 'Display the changelog for the named argument'
       _releases_page https://github.com/jesseduffield/lazygit/releases
     else if string match -- "$argv[1]" "neovim" >/dev/null
       _releases_page https://github.com/neovim/neovim/releases
+    else if string match -- "$argv[1]" "opencode" >/dev/null
+      _releases_page https://github.com/anomalyco/opencode/releases
     else if string match -- "$argv[1]" "git" >/dev/null
       if test -n "$argv[2]"
         _md_file https://raw.githubusercontent.com/git/git/master/Documentation/RelNotes/$argv[2].txt

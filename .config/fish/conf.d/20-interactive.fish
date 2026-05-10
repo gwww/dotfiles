@@ -19,7 +19,7 @@ set -gx ELKM1_URL elk://192.168.2.12
 set -gx UPBPIM_URL serial:///dev/tty.usbserial-FTE2FZBJ
 
 ######## Aliases
-set -l eza eza --group-directories-first
+set -l eza eza --group-directories-first --no-quotes
 alias l    "$eza"
 alias ls   "$eza"
 alias la   "$eza --all"

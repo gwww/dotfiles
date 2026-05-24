@@ -22,7 +22,13 @@ expand_command() {
 }
 
 if [[ -z "${1:-}" ]]; then
-  echo "usage: hadev <command> [args...]" >&2
+  cat <<EOF
+usage: hadev <command> [args...]
+
+commands:
+  setup    Set up development environment (run script/setup with bootstrap fix)
+  catchup  Fetch and merge upstream/dev into current branch
+EOF
   exit 1
 fi
 

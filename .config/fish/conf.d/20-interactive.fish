@@ -54,4 +54,5 @@ abbr --add gdu gdu-go
 
 ############ Setup theme, keybinds, ...
 fish_config theme choose 'Catppuccin Mocha'
+fish_add_path /Users/glenn/.opencode/bin
 zoxide init fish | source

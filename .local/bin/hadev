@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+commands=("setup" "catchup")
+
+expand_command() {
+  local input="$1"
+  local matches=()
+  for cmd in "${commands[@]}"; do
+    if [[ "${cmd:0:${#input}}" == "$input" ]]; then
+      matches+=("$cmd")
+    fi
+  done
+  if [[ ${#matches[@]} -eq 0 ]]; then
+    echo "unknown command: $input" >&2
+    exit 1
+  elif [[ ${#matches[@]} -gt 1 ]]; then
+    echo "ambiguous command: $input matches ${matches[*]}" >&2
+    exit 1
+  fi
+  echo "${matches[0]}"
+}
+
+if [[ -z "${1:-}" ]]; then
+  echo "usage: hadev <command> [args...]" >&2
+  exit 1
+fi
+
+cmd=$(expand_command "$1")
+shift
+
+case "$cmd" in
+  setup)
+    cd ~/Development/automation/core
+    bootstrap="script/bootstrap"
+    cp "$bootstrap" "${bootstrap}.bak"
+    trap 'mv "${bootstrap}.bak" "$bootstrap"' EXIT
+    sed -i '' 's/requirements_all.txt/requirements.txt/g' "$bootstrap"
+    echo "→ running script/setup..."
+    script/setup
+    echo "✓ setup complete"
+    ;;
+  catchup)
+    cd ~/Development/automation/core
+    if ! git remote get-url upstream &>/dev/null; then
+      git remote add upstream https://github.com/home-assistant/core.git
+    fi
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    echo "current branch: $branch"
+    read -r -n 1 -p "proceed with merge from upstream/dev? [y/N] " reply; echo
+    case "$reply" in
+      [yY]|[yY][eE][sS]) ;;
+      *) echo "aborted"; exit 1 ;;
+    esac
+    git fetch upstream dev
+    if git merge upstream/dev; then
+      read -r -n 1 -p "merge successful. push to origin? [y/N] " push_reply; echo
+      case "$push_reply" in
+        [yY]|[yY][eE][sS]) git push ;;
+      esac
+    else
+      echo "merge conflict detected — resolve conflicts, then commit and push manually" >&2
+    fi
+    ;;
+esac

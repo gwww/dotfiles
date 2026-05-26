@@ -62,7 +62,19 @@ case "$cmd" in
     if git merge upstream/dev; then
       read -r -n 1 -p "merge successful. push to origin? [y/N] " push_reply; echo
       case "$push_reply" in
-        [yY]|[yY][eE][sS]) git push ;;
+        [yY]|[yY][eE][sS])
+          if git push; then
+            echo "✓ pushed to origin"
+          else
+            echo "✗ push failed (see error above)" >&2
+            read -r -n 1 -p "recover with git pull --no-rebase; git push? [y/N] " recover_reply; echo
+            case "$recover_reply" in
+              [yY]|[yY][eE][sS])
+                git pull --no-rebase && git push
+                ;;
+            esac
+          fi
+          ;;
       esac
     else
       echo "merge conflict detected — resolve conflicts, then commit and push manually" >&2

@@ -42,8 +42,10 @@ case "$cmd" in
     cp "$bootstrap" "${bootstrap}.bak"
     trap 'mv "${bootstrap}.bak" "$bootstrap"' EXIT
     sed -i '' 's/requirements_all.txt/requirements.txt/g' "$bootstrap"
+    sed -i '' 's,python3 -m script.translations develop --all,& >/dev/null,' "$bootstrap"
     echo "→ running script/setup..."
     script/setup
+    uv pip install aioesphomeapi
     echo "✓ setup complete"
     ;;
   catchup)

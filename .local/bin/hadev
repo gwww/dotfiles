@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-commands=("setup" "catchup")
+commands=("setup" "catchup" "translations")
+core="~/Development/automation/core"
 
 expand_command() {
   local input="$1"
@@ -37,7 +38,7 @@ shift
 
 case "$cmd" in
   setup)
-    cd ~/Development/automation/core
+    cd $core
     bootstrap="script/bootstrap"
     cp "$bootstrap" "${bootstrap}.bak"
     trap 'mv "${bootstrap}.bak" "$bootstrap"' EXIT
@@ -49,7 +50,7 @@ case "$cmd" in
     echo "✓ setup complete"
     ;;
   catchup)
-    cd ~/Development/automation/core
+    cd $core
     if ! git remote get-url upstream &>/dev/null; then
       git remote add upstream https://github.com/home-assistant/core.git
     fi
@@ -81,5 +82,9 @@ case "$cmd" in
     else
       echo "merge conflict detected — resolve conflicts, then commit and push manually" >&2
     fi
+    ;;
+  translations)
+    cd $core
+    python3 -m script.translations develop --all
     ;;
 esac

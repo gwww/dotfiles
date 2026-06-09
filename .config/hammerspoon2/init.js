@@ -27,6 +27,50 @@ class Modal {
   }
 }
 
+// ===== Alert Manager (stacks multiple alerts vertically) =====
+const alert = (() => {
+  const active = []
+  const spacing = 90
+
+  return (message) => {
+    const screen = hs.screen.main()
+    const f = screen.fullFrame
+    const cx = f.x + f.w / 2
+    const baseY = f.y + f.h * 2 / 3
+    const y = baseY - active.length * spacing
+
+    const w = 520
+    const h = 80
+
+    const win = hs.ui.window({
+      x: Math.round(cx - w / 2),
+      y: Math.round(y - h / 2),
+      w, h,
+    })
+      .zstack()
+        .rectangle()
+          .fill("#2C3E50")
+          .cornerRadius(16)
+          .frame({w: "100%", h: "100%"})
+        .text(message)
+          .font(HSFont.system(56))
+          .foregroundColor("#FFFFFF")
+      .end()
+      .show()
+
+    const entry = { win }
+    active.push(entry)
+
+    hs.timer.doAfter(2, () => {
+      const idx = active.indexOf(entry)
+      if (idx !== -1) active.splice(idx, 1)
+      win.close()
+    })
+
+    return win
+  }
+})()
+
 // ===== Hyper =====
 class Hyper {
   constructor(modalKey) {
@@ -75,7 +119,7 @@ function smartLaunch(bundleID, name) {
   const app = hs.application.matchingBundleID(bundleID)
 
   if (!app) {
-    hs.ui.alert(`Launching ${name}`).font(HSFont.system(56)).padding(24).duration(2).show()
+    alert(`Launching ${name}`)
     hs.application.launchOrFocus(bundleID)
   } else {
     if (!savedState.windows) {
@@ -167,10 +211,10 @@ function caffeine() {
   // TODO: add/remove menubar icon; no API yet.
   if (awake) {
     hs.power.allowSleep(type)
-    hs.ui.alert("Sleepy").font(HSFont.system(56)).padding(24).duration(2).show()
+    alert("Sleepy")
   } else {
     hs.power.preventSleep(type)
-    hs.ui.alert("Staying AWAKE!").font(HSFont.system(56)).padding(24).duration(2).show()
+    alert("Staying AWAKE!")
   }
 }
 

@@ -1,31 +1,5 @@
-// ===== Modal (port of hs.hotkey.modal Lua) =====
-class Modal {
-  constructor() {
-    this.keys = []
-  }
-
-  bind(mods, key, pressedfn, releasedfn) {
-    const hk = hs.hotkey.bind(mods, key, pressedfn ?? (() => { }), releasedfn ?? (() => { }))
-    if (hk) {
-      hk.disable()
-      this.keys.push(hk)
-    }
-    return this
-  }
-
-  enter() {
-    this.keys.forEach(hk => hk.enable())
-  }
-
-  exit() {
-    this.keys.forEach(hk => hk.disable())
-  }
-
-  delete() {
-    this.keys.forEach(hk => hk.delete())
-    this.keys = []
-  }
-}
+const configDir = hs.fs.homeDirectory() + "/.config/hammerspoon2/"
+eval(hs.fs.read(configDir + "lib/modal.js"))
 
 // ===== Alert Manager (stacks multiple alerts vertically) =====
 const alert = (() => {
@@ -48,13 +22,13 @@ const alert = (() => {
       w, h,
     })
       .zstack()
-        .rectangle()
-          .fill("#2C3E50")
-          .cornerRadius(16)
-          .frame({w: "100%", h: "100%"})
-        .text(message)
-          .font(HSFont.system(56))
-          .foregroundColor("#FFFFFF")
+      .rectangle()
+      .fill("#2C3E50")
+      .cornerRadius(16)
+      .frame({ w: "100%", h: "100%" })
+      .text(message)
+      .font(HSFont.system(56))
+      .foregroundColor("#FFFFFF")
       .end()
       .show()
 
@@ -71,42 +45,7 @@ const alert = (() => {
   }
 })()
 
-// ===== Hyper =====
-class Hyper {
-  constructor(modalKey) {
-    this.presses = 0
-    this.pressHooks = []
-    this.releaseHooks = []
-    this.modal = new Modal()
-
-    this.hyperHotkey = hs.hotkey.bind([], modalKey, () => {
-      this.presses = 0
-      this.modal.enter()
-      this.pressHooks.forEach(hook => hook())
-    }, () => {
-      this.modal.exit()
-      this.releaseHooks.forEach(hook => hook(this.presses))
-    })
-  }
-
-  bind(bindings) {
-    const list = Array.isArray(bindings) ? bindings : [bindings]
-    list.forEach(binding => {
-      const mods = binding.modifiers || []
-      const action = () => {
-        this.presses++
-        binding.action()
-      }
-      this.modal.bind(mods, binding.key, action)
-    })
-    return this
-  }
-
-  addHook(press, release) {
-    if (press) this.pressHooks.push(press)
-    if (release) this.releaseHooks.push(release)
-  }
-}
+eval(hs.fs.read(configDir + "lib/hyper.js"))
 
 // ===== Smart Launch =====
 let savedState = { lastApp: "" }

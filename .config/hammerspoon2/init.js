@@ -1,49 +1,7 @@
 const configDir = hs.fs.homeDirectory() + "/.config/hammerspoon2/"
 eval(hs.fs.read(configDir + "lib/modal.js"))
 
-// ===== Alert Manager (stacks multiple alerts vertically) =====
-const alert = (() => {
-  const active = []
-  const spacing = 90
-
-  return (message) => {
-    const screen = hs.screen.main()
-    const f = screen.fullFrame
-    const cx = f.x + f.w / 2
-    const baseY = f.y + f.h * 2 / 3
-    const y = baseY - active.length * spacing
-
-    const w = 520
-    const h = 80
-
-    const win = hs.ui.window({
-      x: Math.round(cx - w / 2),
-      y: Math.round(y - h / 2),
-      w, h,
-    })
-      .zstack()
-      .rectangle()
-      .fill("#2C3E50")
-      .cornerRadius(16)
-      .frame({ w: "100%", h: "100%" })
-      .text(message)
-      .font(HSFont.system(56))
-      .foregroundColor("#FFFFFF")
-      .end()
-      .show()
-
-    const entry = { win }
-    active.push(entry)
-
-    hs.timer.doAfter(2, () => {
-      const idx = active.indexOf(entry)
-      if (idx !== -1) active.splice(idx, 1)
-      win.close()
-    })
-
-    return win
-  }
-})()
+eval(hs.fs.read(configDir + "lib/alert.js"))
 
 eval(hs.fs.read(configDir + "lib/hyper.js"))
 
@@ -81,81 +39,9 @@ function smartLaunch(bundleID, name) {
   }
 }
 
-// ===== Window Functions =====
-function cycleCalls(fn, args) {
-  let i = 0
-  return () => {
-    fn(args[i])
-    i = (i + 1) % args.length
-  }
-}
+eval(hs.fs.read(configDir + "lib/window.js"))
 
-function toGrid(rect) {
-  const win = hs.window.focusedWindow()
-  if (!win) return
-  const screen = hs.screen.main()
-  if (!screen) return
-  const frame = screen.fullFrame
-  if (!frame) return
-  win.frame = new HSRect(
-    Math.floor(rect[0] * frame.w + 0.5) + frame.x,
-    Math.floor(rect[1] * frame.h + 0.5) + frame.y,
-    Math.floor(rect[2] * frame.w + 0.5),
-    Math.floor(rect[3] * frame.h + 0.5),
-  )
-}
-
-const previousSizes = {}
-
-function toggleMaximize() {
-  const win = hs.window.focusedWindow()
-  if (!win) return
-  const id = win.id
-  if (previousSizes[id] == null) {
-    const frame = win.frame
-    if (!frame) return
-    previousSizes[id] = frame
-    const screen = win.screen
-    if (!screen) return
-    const full = screen.fullFrame
-    if (!full) return
-    win.frame = new HSRect(full.x, full.y, full.w, full.h)
-  } else {
-    const prev = previousSizes[id]
-    win.frame = new HSRect(prev.x, prev.y, prev.w, prev.h)
-    delete previousSizes[id]
-  }
-}
-
-function moveScreen(dir) {
-  const win = hs.window.focusedWindow()
-  if (!win) return
-  const frame = win.frame
-  if (!frame) return
-  const cur = win.screen
-  if (!cur) return
-  const target = dir === "East" ? cur.toEast() : cur.toWest()
-  if (!target) return
-  const local = cur.absoluteToLocal({ x: frame.x, y: frame.y, w: frame.w, h: frame.h })
-  if (!local) return
-  const newFrame = target.localToAbsolute(local)
-  if (!newFrame) return
-  win.frame = newFrame
-}
-
-// ===== Caffeine =====
-function caffeine() {
-  const type = "display"
-  const awake = hs.power.isSleepPrevented(type)
-  // TODO: add/remove menubar icon; no API yet.
-  if (awake) {
-    hs.power.allowSleep(type)
-    alert("Sleepy")
-  } else {
-    hs.power.preventSleep(type)
-    alert("Staying AWAKE!")
-  }
-}
+eval(hs.fs.read(configDir + "lib/caffeine.js"))
 
 // ===== Setup =====
 const hyper = new Hyper("F20")

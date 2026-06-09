@@ -1,10 +1,9 @@
-const configDir = hs.fs.homeDirectory() + "/.config/hammerspoon2/"
-eval(hs.fs.read(configDir + "lib/modal.js", 0, 0) ?? "")
-eval(hs.fs.read(configDir + "lib/alert.js", 0, 0) ?? "")
-eval(hs.fs.read(configDir + "lib/hyper.js", 0, 0) ?? "")
-eval(hs.fs.read(configDir + "lib/smart-launch.js", 0, 0) ?? "")
-eval(hs.fs.read(configDir + "lib/window.js", 0, 0) ?? "")
-eval(hs.fs.read(configDir + "lib/caffeine.js", 0, 0) ?? "")
+require("lib/modal.js")
+require("lib/alert.js")
+require("lib/hyper.js")
+require("lib/smart-launch.js")
+require("lib/window.js")
+require("lib/caffeine.js")
 
 // ===== Setup =====
 const hyper = new Hyper("F20")

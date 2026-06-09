@@ -2,7 +2,7 @@
 set -euo pipefail
 
 commands=("setup" "catchup" "translations")
-core="~/Development/automation/core"
+core="/users/glenn/Development/automation/core"
 
 expand_command() {
   local input="$1"

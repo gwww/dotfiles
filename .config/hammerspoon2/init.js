@@ -1,3 +1,5 @@
+// Docs: https://cmsj.github.io/Hammerspoon2/
+
 require("lib/modal.js")
 require("lib/alert.js")
 require("lib/hyper.js")

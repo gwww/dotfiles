@@ -33,8 +33,16 @@ function which --description "Locate a program, function, builtin, or file in th
             if not set -q _flag_silent
                 echo "$cmd is a fish function"
                 if set -q _flag_verbose
-                    functions -- $cmd | head -n 5
-                    echo "..." # Visual break showing there is more to the function
+                    # Capture the full function definition as a list of lines
+                    set -l func_lines (functions -- $cmd)
+                    
+                    # Print up to the first 5 lines
+                    echo $func_lines[1..5] | string join \n
+                    
+                    # Only append the ellipsis if there are more than 5 lines total
+                    if test (count $func_lines) -gt 5
+                        echo "..."
+                    end
                 end
             end
             if not set -q _flag_all
@@ -55,7 +63,7 @@ function which --description "Locate a program, function, builtin, or file in th
 
         # 3. Check the PATH for executables
         if set -q _flag_all
-            if set -l paths (type -ap -- $cmd 2>/dev/null)
+            if set -l paths (type -ap -- $cmd 2>/dev/null | string match -v '-')
                 set found_any 1
                 if not set -q _flag_silent
                     for p in $paths

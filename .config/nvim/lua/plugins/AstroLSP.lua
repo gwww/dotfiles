@@ -13,6 +13,13 @@ return {
           --   },
           -- },
         },
+        yamlls = {
+          settings = {
+            yaml = {
+              format = { printWidth = 100 },
+            },
+          },
+        },
       },
     },
   },

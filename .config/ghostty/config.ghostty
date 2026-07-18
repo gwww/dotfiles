@@ -1,6 +1,7 @@
 # vim: set ft=conf:
 
-auto-update-channel = stable
+auto-update = off
+auto-update-channel = tip
 
 font-family = Inconsolata
 font-size = 16.5

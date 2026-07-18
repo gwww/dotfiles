@@ -14,12 +14,14 @@ const smartLaunch = new SmartLaunch()
 hyper.bind([
   { key: "a", action: () => smartLaunch.launch("com.binarynights.ForkLift", "ForkLift") },
   { key: "c", action: caffeine },
+  { key: "d", action: () => hs.docs.show() },
   { key: "f", action: () => smartLaunch.launch("com.apple.finder", "Finder") },
   { key: "h", action: () => hs.task.shell("open ~", {}) },
-  { key: "q", action: () => smartLaunch.launch("app.zen-browser.zen", "Zen Browser") },
+  // { key: "q", action: () => smartLaunch.launch("app.zen-browser.zen", "Zen Browser") },
+  { key: "q", action: () => smartLaunch.launch("org.mozilla.firefox", "Firefox") },
   { key: "r", action: () => hs.reload() },
   { key: "w", action: () => smartLaunch.launch("com.mitchellh.ghostty", "Ghostty") },
-  { key: "y", action: () => hs.console.open() },
+  { key: "y", action: () => hs.openConsole() },
   { key: "z", action: () => smartLaunch.launch("us.zoom.xos", "Zoom") },
 
   // Window management — horizontal splits
